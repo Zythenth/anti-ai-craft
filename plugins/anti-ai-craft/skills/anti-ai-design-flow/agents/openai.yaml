@@ -1,0 +1,7 @@
+interface:
+  display_name: "Fluxo de Design Anti-IA"
+  short_description: "Orquestra design, build e revisão"
+  default_prompt: "Use $anti-ai-design-flow para conduzir esta feature do briefing à revisão com checkpoints retomáveis."
+
+policy:
+  allow_implicit_invocation: false

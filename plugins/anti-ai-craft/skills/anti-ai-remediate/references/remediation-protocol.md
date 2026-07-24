@@ -26,6 +26,7 @@
 - Para UI, capturar estado/viewport anterior.
 - Mapear causa, boundary, arquivos, comportamento que muda e permanece, regressão, validação positiva, risco e rollback.
 - Agrupar IDs somente quando a relação com a mesma causa e mudança estiver explícita.
+- Para fluxo persistido, representar o lote por resultado, origem, dependências, critério de pronto e prova; o plano não amplia a lista de IDs autorizados.
 
 ## 4. Gate de aplicação
 
@@ -45,6 +46,8 @@
 - Garantir transação, rollback, idempotência e concorrência conforme o caso.
 - Para UI, preservar identidade e implementar comportamento/acessibilidade completos.
 - Corrigir uma causa lógica por vez e executar uma prova antes da próxima.
+- Para navegação ou URL pública, preservar deep links, refresh, back/forward, retorno e compatibilidade, ou implementar migração/redirect aprovado.
+- Para tokens, editar a fonte autoritativa, regenerar outputs pelo comando oficial e validar consumidores, modos e estados afetados; não substituir valores em massa sem mapa de uso.
 
 ## 6. Gate de verificação congelada
 
@@ -66,6 +69,7 @@
 - Reexecutar reprodução.
 - Para UI, capturar depois e comparar.
 - Confirmar que a estratégia de rollback está documentada e, quando o risco justificar, ensaiada em ambiente seguro ou por dry-run antes da entrega.
+- Quando houver fluxo de design, reconciliar código, evidência, status da tarefa e artefatos diretamente afetados. Atualizar documento apenas com autorização.
 
 ## 8. Handoff
 

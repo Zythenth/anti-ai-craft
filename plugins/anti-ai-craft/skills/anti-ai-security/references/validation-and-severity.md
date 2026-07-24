@@ -11,6 +11,10 @@ Para cada candidato, registrar:
 - caminho alcançável e superfície do produto;
 - boundary e ambiente;
 - pré-condições;
+- depende de;
+- decisão necessária e origem pesquisada;
+- postura recomendada e efeito se não respondida;
+- trabalho independente concluído;
 - evidência favorável;
 - contraprova mais forte;
 - lacunas de prova;

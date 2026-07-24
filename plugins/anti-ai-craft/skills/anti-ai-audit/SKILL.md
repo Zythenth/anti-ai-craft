@@ -18,9 +18,10 @@ Não editar, formatar, instalar, remover, criar arquivo permanente, fazer stage,
 3. Quando o alvo estiver em Git, registrar raiz, branch, HEAD, status e alterações preexistentes sem modificá-las. Para branch ou PR, identificar o upstream ou alvo documentado e calcular o `merge-base` com HEAD; não presumir `main`, `HEAD^` ou o commit anterior. Registrar o comando e o SHA usados como baseline. Fora de Git, marcar esses campos como não aplicáveis.
 4. Em revisão de diff, comparar `merge-base..HEAD` ou o intervalo explicitamente solicitado e separar o que foi introduzido ou agravado da dívida preexistente.
 5. Identificar usuários, tarefas, dados, estados, invariantes e superfícies.
-6. Para UI, carregar diretamente [princípios de design](../anti-ai-design/references/design-principles.md), [antipadrões visuais](../anti-ai-design/references/design-antipatterns.md) e [acessibilidade](../anti-ai-design/references/accessibility-baseline.md).
-7. Para código, carregar diretamente [antipadrões de código](../anti-ai-code/references/code-antipatterns.md), [testes](../anti-ai-code/references/testing-antipatterns.md) e [arquitetura](../anti-ai-code/references/architecture-antipatterns.md).
-8. Para segurança, carregar diretamente [checklist de segurança](../anti-ai-security/references/security-checklist.md) e [validação e severidade](../anti-ai-security/references/validation-and-severity.md), mantendo esta auditoria sem edições.
+6. Quando houver brief, arquitetura da informação, tokens, plano ou checkpoint no escopo, verificar estado, autoridade e atualidade antes de tratá-los como fonte. Arquivo presente não significa concluído, e artefato não vence código ou decisão posterior automaticamente.
+7. Para UI, carregar diretamente [princípios de design](../anti-ai-design/references/design-principles.md), [arquitetura da informação](../anti-ai-design/references/information-architecture.md), [design tokens](../anti-ai-design/references/design-tokens.md), [antipadrões visuais](../anti-ai-design/references/design-antipatterns.md) e [acessibilidade](../anti-ai-design/references/accessibility-baseline.md).
+8. Para código, carregar diretamente [antipadrões de código](../anti-ai-code/references/code-antipatterns.md), [testes](../anti-ai-code/references/testing-antipatterns.md) e [arquitetura](../anti-ai-code/references/architecture-antipatterns.md).
+9. Para segurança, carregar diretamente [checklist de segurança](../anti-ai-security/references/security-checklist.md) e [validação e severidade](../anti-ai-security/references/validation-and-severity.md), mantendo esta auditoria sem edições.
 
 ## Auditar
 
@@ -33,6 +34,8 @@ Não editar, formatar, instalar, remover, criar arquivo permanente, fazer stage,
 - Validar candidatos, buscar a evidência que os derrotaria e rejeitar falsos positivos.
 - Separar problema do produto de preferência estética/código.
 - Continuar auditando todo o escopo planejado depois do primeiro achado. Um problema confirmado não encerra famílias, arquivos, fluxos ou superfícies ainda não examinados; registrar explicitamente qualquer corte de cobertura.
+- Quando uma pergunta de produto, infraestrutura ou baseline permanecer material, registrar origem pesquisada, recomendação, efeito sobre severidade/confiança e trabalho independente concluído. Bloquear somente a família ou superfície dependente.
+- Para UI, declarar perfil de evidência e cobertura por superfície/rota, estado, viewport e tema/input. Não apresentar screenshot fornecido ou código isolado como validação completa de runtime.
 
 ## Regras de achado
 

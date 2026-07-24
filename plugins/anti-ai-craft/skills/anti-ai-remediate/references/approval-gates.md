@@ -22,6 +22,16 @@ Somente:
 - correção que afeta área não incluída;
 - alternativa com tradeoff material de produto.
 - mudança material do plano, risco, comportamento, IDs ou escopo já aprovados.
+- mudança de navegação principal, URL pública, slug, parâmetro persistido ou estratégia de retorno;
+- troca de token global, namespace, provider, pipeline ou estratégia de tema com alcance em múltiplas superfícies, marcas, modos ou plataformas.
+
+## Classificar dúvidas
+
+- **Descobrível no alvo:** investigar antes de perguntar.
+- **Assumível sem alterar contrato:** declarar pressuposto e continuar.
+- **Bloqueante por autorização, produto ou risco:** perguntar com recomendação e consequências; não tratar default como consentimento.
+
+Um brief ou plano fornece requisitos e critérios, mas não autoriza remediação. Mudança material nesses artefatos exige revalidar o achado e, quando afetar comportamento, risco ou escopo, obter nova aprovação.
 
 ## Interromper
 

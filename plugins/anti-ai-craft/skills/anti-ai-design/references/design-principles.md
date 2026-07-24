@@ -97,7 +97,9 @@ Se a única justificativa for “é moderno”, “parece premium”, “o compo
 
 ### Menus, busca e overflow
 
-- Usar busca somente com dados reais e estados distintos: vazio inicial, zero resultado, loading, erro e indisponível.
+- Usar busca somente com dados representativos do domínio e estados distintos:
+  vazio inicial, zero resultado, loading, erro e indisponível. Dados reais seguem
+  os gates de necessidade, autorização, minimização e redação.
 - Usar menus para conjuntos coerentes de ações; evitar submenus profundos.
 - Tratar tooltip como explicação, nunca como único acesso a ação ou informação essencial.
 
@@ -128,6 +130,7 @@ Na revisão, contar ocorrências, abrir exemplos reais e verificar quantos menus
 - Usar primitivos para valores brutos, semânticos para intenção e tokens de componente apenas quando houver variação local justificável.
 - Fazer componentes reais consumirem tokens semânticos ou de componente; não manter uma taxonomia decorativa enquanto o código usa hex, espaçamento ou radius soltos.
 - Verificar estados como hover, focus, disabled, erro, sucesso, contraste e tema. Um token sem consumidor ou um consumidor que contorna a cadeia deve ser removido, conectado ou justificado.
+- Considerar o sistema pronto para o escopo somente quando fonte e formato correspondem à stack, papéis semânticos estão definidos, consumidores reais e estados críticos foram verificados, valores soltos conhecidos estão delimitados e a migração não absorve dívida fora do pedido.
 
 ### Tipografia
 
@@ -153,12 +156,14 @@ Na revisão, contar ocorrências, abrir exemplos reais e verificar quantos menus
 ### Movimento
 
 - Usar movimento para relação espacial, mudança de estado ou feedback.
+- Classificar movimento material como feedback, transição espacial, orientação ou decoração/ambiente. Exigir função observável para os três primeiros e justificativa, contenção e alternativa para o último.
 - Evitar cascata, bounce, partículas, hover lift, fundo animado e atraso teatral sem função.
 - Respeitar reduced motion e manter a função compreensível sem animação.
 
 ## Conteúdo, microcopy e estados
 
-- Usar conteúdo e dados reais cedo.
+- Usar conteúdo fiel e dados representativos cedo; preferir fixtures e só usar
+  dados reais quando necessários, autorizados, minimizados e redigidos.
 - Não inventar KPI, gráfico, atividade, telemetria, depoimento ou estado para preencher layout.
 - Rotular fixture, exemplo, placeholder e indisponibilidade.
 - Preferir reconhecimento a memorização: mostrar contexto, escolhas e consequências no momento da decisão.
@@ -185,7 +190,7 @@ Na revisão, contar ocorrências, abrir exemplos reais e verificar quantos menus
 - Texto a 200% e zoom a 400% sem perda aplicável.
 - Alvo mínimo WCAG AA de 24×24 CSS px ou exceção; adotar meta maior da plataforma/produto quando apropriado.
 - Zero ação primária escondida sem justificativa.
-- Zero dado de produção inventado.
+- Zero dado apresentado como real quando for fixture, exemplo ou placeholder.
 - Cem por cento das cores e superfícies com papel explicável.
 - Estados críticos comunicados por mais de um canal.
 - Revisão real em viewport estreito, intermediário e amplo.

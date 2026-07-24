@@ -55,8 +55,11 @@ O alvo é coesão e compreensão, não número universal de linhas ou arquivos.
 - comentário, docstring e log repetindo a mesma informação;
 - duas implementações equivalentes mantidas por compatibilidade imaginária;
 - arquitetura “enterprise” aplicada a script, endpoint ou fluxo local simples.
+- tarefa de abstração, tokens, configuração, estrutura ou documentação declarada pronta sem consumidor conhecido ou comportamento verificável no mesmo incremento ou no dependente imediato.
 
 Aplicar o teste de remoção: retirar a estrutura suspeita e comparar contrato, legibilidade, testes, reuso e limites arquiteturais. Se nada material for perdido, escolher a implementação menor. Não usar contagem de linhas como objetivo e não esconder domínio complexo em código compacto demais.
+
+Fundação horizontal pode ser legítima quando possui consumidor confirmado, dependência real e prova própria, como migração compatível, contrato compartilhado ou token semântico consumido. Não rejeitar por formato; exigir valor observável.
 
 ## Compatibilidade e configuração especulativas
 

@@ -1,5 +1,20 @@
 # Template de relatório
 
+## Sumário
+
+- [Resumo](#resumo)
+- [Contagem](#contagem)
+- [Achados](#achados)
+- [Fechamento de candidatos](#fechamento-de-candidatos)
+- [Cobertura de especificação/SDD](#cobertura-de-especificaçãosdd)
+- [Cobertura opcional do fluxo de design](#cobertura-opcional-do-fluxo-de-design)
+- [Cobertura estrutural opcional](#cobertura-estrutural-opcional)
+- [Sistema de tokens opcional](#sistema-de-tokens-opcional)
+- [Decisões pendentes e preferências](#decisões-pendentes-e-preferências)
+- [Falsos positivos rejeitados](#falsos-positivos-rejeitados)
+- [Validações](#validações)
+- [Próximos passos](#próximos-passos)
+
 ## Resumo
 
 - Escopo:
@@ -64,11 +79,33 @@ Se não houver achados principais, declarar: **Nenhum achado qualificável**.
 
 | Requisito/área | Estado | Evidência |
 |---|---|---|
-| exemplo | implementado / parcial / ausente / divergente / ambíguo | |
+| exemplo | implementado / parcial / ausente / divergente / ambíguo / não verificável | |
+
+## Cobertura opcional do fluxo de design
+
+| Feature/fase | Artefato | Estado/autoridade | Vínculo com código | Evidência | Disposição |
+|---|---|---|---|---|---|
+
+Omitir quando não aplicável. Distinguir desvio da implementação, artefato superado e ambiguidade.
+
+## Cobertura estrutural opcional
+
+| Superfície/fluxo | Papel/entrada | URL/persistência | Estados exercitados | Evidência | Cobertura |
+|---|---|---|---|---|---|
+
+Usar somente para produto navegável.
+
+## Sistema de tokens opcional
+
+| Fonte/camada | Token ou alias | Consumidores | Modos/estados | Evidência | Disposição |
+|---|---|---|---|---|---|
 
 ## Decisões pendentes e preferências
 
-Listar separadamente. Explicar alternativas e tradeoffs sem declarar uma preferência como defeito.
+| ID | Pergunta | Origem pesquisada | Depende de | Recomendação/alternativas | Efeito no relatório | Estado | Trabalho independente |
+|---|---|---|---|---|---|---|---|
+
+Usar prefixo distinto dos achados. Explicar tradeoffs sem declarar preferência como defeito.
 
 ## Falsos positivos rejeitados
 
@@ -83,3 +120,8 @@ Listar separadamente. Explicar alternativas e tradeoffs sem declarar uma prefer�
 ## Próximos passos
 
 Ordenar correções aprováveis por dependência e risco. Não aplicar automaticamente.
+
+| IDs | Resultado do lote | Dependências | Risco | Critérios de aceitação | Validação proposta |
+|---|---|---|---|---|---|
+
+A ordem sugerida não constitui autorização. Agrupar somente causa e correção realmente compartilhadas.

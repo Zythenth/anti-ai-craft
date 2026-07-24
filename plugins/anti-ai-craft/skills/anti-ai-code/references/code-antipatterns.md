@@ -144,5 +144,10 @@ Não transformar preferência de nome/tamanho em achado sem impacto verificável
 - modal visual sem comportamento modal;
 - tabs visuais sem semântica;
 - erro real substituído por placeholder.
+- alias de token ausente/circular, tipo ou unidade incompatível;
+- output de tokens editado manualmente em vez da fonte;
+- hardcode que contorna a camada semântica existente;
+- branch de tema duplicada, token sem consumidor ou substituição textual sem confirmar função;
+- rota que perde filtro, página, retorno ou autorização em link direto/refresh;
 
 Analisar como decisão de implementação e comportamento, nunca como prova de autoria.

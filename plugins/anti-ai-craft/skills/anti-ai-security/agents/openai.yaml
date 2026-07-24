@@ -1,7 +1,7 @@
 interface:
   display_name: "Segurança Anti-IA"
   short_description: "Analisa e corrige riscos de segurança"
-  default_prompt: "Use $anti-ai-security para analisar e corrigir somente riscos confirmados e autorizados deste projeto."
+  default_prompt: "Use $anti-ai-security para modelar riscos, planejar provas e corrigir somente o que eu autorizar."
 
 policy:
   allow_implicit_invocation: false

@@ -1,7 +1,7 @@
 {
   "name": "anti-ai-craft",
-  "version": "0.2.2",
-  "description": "Cinco skills reutiliz\u00e1veis para design contextual, c\u00f3digo conciso, auditoria, remedia\u00e7\u00e3o e seguran\u00e7a verific\u00e1vel.",
+  "version": "0.3.0",
+  "description": "Seis skills reutiliz\u00e1veis para fluxo de design, interfaces contextuais, c\u00f3digo conciso, auditoria, remedia\u00e7\u00e3o e seguran\u00e7a verific\u00e1vel.",
   "author": {
     "name": "Zythenth",
     "url": "https://github.com/Zythenth"
@@ -12,14 +12,15 @@
     "codex",
     "skills",
     "design",
+    "design-workflow",
     "code-quality",
     "security"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Anti-AI Craft",
-    "shortDescription": "Design, c\u00f3digo e seguran\u00e7a com evid\u00eancia",
-    "longDescription": "Cinco skills com contratos de evid\u00eancia para dire\u00e7\u00e3o visual, engenharia, auditoria somente leitura, remedia\u00e7\u00e3o aprovada e seguran\u00e7a orientada por caminhos de ataque.",
+    "shortDescription": "Fluxo, design, c\u00f3digo e seguran\u00e7a com evid\u00eancia",
+    "longDescription": "Seis skills com contratos de evid\u00eancia para fluxo de design retom\u00e1vel, dire\u00e7\u00e3o visual, engenharia, auditoria somente leitura, remedia\u00e7\u00e3o aprovada e seguran\u00e7a orientada por caminhos de ataque.",
     "developerName": "Zythenth",
     "category": "Productivity",
     "capabilities": [
@@ -28,7 +29,7 @@
     ],
     "websiteURL": "https://github.com/Zythenth/anti-ai-craft",
     "defaultPrompt": [
-      "Use $anti-ai-design para revisar esta interface.",
+      "Use $anti-ai-design-flow para conduzir esta feature do briefing \u00e0 revis\u00e3o.",
       "Use $anti-ai-code para simplificar este c\u00f3digo sem mudar seu comportamento.",
       "Use $anti-ai-security para analisar e corrigir somente riscos confirmados e autorizados."
     ]

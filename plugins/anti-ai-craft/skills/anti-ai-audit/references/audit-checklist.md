@@ -1,5 +1,17 @@
 # Checklist de auditoria
 
+## Sumário
+
+- [Escopo e fontes de verdade](#escopo-e-fontes-de-verdade)
+- [Ledger e fechamento](#ledger-e-fechamento)
+- [Interface e experiência](#interface-e-experiência)
+- [Acessibilidade](#acessibilidade)
+- [Código e comportamento](#código-e-comportamento)
+- [Arquitetura e manutenção](#arquitetura-e-manutenção)
+- [Testes e documentação](#testes-e-documentação)
+- [Classificação](#classificação)
+- [Evidência por família](#evidência-por-família)
+
 ## Escopo e fontes de verdade
 
 - [ ] Tipo de alvo, raiz, escopo, objetivo, autorização e não edição confirmados.
@@ -8,6 +20,7 @@
 - [ ] O baseline não foi presumido como `main`, `HEAD^` ou commit anterior; o SHA e o comando usados para o diff foram registrados.
 - [ ] Em diff, itens introduzidos/agravados estão separados da dívida preexistente.
 - [ ] Usuários, tarefas, dados, estados e invariantes identificados.
+- [ ] Artefatos de fluxo relevantes têm estado, autoridade, atualidade e vínculo com o código verificados.
 - [ ] Comandos oficiais e ambiente conhecidos.
 - [ ] Comandos que escreveriam caches, snapshots, lockfiles, bancos ou artefatos no alvo foram evitados.
 
@@ -31,6 +44,10 @@
 - [ ] Tipografia, cor, sombra, borda, radius, ícones e movimento têm papéis.
 - [ ] Desktop, tablet e mobile repriorizam corretamente.
 - [ ] Antes/depois ou screenshots reais foram comparados quando disponíveis.
+- [ ] Perfil de evidência e matriz superfície/rota × estado × viewport × tema/input estão registrados de forma proporcional ao risco.
+- [ ] Mapa de superfícies, navegação por papel, deep links, URL/redirects, retorno, crescimento e persistência foram exercitados quando aplicáveis.
+- [ ] Duplicação visual ou reuso proposto foi validado contra componente real, API, alcance e limitações; sem inferência apenas por aparência.
+- [ ] Fonte autoritativa de tokens, outputs gerados, camadas, aliases, consumidores, hardcodes e paridade entre modos/estados foram examinados quando tokens estavam no escopo.
 
 ## Acessibilidade
 
@@ -94,3 +111,4 @@
 - [ ] Segurança: fonte controlável → controle mais próximo → sink/operação → pré-condições → impacto.
 - [ ] Acessibilidade: ação/estado → semântica/operação esperada → falha observada.
 - [ ] Design: tarefa → ação/hierarquia → viewport/estado → dano concreto.
+- [ ] Fluxo de design: decisão/requisito → artefato vigente → implementação/runtime → evidência/disposição.

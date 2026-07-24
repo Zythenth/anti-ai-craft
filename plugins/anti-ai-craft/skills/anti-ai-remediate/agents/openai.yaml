@@ -1,7 +1,7 @@
 interface:
   display_name: "Remediação Anti-IA"
   short_description: "Corrige somente achados aprovados"
-  default_prompt: "Use $anti-ai-remediate para aplicar somente os achados que aprovei."
+  default_prompt: "Use $anti-ai-remediate para planejar e aplicar somente os achados que aprovei."
 
 policy:
   allow_implicit_invocation: false

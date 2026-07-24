@@ -14,7 +14,7 @@ Usar `$anti-ai-audit` para uma varredura ampla somente leitura, `$anti-ai-securi
 1. Confirmar escopo, autorização para editar e resultado esperado.
 2. Ler AGENTS.md, README, documentação, configs, manifestos, lockfiles, scripts, código vizinho, testes e histórico Git quando ajudarem.
 3. Registrar arquitetura, convenções, API pública, invariantes, alterações preexistentes e comandos oficiais.
-4. Declarar somente pressupostos, interpretações concorrentes e trade-offs materiais. Ambiguidade de baixo risco pode ser assumida e explicitada; ambiguidade de contrato ou segurança deve ser resolvida.
+4. Declarar somente pressupostos, interpretações concorrentes e trade-offs materiais. Investigar fatos no repositório; ordenar decisões por contrato/invariante, boundary/API e implementação. Ambiguidade de baixo risco pode ser assumida e explicitada; decisão de contrato ou segurança deve ser perguntada com recomendação, fundamento e consequência. Continuar ramos independentes.
 5. Reproduzir o comportamento antes de chamar algo de bug.
 6. Verificar API nesta ordem: repositório/lockfile/imports/tipos; pacote ou CLI instalado; documentação oficial da versão exata; release notes ou repositório oficial. Não inferir entre versões, linguagens ou SDKs.
 7. Separar fato verificado, inferência e desconhecido. Se uma API, versão, comando, citação ou requisito não puder ser confirmado, declarar a limitação em vez de completar a lacuna por plausibilidade.
@@ -27,6 +27,7 @@ Usar `$anti-ai-audit` para uma varredura ampla somente leitura, `$anti-ai-securi
 - Ler [debugging-and-evidence.md](references/debugging-and-evidence.md) ao depurar, refatorar, lidar com falhas repetidas ou montar a prova de uma alegação.
 - Ler [review-workflow.md](references/review-workflow.md) para investigação, correção localizada, validação e relatório.
 - Ler [sources.md](references/sources.md) ao justificar uma regra ou calibrar alegações de qualidade e correção.
+- Quando a mudança vier de fluxo de design, ler o brief, a [arquitetura da informação](../anti-ai-design/references/information-architecture.md), os [tokens](../anti-ai-design/references/design-tokens.md) e o plano somente se forem relevantes e atuais; um rascunho ou arquivo presente não autoriza implementação.
 
 ## Revisar
 
@@ -41,12 +42,14 @@ Usar `$anti-ai-audit` para uma varredura ampla somente leitura, `$anti-ai-securi
 9. Procurar a evidência que derrubaria o achado; quando contestado, revalidar do zero.
 10. Rejeitar falsos positivos e rotular preferências.
 11. Aplicar o teste de remoção: se helper, wrapper, classe, camada, configuração ou comentário puder desaparecer sem perder contrato, invariante, reuso real ou clareza, preferir a forma direta.
+12. Quando houver plano, validar cada tarefa como resultado observável com origem, estratégia, dependências, critério de pronto e prova; rejeitar tarefas que apenas nomeiam atividade.
 
 ## Implementar somente quando autorizado
 
 - Preservar comportamento válido, arquitetura local e API pública.
 - Preferir correção localizada e mudança mínima.
 - Trabalhar em ciclos `mudança → prova`; não empilhar patches quando um experimento falhar.
+- Implementar fatias verticais por comportamento, incluindo somente as camadas necessárias ao mesmo resultado. Não separar automaticamente estrutura, estilo, interação, testes ou segurança em tarefas sem consumidor.
 - Preferir fluxo de controle direto, nomes do domínio e uma implementação coesa à fragmentação em helpers triviais.
 - Criar teste de regressão quando viável.
 - Não esconder erro, relaxar asserção, substituir função por mock ou devolver sucesso falso para fazer teste passar.
@@ -68,13 +71,14 @@ Usar `$anti-ai-audit` para uma varredura ampla somente leitura, `$anti-ai-securi
 - Verificar lint, typecheck, build, análise estática ou auditoria de dependências quando existirem e forem pertinentes.
 - Revisar diff e confirmar que alterações preexistentes foram preservadas.
 - Mapear cada alegação para a evidência adequada: teste não substitui build; lint não substitui execução; uma suíte verde não substitui o requisito. Reexecutar a evidência depois da última mudança relevante.
+- Em tarefa de fluxo, usar `validada`, `validação parcial`, `bloqueada`, `superada` ou `falhou`; edição ou checklist marcado não significam conclusão.
 - Não afirmar sucesso sem execução. Informar comando, resultado e tudo que não pôde ser testado.
 
 ## Contrato de saída
 
 Para análise, entregar achados ordenados por impacto com arquivo/linha, evidência, classificação, impacto, correção e validação.
 
-Para implementação, entregar causa, mudança mínima, arquivos alterados, teste de regressão, comandos executados, resultados, limitações e riscos restantes.
+Para implementação, entregar causa, tarefa/requisito de origem quando houver, mudança mínima, arquivos alterados, teste de regressão, comandos executados, resultados, estado da tarefa, limitações e riscos restantes.
 
 Cada linha alterada deve estar ligada ao pedido ou a uma consequência necessária. Remover somente órfãos criados pela mudança atual; dívida preexistente deve ser relatada, não absorvida silenciosamente.
 

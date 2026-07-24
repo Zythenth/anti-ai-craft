@@ -81,7 +81,7 @@ Em cada execução, registrar somente o que foi realmente consultado: caminho ou
 
 ## Critérios de aplicação
 
-- Adotar tese visual antes do código, primeiro viewport intencional, estrutura ligada a conteúdo real, assinatura visual com contenção, escrita consistente, autocrítica e validação por screenshots.
+- Adotar tese visual antes do código, primeiro viewport intencional, estrutura ligada a conteúdo representativo do domínio, assinatura visual com contenção, escrita consistente, autocrítica e validação proporcional ao perfil de evidência.
 - Adotar mandato explícito de preservar, refinar ou redesenhar, referência dominante, integridade de mídia, contratos de estado, passes visual e técnico independentes e cenários representativos.
 - Rejeitar como absolutos quantidade fixa de cores ou fontes, stack obrigatória, duração universal de animação, risco visual obrigatório, aleatoriedade de direção, imagem obrigatória e proibição geral de gradiente ou menu.
 - Manter qualquer heurística não normativa subordinada às fontes de verdade do projeto, à acessibilidade, ao comportamento real e à validação.

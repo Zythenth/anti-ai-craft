@@ -1,7 +1,7 @@
 interface:
   display_name: "Auditoria Anti-IA"
   short_description: "Auditoria estritamente somente leitura"
-  default_prompt: "Use $anti-ai-audit para auditar este repositório sem editar arquivos."
+  default_prompt: "Use $anti-ai-audit para auditar este repositório e propor lotes verificáveis sem editar."
 
 policy:
   allow_implicit_invocation: false

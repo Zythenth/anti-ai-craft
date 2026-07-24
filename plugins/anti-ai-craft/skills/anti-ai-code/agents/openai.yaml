@@ -1,7 +1,7 @@
 interface:
   display_name: "Código Anti-IA"
   short_description: "Código conciso, verificável e sem excessos"
-  default_prompt: "Use $anti-ai-code para revisar este módulo e corrigir somente problemas confirmados."
+  default_prompt: "Use $anti-ai-code para planejar e implementar esta mudança delimitada com prova proporcional."
 
 policy:
   allow_implicit_invocation: false

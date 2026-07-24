@@ -1,6 +1,6 @@
 # Anti-AI Craft
 
-Cinco skills para o Codex produzirem design, código, auditorias, correções e análises de segurança com mais intenção, evidência e controle.
+Seis skills para o Codex conduzirem fluxos de design, criarem interfaces, produzirem código, auditarem, corrigirem e analisarem segurança com mais intenção, evidência e controle.
 
 “Anti-AI” não significa detectar autoria ou proibir o uso de IA. O objetivo é reduzir padrões recorrentes de trabalho automático mal conduzido: interfaces genéricas, abstrações desnecessárias, fallbacks silenciosos, mudanças sem evidência, correções fora do escopo e controles de segurança esquecidos.
 
@@ -8,13 +8,14 @@ Cinco skills para o Codex produzirem design, código, auditorias, correções e 
 
 | Skill | Invocação | Quando usar |
 |---|---|---|
+| Fluxo de Design Anti-IA | `$anti-ai-design-flow` | Conduzir uma feature por três ou mais fases, com checkpoints e retomada |
 | Design Anti-IA | `$anti-ai-design` | Planejar, revisar ou implementar interfaces contextuais, acessíveis e responsivas |
 | Código Anti-IA | `$anti-ai-code` | Produzir ou revisar código direto, coeso, testável e sem complexidade especulativa |
 | Auditoria Anti-IA | `$anti-ai-audit` | Examinar código e interface por severidade, sem alterar arquivos |
 | Remediação Anti-IA | `$anti-ai-remediate` | Corrigir somente achados confirmados, reproduzíveis e aprovados |
 | Segurança Anti-IA | `$anti-ai-security` | Modelar ameaças, analisar caminhos de abuso e corrigir riscos autorizados |
 
-Os identificadores permanecem em inglês para serem estáveis em prompts, scripts e documentação. Os nomes e as descrições visíveis estão em português.
+Os identificadores permanecem em inglês para serem estáveis em prompts, scripts e documentação. Os nomes e as descrições visíveis estão em português. As cinco skills anteriores mantêm os mesmos identificadores; o fluxo é uma sexta entrada opcional.
 
 ## Instalação
 
@@ -35,7 +36,7 @@ Instale o plugin:
 codex plugin add anti-ai-craft@zythenth
 ```
 
-Abra uma nova tarefa no Codex após a instalação para carregar as cinco skills.
+Abra uma nova tarefa no Codex após a instalação para carregar as seis skills.
 
 Para confirmar que o marketplace foi reconhecido:
 
@@ -48,6 +49,8 @@ codex plugin list --marketplace zythenth
 Invoque uma skill pelo seletor de skills ou mencione seu identificador diretamente:
 
 ```text
+$anti-ai-design-flow conduza esta feature do briefing à revisão e mantenha checkpoints retomáveis
+
 $anti-ai-design revise esta interface antes de alterar o código
 
 $anti-ai-code simplifique este módulo sem mudar o comportamento
@@ -61,10 +64,26 @@ $anti-ai-security procure caminhos de abuso e corrija apenas riscos autorizados
 
 Não existe um comando como `/anti-ai-craft/design`. Cada skill é invocada pelo próprio identificador.
 
+## Fluxo completo
+
+Use `$anti-ai-design-flow` somente para uma jornada multifase: descoberta e brief, arquitetura da informação, sistema visual/tokens, plano em fatias verificáveis, gate de segurança quando aplicável, implementação autorizada, revisão e remediação opcional.
+
+O fluxo:
+
+- verifica o projeto antes de perguntar;
+- reutiliza ou pula fases somente quando a saída existente está atual e comprovada;
+- não transforma planejamento em autorização de edição;
+- mantém checkpoint de decisões, artefatos, bloqueios e próxima ação;
+- invalida somente dependentes de uma decisão alterada;
+- preserva auditoria somente leitura e remediação por IDs aprovados.
+
+Para uma tela, componente, screenshot ou ajuste visual delimitado, continue usando `$anti-ai-design`.
+
 ## Qual skill escolher
 
 | Objetivo | Skill |
 |---|---|
+| Jornada completa, multifase e retomável | `$anti-ai-design-flow` |
 | Direção visual, UI, responsividade ou acessibilidade | `$anti-ai-design` |
 | Implementação ou revisão de um módulo ou diff delimitado | `$anti-ai-code` |
 | Inspeção ampla e somente leitura | `$anti-ai-audit` |
@@ -75,7 +94,7 @@ Para auditoria ampla, prefira `$anti-ai-audit`. Para riscos de segurança, use `
 
 ## Princípios e limites
 
-- As cinco skills exigem invocação explícita.
+- As seis skills exigem invocação explícita.
 - Regras do projeto e requisitos funcionais ou normativos prevalecem sobre heurísticas.
 - Análise não autoriza edição; cada skill preserva o escopo concedido pelo usuário.
 - Auditoria é sempre somente leitura.
@@ -93,6 +112,10 @@ codex plugin add anti-ai-craft@zythenth
 ```
 
 Depois, abra uma nova tarefa para garantir que o Codex carregue a versão atualizada.
+
+O upgrade do marketplace pode apontar para uma revisão nova do plugin. O caminho
+acima continua sendo o mais simples; em ambientes sensíveis, revise as notas da
+versão e o diff antes de atualizar. O branch padrão não é uma referência imutável.
 
 ## Desinstalação
 
@@ -113,6 +136,7 @@ codex plugin marketplace remove zythenth
 ```text
 .
 ├── .agents/plugins/marketplace.json
+├── docs/analises/
 ├── plugins/anti-ai-craft/
 │   ├── .codex-plugin/plugin.json
 │   └── skills/
@@ -120,6 +144,8 @@ codex plugin marketplace remove zythenth
 ```
 
 Cada skill mantém seu contrato principal em `SKILL.md` e referências especializadas em sua própria pasta.
+Os relatórios em `docs/analises/` registram a avaliação técnica usada para evoluir
+o plugin e a revisão final de cobertura.
 
 ## Contribuições
 

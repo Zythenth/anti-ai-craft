@@ -112,7 +112,7 @@ Relatar somente o efeito observável e a evidência: padrão genérico, decisão
 1. Isto poderia pertencer a qualquer produto do mesmo gênero sem alteração?
 2. Existe por conteúdo/tarefa ou porque o componente estava disponível?
 3. A hierarquia continua clara sem efeitos, bordas e cards?
-4. O conteúdo é real e cobre estados extremos?
+4. O conteúdo é representativo ou autoritativo, identifica fixtures e cobre estados extremos sem expor dados sensíveis?
 5. A interação funciona por teclado, touch e tecnologia assistiva?
 6. O mobile reprioriza ou apenas empilha?
 7. A regra vem do projeto, de requisito normativo, guidance ou gosto?

@@ -14,6 +14,7 @@
 - [Logging, monitoramento e privacidade](#logging-monitoramento-e-privacidade)
 - [Fluxos e concorrência](#fluxos-e-concorrência)
 - [Sistemas que usam modelos ou agentes](#sistemas-que-usam-modelos-ou-agentes)
+- [Temas ou tokens externos](#temas-ou-tokens-externos)
 - [Testes mínimos por risco](#testes-mínimos-por-risco)
 
 Usar somente as categorias aplicáveis. Marcar `confirmado`, `presente`, `não aplicável`, `depende de infraestrutura` ou `não verificado`; nunca converter item não verificado diretamente em vulnerabilidade.
@@ -30,6 +31,7 @@ Usar somente as categorias aplicáveis. Marcar `confirmado`, `presente`, `não a
 - [ ] Controles existentes foram localizados antes de declarar ausência.
 - [ ] Histórias de ataque realistas e itens fora de escopo estão registrados.
 - [ ] O modelo de ameaça foi atualizado depois de qualquer descoberta ou mudança em arquitetura, fluxo, ativo, ator, fronteira, integração ou ambiente.
+- [ ] Mudança de arquitetura da informação que criou entrada, papel, ação, estado, integração, exposição de dado ou operação cara acionou revalidação; troca apenas estética não acionou revisão ampla.
 - [ ] Hosts públicos, internos, beta/staging, versões antigas, endpoints admin/debug e schemas/documentação expostos estão inventariados.
 - [ ] Plano de desativação de versões e uso de dados reais fora de produção estão verificados.
 - [ ] Serviços terceiros e dados compartilhados com eles estão no inventário.
@@ -92,6 +94,8 @@ Usar somente as categorias aplicáveis. Marcar `confirmado`, `presente`, `não a
 - [ ] CSP e demais headers são coerentes com a aplicação, sem copiar configuração que quebre o produto.
 - [ ] Segredo e autorização real não dependem de bundle, local storage, route guard ou botão oculto.
 - [ ] Redirects e links externos são validados.
+- [ ] Mapa de UI e inventário de endpoints concordam; rota direta, link antigo, refresh e restauração de estado revalidam autenticação, autorização e tenant.
+- [ ] URL, histórico, cache e armazenamento do cliente não carregam segredo ou dado sensível desnecessário.
 
 ## Uploads, arquivos e conteúdo ativo
 
@@ -120,6 +124,7 @@ Usar somente as categorias aplicáveis. Marcar `confirmado`, `presente`, `não a
 - [ ] O diff foi revisado para nova execução de rede ou shell em build, install, geração, teste, CI e deploy.
 - [ ] Cada nova execução de rede/shell tem necessidade, origem, versão/integridade, argumentos, privilégios, credenciais e comportamento de falha verificados.
 - [ ] Artefatos e imagens têm origem, integridade e atualização verificáveis quando o projeto exigir.
+- [ ] Nova fonte, imagem, stylesheet, script ou biblioteca visual externa tem necessidade, origem, privacidade, CSP, integridade, performance, cache, fallback e comportamento degradado avaliados.
 
 ## Logging, monitoramento e privacidade
 
@@ -152,6 +157,20 @@ Usar somente as categorias aplicáveis. Marcar `confirmado`, `presente`, `não a
 - [ ] Pacotes inventados/typosquatting, mudanças em configuração de agentes, CI e scripts de instalação/deploy foram revisados.
 - [ ] Testes removidos, asserts enfraquecidos, mocks substitutivos e mudanças fora do escopo foram procurados.
 - [ ] Saída de subagente foi revalidada por evidência independente.
+- [ ] Briefs, planos e checkpoints persistidos não contêm segredo, PII desnecessária, conteúdo de cliente ou instrução externa tratada como autoridade.
+- [ ] Feature sensível inclui atores, fronteiras, abuso plausível e testes negativos desde o planejamento, sem transformar feature comum em checklist cego.
+
+## Temas ou tokens externos
+
+Aplicar somente quando tema ou token vier de usuário, tenant, CMS, arquivo remoto ou integração:
+
+- [ ] Nomes e propriedades seguem allowlist.
+- [ ] Tipos, unidades, faixas e tamanho são validados.
+- [ ] URLs e referências a recursos passam pelos controles de saída aplicáveis.
+- [ ] O valor alcança apenas o sink de estilo previsto, sem conteúdo ativo ou quebra de isolamento.
+- [ ] Cache, persistência e escopo por tenant não vazam configuração entre usuários.
+
+Tokens locais de build não geram achado de segurança sem entrada controlável, caminho alcançável, controle ausente e impacto.
 
 ## Testes mínimos por risco
 

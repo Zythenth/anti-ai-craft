@@ -14,6 +14,7 @@
 - [Reflow, zoom e texto](#reflow-zoom-e-texto)
 - [Movimento](#movimento)
 - [Matriz manual mínima](#matriz-manual-mínima)
+- [Validação por fatia e em mobile](#validação-por-fatia-e-em-mobile)
 
 ## Autoridade
 
@@ -107,13 +108,24 @@ Usar WCAG 2.2 A/AA aplicável como baseline normativo para web. Tratar WAI-ARIA 
 
 ## Matriz manual mínima
 
-1. Percorrer fluxo principal e recuperação somente por teclado.
-2. Abrir/fechar menu, modal, tabs e drawer, registrando foco antes/depois.
-3. Verificar leitor de tela em carga e atualização.
-4. Testar viewport estreito, intermediário e amplo.
-5. Testar 320 CSS px, 200%, 400%, text spacing e strings longas.
-6. Verificar contraste, forced colors, light/dark e aumento de contraste.
-7. Testar touch e alvos.
-8. Testar reduced motion.
-9. Exercitar vazio, loading, erro, offline, permissão e dados extremos.
-10. Rodar automação acessível, sem tratá-la como substituto dos passes manuais.
+Esta é uma matriz de seleção, não uma lista universal. Escolher somente dimensões
+aplicáveis ao widget, fluxo, risco, plataforma e suporte real; registrar como `não
+aplicável` ou `não exercitado` o restante, com motivo.
+
+1. Para fluxos operáveis, percorrer caminho principal e recuperação por teclado.
+2. Para menu, modal, tabs ou drawer alterado, registrar foco antes/depois e os comandos correspondentes.
+3. Para semântica ou atualização dinâmica, verificar leitor de tela na combinação suportada.
+4. Para escopo responsivo, testar viewports representativos definidos pelo projeto ou risco.
+5. Para conteúdo que precisa refluir, testar 320 CSS px, 200%, 400%, text spacing e strings longas conforme o critério aplicável.
+6. Para cor, tema ou estilos de sistema afetados, verificar contraste e os modos realmente suportados, incluindo forced colors quando aplicável.
+7. Para superfícies touch, testar alvos e operação por toque.
+8. Para movimento introduzido ou alterado, testar reduced motion.
+9. Para estados presentes no escopo, exercitar vazio, loading, erro, offline, permissão e dados extremos pertinentes.
+10. Quando houver automação acessível compatível, executá-la sem tratá-la como substituto dos passes manuais selecionados.
+
+## Validação por fatia e em mobile
+
+- Anexar a cada fatia interativa somente os checks de semântica, teclado, foco, mensagem e estado que ela introduz ou altera; manter um passe integrado do fluxo ao final.
+- Em superfícies de leitura, verificar medida de linha, ritmo e continuidade nos viewports pertinentes sem transformar preferência editorial em norma.
+- Em formulários mobile, testar foco, zoom do navegador, teclado virtual, safe area, clipping, scroll e acesso à ação principal.
+- Registrar navegador, viewport, input e estado; separar falha normativa de problema de usabilidade ou preferência.
