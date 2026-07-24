@@ -1,0 +1,7 @@
+interface:
+  display_name: "Design Anti-IA"
+  short_description: "Direção visual contextual e acessível"
+  default_prompt: "Use $anti-ai-design para revisar esta interface antes de alterar o código."
+
+policy:
+  allow_implicit_invocation: false
