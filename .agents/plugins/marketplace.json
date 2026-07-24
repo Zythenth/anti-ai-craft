@@ -1,0 +1,20 @@
+{
+  "name": "zythenth",
+  "interface": {
+    "displayName": "Zythenth"
+  },
+  "plugins": [
+    {
+      "name": "anti-ai-craft",
+      "source": {
+        "source": "local",
+        "path": "./plugins/anti-ai-craft"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

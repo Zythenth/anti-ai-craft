@@ -1,103 +1,126 @@
 # Anti-AI Craft
 
-Plugin pessoal e local para conduzir design, programação, auditoria, remediação e segurança com contexto e evidência. “Anti-AI” descreve um workflow de qualidade; o plugin não detecta, classifica nem atribui autoria.
+Cinco skills para o Codex produzirem design, código, auditorias, correções e análises de segurança com mais intenção, evidência e controle.
 
-## Limites
+“Anti-AI” não significa detectar autoria ou proibir o uso de IA. O objetivo é reduzir padrões recorrentes de trabalho automático mal conduzido: interfaces genéricas, abstrações desnecessárias, fallbacks silenciosos, mudanças sem evidência, correções fora do escopo e controles de segurança esquecidos.
 
-- Skill-only: não inclui apps, MCP, hooks, scripts automáticos, telemetria ou acesso a serviços.
-- As cinco skills exigem invocação explícita.
-- Regras do projeto e requisitos funcionais/normativos prevalecem sobre heurísticas.
-- Análise não autoriza edição; remediação exige achados aprovados.
-- Nenhuma skill faz commit ou push sem autorização explícita.
+## O que o plugin oferece
 
-## Skills
+| Skill | Invocação | Quando usar |
+|---|---|---|
+| Design Anti-IA | `$anti-ai-design` | Planejar, revisar ou implementar interfaces contextuais, acessíveis e responsivas |
+| Código Anti-IA | `$anti-ai-code` | Produzir ou revisar código direto, coeso, testável e sem complexidade especulativa |
+| Auditoria Anti-IA | `$anti-ai-audit` | Examinar código e interface por severidade, sem alterar arquivos |
+| Remediação Anti-IA | `$anti-ai-remediate` | Corrigir somente achados confirmados, reproduzíveis e aprovados |
+| Segurança Anti-IA | `$anti-ai-security` | Modelar ameaças, analisar caminhos de abuso e corrigir riscos autorizados |
 
-Os identificadores técnicos permanecem em inglês para não quebrar prompts existentes; nomes visíveis e descrições estão em português.
+Os identificadores permanecem em inglês para serem estáveis em prompts, scripts e documentação. Os nomes e as descrições visíveis estão em português.
 
-| Nome visível | Invocação | Finalidade | Edição |
-|---|---|---|---|
-| Design Anti-IA | `$anti-ai-design` | Pesquisar, planejar, revisar ou implementar interfaces contextuais, acessíveis e responsivas | somente quando autorizada |
-| Código Anti-IA | `$anti-ai-code` | Produzir ou revisar código direto, coeso, verificável e sem prolixidade ou abstração especulativa | somente quando autorizada |
-| Auditoria Anti-IA | `$anti-ai-audit` | Auditar interface e código por severidade | sempre somente leitura |
-| Remediação Anti-IA | `$anti-ai-remediate` | Aplicar somente achados confirmados, aprovados e reproduzíveis | sim, no escopo aprovado |
-| Segurança Anti-IA | `$anti-ai-security` | Analisar controles ausentes e corrigir riscos confirmados, incluindo autorização e limites de consumo | somente quando autorizada |
+## Instalação
 
-### Qual skill usar
+Pré-requisitos:
 
-| Se você precisa de… | Use |
-|---|---|
-| direção visual, UI, responsividade ou acessibilidade | `$anti-ai-design` |
-| implementar ou revisar um módulo/diff delimitado | `$anti-ai-code` |
-| varrer um escopo amplo sem alterar nada | `$anti-ai-audit` |
-| corrigir IDs já confirmados e aprovados | `$anti-ai-remediate` |
-| modelar ameaça, validar abuso ou corrigir um risco confirmado | `$anti-ai-security` |
+- Codex CLI com suporte ao comando `codex plugin`;
+- Git disponível no sistema.
 
-Auditoria ampla de código deve usar `$anti-ai-audit`; segurança deve usar `$anti-ai-security`; correção de achados já numerados deve usar `$anti-ai-remediate`.
+Adicione este repositório como um marketplace:
 
-## Instalação local
+```bash
+codex plugin marketplace add Zythenth/anti-ai-craft --ref main
+```
 
-O plugin fica em:
+Instale o plugin:
 
-~~~text
-$HOME/.agents/plugins/anti-ai-craft/
-~~~
+```bash
+codex plugin add anti-ai-craft@zythenth
+```
 
-O marketplace pessoal fica em:
+Abra uma nova tarefa no Codex após a instalação para carregar as cinco skills.
 
-~~~text
-$HOME/.agents/plugins/marketplace.json
-~~~
+Para confirmar que o marketplace foi reconhecido:
 
-Depois de validar o marketplace, instalar:
+```bash
+codex plugin list --marketplace zythenth
+```
 
-~~~text
-codex plugin add anti-ai-craft@personal
-~~~
+## Como usar
 
-Abrir uma nova tarefa após instalar ou atualizar para que a lista de skills seja recarregada.
+Invoque uma skill pelo seletor de skills ou mencione seu identificador diretamente:
 
-## Seleção e invocação
-
-Usar /skills, o seletor de skills ou menção explícita com dólar:
-
-~~~text
+```text
 $anti-ai-design revise esta interface antes de alterar o código
 
-$anti-ai-code analise este módulo e corrija apenas problemas confirmados
+$anti-ai-code simplifique este módulo sem mudar o comportamento
 
 $anti-ai-audit audite este repositório sem editar arquivos
 
 $anti-ai-remediate aplique somente os achados que aprovei
 
-$anti-ai-security analise e corrija somente riscos confirmados e autorizados
-~~~
+$anti-ai-security procure caminhos de abuso e corrija apenas riscos autorizados
+```
 
-Não existe comando inventado como /anti-ai-craft/design.
+Não existe um comando como `/anti-ai-craft/design`. Cada skill é invocada pelo próprio identificador.
 
-## Privacidade
+## Qual skill escolher
 
-As skills contêm somente instruções e referências públicas. Não incluem código de projetos, caminhos pessoais, credenciais, prompts privados, histórico de conversa, screenshots ou conteúdo proprietário. Funcionam sem qualquer projeto de origem disponível.
+| Objetivo | Skill |
+|---|---|
+| Direção visual, UI, responsividade ou acessibilidade | `$anti-ai-design` |
+| Implementação ou revisão de um módulo ou diff delimitado | `$anti-ai-code` |
+| Inspeção ampla e somente leitura | `$anti-ai-audit` |
+| Correção de achados já numerados e aprovados | `$anti-ai-remediate` |
+| Threat model, autorização, isolamento, rate limits ou abuso | `$anti-ai-security` |
+
+Para auditoria ampla, prefira `$anti-ai-audit`. Para riscos de segurança, use `$anti-ai-security`. Para aplicar correções já aprovadas, use `$anti-ai-remediate`.
+
+## Princípios e limites
+
+- As cinco skills exigem invocação explícita.
+- Regras do projeto e requisitos funcionais ou normativos prevalecem sobre heurísticas.
+- Análise não autoriza edição; cada skill preserva o escopo concedido pelo usuário.
+- Auditoria é sempre somente leitura.
+- Remediação exige achados confirmados e aprovados.
+- Nenhuma skill autoriza commit, push ou outra ação externa por conta própria.
+- O pacote não inclui apps, MCP, hooks, executáveis, telemetria ou serviços externos.
 
 ## Atualização
 
-1. Editar somente a origem local.
-2. Validar as cinco skills e o plugin.
-3. Atualizar a versão SemVer quando houver release local; durante iteração, usar o fluxo de cachebuster oficial.
-4. Reinstalar pelo marketplace pessoal.
-5. Abrir uma nova tarefa e repetir os testes de invocação.
+Atualize o snapshot do marketplace e reinstale o plugin:
+
+```bash
+codex plugin marketplace upgrade zythenth
+codex plugin add anti-ai-craft@zythenth
+```
+
+Depois, abra uma nova tarefa para garantir que o Codex carregue a versão atualizada.
 
 ## Desinstalação
 
-1. Executar `codex plugin remove anti-ai-craft@personal`.
-2. Remover somente a entrada anti-ai-craft do marketplace pessoal.
-3. Remover a pasta local do plugin se não for mais necessária.
-4. Reiniciar o Codex.
+Remova o plugin:
 
-## Validação
+```bash
+codex plugin remove anti-ai-craft@zythenth
+```
 
-- No Windows, validar cada pasta com `python -X utf8 quick_validate.py <pasta-da-skill>`.
-- No Windows, validar o plugin com `python -X utf8 validate_plugin.py <pasta-do-plugin>`.
-- Validar JSON, YAML, UTF-8, links relativos, arquivos vazios e placeholders.
-- Confirmar allow_implicit_invocation: false nas cinco skills.
-- Confirmar ausência de apps, MCP, hooks, scripts e dependências externas.
-- Confirmar descoberta no marketplace pessoal e testar as cinco menções em uma nova tarefa.
+Se você não utiliza nenhum outro plugin desse marketplace, também pode removê-lo:
+
+```bash
+codex plugin marketplace remove zythenth
+```
+
+## Estrutura do repositório
+
+```text
+.
+├── .agents/plugins/marketplace.json
+├── plugins/anti-ai-craft/
+│   ├── .codex-plugin/plugin.json
+│   └── skills/
+└── README.md
+```
+
+Cada skill mantém seu contrato principal em `SKILL.md` e referências especializadas em sua própria pasta.
+
+## Contribuições
+
+Relatos de comportamento inesperado, sugestões e pull requests são bem-vindos. Ao propor uma mudança, preserve os identificadores públicos das skills, mantenha análise e edição como permissões distintas e inclua uma forma objetiva de verificar o resultado.
