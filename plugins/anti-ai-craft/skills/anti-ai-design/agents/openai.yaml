@@ -1,7 +1,7 @@
 interface:
   display_name: "Design Anti-IA"
-  short_description: "Brief, direção e revisão visual contextual"
-  default_prompt: "Use $anti-ai-design para planejar ou revisar esta interface sem editar até eu autorizar."
+  short_description: "Interfaces contextuais e orientadas a resultados"
+  default_prompt: "Use $anti-ai-design para projetar esta interface com contexto, evidência e limites éticos."
 
 policy:
   allow_implicit_invocation: true

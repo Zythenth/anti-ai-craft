@@ -2,10 +2,12 @@
 
 Data: 2026-07-24
 
-Atualização de 2026-07-25: a versão `0.3.1` adotou ativação híbrida. Design,
+Atualização de 2026-07-25: a versão `0.4.0` mantém a ativação híbrida. Design,
 Código e Segurança podem ser selecionadas implicitamente pelo contexto; Fluxo,
 Auditoria e Remediação permanecem exclusivamente manuais. Esta mudança preserva
-as fronteiras de autorização descritas no relatório.
+as fronteiras de autorização descritas no relatório. A mesma versão amplia Design
+Anti-IA com 101 princípios autorais orientados a resultados, carregados por tema e
+subordinados à tarefa, à evidência e às proteções de autonomia.
 
 ## Veredito
 
@@ -235,7 +237,7 @@ Um teste de onboarding B2B multitenant:
 - todos os links Markdown locais das skills resolvem;
 - três políticas `allow_implicit_invocation: true` e três `false`, conforme o modo híbrido;
 - cada prompt de interface menciona o identificador correto;
-- README, manifesto e diretórios concordam em seis skills e versão `0.3.1`;
+- README, manifesto e diretórios concordam em seis skills e versão `0.4.0`;
 - nenhuma citação, URL, autoria ou nome dos repositórios-base permanece;
 - nenhuma fonte temporária de pesquisa permanece no working tree;
 - `git diff --check` passou imediatamente antes do commit.

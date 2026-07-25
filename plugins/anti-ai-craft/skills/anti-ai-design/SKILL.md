@@ -1,6 +1,6 @@
 ---
 name: anti-ai-design
-description: "Pesquisar, criar brief, planejar arquitetura da informação ou tokens, revisar, implementar ou refatorar interfaces sem recorrer automaticamente a composição genérica. Usar quando o pedido envolver screenshots, wireframes, frontend, componentes visuais, fluxos de interface delimitados, navegação, design system, acessibilidade ou responsividade; não usar para orquestrar uma jornada completa ou multifase, como do briefing à revisão, nem em código sem componente visual. Ler fontes do projeto e visuais fornecidos, produzir direção ou revisão com evidência e editar apenas quando o usuário autorizar."
+description: "Pesquisar, criar brief, planejar arquitetura da informação ou tokens, revisar, implementar ou refatorar interfaces contextuais e orientadas a resultados, sem recorrer automaticamente a composição genérica ou táticas manipulativas. Usar quando o pedido envolver screenshots, wireframes, frontend, componentes visuais, fluxos de interface delimitados, navegação, design system, acessibilidade, responsividade, landing pages, onboarding, ativação, pricing, retenção ou métricas de produto; não usar para orquestrar uma jornada completa ou multifase, como do briefing à revisão, nem em código sem componente visual. Ler fontes do projeto e visuais fornecidos, tratar resultado comercial como hipótese subordinada à tarefa e editar apenas quando o usuário autorizar."
 ---
 
 # Design Anti-IA
@@ -31,30 +31,42 @@ Tratar “anti-AI” como disciplina de projeto, não como detector de autoria. 
 - Ler [review-workflow.md](references/review-workflow.md) ao implementar, capturar screenshots ou comparar antes/depois.
 - Ler [design-review-template.md](references/design-review-template.md) ao produzir revisão formal ou handoff de achados.
 - Ler [sources.md](references/sources.md) quando precisar justificar uma regra, resolver conflito ou distinguir requisito, guidance e heurística.
+- Ler [outcomes-method.md](references/outcomes-method.md) quando a interface tiver objetivo de aquisição, ativação, adoção, monetização, continuidade, diferenciação ou outra métrica de produto.
+- Ler [outcomes-context-and-strategy.md](references/outcomes-context-and-strategy.md) para resultado, estágio, superfície, escopo e estratégia.
+- Ler [outcomes-positioning-and-promise.md](references/outcomes-positioning-and-promise.md) para público, categoria, posicionamento, promessa e coerência entre canais.
+- Ler [outcomes-acquisition-and-landing.md](references/outcomes-acquisition-and-landing.md) para aquisição, páginas de entrada, proposta, prova e CTA.
+- Ler [outcomes-onboarding-and-activation.md](references/outcomes-onboarding-and-activation.md) para primeiro uso, ativação, onboarding, avaliação e estados vazios.
+- Ler [outcomes-product-structure-and-features.md](references/outcomes-product-structure-and-features.md) para escopo, descoberta, adoção, ciclo de vida, dashboards e funcionalidades.
+- Ler [outcomes-pricing-and-monetization.md](references/outcomes-pricing-and-monetization.md) para planos, preço, cobrança, limites, avaliação e upgrade.
+- Ler [outcomes-retention-and-offboarding.md](references/outcomes-retention-and-offboarding.md) para continuidade, suporte, cancelamento, exportação e retorno.
+- Ler [outcomes-ethical-choice-architecture.md](references/outcomes-ethical-choice-architecture.md) para defaults, persuasão, fricção, urgência, prova social e autonomia.
+- Ler [outcomes-metrics-and-experimentation.md](references/outcomes-metrics-and-experimentation.md) para instrumentação, métricas, pesquisa, coortes e experimentos.
+- Ler [outcomes-ai-differentiation-and-delivery.md](references/outcomes-ai-differentiation-and-delivery.md) para diferenciação, confiança e entrega em produtos criados ou acelerados com IA.
 
 ## Executar o workflow
 
 1. Ler o projeto e registrar o estado inicial quando houver código.
 2. Identificar a tarefa e os usuários.
 3. Localizar regras existentes e ordenar sua autoridade.
-4. Inventariar telas, rotas, componentes, conteúdo, mídia, estados e fluxos reais.
-5. Quando houver várias superfícies, mapear entradas, navegação, hierarquia, URLs, persistência, caminhos principal/alternativos e recuperação antes da estética.
-6. Separar identidade verificável de decoração substituível e registrar o que deve permanecer invariável.
-7. Antes do código, escrever um contrato de direção curto: tese, modo, tarefa, primeiro viewport, caminho principal, estrutura, papéis de cor/tipo, assinatura, risco e default da categoria rejeitado.
-8. Para tokens, identificar fonte autoritativa, outputs gerados, aliases, consumidores, modos e alcance antes de propor valores.
-9. Travar uma referência dominante e limitar fontes secundárias a papéis explícitos; não calcular uma média visual de referências conflitantes.
-10. Listar defaults prováveis: composição, componentes, copy, paleta, tipografia, movimento e controles de overflow.
-11. Inventariar ações primárias, frequentes, secundárias e destrutivas antes de aceitar kebab, reticências ou menus genéricos.
-12. Produzir alternativas somente quando houver decisão material em aberto; comparar consequências, não apenas estilos.
-13. Definir estados de componentes por gatilho, alteração visual, estado semântico, ação permitida e recuperação.
-14. Ao planejar build, criar fatias verticais por resultado observável com origem, estratégia de reuso, dependências, critérios de pronto e prova; não decompor automaticamente por tecnologia ou arquivo.
-15. Implementar apenas quando autorizado, preservando arquitetura, conteúdo essencial e invariantes do produto.
-16. Executar a interface real quando o perfil de revisão exigir runtime; calibrar alegações quando houver apenas screenshot ou código.
-17. Revisar viewports e estados por criticidade, incluindo teclado, leitor de tela, interrupção e recuperação.
-18. Fazer primeiro um passe visual/UX sem consultar detectores; depois um passe técnico/determinístico; sintetizar os dois com evidência.
-19. Comparar antes/depois com dados, estados, temas e viewports equivalentes.
-20. Produzir IDs estáveis para achados de revisão e solicitar seleção explícita antes de qualquer correção.
-21. Solicitar aprovação antes de uma alteração visualmente ampla ou de uma escolha que redefine identidade, navegação, tema ou alcance global de tokens.
+4. Quando houver resultado de produto ou negócio, ler o método orientado a resultados, distinguir resultado da pessoa e da organização, selecionar no máximo três IDs `ADO-*` por decisão e definir indicador, métricas de proteção, contraprova e condição de reversão.
+5. Inventariar telas, rotas, componentes, conteúdo, mídia, estados e fluxos reais.
+6. Quando houver várias superfícies, mapear entradas, navegação, hierarquia, URLs, persistência, caminhos principal/alternativos e recuperação antes da estética.
+7. Separar identidade verificável de decoração substituível e registrar o que deve permanecer invariável.
+8. Antes do código, escrever um contrato de direção curto: tese, modo, tarefa, primeiro viewport, caminho principal, estrutura, papéis de cor/tipo, assinatura, risco e default da categoria rejeitado.
+9. Para tokens, identificar fonte autoritativa, outputs gerados, aliases, consumidores, modos e alcance antes de propor valores.
+10. Travar uma referência dominante e limitar fontes secundárias a papéis explícitos; não calcular uma média visual de referências conflitantes.
+11. Listar defaults prováveis: composição, componentes, copy, paleta, tipografia, movimento e controles de overflow.
+12. Inventariar ações primárias, frequentes, secundárias e destrutivas antes de aceitar kebab, reticências ou menus genéricos.
+13. Produzir alternativas somente quando houver decisão material em aberto; comparar consequências, não apenas estilos.
+14. Definir estados de componentes por gatilho, alteração visual, estado semântico, ação permitida e recuperação.
+15. Ao planejar build, criar fatias verticais por resultado observável com origem, estratégia de reuso, dependências, critérios de pronto e prova; não decompor automaticamente por tecnologia ou arquivo.
+16. Implementar apenas quando autorizado, preservando arquitetura, conteúdo essencial e invariantes do produto.
+17. Executar a interface real quando o perfil de revisão exigir runtime; calibrar alegações quando houver apenas screenshot ou código.
+18. Revisar viewports e estados por criticidade, incluindo teclado, leitor de tela, interrupção e recuperação.
+19. Fazer primeiro um passe visual/UX sem consultar detectores; depois um passe técnico/determinístico; sintetizar os dois com evidência.
+20. Comparar antes/depois com dados, estados, temas e viewports equivalentes.
+21. Produzir IDs estáveis para achados de revisão e solicitar seleção explícita antes de qualquer correção.
+22. Solicitar aprovação antes de uma alteração visualmente ampla ou de uma escolha que redefine identidade, navegação, tema ou alcance global de tokens.
 
 ## Operar por modo
 
@@ -95,6 +107,7 @@ Entregar, conforme o modo:
 - tarefa, usuários, conteúdo, estados e restrições;
 - defaults prováveis e por que se aplicam ou não;
 - direção ou achados com nível de evidência;
+- resultados da pessoa e da organização, IDs `ADO-*` selecionados, indicador principal, métricas de proteção e contraprova quando houver objetivo de produto ou negócio;
 - contrato de direção e referência dominante quando houver criação ou redesign;
 - decisões preservadas, alteradas e rejeitadas;
 - arquitetura, tokens, tarefas ou artefatos superados e dependentes a revalidar;

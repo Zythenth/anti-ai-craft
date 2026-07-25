@@ -9,7 +9,7 @@ Seis skills para o Codex conduzirem fluxos de design, criarem interfaces, produz
 | Skill | Identificador | Ativação | Quando usar |
 |---|---|---|---|
 | Fluxo de Design Anti-IA | `$anti-ai-design-flow` | Manual | Conduzir uma feature por três ou mais fases, com checkpoints e retomada |
-| Design Anti-IA | `$anti-ai-design` | Automática ou manual | Planejar, revisar ou implementar interfaces contextuais, acessíveis e responsivas |
+| Design Anti-IA | `$anti-ai-design` | Automática ou manual | Planejar, revisar ou implementar interfaces contextuais, acessíveis, responsivas e orientadas a resultados |
 | Código Anti-IA | `$anti-ai-code` | Automática ou manual | Produzir ou revisar código direto, coeso, testável e sem complexidade especulativa |
 | Auditoria Anti-IA | `$anti-ai-audit` | Manual | Examinar código e interface por severidade, sem alterar arquivos |
 | Remediação Anti-IA | `$anti-ai-remediate` | Manual | Corrigir somente achados confirmados, reproduzíveis e aprovados |
@@ -78,6 +78,21 @@ O fluxo:
 - preserva auditoria somente leitura e remediação por IDs aprovados.
 
 Para uma tela, componente, screenshot ou ajuste visual delimitado, continue usando `$anti-ai-design`.
+
+## Design orientado a resultados
+
+`$anti-ai-design` inclui um catálogo autoral de 101 princípios para interfaces de
+produto. Eles estão organizados em dez áreas: contexto e estratégia; posicionamento
+e promessa; aquisição; onboarding e ativação; estrutura e funcionalidades; pricing
+e monetização; retenção e offboarding; arquitetura ética de escolha; métricas e
+experimentação; diferenciação e entrega com IA.
+
+A skill carrega somente as áreas relevantes e seleciona no máximo três princípios
+por decisão. Cada princípio declara quando se aplica, qual decisão orienta, que
+prova pode sustentá-lo e que abuso deve ser evitado. Métricas comerciais são
+tratadas como hipóteses subordinadas ao resultado da pessoa: o catálogo não
+autoriza urgência falsa, prova social fabricada, cancelamento difícil, coleta
+desnecessária ou qualquer outro padrão manipulativo.
 
 ## Qual skill escolher
 
