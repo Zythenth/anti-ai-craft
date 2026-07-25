@@ -6,16 +6,16 @@ Seis skills para o Codex conduzirem fluxos de design, criarem interfaces, produz
 
 ## O que o plugin oferece
 
-| Skill | Invocação | Quando usar |
-|---|---|---|
-| Fluxo de Design Anti-IA | `$anti-ai-design-flow` | Conduzir uma feature por três ou mais fases, com checkpoints e retomada |
-| Design Anti-IA | `$anti-ai-design` | Planejar, revisar ou implementar interfaces contextuais, acessíveis e responsivas |
-| Código Anti-IA | `$anti-ai-code` | Produzir ou revisar código direto, coeso, testável e sem complexidade especulativa |
-| Auditoria Anti-IA | `$anti-ai-audit` | Examinar código e interface por severidade, sem alterar arquivos |
-| Remediação Anti-IA | `$anti-ai-remediate` | Corrigir somente achados confirmados, reproduzíveis e aprovados |
-| Segurança Anti-IA | `$anti-ai-security` | Modelar ameaças, analisar caminhos de abuso e corrigir riscos autorizados |
+| Skill | Identificador | Ativação | Quando usar |
+|---|---|---|---|
+| Fluxo de Design Anti-IA | `$anti-ai-design-flow` | Manual | Conduzir uma feature por três ou mais fases, com checkpoints e retomada |
+| Design Anti-IA | `$anti-ai-design` | Automática ou manual | Planejar, revisar ou implementar interfaces contextuais, acessíveis e responsivas |
+| Código Anti-IA | `$anti-ai-code` | Automática ou manual | Produzir ou revisar código direto, coeso, testável e sem complexidade especulativa |
+| Auditoria Anti-IA | `$anti-ai-audit` | Manual | Examinar código e interface por severidade, sem alterar arquivos |
+| Remediação Anti-IA | `$anti-ai-remediate` | Manual | Corrigir somente achados confirmados, reproduzíveis e aprovados |
+| Segurança Anti-IA | `$anti-ai-security` | Automática ou manual | Modelar ameaças, analisar caminhos de abuso e corrigir riscos autorizados |
 
-Os identificadores permanecem em inglês para serem estáveis em prompts, scripts e documentação. Os nomes e as descrições visíveis estão em português. As cinco skills anteriores mantêm os mesmos identificadores; o fluxo é uma sexta entrada opcional.
+Os identificadores permanecem em inglês para serem estáveis em prompts, scripts e documentação. Os nomes e as descrições visíveis estão em português. Design, Código e Segurança podem ser selecionadas automaticamente quando o pedido corresponde aos seus gatilhos; todas também aceitam invocação manual. Fluxo, Auditoria e Remediação exigem o identificador explícito. Pedidos de auditoria ampla ou de aplicação de achados numerados continuam exigindo `$anti-ai-audit` ou `$anti-ai-remediate`.
 
 ## Instalação
 
@@ -94,7 +94,9 @@ Para auditoria ampla, prefira `$anti-ai-audit`. Para riscos de segurança, use `
 
 ## Princípios e limites
 
-- As seis skills exigem invocação explícita.
+- Design, Código e Segurança podem ser selecionadas automaticamente pelo Codex conforme o pedido.
+- Fluxo, Auditoria e Remediação exigem invocação explícita.
+- Ativação automática não amplia autorização de leitura, edição ou ação externa.
 - Regras do projeto e requisitos funcionais ou normativos prevalecem sobre heurísticas.
 - Análise não autoriza edição; cada skill preserva o escopo concedido pelo usuário.
 - Auditoria é sempre somente leitura.

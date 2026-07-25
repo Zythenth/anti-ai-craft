@@ -1,6 +1,6 @@
 ---
 name: anti-ai-design
-description: "Pesquisar, criar brief, planejar arquitetura da informação ou tokens, revisar, implementar ou refatorar interfaces sem recorrer automaticamente a composição genérica. Usar somente quando invocada explicitamente para screenshots, wireframes, frontend, fluxos, navegação, design system, acessibilidade ou responsividade; não usar para orquestrar uma jornada completa retomável nem em código sem componente visual. Ler fontes do projeto e visuais fornecidos, produzir direção ou revisão com evidência e editar apenas quando o usuário autorizar."
+description: "Pesquisar, criar brief, planejar arquitetura da informação ou tokens, revisar, implementar ou refatorar interfaces sem recorrer automaticamente a composição genérica. Usar quando o pedido envolver screenshots, wireframes, frontend, componentes visuais, fluxos de interface delimitados, navegação, design system, acessibilidade ou responsividade; não usar para orquestrar uma jornada completa ou multifase, como do briefing à revisão, nem em código sem componente visual. Ler fontes do projeto e visuais fornecidos, produzir direção ou revisão com evidência e editar apenas quando o usuário autorizar."
 ---
 
 # Design Anti-IA

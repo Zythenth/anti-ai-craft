@@ -1,6 +1,6 @@
 ---
 name: anti-ai-code
-description: "Revisar ou implementar mudanças de código delimitadas, evitando comportamento não verificável, frágil, inventado, prolixo ou superengenheirado. Usar somente quando invocada explicitamente para módulos, diffs, testes ou requisitos; não usar para design puramente visual ou tradução. Ler o repositório, citar evidência por arquivo e linha e editar apenas quando solicitado, priorizando solução direta, coesa e mínima."
+description: "Revisar ou implementar mudanças de código delimitadas, evitando comportamento não verificável, frágil, inventado, prolixo ou superengenheirado. Usar quando o pedido envolver módulos, diffs, testes, correções, refatorações ou requisitos de implementação; não usar para design puramente visual, auditoria ampla somente leitura, aplicação de achados numerados ou tradução. Ler o repositório, citar evidência por arquivo e linha e editar apenas quando solicitado, priorizando solução direta, coesa e mínima."
 ---
 
 # Código Anti-IA

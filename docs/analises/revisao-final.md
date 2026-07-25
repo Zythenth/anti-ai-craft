@@ -2,6 +2,11 @@
 
 Data: 2026-07-24
 
+Atualização de 2026-07-25: a versão `0.3.1` adotou ativação híbrida. Design,
+Código e Segurança podem ser selecionadas implicitamente pelo contexto; Fluxo,
+Auditoria e Remediação permanecem exclusivamente manuais. Esta mudança preserva
+as fronteiras de autorização descritas no relatório.
+
 ## Veredito
 
 **PASS para o conteúdo commitável.**
@@ -228,9 +233,9 @@ Um teste de onboarding B2B multitenant:
 - seis `SKILL.md` aprovados pelo validador oficial;
 - manifesto aprovado pelo validador oficial de plugins;
 - todos os links Markdown locais das skills resolvem;
-- seis políticas `allow_implicit_invocation: false`;
+- três políticas `allow_implicit_invocation: true` e três `false`, conforme o modo híbrido;
 - cada prompt de interface menciona o identificador correto;
-- README, manifesto e diretórios concordam em seis skills e versão `0.3.0`;
+- README, manifesto e diretórios concordam em seis skills e versão `0.3.1`;
 - nenhuma citação, URL, autoria ou nome dos repositórios-base permanece;
 - nenhuma fonte temporária de pesquisa permanece no working tree;
 - `git diff --check` passou imediatamente antes do commit.

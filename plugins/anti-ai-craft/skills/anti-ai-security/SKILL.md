@@ -1,6 +1,6 @@
 ---
 name: anti-ai-security
-description: "Analisar ou corrigir segurança de aplicações, APIs, serviços, infraestrutura e mudanças de código, procurando controles ausentes ou incompletos como autorização por objeto e tenant, rate limiting, limites de recursos, validação, proteção de segredos, sessões, fluxos de negócio e testes adversariais. Usar somente quando invocada explicitamente com repositório, caminho, diff, endpoint ou requisito de segurança; editar apenas quando o usuário pedir correção e validar cada achado por evidência observável."
+description: "Analisar ou corrigir segurança de aplicações, APIs, serviços, infraestrutura e mudanças de código, procurando controles ausentes ou incompletos como autorização por objeto e tenant, rate limiting, limites de recursos, validação, proteção de segredos, sessões, fluxos de negócio e testes adversariais. Usar quando o pedido mencionar segurança ou quando o escopo alterar autenticação, autorização, tenants, dados sensíveis, entradas externas, uploads, integrações, limites de custo/recursos ou operações protegidas; editar apenas quando o usuário pedir correção e validar cada achado por evidência observável."
 ---
 
 # Segurança Anti-IA

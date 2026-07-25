@@ -4,4 +4,4 @@ interface:
   default_prompt: "Use $anti-ai-security para modelar riscos, planejar provas e corrigir somente o que eu autorizar."
 
 policy:
-  allow_implicit_invocation: false
+  allow_implicit_invocation: true

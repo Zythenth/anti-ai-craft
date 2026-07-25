@@ -4,4 +4,4 @@ interface:
   default_prompt: "Use $anti-ai-design para planejar ou revisar esta interface sem editar até eu autorizar."
 
 policy:
-  allow_implicit_invocation: false
+  allow_implicit_invocation: true

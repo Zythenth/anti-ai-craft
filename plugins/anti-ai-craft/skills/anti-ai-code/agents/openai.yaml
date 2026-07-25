@@ -4,4 +4,4 @@ interface:
   default_prompt: "Use $anti-ai-code para planejar e implementar esta mudança delimitada com prova proporcional."
 
 policy:
-  allow_implicit_invocation: false
+  allow_implicit_invocation: true
