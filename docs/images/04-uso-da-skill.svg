@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Exemplo ilustrativo de uso da skill Design Anti-IA</title>
+  <desc id="desc">Um prompt explícito leva a uma revisão com perfil de evidência, princípios selecionados e nenhuma edição sem autorização.</desc>
+  <rect width="1600" height="900" fill="#0B0D10"/>
+  <circle cx="1480" cy="760" r="340" fill="#35C9A5" opacity="0.05"/>
+  <text x="100" y="76" fill="#35C9A5" font-family="Segoe UI, sans-serif" font-size="20" font-weight="700" letter-spacing="3">ANTI-AI CRAFT · EXEMPLO ILUSTRATIVO</text>
+  <text x="100" y="145" fill="#F4F7FA" font-family="Segoe UI, sans-serif" font-size="54" font-weight="750">Da tela à decisão verificável</text>
+  <text x="100" y="190" fill="#98A2B3" font-family="Segoe UI, sans-serif" font-size="23">Invoque a skill, fixe a autorização e receba uma análise rastreável.</text>
+
+  <rect x="100" y="250" width="575" height="470" rx="28" fill="#141820" stroke="#2A3140"/>
+  <text x="138" y="298" fill="#8B7CF6" font-family="Segoe UI, sans-serif" font-size="18" font-weight="800">1 · PROMPT</text>
+  <rect x="138" y="330" width="499" height="260" rx="22" fill="#202636"/>
+  <text x="170" y="378" fill="#BDB3FF" font-family="Cascadia Code, Consolas, monospace" font-size="20" font-weight="700">$anti-ai-design</text>
+  <text x="170" y="423" fill="#F4F7FA" font-family="Segoe UI, sans-serif" font-size="21">Revise esta tela.</text>
+  <text x="170" y="459" fill="#F4F7FA" font-family="Segoe UI, sans-serif" font-size="21">Não altere nada ainda.</text>
+  <text x="170" y="507" fill="#A9B2C1" font-family="Segoe UI, sans-serif" font-size="19">Identifique problemas de hierarquia,</text>
+  <text x="170" y="539" fill="#A9B2C1" font-family="Segoe UI, sans-serif" font-size="19">UX, acessibilidade e padrões genéricos.</text>
+  <rect x="138" y="624" width="235" height="48" rx="14" fill="#2B2447"/><text x="255" y="655" text-anchor="middle" fill="#BDB3FF" font-family="Segoe UI, sans-serif" font-size="16" font-weight="700">ANÁLISE, SEM EDIÇÃO</text>
+
+  <path d="M710 485h90" stroke="#F4A261" stroke-width="5" stroke-linecap="round"/><path d="M782 468l18 17-18 17" fill="none" stroke="#F4A261" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="835" y="250" width="665" height="470" rx="28" fill="#141820" stroke="#24594E"/>
+  <text x="875" y="298" fill="#35C9A5" font-family="Segoe UI, sans-serif" font-size="18" font-weight="800">2 · RESPOSTA ESTRUTURADA</text>
+  <text x="875" y="356" fill="#98A2B3" font-family="Segoe UI, sans-serif" font-size="16" font-weight="700">PERFIL DE EVIDÊNCIA</text>
+  <text x="875" y="386" fill="#F4F7FA" font-family="Segoe UI, sans-serif" font-size="21">Artefato visual · runtime não exercitado</text>
+  <line x1="875" y1="415" x2="1460" y2="415" stroke="#2A3140"/>
+  <text x="875" y="458" fill="#98A2B3" font-family="Segoe UI, sans-serif" font-size="16" font-weight="700">PRINCÍPIOS SELECIONADOS</text>
+  <rect x="875" y="478" width="120" height="38" rx="19" fill="#11352E"/><text x="935" y="503" text-anchor="middle" fill="#71E4C8" font-family="Segoe UI, sans-serif" font-size="16" font-weight="700">ADO-050</text>
+  <rect x="1008" y="478" width="120" height="38" rx="19" fill="#11352E"/><text x="1068" y="503" text-anchor="middle" fill="#71E4C8" font-family="Segoe UI, sans-serif" font-size="16" font-weight="700">ADO-057</text>
+  <text x="875" y="563" fill="#98A2B3" font-family="Segoe UI, sans-serif" font-size="16" font-weight="700">ACHADO</text>
+  <text x="875" y="598" fill="#F4F7FA" font-family="Segoe UI, sans-serif" font-size="20">Ações frequentes estão escondidas no menu.</text>
+  <text x="875" y="632" fill="#A9B2C1" font-family="Segoe UI, sans-serif" font-size="18">Torne a ação principal visível e preserve</text>
+  <text x="875" y="661" fill="#A9B2C1" font-family="Segoe UI, sans-serif" font-size="18">o overflow para opções secundárias relacionadas.</text>
+
+  <rect x="100" y="770" width="1400" height="70" rx="18" fill="#112A25" stroke="#236B5C"/>
+  <text x="140" y="813" fill="#71E4C8" font-family="Segoe UI, sans-serif" font-size="20" font-weight="700">✓ A skill lê o contexto, declara limitações e só edita quando você autoriza.</text>
+</svg>

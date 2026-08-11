@@ -4,6 +4,35 @@ Seis skills para o Codex conduzirem fluxos de design, criarem interfaces, produz
 
 “Anti-AI” não significa detectar autoria ou proibir o uso de IA. O objetivo é reduzir padrões recorrentes de trabalho automático mal conduzido: interfaces genéricas, abstrações desnecessárias, fallbacks silenciosos, mudanças sem evidência, correções fora do escopo e controles de segurança esquecidos.
 
+## Visão rápida
+
+### Instalação
+
+![Fluxo de instalação do Anti-AI Craft](docs/images/01-instalacao.png)
+
+### Skills disponíveis
+
+![Mapa das seis skills do Anti-AI Craft](docs/images/02-skills-no-codex.png)
+
+### Comparação controlada
+
+Baseline neutro e versão orientada por `$anti-ai-design`, implementados por agentes
+independentes a partir do mesmo brief, fixture, interações e viewport de 1280 × 800.
+Um terceiro agente auditou a equivalência; as duas versões passaram o mesmo percurso
+funcional no navegador. A captura permite comparar hierarquia, densidade, contexto e
+acesso às ações sem apresentar o baseline como uma tela quebrada.
+
+![Comparação real entre o baseline neutro e a versão orientada por Design Anti-IA](docs/images/03-antes-depois.png)
+
+[Consultar brief, código executável e auditoria do comparativo](docs/demo-comparativo/AUDITORIA.md).
+
+### Uso de uma skill
+
+Exemplo ilustrativo de invocação e resposta esperada; não é uma captura do
+aplicativo do Codex.
+
+![Exemplo ilustrativo de uso da skill Design Anti-IA](docs/images/04-uso-da-skill.png)
+
 ## O que o plugin oferece
 
 | Skill | Identificador | Ativação | Quando usar |

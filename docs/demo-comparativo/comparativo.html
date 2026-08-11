@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Comparativo — baseline e Anti-IA</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --canvas: #e9ebe8;
+        --ink: #17231f;
+        --muted: #56615d;
+        --line: #c7cdc8;
+        --surface: #fff;
+        --anti: #9b382b;
+      }
+
+      * { box-sizing: border-box; }
+
+      html,
+      body {
+        margin: 0;
+        min-width: 320px;
+        color: var(--ink);
+        background: var(--canvas);
+        font-family: "Segoe UI", Arial, sans-serif;
+      }
+
+      body { padding: 28px; }
+
+      header {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 32px;
+        max-width: 2624px;
+        margin: 0 auto 18px;
+      }
+
+      h1 {
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 34px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+
+      header p {
+        max-width: 620px;
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+        text-align: right;
+      }
+
+      main {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        max-width: 2624px;
+        margin: 0 auto;
+      }
+
+      article {
+        overflow: hidden;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        box-shadow: 0 14px 36px rgb(26 39 33 / 8%);
+      }
+
+      .panel-heading {
+        min-height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 14px 18px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .panel-heading h2 {
+        margin: 0 0 3px;
+        font-size: 18px;
+      }
+
+      .panel-heading p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .tag {
+        flex: 0 0 auto;
+        padding: 6px 9px;
+        border: 1px solid var(--line);
+        font-size: 11px;
+        font-weight: 750;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .anti .panel-heading { border-top: 4px solid var(--anti); }
+      .baseline .panel-heading { border-top: 4px solid #355da8; }
+
+      figure { margin: 0; }
+
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+        aspect-ratio: 1280 / 800;
+      }
+
+      footer {
+        max-width: 2624px;
+        margin: 14px auto 0;
+        color: var(--muted);
+        font-size: 12px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Mesmo brief. Mesmos dados. Decisões diferentes.</h1>
+      <p>Renderizações reais no mesmo navegador, estado inicial, zoom e viewport de 1280 × 800.</p>
+    </header>
+
+    <main aria-label="Comparação lado a lado">
+      <article class="baseline">
+        <div class="panel-heading">
+          <div>
+            <h2>Baseline neutro</h2>
+            <p>Implementação convencional, funcional e sem referências da skill.</p>
+          </div>
+          <span class="tag">Controle</span>
+        </div>
+        <figure>
+          <img src="capturas/baseline-1280x800.png" alt="Baseline da fila de tradução">
+        </figure>
+      </article>
+
+      <article class="anti">
+        <div class="panel-heading">
+          <div>
+            <h2>Com Design Anti-IA</h2>
+            <p>Hierarquia operacional, detalhes no contexto e ações nomeadas.</p>
+          </div>
+          <span class="tag">$anti-ai-design</span>
+        </div>
+        <figure>
+          <img src="capturas/anti-ai-1280x800.png" alt="Versão da fila de tradução orientada pela skill Design Anti-IA">
+        </figure>
+      </article>
+    </main>
+
+    <footer>Dados de demonstração: quatro capítulos, 15.743 palavras e o mesmo estado de execução.</footer>
+  </body>
+</html>
