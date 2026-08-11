@@ -1,127 +1,127 @@
-# Template de relatório
+# Report template
 
-## Sumário
+## Summary
 
-- [Resumo](#resumo)
-- [Contagem](#contagem)
-- [Achados](#achados)
-- [Fechamento de candidatos](#fechamento-de-candidatos)
-- [Cobertura de especificação/SDD](#cobertura-de-especificaçãosdd)
-- [Cobertura opcional do fluxo de design](#cobertura-opcional-do-fluxo-de-design)
-- [Cobertura estrutural opcional](#cobertura-estrutural-opcional)
-- [Sistema de tokens opcional](#sistema-de-tokens-opcional)
-- [Decisões pendentes e preferências](#decisões-pendentes-e-preferências)
-- [Falsos positivos rejeitados](#falsos-positivos-rejeitados)
-- [Validações](#validações)
-- [Próximos passos](#próximos-passos)
+- [Overview](#overview)
+- [Count](#count)
+- [Findings](#findings)
+- [Candidate closure](#candidate-closure)
+- [Specification/SDD coverage](#specificationsdd-coverage)
+- [Optional design-flow coverage](#optional-design-flow-coverage)
+- [Optional structural coverage](#optional-structural-coverage)
+- [Optional token system](#optional-token-system)
+- [Pending decisions and preferences](#pending-decisions-and-preferences)
+- [Rejected false positives](#rejected-false-positives)
+- [Validations](#validations)
+- [Next steps](#next-steps)
 
-## Resumo
+## Overview
 
-- Escopo:
-- Tipo de alvo:
-- Raiz/branch/HEAD:
-- Upstream ou alvo do diff:
-- Merge-base/SHA do baseline:
-- Comando ou intervalo comparado:
-- Modo: read-only
-- Fontes de verdade:
-- Git/estado inicial:
-- Execução e ambiente:
-- Cobertura:
-- Limitações:
-- Risco residual:
+- Scope:
+- Target type:
+- Root/branch/HEAD:
+- Upstream or diff target:
+- Merge-base/baseline SHA:
+- Compared command or range:
+- Mode: read-only
+- Sources of truth:
+- Git/initial state:
+- Execution and environment:
+- Coverage:
+- Limitations:
+- Residual risk:
 
-## Contagem
+## Count
 
-| Severidade | Quantidade |
+| Severity | Count |
 |---|---:|
-| Crítica | 0 |
-| Alta | 0 |
-| Média | 0 |
-| Baixa | 0 |
-| Observação | 0 |
+| Critical | 0 |
+| High | 0 |
+| Medium | 0 |
+| Low | 0 |
+| Observation | 0 |
 
-## Achados
+## Findings
 
-### AAC-001 — Título
+### AAC-001 — Title
 
-- Área:
-- Severidade:
-- Confiança:
-- Prioridade de remediação:
-- Arquivo:
-- Linha ou componente:
-- Controle ou causa raiz afetada:
-- Ator e pré-condições:
-- Evidência:
-- Reprodução/caminho:
-- Contraprova mais forte examinada:
-- Lacuna de prova:
-- Impacto:
-- Justificativa da severidade:
-- Regra violada:
-- Classificação do achado:
-- Correção recomendada:
-- Risco da correção:
-- Validação necessária:
-- Critérios de aceitação:
+- Area:
+- Severity:
+- Confidence:
+- Remediation priority:
+- File:
+- Line or component:
+- Affected control or root cause:
+- Actor and preconditions:
+- Evidence:
+- Reproduction/path:
+- Strongest disconfirming evidence examined:
+- Evidence gap:
+- Impact:
+- Severity rationale:
+- Violated rule:
+- Finding classification:
+- Recommended fix:
+- Fix risk:
+- Required validation:
+- Acceptance criteria:
 
-Repetir somente para achados sustentados.
+Repeat only for substantiated findings.
 
-## Fechamento de candidatos
+## Candidate closure
 
-| Candidato | Localização | Método/controle | Disposição | Contraprova ou lacuna | Motivo |
+| Candidate | Location | Method/control | Disposition | Disconfirming evidence or gap | Reason |
 |---|---|---|---|---|---|
 
-Se não houver achados principais, declarar: **Nenhum achado qualificável**.
+If there are no primary findings, state: **No qualifying findings**.
 
-## Cobertura de especificação/SDD
+## Specification/SDD coverage
 
-| Requisito/área | Estado | Evidência |
+| Requirement/area | Status | Evidence |
 |---|---|---|
-| exemplo | implementado / parcial / ausente / divergente / ambíguo / não verificável | |
+| example | implemented / partial / absent / divergent / ambiguous / unverifiable | |
 
-## Cobertura opcional do fluxo de design
+## Optional design-flow coverage
 
-| Feature/fase | Artefato | Estado/autoridade | Vínculo com código | Evidência | Disposição |
+| Feature/phase | Artifact | Status/authority | Link to code | Evidence | Disposition |
 |---|---|---|---|---|---|
 
-Omitir quando não aplicável. Distinguir desvio da implementação, artefato superado e ambiguidade.
+Omit when not applicable. Distinguish an implementation deviation, a superseded artifact, and ambiguity.
 
-## Cobertura estrutural opcional
+## Optional structural coverage
 
-| Superfície/fluxo | Papel/entrada | URL/persistência | Estados exercitados | Evidência | Cobertura |
+| Surface/flow | Role/entry | URL/persistence | States exercised | Evidence | Coverage |
 |---|---|---|---|---|---|
 
-Usar somente para produto navegável.
+Use only for a navigable product.
 
-## Sistema de tokens opcional
+## Optional token system
 
-| Fonte/camada | Token ou alias | Consumidores | Modos/estados | Evidência | Disposição |
+| Source/layer | Token or alias | Consumers | Modes/states | Evidence | Disposition |
 |---|---|---|---|---|---|
 
-## Decisões pendentes e preferências
+## Pending decisions and preferences
 
-| ID | Pergunta | Origem pesquisada | Depende de | Recomendação/alternativas | Efeito no relatório | Estado | Trabalho independente |
+| ID | Question | Source researched | Depends on | Recommendation/alternatives | Effect on report | Status | Independent work |
 |---|---|---|---|---|---|---|---|
 
-Usar prefixo distinto dos achados. Explicar tradeoffs sem declarar preferência como defeito.
+Use a prefix distinct from findings. Explain trade-offs without declaring a preference to be a defect.
 
-## Falsos positivos rejeitados
+## Rejected false positives
 
-| Candidato | Evidência examinada | Motivo da rejeição |
+| Candidate | Evidence examined | Reason for rejection |
 |---|---|---|
 
-## Validações
+## Validations
 
-| Comando/passe | Exit code | Resultado | Evidência/limitação |
+| Command/pass | Exit code | Outcome | Evidence/limitation |
 |---|---:|---|---|
 
-## Próximos passos
+## Next steps
 
-Ordenar correções aprováveis por dependência e risco. Não aplicar automaticamente.
+Order approvable fixes by dependency and risk. Do not apply them automatically.
 
-| IDs | Resultado do lote | Dependências | Risco | Critérios de aceitação | Validação proposta |
+| IDs | Batch outcome | Dependencies | Risk | Acceptance criteria | Proposed validation |
 |---|---|---|---|---|---|
 
-A ordem sugerida não constitui autorização. Agrupar somente causa e correção realmente compartilhadas.
+The suggested order does not constitute authorization. Group only when the cause and fix are truly shared.

@@ -1,155 +1,155 @@
-# Design tokens operacionais
+# Operational design tokens
 
-## Sumário
+## Summary
 
-- [Princípio](#princípio)
-- [Descoberta e classificação](#descoberta-e-classificação)
-- [Fonte, aliases e consumidores](#fonte-aliases-e-consumidores)
-- [Famílias](#famílias)
-- [Modos e temas](#modos-e-temas)
-- [Implementação e validação](#implementação-e-validação)
-- [Contrato de saída](#contrato-de-saída)
+- [Principle](#principle)
+- [Discovery and classification](#discovery-and-classification)
+- [Source, aliases, and consumers](#source-aliases-and-consumers)
+- [Families](#families)
+- [Modes and themes](#modes-and-themes)
+- [Implementation and validation](#implementation-and-validation)
+- [Output contract](#output-contract)
 
-## Princípio
+## Principle
 
-Organizar a cadeia `primitivo → semântico → componente ou consumidor` quando o projeto adotar essas camadas. Criar somente abstrações e famílias com intenção e consumidor reais. Um catálogo de variáveis sem uso, estados ou modos conectados não constitui sistema concluído.
+Organize the `primitive → semantic → component or consumer` chain when the project adopts these layers. Create only abstractions and families with genuine intent and consumers. A catalog of variables without connected use, states, or modes does not constitute a complete system.
 
-Não obrigar CSS, framework, tema escuro, escala, breakpoint, quantidade de tokens ou formato.
+Do not require CSS, a framework, dark theme, scale, breakpoint, token count, or format.
 
-## Descoberta e classificação
+## Discovery and classification
 
-Descobrir:
+Discover:
 
-- definições, imports e consumidores de variáveis;
-- configuração, providers, atributos e preferências de tema;
-- objetos ou recursos nativos de plataforma;
-- arquivos estruturados e scripts de geração;
-- bibliotecas de componentes e documentação;
-- valores repetidos ou hardcoded;
-- aliases, referências e outputs gerados;
-- testes visuais e ferramentas de design;
-- marcas, temas, densidades ou plataformas.
+- definitions, imports, and consumers of variables;
+- theme configuration, providers, attributes, and preferences;
+- native platform objects or resources;
+- structured files and generation scripts;
+- component libraries and documentation;
+- repeated or hardcoded values;
+- aliases, references, and generated outputs;
+- visual tests and design tools;
+- brands, themes, densities, or platforms.
 
-Classificar o sistema:
+Classify the system as:
 
-- `inexistente`;
-- `informal`: valores repetidos sem semântica estável;
-- `parcial`: algumas camadas ou geração;
-- `estabelecido`: fonte, camadas e consumidores identificados;
-- `fragmentado`: fontes concorrentes ou política duplicada.
+- `nonexistent`;
+- `informal`: repeated values without stable semantics;
+- `partial`: some layers or generation;
+- `established`: source, layers, and consumers identified;
+- `fragmented`: competing sources or duplicated policy.
 
-A classificação determina `criar`, `estender`, `consolidar`, `conectar consumidores` ou `preservar`.
+The classification determines whether to `create`, `extend`, `consolidate`, `connect consumers`, or `preserve`.
 
-## Fonte, aliases e consumidores
+## Source, aliases, and consumers
 
-1. Identificar fonte autoritativa por documentação, imports, scripts e consumidores; não pelo nome ou data do arquivo.
-2. Distinguir arquivos derivados e comando oficial de geração.
-3. Resolver aliases e dependências; procurar referência ausente, ciclo, tipo ou unidade incompatível.
-4. Mapear token a consumidores, estados e modos representativos.
-5. Alterar a menor camada capaz de expressar a intenção.
-6. Regenerar outputs pelo comando oficial.
-7. Remover somente órfãos comprovados ou criados pela mudança.
+1. Identify the authoritative source through documentation, imports, scripts, and consumers—not by a file's name or date.
+2. Distinguish derived files and the official generation command.
+3. Resolve aliases and dependencies; look for a missing reference, cycle, or incompatible type or unit.
+4. Map tokens to representative consumers, states, and modes.
+5. Change the smallest layer capable of expressing the intent.
+6. Regenerate outputs with the official command.
+7. Remove only proven orphans or those created by the change.
 
-Tratar como candidato técnico:
+Treat as a technical candidate:
 
-- alias quebrado ou circular;
-- fonte e output divergentes;
-- primitivo consumido onde o contrato exige semântico;
-- hardcode que contorna política vigente;
-- branch manual de tema que duplica provider;
-- token órfão;
-- substituição textual sem confirmar semântica.
+- broken or circular alias;
+- divergent source and output;
+- primitive consumed where the contract requires a semantic token;
+- hardcoding that bypasses current policy;
+- manual theme branch that duplicates a provider;
+- orphaned token;
+- textual replacement without confirmed semantics.
 
-Literal local não é falha por si. Valores intrínsecos, calculados, de mídia ou de terceiros podem permanecer locais com justificativa.
+A local literal is not a failure by itself. Intrinsic, calculated, media, or third-party values may remain local with justification.
 
-## Famílias
+## Families
 
-Criar apenas famílias aplicáveis. Para cada token, registrar intenção, nome, tipo/unidade, consumidor, estados, modos e validação.
+Create only applicable families. For each token, record intent, name, type/unit, consumer, states, modes, and validation.
 
-### Cor
+### Color
 
-Mapear papéis necessários:
+Map the necessary roles:
 
-- superfícies e fundos;
-- texto e ícones;
-- bordas e separadores;
-- ação, foco e interação;
-- sucesso, aviso, erro e informação;
-- overlay e elevação.
+- surfaces and backgrounds;
+- text and icons;
+- borders and separators;
+- action, focus, and interaction;
+- success, warning, error, and information;
+- overlay and elevation.
 
-Nomes de valor pertencem à camada primitiva; API semântica expressa intenção. Não comunicar estado apenas por cor.
+Value names belong to the primitive layer; the semantic API expresses intent. Do not communicate state through color alone.
 
-### Tipografia
+### Typography
 
-Definir papéis de leitura, display, dados e código. Tratar família, fallback, tamanho, peso, altura de linha e tracking como conjunto. Validar idioma, scripts suportados, zoom, text spacing, tradução e strings longas.
+Define roles for reading, display, data, and code. Treat family, fallback, size, weight, line height, and tracking as a set. Validate language, supported scripts, zoom, text spacing, translation, and long strings.
 
-Não impor número de famílias, passos ou pesos.
+Do not impose a number of families, steps, or weights.
 
-### Espaço, dimensão, forma e elevação
+### Spacing, dimension, shape, and elevation
 
-- Estender a escala existente.
-- Derivar passos de agrupamento, densidade, toque e layout reais.
-- Evitar duplicatas quase idênticas sem função.
-- Permitir exceção local justificada.
-- Não tokenizar proporção de mídia ou cálculo intrínseco apenas por completude.
-- Ligar radius e sombra a forma, estado ou elevação.
+- Extend the existing scale.
+- Derive steps from real grouping, density, touch, and layout.
+- Avoid near-duplicates without a function.
+- Allow a justified local exception.
+- Do not tokenize media proportions or intrinsic calculations merely for completeness.
+- Connect radius and shadow to shape, state, or elevation.
 
-### Movimento
+### Motion
 
-Tokenizar duração, curva, atraso ou intensidade somente quando representarem linguagem repetida. Registrar consumidor, transição de estado e variante reduzida. Não criar escala para animação única nem adotar bounce ou duração universal.
+Tokenize duration, easing, delay, or intensity only when they represent repeated language. Record the consumer, state transition, and reduced variant. Do not create a scale for a one-off animation or adopt a universal bounce or duration.
 
-### Layout e breakpoints
+### Layout and breakpoints
 
-Definir breakpoints quando conteúdo, leitura, navegação ou interação deixarem de funcionar. Respeitar a capacidade do stack; não tratar classes de aparelho como contrato universal.
+Define breakpoints when content, reading, navigation, or interaction stops working. Respect the stack's capabilities; do not treat device classes as a universal contract.
 
-## Modos e temas
+## Modes and themes
 
-Preservar o mecanismo existente. Criar novo modo apenas por requisito e autorização.
+Preserve the existing mechanism. Create a new mode only by requirement and authorization.
 
-Quando houver múltiplos temas ou modos, registrar:
+When there are multiple themes or modes, record:
 
-- fonte de verdade;
-- modos realmente suportados;
-- precedência entre sistema, produto e escolha manual;
-- persistência e estado antes da hidratação;
-- paridade dos papéis semânticos;
-- assets, controles nativos, overlays e sombras;
-- contraste, foco, estados e forced colors;
-- relação com reduced motion.
+- source of truth;
+- modes actually supported;
+- precedence among system, product, and manual choice;
+- persistence and pre-hydration state;
+- parity of semantic roles;
+- assets, native controls, overlays, and shadows;
+- contrast, focus, states, and forced colors;
+- relationship to reduced motion.
 
-Não combinar provider, atributo e media query concorrentes sem um contrato explícito.
+Do not combine competing providers, attributes, and media queries without an explicit contract.
 
-## Implementação e validação
+## Implementation and validation
 
-Antes:
+Before:
 
-- registrar baseline e consumidores;
-- delimitar alcance por componentes, marcas, modos e plataformas;
-- pedir aprovação quando token global ou pipeline tiver alcance amplo;
-- prever rollback ou migração.
+- record the baseline and consumers;
+- bound reach by components, brands, modes, and platforms;
+- request approval when a global token or pipeline has broad reach;
+- anticipate rollback or migration.
 
-Depois:
+After:
 
-1. validar aliases, tipos e geração;
-2. executar build/lint/testes oficiais pertinentes;
-3. comparar consumidores representativos com mesmos dados e estados;
-4. cobrir modos, interação, contraste, zoom, strings longas e reduced motion afetados;
-5. revisar diff de fonte e outputs;
-6. registrar combinações não testadas.
+1. validate aliases, types, and generation;
+2. run the relevant official build/lint/tests;
+3. compare representative consumers with the same data and states;
+4. cover affected modes, interaction, contrast, zoom, long strings, and reduced motion;
+5. review the source and output diff;
+6. record untested combinations.
 
-Build não prova resultado visual; screenshot não prova integridade da cadeia.
+A build does not prove the visual result; a screenshot does not prove chain integrity.
 
-## Contrato de saída
+## Output contract
 
-Entregar:
+Deliver:
 
-- classificação do sistema;
-- fonte autoritativa e outputs gerados;
-- formatos e comandos;
-- modos e famílias aplicáveis;
-- tokens preservados, adicionados, alterados e rejeitados;
-- aliases e consumidores afetados;
-- valores que ainda contornam a cadeia;
-- alcance e aprovação;
-- validações visual e técnica;
-- riscos, dívida fora do escopo e decisões pendentes.
+- system classification;
+- authoritative source and generated outputs;
+- formats and commands;
+- applicable modes and families;
+- preserved, added, changed, and rejected tokens;
+- affected aliases and consumers;
+- values that still bypass the chain;
+- reach and approval;
+- visual and technical validations;
+- risks, out-of-scope debt, and pending decisions.

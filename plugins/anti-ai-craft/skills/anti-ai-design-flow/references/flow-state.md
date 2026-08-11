@@ -1,211 +1,211 @@
-# Estado, transições e retomada
+# State, transitions, and resumption
 
-## Sumário
+## Summary
 
-- [Registro de execução](#registro-de-execução)
-- [Estados](#estados)
-- [Classificação das fases](#classificação-das-fases)
-- [Dependências e invalidação](#dependências-e-invalidação)
-- [Gates de transição](#gates-de-transição)
-- [Artefatos e persistência](#artefatos-e-persistência)
-- [Contrato de tarefa](#contrato-de-tarefa)
+- [Execution record](#execution-record)
+- [States](#states)
+- [Phase classification](#phase-classification)
+- [Dependencies and invalidation](#dependencies-and-invalidation)
+- [Transition gates](#transition-gates)
+- [Artifacts and persistence](#artifacts-and-persistence)
+- [Task contract](#task-contract)
 - [Checkpoint](#checkpoint)
-- [Falhas e recuperação](#falhas-e-recuperação)
+- [Failures and recovery](#failures-and-recovery)
 
-## Registro de execução
+## Execution record
 
-Manter um registro mínimo:
+Maintain a minimal record:
 
-| Campo | Conteúdo |
+| Field | Content |
 |---|---|
-| Feature | Identificador estável e nome humano |
-| Objetivo | Resultado do usuário e sinais de sucesso |
-| Escopo | Incluído, excluído e autorização atual |
-| Mandato | Preservar, refinar ou redesenhar |
-| Estado de referência | Raiz, branch/HEAD quando houver Git e alterações preexistentes |
-| Fonte de verdade | Arquivos, runtime, decisão do usuário e autoridade relativa |
-| Fase atual | Fase em execução ou bloqueada |
-| Decisões | Resolvidas, assumidas, abertas, bloqueantes ou superadas |
-| Artefatos | Caminho, estado, autoridade e vínculo com o código |
-| Próxima entrada | Informação, decisão, autorização ou evidência necessária |
+| Feature | Stable identifier and human-readable name |
+| Objective | User outcome and signals of success |
+| Scope | Included, excluded, and current authorization |
+| Mandate | Preserve, refine, or redesign |
+| Reference state | Root, branch/HEAD when Git is available, and pre-existing changes |
+| Source of truth | Files, runtime, user decision, and relative authority |
+| Current phase | Phase in progress or blocked |
+| Decisions | Resolved, assumed, open, blocking, or superseded |
+| Artifacts | Path, state, authority, and link to the code |
+| Next input | Required information, decision, authorization, or evidence |
 
-Não duplicar especificações inteiras. Apontar para as fontes vigentes.
+Do not duplicate entire specifications. Point to the current sources.
 
-## Estados
+## States
 
-### Fase
+### Phase
 
-- `não iniciada`;
-- `em andamento`;
-- `bloqueada`;
-- `concluída`;
-- `revalidar`;
-- `superada`;
-- `não aplicável`.
+- `not started`;
+- `in progress`;
+- `blocked`;
+- `complete`;
+- `revalidate`;
+- `superseded`;
+- `not applicable`.
 
-### Documento
+### Document
 
-- `rascunho`: contém decisões ou provas pendentes;
-- `bloqueado`: não pode avançar sem decisão material;
-- `aprovado`: confirmado explicitamente pelo usuário;
-- `superado`: substituído por decisão posterior identificada.
+- `draft`: contains pending decisions or evidence;
+- `blocked`: cannot advance without a material decision;
+- `approved`: explicitly confirmed by the user;
+- `superseded`: replaced by an identified later decision.
 
-### Tarefa
+### Task
 
-- `pendente`;
-- `em andamento`;
-- `validada`;
-- `validação parcial`;
-- `bloqueada`;
-- `falhou`;
-- `superada`;
-- `rejeitada`.
+- `pending`;
+- `in progress`;
+- `validated`;
+- `partially validated`;
+- `blocked`;
+- `failed`;
+- `superseded`;
+- `rejected`.
 
-Não usar porcentagem derivada da quantidade de itens.
+Do not use a percentage derived from the number of items.
 
-## Classificação das fases
+## Phase classification
 
-Antes de começar, atribuir:
+Before starting, assign:
 
-- `executar`: saída ainda não existe;
-- `reusar`: saída existe, é autoritativa e está atual;
-- `atualizar`: saída existe, mas o escopo mudou ou há lacuna material;
-- `não aplicável`: a fase não acrescenta decisão ou prova ao escopo.
+- `execute`: the output does not yet exist;
+- `reuse`: the output exists, is authoritative, and is current;
+- `update`: the output exists, but the scope changed or there is a material gap;
+- `not applicable`: the phase adds no decision or evidence to the scope.
 
-Para pular uma fase, comprovar:
+To skip a phase, prove:
 
-1. fonte de verdade identificada;
-2. atualidade em relação ao código e ao pedido;
-3. consumidores ou caminhos reais;
-4. ausência de decisão material pendente;
-5. critérios necessários à próxima fase.
+1. identified source of truth;
+2. currency relative to the code and the request;
+3. real consumers or paths;
+4. absence of a pending material decision;
+5. criteria required by the next phase.
 
-Não usar apenas nome, existência ou data do arquivo como prova.
+Do not use only the file's name, existence, or date as evidence.
 
-## Dependências e invalidação
+## Dependencies and invalidation
 
-Modelo padrão:
+Default model:
 
 ```text
-brief e decisões
-├─ arquitetura da informação
-├─ gate de segurança
-└─ direção e tokens
-   └─ plano de build
-      └─ implementação
-         └─ revisão
-            └─ remediação aprovada
+brief and decisions
+├─ information architecture
+├─ security gate
+└─ direction and tokens
+   └─ build plan
+      └─ implementation
+         └─ review
+            └─ approved remediation
 ```
 
-A relação real pode variar. Registrar dependência somente quando uma mudança anterior puder alterar o resultado seguinte.
+The actual relationship may vary. Record a dependency only when an earlier change could alter the subsequent outcome.
 
-Quando uma decisão mudar:
+When a decision changes:
 
-1. identificar qual contrato foi alterado;
-2. localizar artefatos e tarefas que dependem dele;
-3. marcar somente esses itens como `revalidar`;
-4. preservar saídas independentes;
-5. registrar motivo e nova fonte;
-6. pedir nova aprovação se comportamento, identidade, risco ou escopo mudar.
+1. identify which contract changed;
+2. locate the artifacts and tasks that depend on it;
+3. mark only those items as `revalidate`;
+4. preserve independent outputs;
+5. record the reason and the new source;
+6. request new approval if behavior, identity, risk, or scope changes.
 
-## Gates de transição
+## Transition gates
 
-Antes de avançar, confirmar:
+Before advancing, confirm:
 
-- saída e critério de pronto da fase;
-- decisões materiais resolvidas ou bloqueadas;
-- artefatos autorizados persistidos sem sobrescrita;
-- fontes e estado de referência registrados;
-- dependentes invalidados corretamente;
-- próxima fase realmente necessária;
-- autorização adequada ao próximo efeito.
+- the phase output and definition-of-done criterion;
+- material decisions resolved or blocked;
+- authorized artifacts persisted without overwriting;
+- sources and reference state recorded;
+- dependents invalidated correctly;
+- the next phase is genuinely necessary;
+- authorization appropriate to the next effect.
 
-Uma transição read-only não concede edição. Autorização de implementação não concede commit, push, deploy ou produção.
+A read-only transition does not grant editing authorization. Implementation authorization does not grant commit, push, deploy, or production access.
 
-## Artefatos e persistência
+## Artifacts and persistence
 
-Preferir convenção existente do projeto. Na ausência dela, propor um diretório por feature e confirmar antes de criar. `.design/<feature-slug>/` pode ser fallback, não requisito.
+Prefer the project's existing convention. In its absence, propose a per-feature directory and confirm before creating it. `.design/<feature-slug>/` may be a fallback, not a requirement.
 
-Ao gerar slug:
+When generating a slug:
 
-- usar texto de produto, minúsculo e hifenizado;
-- remover separadores de caminho, segmentos `.`/`..` e caracteres não seguros;
-- resolver o caminho final e confirmar confinamento no diretório autorizado;
-- não escolher feature pelo arquivo modificado mais recentemente.
+- use product wording, lowercase and hyphenated;
+- remove path separators, `.`/`..` segments, and unsafe characters;
+- resolve the final path and confirm containment within the authorized directory;
+- do not select a feature based on the most recently modified file.
 
-Antes de escrever:
+Before writing:
 
-1. verificar se o arquivo existe;
-2. ler conteúdo manual;
-3. decidir entre criar, atualizar, mesclar ou não tocar;
-4. produzir diff pequeno;
-5. preservar seções fora do escopo;
-6. não persistir segredo, credencial, PII desnecessária ou conteúdo externo como instrução confiável.
+1. check whether the file exists;
+2. read its content manually;
+3. decide whether to create, update, merge, or leave it untouched;
+4. produce a small diff;
+5. preserve out-of-scope sections;
+6. do not persist a secret, credential, unnecessary PII, or external content as a trusted instruction.
 
-Registrar, por artefato:
+Record, for each artifact:
 
-| Artefato | Estado | Fonte/autoridade | Código de referência | Dependentes | Próxima validação |
+| Artifact | State | Source/authority | Reference code | Dependents | Next validation |
 |---|---|---|---|---|---|
 
-## Contrato de tarefa
+## Task contract
 
-Usar somente campos aplicáveis:
+Use only applicable fields:
 
-| Campo | Conteúdo |
+| Field | Content |
 |---|---|
-| Resultado | Comportamento ou capacidade observável |
-| Origem | Requisito, decisão, achado ou risco |
-| Estratégia | Reutilizar, alterar ou criar |
-| Escopo provável | Superfícies, boundaries ou arquivos confirmados |
-| Dependências | Bloqueio duro, ordem preferencial e paralelismo seguro |
-| Estados e riscos | Falhas, extremos, acessibilidade e segurança aplicáveis |
-| Critério de pronto | Condições observáveis |
-| Prova | Comando, cenário, captura ou inspeção |
-| Estado | Estado atual e limitação |
+| Outcome | Observable behavior or capability |
+| Origin | Requirement, decision, finding, or risk |
+| Strategy | Reuse, change, or create |
+| Likely scope | Confirmed surfaces, boundaries, or files |
+| Dependencies | Hard blocker, preferred order, and safe parallelism |
+| States and risks | Applicable failures, edge cases, accessibility, and security |
+| Definition-of-done criterion | Observable conditions |
+| Evidence | Command, scenario, screenshot, or inspection |
+| State | Current state and limitation |
 
-Uma fatia vertical atravessa somente as camadas necessárias ao resultado. Não criar tarefas isoladas de “HTML”, “CSS”, “testes”, “segurança” ou “polimento” sem comportamento e consumidor.
+A vertical slice crosses only the layers required by the outcome. Do not create isolated “HTML,” “CSS,” “tests,” “security,” or “polish” tasks without behavior and a consumer.
 
-Aplicar:
+Apply:
 
-1. teste de remoção: sem a tarefa, qual requisito fica sem cobertura?
-2. teste de falsificação: como ela pode parecer pronta e falhar no critério?
-3. teste de consumidor: qual fluxo usa a fundação criada?
+1. removal test: without the task, which requirement remains uncovered?
+2. falsification test: how could it appear complete while failing the criterion?
+3. consumer test: which flow uses the foundation that was created?
 
 ## Checkpoint
 
-Ao pausar ou concluir uma fase, entregar:
+When pausing or completing a phase, deliver:
 
 ```markdown
-## Checkpoint da feature
+## Feature checkpoint
 
 - Feature:
-- Objetivo:
-- Escopo/autorização:
-- Fase atual:
-- Fases: executar / reusar / atualizar / não aplicável
-- Saídas concluídas:
-- Decisões e pressupostos:
-- Bloqueios e condição de desbloqueio:
-- Artefatos e estado:
-- Código/commit de referência:
-- Validações:
-- Dependentes a revalidar:
-- Próxima ação segura:
+- Objective:
+- Scope/authorization:
+- Current phase:
+- Phases: execute / reuse / update / not applicable
+- Completed outputs:
+- Decisions and assumptions:
+- Blockers and unblocking condition:
+- Artifacts and state:
+- Reference code/commit:
+- Validations:
+- Dependents to revalidate:
+- Next safe action:
 ```
 
-Se não houver persistência autorizada, manter o checkpoint na resposta e deixar explícita essa limitação.
+If persistence was not authorized, keep the checkpoint in the response and make that limitation explicit.
 
-## Falhas e recuperação
+## Failures and recovery
 
-| Falha | Conduta |
+| Failure | Conduct |
 |---|---|
-| Artefato contraditório | Preservar alternativas, definir autoridade e bloquear só o dependente |
-| Artefato desatualizado | Marcar `revalidar`; não atualizar silenciosamente |
-| Skill especializada indisponível | Parar a fase e indicar contrato ausente; não improvisar versão reduzida |
-| Stack de tokens incerta | Investigar fonte/consumidores ou pedir decisão; não criar formato paralelo |
-| Implementação diverge do plano | Determinar se o plano foi superado ou o código desviou antes de editar |
-| Validação de tarefa falha | Marcar `falhou` e voltar à hipótese; não empilhar remendos |
-| Runtime indisponível | Reduzir nível de evidência e registrar limitação |
-| Mudança de escopo | Reclassificar fases e pedir aprovação quando material |
-| Conflito com trabalho preexistente | Preservar mudanças e pausar somente a área em colisão |
-| Usuário pausa | Emitir checkpoint sem inventar conclusão |
+| Contradictory artifact | Preserve alternatives, establish authority, and block only the dependent item |
+| Outdated artifact | Mark `revalidate`; do not update silently |
+| Specialized skill unavailable | Stop the phase and identify the missing contract; do not improvise a reduced version |
+| Uncertain token stack | Investigate the source/consumers or ask for a decision; do not create a parallel format |
+| Implementation diverges from the plan | Determine whether the plan was superseded or the code deviated before editing |
+| Task validation fails | Mark `failed` and return to the hypothesis; do not stack patches |
+| Runtime unavailable | Lower the level of evidence and record the limitation |
+| Scope change | Reclassify phases and request approval when material |
+| Conflict with pre-existing work | Preserve changes and pause only the colliding area |
+| User pauses | Emit a checkpoint without inventing completion |

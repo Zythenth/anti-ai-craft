@@ -1,32 +1,32 @@
-# Fontes e matriz de evidência de código
+# Code sources and evidence matrix
 
-Corpus desta versão: 30 fontes públicas — 18 pesquisas ou benchmarks, 10 padrões ou guias oficiais e 2 fontes industriais usadas apenas como heurística.
+Corpus for this version: 30 public sources — 18 research papers or benchmarks, 10 official standards or guides, and 2 industry sources used only as heuristics.
 
-## Regras de evidência
+## Evidence rules
 
-- Não generalizar taxa entre modelos, datas, linguagens ou tipos de tarefa.
-- Preferir resultado funcional, teste ampliado e caminho de impacto a métrica estética.
-- Tratar preprint como evidência provisória.
-- Tratar ferramenta de análise estática como detector, não oráculo.
-- Usar taxonomias tradicionais e evidência observável; não criar categoria de proveniência.
-- Não inferir autoria.
+- Do not generalize a rate across models, dates, languages, or task types.
+- Prefer a functional outcome, expanded test, and impact path over an aesthetic metric.
+- Treat a preprint as provisional evidence.
+- Treat a static analysis tool as a detector, not an oracle.
+- Use traditional taxonomies and observable evidence; do not create a provenance category.
+- Do not infer authorship.
 
-## Matriz resumida
+## Summary matrix
 
-| Fonte/tipo | Método/amostra | Padrão observado | Limitação | Decisão |
+| Source/type | Method/sample | Observed pattern | Limitation | Decision |
 |---|---|---|---|---|
-| EvalPlus, pesquisa | 26 modelos; testes HumanEval ampliados 80x | testes originais deixaram passar código incorreto; pass@k caiu até 19,3–28,9% | funções pequenas/benchmark | adotar validação ampliada |
-| ULT, preprint | 3.909 funções Python reais | testes gerados tiveram accuracy/coverage/mutation limitados | função Python; modelos/data específicos | adotar revisão de oráculo e regressão |
-| Package hallucinations, pesquisa | 16 modelos; 576 mil amostras Python/JS | pacotes inexistentes ocorreram em todos os grupos | taxas envelhecem com modelos/ecossistemas | adotar verificação no registry/lock |
-| Robustness, preprint | quatro code LLMs | validação condicional ausente foi recorrente | benchmark e definição de robustez próprios | adaptar para revisão de limites |
-| Maintainability/reliability, estudos | tarefas e analisadores variados | resultados mistos; alguns melhores em métricas simples, falhas em complexidade | static analysis e tarefas não representam repositórios inteiros | rejeitar “sempre pior” |
-| CyberSecEval/CWEval, benchmarks | tarefas de código sensíveis a CWE | código funcional pode continuar vulnerável | benchmark não substitui threat model do produto | adotar segurança separada da correção |
-| Copilot security, estudo | 1.689 programas/89 cenários | proporção relevante vulnerável em modelo antigo | versão e prompting antigos | adaptar; não usar taxa como atual |
-| Deprecated APIs, estudo | oito bibliotecas Python | completions podem escolher APIs obsoletas | linguagem/ecossistema limitado | adotar verificação de versão |
-| Code review field study | ambiente industrial | contexto e false positives afetam confiança | organização/ferramenta específicas | adotar repo-first e revisão humana |
-| NIST/OWASP, guidance | práticas de SDLC/verificação | revisão, testes, análise, supply chain e segurança são complementares | não específico a uma stack | adotar como baseline |
+| EvalPlus, research | 26 models; HumanEval tests expanded 80x | original tests allowed incorrect code through; pass@k fell by as much as 19.3–28.9% | small functions/benchmark | adopt expanded validation |
+| ULT, preprint | 3,909 real Python functions | generated tests had limited accuracy/coverage/mutation | Python functions; specific models/data | adopt oracle and regression review |
+| Package hallucinations, research | 16 models; 576,000 Python/JS samples | nonexistent packages occurred in every group | rates age with models/ecosystems | adopt registry/lock verification |
+| Robustness, preprint | four code LLMs | missing conditional validation was recurrent | its own benchmark and definition of robustness | adapt for boundary review |
+| Maintainability/reliability, studies | varied tasks and analyzers | mixed outcomes; some better on simple metrics, failures on complexity | static analysis and tasks do not represent entire repositories | reject “always worse” |
+| CyberSecEval/CWEval, benchmarks | code tasks sensitive to CWEs | functional code may remain vulnerable | a benchmark does not replace the product threat model | adopt security separately from correctness |
+| Copilot security, study | 1,689 programs/89 scenarios | a relevant proportion was vulnerable in an old model | old version and prompting | adapt; do not use the rate as current |
+| Deprecated APIs, study | eight Python libraries | completions may choose obsolete APIs | limited language/ecosystem | adopt version verification |
+| Code review field study | industrial environment | context and false positives affect trust | specific organization/tool | adopt repo-first and human review |
+| NIST/OWASP, guidance | SDLC/verification practices | review, testing, analysis, supply chain, and security are complementary | not specific to one stack | adopt as a baseline |
 
-## Pesquisas e benchmarks — 18
+## Research and benchmarks — 18
 
 - [Is LLM-Generated Code More Maintainable and Reliable?](https://arxiv.org/abs/2508.00700)
 - [Human-Written vs. AI-Generated Code](https://arxiv.org/abs/2508.21634)
@@ -47,7 +47,7 @@ Corpus desta versão: 30 fontes públicas — 18 pesquisas ou benchmarks, 10 pad
 - [Co-Development with AI and Maintainability — Registered Report](https://arxiv.org/abs/2408.10758)
 - [Evaluating Large Language Models Trained on Code](https://arxiv.org/abs/2107.03374)
 
-## Padrões e guias oficiais — 10
+## Official standards and guides — 10
 
 - [NIST SP 800-218 — SSDF 1.1](https://csrc.nist.gov/pubs/sp/800/218/final)
 - [NIST IR 8397 — Developer Verification](https://csrc.nist.gov/pubs/ir/8397/final)
@@ -55,22 +55,22 @@ Corpus desta versão: 30 fontes públicas — 18 pesquisas ou benchmarks, 10 pad
 - [OWASP Top 10:2025 — Inappropriate Trust in AI Generated Code](https://owasp.org/Top10/2025/X01_2025-Next_Steps/)
 - [MITRE — CWE Top 25](https://cwe.mitre.org/top25/)
 - [OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/)
-- [GitHub Docs — Examinar código gerado por IA](https://docs.github.com/pt/enterprise-cloud%40latest/copilot/tutorials/review-ai-generated-code)
-- [GitHub Docs — Uso responsável do Copilot](https://docs.github.com/pt/copilot/responsible-use-of-github-copilot-features/responsible-use-of-github-copilot-code-completion)
-- [Google — Gemini Code Assist e IA responsável](https://developers.google.com/gemini-code-assist/docs/responsible-ai?hl=pt-br)
-- [Governo Digital — Guia IA Generativa](https://www.gov.br/governodigital/pt-br/infraestrutura-nacional-de-dados/inteligencia-artificial-1/publicacoes/guia-ia-generativa)
+- [GitHub Docs — Reviewing AI-generated code](https://docs.github.com/pt/enterprise-cloud%40latest/copilot/tutorials/review-ai-generated-code)
+- [GitHub Docs — Responsible use of Copilot](https://docs.github.com/pt/copilot/responsible-use-of-github-copilot-features/responsible-use-of-github-copilot-code-completion)
+- [Google — Gemini Code Assist and responsible AI](https://developers.google.com/gemini-code-assist/docs/responsible-ai?hl=pt-br)
+- [Digital Government — Generative AI Guide](https://www.gov.br/governodigital/pt-br/infraestrutura-nacional-de-dados/inteligencia-artificial-1/publicacoes/guia-ia-generativa)
 
-## Heurísticas industriais — 2
+## Industry heuristics — 2
 
 - [Thoughtworks Technology Radar](https://www.thoughtworks.com/radar)
 - [GitClear — Coding on Copilot](https://www.gitclear.com/coding_on_copilot_data_shows_ais_downward_pressure_on_code_quality)
 
-Usar essas fontes apenas para formular hipóteses e procedimentos de revisão; não tratá-las como consenso, causalidade ou prova de eficácia.
+Use these sources only to formulate review hypotheses and procedures; do not treat them as consensus, causality, or proof of effectiveness.
 
-## Critérios de aplicação
+## Application criteria
 
-- Exigir falha visível, tratamento de exceções delimitado, testes capazes de detectar remoção da lógica e casos fora dos exemplos.
-- Trabalhar na sequência compreender → delimitar → executar → verificar → relatar, com critérios de sucesso e reversão proporcionais ao risco.
-- Distinguir fato, inferência e desconhecido; corrigir afirmações frágeis e verificar APIs, dependências e comportamentos em fontes primárias ou no próprio repositório.
-- Investigar uma hipótese falsificável por vez, rastrear até a causa, preferir esperas por condição, usar oráculos sensíveis e reverificar depois da última mudança.
-- Manter assunções materiais explícitas, soluções diretas e diffs cirúrgicos, sem transformar concisão em compressão obscura.
+- Require visible failure, bounded exception handling, tests capable of detecting removal of the logic, and cases beyond the examples.
+- Work in the sequence understand → scope → execute → verify → report, with success and reversal criteria proportionate to the risk.
+- Distinguish fact, inference, and unknown; correct fragile claims and verify APIs, dependencies, and behavior in primary sources or the repository itself.
+- Investigate one falsifiable hypothesis at a time, trace it to the cause, prefer condition-based waits, use sensitive oracles, and reverify after the last change.
+- Keep material assumptions explicit, solutions direct, and diffs surgical, without turning concision into obscure compression.

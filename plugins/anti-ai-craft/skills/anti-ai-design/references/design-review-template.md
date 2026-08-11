@@ -1,102 +1,102 @@
-# Template de revisão de design
+# Design review template
 
-Usar somente os campos aplicáveis. Entregar na resposta por padrão; salvar arquivo ou capturas permanentes apenas com autorização.
+Use only the applicable fields. Deliver it in the response by default; save a file or permanent captures only with authorization.
 
-## Resumo
+## Summary
 
-- Escopo:
-- Mandato:
-- Fontes de verdade:
-- Estado do código/baseline:
-- Perfil de evidência:
-- Ambiente/runtime:
-- Gate: passar / passar com ressalvas / bloquear / decisão humana
-- Cobertura:
-- Limitações:
-- Risco residual:
+- Scope:
+- Mandate:
+- Sources of truth:
+- Code/baseline state:
+- Evidence profile:
+- Environment/runtime:
+- Gate: pass / pass with reservations / block / human decision
+- Coverage:
+- Limitations:
+- Residual risk:
 
-## Perfis de evidência
+## Evidence profiles
 
-| Perfil | Evidência | Alegações permitidas |
+| Profile | Evidence | Permitted claims |
 |---|---|---|
-| Runtime completo | App executável e superfícies acessíveis | Resultado renderizado, interação e estados exercitados |
-| Runtime parcial | Apenas parte alcançável | Somente superfícies e estados observados |
-| Artefato visual | Screenshot ou vídeo fornecido | Aparência visível naquele quadro |
-| Código apenas | Código/diff sem execução confiável | Estrutura, implementação potencial e risco técnico |
+| Full runtime | Executable app and accessible surfaces | Rendered result, interaction, and exercised states |
+| Partial runtime | Only part is reachable | Only observed surfaces and states |
+| Visual artifact | Supplied screenshot or video | Appearance visible in that frame |
+| Code only | Code/diff without reliable execution | Structure, potential implementation, and technical risk |
 
-Não declarar qualidade visual renderizada com código apenas. Não inferir teclado, semântica, responsividade ou estados ausentes de uma captura isolada.
+Do not claim rendered visual quality from code alone. Do not infer keyboard behavior, semantics, responsiveness, or states absent from an isolated capture.
 
-## Manifesto de evidência
+## Evidence manifest
 
-| ID/arquivo | Origem | Superfície | Estado/dados | Dimensões/escala | Tema/input | Ambiente | Comparável a |
+| ID/file | Origin | Surface | State/data | Dimensions/scale | Theme/input | Environment | Comparable to |
 |---|---|---|---|---|---|---|---|
 
-Captura prova sintoma, não necessariamente causa. Código pode explicar causa, mas não prova sozinho o resultado visual.
+A capture proves a symptom, not necessarily its cause. Code may explain the cause, but alone it does not prove the visual result.
 
-## Matriz de cobertura
+## Coverage matrix
 
-| Superfície | Criticidade | Estados | Viewports | Tema/input | Evidência | Disposição |
+| Surface | Criticality | States | Viewports | Theme/input | Evidence | Disposition |
 |---|---|---|---|---|---|---|
 
-Usar amostragem por risco, compartilhamento e criticidade. Registrar `coberto`, `parcial`, `bloqueado`, `não exercitado` ou `não aplicável`. Não exigir produto cartesiano de todas as combinações.
+Sample by risk, sharing, and criticality. Record `covered`, `partial`, `blocked`, `not exercised`, or `not applicable`. Do not require the Cartesian product of every combination.
 
-## Decisão preservada
+## Preserved decision
 
-| Elemento | Evidência | Por que funciona | Invariante |
+| Element | Evidence | Why it works | Invariant |
 |---|---|---|---|
 
-Não preencher com elogio genérico. Se nada foi comprovado, omitir.
+Do not fill this with generic praise. Omit it if nothing was proven.
 
-## Achados
+## Findings
 
-### ADR-001 — Título
+### ADR-001 — Title
 
-- Feature/fase:
-- Artefato vigente:
-- Área:
-- Classificação:
-- Severidade:
-- Confiança:
-- Prioridade:
+- Feature/phase:
+- Current artifact:
+- Area:
+- Classification:
+- Severity:
+- Confidence:
+- Priority:
 - Gate:
-- Superfície/rota:
-- Estado/viewport/tema:
-- Arquivo/linha/componente:
-- Evidência visual:
-- Evidência técnica:
-- Controle ou causa:
-- Ator e pré-condições:
-- Contraprova mais forte:
-- Lacuna de prova:
-- Impacto:
-- Justificativa:
-- Regra ou contrato:
-- Correção sugerida:
-- Risco da correção:
-- Critérios de aceitação:
-- Validação necessária:
+- Surface/route:
+- State/viewport/theme:
+- File/line/component:
+- Visual evidence:
+- Technical evidence:
+- Control or cause:
+- Actor and preconditions:
+- Strongest disconfirming evidence:
+- Evidence gap:
+- Impact:
+- Rationale:
+- Rule or contract:
+- Suggested fix:
+- Fix risk:
+- Acceptance criteria:
+- Required validation:
 
-Repetir somente para achados sustentados. Preferência estética e decisão de produto ficam separadas.
+Repeat only for supported findings. Aesthetic preference and product decision remain separate.
 
-## Coerência do fluxo
+## Flow consistency
 
-| ID relacionado | Decisão/requisito | Feature/fase | Artefato vigente | Implementação/runtime | Disposição | Evidência |
+| Related ID | Decision/requirement | Feature/phase | Current artifact | Implementation/runtime | Disposition | Evidence |
 |---|---|---|---|---|---|---|
 
-Classificar divergência como defeito, decisão posterior válida, artefato superado, ambiguidade ou lacuna de prova.
+Classify divergence as a defect, valid later decision, superseded artifact, ambiguity, or evidence gap.
 
-## Candidatos e falsos positivos
+## Candidates and false positives
 
-| Candidato | Evidência examinada | Disposição | Motivo |
+| Candidate | Evidence examined | Disposition | Reason |
 |---|---|---|---|
 
-## Falhas e áreas não testadas
+## Failures and untested areas
 
-Registrar runtime indisponível, rota bloqueada, credencial/dado ausente, captura falha, asset externo, comparação inválida, ambiente divergente e testes insuficientes. Falha operacional não é automaticamente defeito do produto.
+Record an unavailable runtime, blocked route, missing credential/data, failed capture, external asset, invalid comparison, divergent environment, and insufficient tests. An operational failure is not automatically a product defect.
 
-## Plano opcional de aplicação
+## Optional application plan
 
-| ID | Resultado esperado | Dependências | Risco | Aceitação | Prova |
+| ID | Expected outcome | Dependencies | Risk | Acceptance | Evidence |
 |---|---|---|---|---|---|
 
-O plano não autoriza edição. Solicitar seleção explícita dos IDs e encaminhar preferencialmente para `$anti-ai-remediate`.
+The plan does not authorize editing. Request explicit selection of IDs and preferably hand off to `$anti-ai-remediate`.

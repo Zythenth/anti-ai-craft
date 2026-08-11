@@ -1,118 +1,118 @@
-# Antipadrões e falsos sinais
+# Antipatterns and false signals
 
-## Sumário
+## Summary
 
-- [Regra de interpretação](#regra-de-interpretação)
-- [Composição e conteúdo](#composição-e-conteúdo)
-- [Estética reflexa](#estética-reflexa)
-- [Componentes](#componentes)
-- [Movimento e teatro](#movimento-e-teatro)
-- [Responsividade superficial](#responsividade-superficial)
-- [Falsos sinais de autoria](#falsos-sinais-de-autoria)
-- [Perguntas de crítica](#perguntas-de-crítica)
+- [Interpretation rule](#interpretation-rule)
+- [Composition and content](#composition-and-content)
+- [Reflexive aesthetics](#reflexive-aesthetics)
+- [Components](#components)
+- [Motion and theatrics](#motion-and-theatrics)
+- [Superficial responsiveness](#superficial-responsiveness)
+- [False authorship signals](#false-authorship-signals)
+- [Critique questions](#critique-questions)
 
-## Regra de interpretação
+## Interpretation rule
 
-Não tratar qualquer item isolado como prova de baixa qualidade ou autoria. Procurar combinação, repetição, ausência de justificativa e conflito com tarefa, conteúdo, estado, identidade ou acessibilidade.
+Do not treat any isolated item as proof of low quality or authorship. Look for combination, repetition, lack of rationale, and conflict with the task, content, state, identity, or accessibility.
 
-Classificar cada ocorrência como:
+Classify each occurrence as:
 
-- defeito funcional ou normativo;
-- inconsistência com fonte de verdade;
-- padrão genérico contextual;
-- heurística;
-- preferência subjetiva;
-- falso positivo rejeitado.
+- functional or normative defect;
+- inconsistency with a source of truth;
+- contextual generic pattern;
+- heuristic;
+- subjective preference;
+- rejected false positive.
 
-## Composição e conteúdo
+## Composition and content
 
-| Sinal | Risco | Decisão contextual |
+| Signal | Risk | Contextual decision |
 |---|---|---|
-| Hero promocional dentro do produto | desloca a tarefa para marketing | rejeitar salvo onboarding/comunicação real |
-| Sidebar + topbar intercambiáveis | produto vira dashboard genérico | adaptar aos destinos, linguagem e frequência reais |
-| Cards idênticos | dá peso igual e esconde relações | usar lista, tabela, alinhamento ou cards autônomos |
-| Bento escolhido antes do conteúdo | receita governa a informação | aceitar somente overview modular comprovado |
-| Card dentro de card | profundidade sem modelo | reduzir níveis ou justificar subgrupo |
-| Simetria automática | apaga prioridade | manter apenas para comparação real |
-| Assimetria performática | dificulta varredura | exigir ganho informacional |
-| Centralização universal | enfraquece leitura e percurso | limitar a estados curtos e locais |
-| Espaço uniforme ou vazio cenográfico | relações parecem equivalentes | variar ritmo por item, grupo e seção |
-| KPI, gráfico ou atividade fictícia | constrói arquitetura sobre dado falso | remover ou marcar fixture fora de produção |
-| Copy promocional em fluxo operacional | ocupa espaço da tarefa | trocar por vocabulário e ação do domínio |
-| Happy path sem extremos | interface parece pronta sem funcionar | testar vazio, erro, offline, loading e overflow |
+| Promotional hero inside the product | displaces the task with marketing | reject unless there is genuine onboarding/communication |
+| Interchangeable sidebar + top bar | turns the product into a generic dashboard | adapt to actual destinations, language, and frequency |
+| Identical cards | gives equal weight and hides relationships | use a list, table, alignment, or self-contained cards |
+| Bento selected before content | the recipe governs the information | accept only for a proven modular overview |
+| Card inside a card | depth without a model | reduce levels or justify the subgroup |
+| Automatic symmetry | erases priority | retain only for genuine comparison |
+| Performative asymmetry | impairs scanning | require an informational gain |
+| Universal centering | weakens reading and progression | limit to short, local states |
+| Uniform spacing or scenic emptiness | relationships appear equivalent | vary rhythm by item, group, and section |
+| Fictional KPI, chart, or activity | builds architecture on false data | remove or mark as a non-production fixture |
+| Promotional copy in an operational flow | takes space from the task | replace with domain vocabulary and action |
+| Happy path without extremes | interface looks complete without working | test empty, error, offline, loading, and overflow |
 
-## Estética reflexa
+## Reflexive aesthetics
 
-| Sinal | Risco | Falso positivo ou condição |
+| Signal | Risk | False positive or condition |
 |---|---|---|
-| Gradiente roxo/azul/ciano | paleta substituível | válido se pertence à marca/dado e passa contraste |
-| Glassmorphism | contraste e camadas ambíguas | válido em sobreposição controlada e legível |
-| Glow, blobs e manchas | atmosfera sem informação | válido quando comunica foco/estado e há pista sólida |
-| Radius alto em tudo | hierarquia achatada | formatos arredondados podem pertencer ao sistema |
-| Pills em toda ação | botões parecem badges | usar para chip, toggle ou estado curto |
-| Sombra e hover lift | “premium” sem modelo | sombra pode comunicar elevação real |
-| Dark mode | não é genérico por si | avaliar identidade, contraste e função |
-| Tema claro creme/serif/terracota | pode ser novo default | avaliar contexto, não trocar um preset por outro |
-| Acid-on-black ou broadsheet | pode performar diferença | exigir vínculo com domínio e legibilidade |
-| Mono integral | fadiga e “terminal cosplay” | útil para código, dados e metadados |
-| Serif editorial | pode virar template | válida para leitura/voz quando suportada |
-| Caixa alta e tracking | ruído e baixa leitura | aceitável em códigos e rótulos curtos |
-| Sparkle ou emoji | ícone genérico/ambíguo | conteúdo do usuário ou símbolo ensinado pode ser válido |
+| Purple/blue/cyan gradient | replaceable palette | valid if it belongs to the brand/data and passes contrast |
+| Glassmorphism | ambiguous contrast and layers | valid in a controlled, legible overlay |
+| Glow, blobs, and splotches | atmosphere without information | valid when they communicate focus/state and have a solid cue |
+| High radius on everything | flattened hierarchy | rounded shapes may belong to the system |
+| Pills for every action | buttons look like badges | use for a chip, toggle, or short state |
+| Shadow and hover lift | “premium” without a model | shadow may communicate actual elevation |
+| Dark mode | not generic by itself | assess identity, contrast, and function |
+| Cream/serif/terracotta light theme | may become the new default | assess context; do not swap one preset for another |
+| Acid-on-black or broadsheet | may perform difference | require a connection to the domain and legibility |
+| Mono throughout | fatigue and “terminal cosplay” | useful for code, data, and metadata |
+| Editorial serif | may become a template | valid for reading/voice when supported |
+| Uppercase and tracking | noise and reduced readability | acceptable in codes and short labels |
+| Sparkle or emoji | generic/ambiguous icon | user content or a taught symbol may be valid |
 
-## Componentes
+## Components
 
-| Sinal | Risco | Decisão contextual |
+| Signal | Risk | Contextual decision |
 |---|---|---|
-| Kebab em toda linha/card | ação vira caça e repetição | consolidar ações e manter frequentes visíveis |
-| Reticências com uma ação | overflow sem necessidade | mostrar a ação diretamente |
-| Salvar/confirmar/executar oculto | baixa descoberta e eficiência | manter visível |
-| Excluir crítico oculto | risco e falta de clareza | expor com hierarquia e confirmação apropriada |
-| Ícone sem label/nome | ambiguidade e barreira de acesso | adicionar texto, tooltip e nome acessível conforme o caso |
-| Tabela convertida em cards | comparação fica difícil | preservar relação bidimensional |
-| Componente genérico para dados incompatíveis | estrutura apaga semântica | criar variação com propósito ou composição específica |
-| Modal visual sem comportamento modal | foco escapa e fundo opera | implementar padrão completo ou usar página |
-| Tabs visuais sem semântica | teclado e relação quebrados | implementar padrão ou usar navegação |
-| Tooltip com ação essencial | inacessível em touch/teclado | mover ação para controle persistente |
+| Kebab menu on every row/card | action becomes repetitive hunting | consolidate actions and keep frequent ones visible |
+| Ellipsis with one action | unnecessary overflow | show the action directly |
+| Hidden save/confirm/run | low discoverability and efficiency | keep visible |
+| Hidden critical delete action | risk and lack of clarity | expose with appropriate hierarchy and confirmation |
+| Icon without label/name | ambiguity and access barrier | add text, tooltip, and accessible name as appropriate |
+| Table converted to cards | comparison becomes difficult | preserve the two-dimensional relationship |
+| Generic component for incompatible data | structure erases semantics | create a purposeful variant or specific composition |
+| Visual modal without modal behavior | focus escapes and background remains operable | implement the complete pattern or use a page |
+| Visual tabs without semantics | keyboard and relationship are broken | implement the pattern or use navigation |
+| Tooltip with an essential action | inaccessible on touch/keyboard | move the action to a persistent control |
 
-## Movimento e “teatro”
+## Motion and “theatrics”
 
-- Animação em cascata escolhida por default.
-- Partículas, fundo animado, parallax ou glitch sem função.
-- Hover que desloca layout.
-- Loading teatral, delay artificial ou porcentagem inventada.
-- Typewriter que retarda acesso ao conteúdo.
-- Confete ou celebração sem adequação ao resultado.
+- Staggered animation selected by default.
+- Particles, animated background, parallax, or glitch without a function.
+- Hover that shifts layout.
+- Theatrical loading, artificial delay, or fabricated percentage.
+- Typewriter effect that delays access to content.
+- Confetti or celebration mismatched to the outcome.
 
-Perguntar: a função permanece clara sem o movimento? O backend mede esse progresso? O usuário consegue reduzir, pausar ou interromper?
+Ask: does the function remain clear without motion? Does the backend measure this progress? Can the user reduce, pause, or interrupt it?
 
-## Responsividade superficial
+## Superficial responsiveness
 
-- Empilhar todas as colunas sem reordenar prioridade.
-- Transportar sidebar/topbar inteira para mobile.
-- Ocultar estado crítico por posição fixa.
-- Cortar texto ou ação para preservar card.
-- Criar rolagem horizontal global.
-- Escolher breakpoints por modelo de aparelho, sem testar conteúdo.
+- Stack every column without reprioritizing.
+- Carry the entire sidebar/top bar into mobile.
+- Hide critical state because of fixed positioning.
+- Clip text or an action to preserve a card.
+- Create global horizontal scrolling.
+- Choose breakpoints by device model without testing content.
 
-## Falsos sinais de autoria
+## False authorship signals
 
-Rejeitar inferências como:
+Reject inferences such as:
 
-- “usa cards, então foi feito por IA”;
-- “usa dark mode/ciano/serif/mono, então foi feito por IA”;
-- “tem menu de três pontos, então foi feito por IA”;
-- “é polido ou simétrico, então foi feito por IA”;
-- “tem um bug, então foi gerado”;
-- “segue um design system, então não é autoral”.
+- “it uses cards, so AI made it”;
+- “it uses dark mode/cyan/serif/mono, so AI made it”;
+- “it has a three-dot menu, so AI made it”;
+- “it is polished or symmetrical, so AI made it”;
+- “it has a bug, so it was generated”;
+- “it follows a design system, so it is not original.”
 
-Relatar somente o efeito observável e a evidência: padrão genérico, decisão sem justificativa funcional, inconsistência, acessibilidade, manutenção visual ou preferência.
+Report only the observable effect and evidence: generic pattern, decision without functional rationale, inconsistency, accessibility, visual maintainability, or preference.
 
-## Perguntas de crítica
+## Critique questions
 
-1. Isto poderia pertencer a qualquer produto do mesmo gênero sem alteração?
-2. Existe por conteúdo/tarefa ou porque o componente estava disponível?
-3. A hierarquia continua clara sem efeitos, bordas e cards?
-4. O conteúdo é representativo ou autoritativo, identifica fixtures e cobre estados extremos sem expor dados sensíveis?
-5. A interação funciona por teclado, touch e tecnologia assistiva?
-6. O mobile reprioriza ou apenas empilha?
-7. A regra vem do projeto, de requisito normativo, guidance ou gosto?
+1. Could this belong to any product in the same category without alteration?
+2. Does it exist because of content/task or because the component was available?
+3. Does the hierarchy remain clear without effects, borders, and cards?
+4. Is the content representative or authoritative, does it identify fixtures and cover extreme states without exposing sensitive data?
+5. Does the interaction work with keyboard, touch, and assistive technology?
+6. Does mobile reprioritize or merely stack?
+7. Does the rule come from the project, a normative requirement, guidance, or taste?

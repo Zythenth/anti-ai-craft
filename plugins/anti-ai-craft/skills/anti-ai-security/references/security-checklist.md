@@ -1,184 +1,184 @@
-# Checklist de segurança contextual
+# Contextual security checklist
 
-## Sumário
+## Summary
 
-- [Modelo de ameaça e superfícies](#modelo-de-ameaça-e-superfícies)
-- [Autenticação e sessão](#autenticação-e-sessão)
-- [Autorização e isolamento](#autorização-e-isolamento)
-- [Rate limiting e recursos](#rate-limiting-e-recursos)
-- [Entrada, saída e execução](#entrada-saída-e-execução)
-- [Navegador e cliente](#navegador-e-cliente)
-- [Uploads, arquivos e conteúdo ativo](#uploads-arquivos-e-conteúdo-ativo)
-- [Segredos, criptografia e configuração](#segredos-criptografia-e-configuração)
-- [Dependências e cadeia de suprimentos](#dependências-e-cadeia-de-suprimentos)
-- [Logging, monitoramento e privacidade](#logging-monitoramento-e-privacidade)
-- [Fluxos e concorrência](#fluxos-e-concorrência)
-- [Sistemas que usam modelos ou agentes](#sistemas-que-usam-modelos-ou-agentes)
-- [Temas ou tokens externos](#temas-ou-tokens-externos)
-- [Testes mínimos por risco](#testes-mínimos-por-risco)
+- [Threat model and surfaces](#threat-model-and-surfaces)
+- [Authentication and session](#authentication-and-session)
+- [Authorization and isolation](#authorization-and-isolation)
+- [Rate limiting and resources](#rate-limiting-and-resources)
+- [Input, output, and execution](#input-output-and-execution)
+- [Browser and client](#browser-and-client)
+- [Uploads, files, and active content](#uploads-files-and-active-content)
+- [Secrets, cryptography, and configuration](#secrets-cryptography-and-configuration)
+- [Dependencies and supply chain](#dependencies-and-supply-chain)
+- [Logging, monitoring, and privacy](#logging-monitoring-and-privacy)
+- [Flows and concurrency](#flows-and-concurrency)
+- [Systems that use models or agents](#systems-that-use-models-or-agents)
+- [External themes or tokens](#external-themes-or-tokens)
+- [Minimum tests by risk](#minimum-tests-by-risk)
 
-Usar somente as categorias aplicáveis. Marcar `confirmado`, `presente`, `não aplicável`, `depende de infraestrutura` ou `não verificado`; nunca converter item não verificado diretamente em vulnerabilidade.
+Use only the applicable categories. Mark `confirmed`, `present`, `not applicable`, `depends on infrastructure`, or `unverified`; never convert an unverified item directly into a vulnerability.
 
-## Modelo de ameaça e superfícies
+## Threat model and surfaces
 
-- [ ] Ativos, dados sensíveis, atores, papéis e tenants identificados.
-- [ ] Processos, datastores, fluxos, entidades externas e fronteiras diagramados na profundidade proporcional ao risco.
-- [ ] Produção, CI/build, local, exemplos, testes e conteúdo gerado estão separados.
-- [ ] Entradas controláveis por atacante, operador, desenvolvedor e provedor foram distinguidas.
-- [ ] Entradas públicas, administrativas, internas, assíncronas e de terceiros inventariadas.
-- [ ] Fronteiras de confiança e credenciais entre componentes registradas.
-- [ ] Abusos de negócio e impactos de confidencialidade, integridade, disponibilidade e custo considerados.
-- [ ] Controles existentes foram localizados antes de declarar ausência.
-- [ ] Histórias de ataque realistas e itens fora de escopo estão registrados.
-- [ ] O modelo de ameaça foi atualizado depois de qualquer descoberta ou mudança em arquitetura, fluxo, ativo, ator, fronteira, integração ou ambiente.
-- [ ] Mudança de arquitetura da informação que criou entrada, papel, ação, estado, integração, exposição de dado ou operação cara acionou revalidação; troca apenas estética não acionou revisão ampla.
-- [ ] Hosts públicos, internos, beta/staging, versões antigas, endpoints admin/debug e schemas/documentação expostos estão inventariados.
-- [ ] Plano de desativação de versões e uso de dados reais fora de produção estão verificados.
-- [ ] Serviços terceiros e dados compartilhados com eles estão no inventário.
+- [ ] Assets, sensitive data, actors, roles, and tenants identified.
+- [ ] Processes, datastores, flows, external entities, and boundaries diagrammed to a depth proportionate to the risk.
+- [ ] Production, CI/build, local, examples, tests, and generated content are separated.
+- [ ] Inputs controllable by an attacker, operator, developer, and provider were distinguished.
+- [ ] Public, administrative, internal, asynchronous, and third-party inputs inventoried.
+- [ ] Trust boundaries and credentials between components recorded.
+- [ ] Business abuses and confidentiality, integrity, availability, and cost impacts considered.
+- [ ] Existing controls were located before declaring their absence.
+- [ ] Realistic attack stories and out-of-scope items are recorded.
+- [ ] The threat model was updated after any discovery or change in architecture, flow, asset, actor, boundary, integration, or environment.
+- [ ] An information architecture change that created an input, role, action, state, integration, data exposure, or expensive operation triggered revalidation; a solely aesthetic change did not trigger a broad review.
+- [ ] Public, internal, beta/staging, and legacy hosts, admin/debug endpoints, and exposed schemas/documentation are inventoried.
+- [ ] Version retirement plans and use of real data outside production are verified.
+- [ ] Third-party services and the data shared with them are in the inventory.
 
-## Autenticação e sessão
+## Authentication and session
 
-- [ ] Senhas usam primitive apropriada do stack, política coerente e comparação segura.
-- [ ] Login, MFA, OTP, reset e recuperação resistem a enumeração, replay e brute force.
-- [ ] Tokens têm audience, issuer, expiração, assinatura e algoritmo validados conforme o protocolo.
-- [ ] Cookies sensíveis usam `Secure`, `HttpOnly` e `SameSite` apropriados.
-- [ ] Sessão é renovada após autenticação/elevação e invalidada em logout, revogação e mudança crítica.
-- [ ] Erros não revelam se conta, email, telefone ou tenant existe sem necessidade.
+- [ ] Passwords use an appropriate stack primitive, a coherent policy, and secure comparison.
+- [ ] Login, MFA, OTP, reset, and recovery resist enumeration, replay, and brute force.
+- [ ] Tokens have audience, issuer, expiration, signature, and algorithm validated according to the protocol.
+- [ ] Sensitive cookies use appropriate `Secure`, `HttpOnly`, and `SameSite` settings.
+- [ ] The session is renewed after authentication/elevation and invalidated on logout, revocation, and critical change.
+- [ ] Errors do not reveal whether an account, email, phone number, or tenant exists without need.
 
-## Autorização e isolamento
+## Authorization and isolation
 
-- [ ] Matriz ator × entrada × ação × recurso × propriedade × tenant × estado foi exercitada.
-- [ ] Toda ação protegida valida autorização no servidor.
-- [ ] IDs controlados pelo cliente passam por autorização de objeto e tenant.
-- [ ] Campos de leitura e escrita sensíveis usam allowlist; sem mass assignment.
-- [ ] Papéis baixos não acessam funções administrativas por URL, método alternativo ou API direta.
-- [ ] Queries, cache keys, filas, storage paths e eventos preservam tenant/ownership.
-- [ ] RLS, ACL, IAM ou policy externa está comprovada e testada, não apenas presumida.
-- [ ] Role e owner de tabelas não contornam RLS inesperadamente.
-- [ ] Serviços preservam a identidade original e não viram confused deputy.
-- [ ] Revogação, cache/token stale, onboarding, offboarding, exportação e exclusão preservam isolamento.
-- [ ] Todas as versões, jobs, webhooks, filas, busca e ferramentas internas equivalentes foram inventariadas.
-- [ ] Testes cobrem usuário A/B, tenant A/B, papéis e objetos inexistentes.
+- [ ] The actor × input × action × resource × property × tenant × state matrix was exercised.
+- [ ] Every protected action validates authorization on the server.
+- [ ] Client-controlled IDs undergo object- and tenant-level authorization.
+- [ ] Sensitive read and write fields use an allowlist; no mass assignment.
+- [ ] Low-privilege roles cannot access administrative functions through a URL, alternative method, or direct API.
+- [ ] Queries, cache keys, queues, storage paths, and events preserve tenant/ownership.
+- [ ] RLS, ACL, IAM, or external policy is proven and tested, not merely assumed.
+- [ ] Table role and owner do not bypass RLS unexpectedly.
+- [ ] Services preserve the original identity and do not become a confused deputy.
+- [ ] Revocation, stale cache/token, onboarding, offboarding, export, and deletion preserve isolation.
+- [ ] All equivalent versions, jobs, webhooks, queues, search, and internal tools were inventoried.
+- [ ] Tests cover user A/B, tenant A/B, roles, and nonexistent objects.
 
-## Rate limiting e recursos
+## Rate limiting and resources
 
-- [ ] Camada, rotas, métodos, versões, aliases, batch/GraphQL e endpoints internos estão cobertos.
-- [ ] A chave do limite corresponde ao abuso: identidade, token, tenant, endpoint, IP confiável ou combinação.
-- [ ] Proxies confiáveis e headers de IP estão configurados sem permitir spoofing.
-- [ ] Burst e taxa sustentada são limitados com armazenamento coerente em múltiplas instâncias.
-- [ ] Operações do store compartilhado são atômicas e a política de falha do limiter é explícita.
-- [ ] Login, OTP, reset, convite, cadastro e operações pagas têm limites próprios.
-- [ ] Body, string, array, upload, batch, paginação, GraphQL e exportação têm máximos.
-- [ ] Há timeout, cancelamento, backpressure, concorrência e retry finitos.
-- [ ] Jobs e filas têm deduplicação/idempotência e limite de crescimento.
-- [ ] Integrações cobradas têm orçamento, cota ou alerta de custo.
-- [ ] Noisy neighbor foi exercitado: um usuário ou tenant não degrada pools, filas, CPU, memória, conexões, storage, cotas ou orçamento dos demais.
-- [ ] Isolamento, fairness, prioridade, backpressure e limites por tenant/usuário existem onde recursos são compartilhados.
-- [ ] Resposta de excesso é consistente (`429` quando aplicável), observável e não cria bypass.
-- [ ] Limiares vêm de capacidade, custo, UX e ameaça; valores arbitrários estão marcados como decisão pendente.
+- [ ] Layer, routes, methods, versions, aliases, batch/GraphQL, and internal endpoints are covered.
+- [ ] The limit key matches the abuse: identity, token, tenant, endpoint, trusted IP, or a combination.
+- [ ] Trusted proxies and IP headers are configured without allowing spoofing.
+- [ ] Burst and sustained rate are limited with storage consistent across multiple instances.
+- [ ] Shared-store operations are atomic and the limiter failure policy is explicit.
+- [ ] Login, OTP, reset, invitation, registration, and paid operations have their own limits.
+- [ ] Body, string, array, upload, batch, pagination, GraphQL, and export have maximums.
+- [ ] Timeout, cancellation, backpressure, concurrency, and retry are finite.
+- [ ] Jobs and queues have deduplication/idempotency and a growth limit.
+- [ ] Billed integrations have a budget, quota, or cost alert.
+- [ ] Noisy neighbor was exercised: one user or tenant does not degrade others' pools, queues, CPU, memory, connections, storage, quotas, or budget.
+- [ ] Isolation, fairness, priority, backpressure, and per-tenant/user limits exist where resources are shared.
+- [ ] The excess response is consistent (`429` when applicable), observable, and does not create a bypass.
+- [ ] Thresholds come from capacity, cost, UX, and threat; arbitrary values are marked as a pending decision.
 
-## Entrada, saída e execução
+## Input, output, and execution
 
-- [ ] Entrada valida tipo, formato, faixa, tamanho, semântica e campos inesperados.
-- [ ] SQL/ORM usa parâmetros; shell evita concatenação; template/HTML aplica encoding contextual.
-- [ ] Paths são normalizados, confinados e não aceitam traversal.
-- [ ] URLs de saída restringem esquema, host, redirects, DNS/rebinding e redes internas conforme o caso.
-- [ ] Desserializadores e parsers estão em modo seguro e com limites.
-- [ ] Content-Type, método HTTP e tamanho são allowlisted.
-- [ ] Saídas não expõem campos internos, segredo, stack trace ou PII desnecessária.
+- [ ] Input validates type, format, range, size, semantics, and unexpected fields.
+- [ ] SQL/ORM uses parameters; shell avoids concatenation; template/HTML applies contextual encoding.
+- [ ] Paths are normalized, confined, and do not accept traversal.
+- [ ] Outbound URLs restrict scheme, host, redirects, DNS/rebinding, and internal networks as appropriate.
+- [ ] Deserializers and parsers are in secure mode and have limits.
+- [ ] Content-Type, HTTP method, and size are allowlisted.
+- [ ] Outputs do not expose internal fields, secrets, stack traces, or unnecessary PII.
 
-## Navegador e cliente
+## Browser and client
 
-- [ ] CORS usa origens, métodos e credentials deliberados; não reflete origem cegamente.
-- [ ] Operações com sessão por cookie têm proteção CSRF aplicável.
-- [ ] CSP e demais headers são coerentes com a aplicação, sem copiar configuração que quebre o produto.
-- [ ] Segredo e autorização real não dependem de bundle, local storage, route guard ou botão oculto.
-- [ ] Redirects e links externos são validados.
-- [ ] Mapa de UI e inventário de endpoints concordam; rota direta, link antigo, refresh e restauração de estado revalidam autenticação, autorização e tenant.
-- [ ] URL, histórico, cache e armazenamento do cliente não carregam segredo ou dado sensível desnecessário.
+- [ ] CORS uses deliberate origins, methods, and credentials; it does not blindly reflect the origin.
+- [ ] Cookie-session operations have applicable CSRF protection.
+- [ ] CSP and other headers are consistent with the application, without copying configuration that breaks the product.
+- [ ] Secrets and real authorization do not depend on the bundle, local storage, route guard, or hidden button.
+- [ ] Redirects and external links are validated.
+- [ ] The UI map and endpoint inventory agree; direct route, old link, refresh, and state restoration revalidate authentication, authorization, and tenant.
+- [ ] URL, history, cache, and client storage do not carry unnecessary secrets or sensitive data.
 
-## Uploads, arquivos e conteúdo ativo
+## Uploads, files, and active content
 
-- [ ] Extensão, tipo real, tamanho, nome e conteúdo são verificados por allowlist/contexto.
-- [ ] Arquivo é armazenado fora do webroot ou servido por handler autorizado.
-- [ ] Nome/path é gerado pelo servidor e não sobrescreve arquivo arbitrário.
-- [ ] Processadores resistem a arquivo comprimido/bomba e têm tempo/memória limitados.
-- [ ] Download revalida autorização e usa headers seguros.
+- [ ] Extension, actual type, size, name, and content are verified by allowlist/context.
+- [ ] The file is stored outside the webroot or served by an authorized handler.
+- [ ] The name/path is generated by the server and does not overwrite an arbitrary file.
+- [ ] Processors resist compressed/bomb files and have bounded time/memory.
+- [ ] Download revalidates authorization and uses secure headers.
 
-## Segredos, criptografia e configuração
+## Secrets, cryptography, and configuration
 
-- [ ] Nenhum segredo aparece em código, cliente, log, fixture, imagem ou erro.
-- [ ] Segredos têm privilégio mínimo, rotação, revogação, expiração e separação por ambiente.
-- [ ] Para segredo já exposto, remoção do código não foi tratada como resolução; alcance, contenção e revogação/rotação foram exigidos e seu estado foi confirmado ou escalado.
-- [ ] TLS é exigido onde dados/credenciais cruzam rede não confiável.
-- [ ] Criptografia usa biblioteca e algoritmo aprovados pelo stack; chaves não ficam junto do ciphertext sem modelo justificável.
-- [ ] Debug, default password, endpoint administrativo e storage público estão desativados/restritos por padrão.
-- [ ] Config ausente falha de modo explícito e seguro, sem default allow silencioso.
+- [ ] No secret appears in code, client, log, fixture, image, or error.
+- [ ] Secrets have least privilege, rotation, revocation, expiration, and environment separation.
+- [ ] For a secret already exposed, removal from the code was not treated as resolution; scope, containment, and revocation/rotation were required and their status was confirmed or escalated.
+- [ ] TLS is required where data/credentials cross an untrusted network.
+- [ ] Cryptography uses a stack-approved library and algorithm; keys are not stored with the ciphertext without a justifiable model.
+- [ ] Debug, default password, administrative endpoint, and public storage are disabled/restricted by default.
+- [ ] Missing config fails explicitly and securely, without a silent default allow.
 
-## Dependências e cadeia de suprimentos
+## Dependencies and supply chain
 
-- [ ] Pacotes sugeridos existem, são necessários e correspondem ao nome/registry correto.
-- [ ] Manifest e lockfile concordam; resolução não depende de versão flutuante perigosa.
-- [ ] Alertas existentes, versões vulneráveis e software não mantido foram considerados.
-- [ ] Build/CI não executa input não confiável com segredo ou permissão excessiva.
-- [ ] O diff foi revisado para nova execução de rede ou shell em build, install, geração, teste, CI e deploy.
-- [ ] Cada nova execução de rede/shell tem necessidade, origem, versão/integridade, argumentos, privilégios, credenciais e comportamento de falha verificados.
-- [ ] Artefatos e imagens têm origem, integridade e atualização verificáveis quando o projeto exigir.
-- [ ] Nova fonte, imagem, stylesheet, script ou biblioteca visual externa tem necessidade, origem, privacidade, CSP, integridade, performance, cache, fallback e comportamento degradado avaliados.
+- [ ] Suggested packages exist, are necessary, and match the correct name/registry.
+- [ ] Manifest and lockfile agree; resolution does not depend on a dangerous floating version.
+- [ ] Existing alerts, vulnerable versions, and unmaintained software were considered.
+- [ ] Build/CI does not execute untrusted input with a secret or excessive permission.
+- [ ] The diff was reviewed for new network or shell execution in build, install, generation, test, CI, and deploy.
+- [ ] Every new network/shell execution has its need, origin, version/integrity, arguments, privileges, credentials, and failure behavior verified.
+- [ ] Artifacts and images have verifiable provenance, integrity, and updates when the project requires it.
+- [ ] A new external font, image, stylesheet, script, or visual library has its need, origin, privacy, CSP, integrity, performance, cache, fallback, and degraded behavior evaluated.
 
-## Logging, monitoramento e privacidade
+## Logging, monitoring, and privacy
 
-- [ ] Falhas de autenticação, autorização, validação e rate limit geram eventos úteis.
-- [ ] Logs têm correlação, ator/tenant apropriado e proteção contra log injection.
-- [ ] Tokens, senhas, chaves, conteúdo sensível e PII desnecessária não são registrados.
-- [ ] Alertas têm consumidor e limiar; logging não é ruído sem ação.
-- [ ] Retenção, exclusão, exportação e minimização de dados seguem requisito aplicável.
+- [ ] Authentication, authorization, validation, and rate-limit failures generate useful events.
+- [ ] Logs have correlation, an appropriate actor/tenant, and protection against log injection.
+- [ ] Tokens, passwords, keys, sensitive content, and unnecessary PII are not logged.
+- [ ] Alerts have a consumer and threshold; logging is not unactionable noise.
+- [ ] Data retention, deletion, export, and minimization follow the applicable requirement.
 
-## Fluxos e concorrência
+## Flows and concurrency
 
-- [ ] Ordem de estados é validada no servidor.
-- [ ] Preço, desconto, ownership, papel e permissão são recalculados no servidor.
-- [ ] Operações financeiras, crédito, estoque, convite e confirmação resistem a replay e dupla submissão.
-- [ ] Um passe de usuário desonesto tentou mentir sobre identidade, tenant, estado, quantidade, preço, elegibilidade, sequência e sucesso anterior para obter benefício.
-- [ ] Etapas puladas, repetidas, fora de ordem e TOCTOU foram exercitadas.
-- [ ] Funções que dispensam valor têm limite por fluxo de negócio, não apenas limite genérico de endpoint.
-- [ ] Idempotency key é vinculada a ator, operação e payload quando usada.
-- [ ] Transações, locks, unique constraints ou compare-and-set protegem invariantes concorrentes.
-- [ ] Falha parcial tem rollback ou compensação observável.
+- [ ] State order is validated on the server.
+- [ ] Price, discount, ownership, role, and permission are recalculated on the server.
+- [ ] Financial, credit, inventory, invitation, and confirmation operations resist replay and double submission.
+- [ ] A dishonest-user pass tried lying about identity, tenant, state, quantity, price, eligibility, sequence, and prior success to obtain a benefit.
+- [ ] Skipped, repeated, and out-of-order steps and TOCTOU were exercised.
+- [ ] Functions that dispense value have a limit per business flow, not only a generic endpoint limit.
+- [ ] An idempotency key is bound to the actor, operation, and payload when used.
+- [ ] Transactions, locks, unique constraints, or compare-and-set protect concurrent invariants.
+- [ ] Partial failure has observable rollback or compensation.
 
-## Sistemas que usam modelos ou agentes
+## Systems that use models or agents
 
-- [ ] Conteúdo externo é tratado como dado, não como instrução confiável.
-- [ ] Issues, PRs, README, logs, páginas e respostas de ferramentas não podem redefinir instruções persistentes silenciosamente.
-- [ ] Ferramentas, arquivos, rede e segredos seguem privilégio mínimo.
-- [ ] Saída do modelo é validada antes de SQL, shell, HTML, URL, parser ou ação externa.
-- [ ] Aprovação humana existe para ações destrutivas ou de alto impacto.
-- [ ] Custos, tokens, concorrência e tamanho de contexto têm limites.
-- [ ] Pacotes inventados/typosquatting, mudanças em configuração de agentes, CI e scripts de instalação/deploy foram revisados.
-- [ ] Testes removidos, asserts enfraquecidos, mocks substitutivos e mudanças fora do escopo foram procurados.
-- [ ] Saída de subagente foi revalidada por evidência independente.
-- [ ] Briefs, planos e checkpoints persistidos não contêm segredo, PII desnecessária, conteúdo de cliente ou instrução externa tratada como autoridade.
-- [ ] Feature sensível inclui atores, fronteiras, abuso plausível e testes negativos desde o planejamento, sem transformar feature comum em checklist cego.
+- [ ] External content is treated as data, not as a trusted instruction.
+- [ ] Issues, PRs, README, logs, pages, and tool responses cannot silently redefine persistent instructions.
+- [ ] Tools, files, network, and secrets follow least privilege.
+- [ ] Model output is validated before SQL, shell, HTML, URL, parser, or external action.
+- [ ] Human approval exists for destructive or high-impact actions.
+- [ ] Costs, tokens, concurrency, and context size have limits.
+- [ ] Invented packages/typosquatting and changes to agent configuration, CI, and install/deploy scripts were reviewed.
+- [ ] Removed tests, weakened assertions, substitute mocks, and out-of-scope changes were sought.
+- [ ] Subagent output was revalidated through independent evidence.
+- [ ] Persisted briefs, plans, and checkpoints do not contain secrets, unnecessary PII, client content, or external instructions treated as authority.
+- [ ] A sensitive feature includes actors, boundaries, plausible abuse, and negative tests from the planning stage, without turning an ordinary feature into a blind checklist.
 
-## Temas ou tokens externos
+## External themes or tokens
 
-Aplicar somente quando tema ou token vier de usuário, tenant, CMS, arquivo remoto ou integração:
+Apply only when a theme or token comes from a user, tenant, CMS, remote file, or integration:
 
-- [ ] Nomes e propriedades seguem allowlist.
-- [ ] Tipos, unidades, faixas e tamanho são validados.
-- [ ] URLs e referências a recursos passam pelos controles de saída aplicáveis.
-- [ ] O valor alcança apenas o sink de estilo previsto, sem conteúdo ativo ou quebra de isolamento.
-- [ ] Cache, persistência e escopo por tenant não vazam configuração entre usuários.
+- [ ] Names and properties follow an allowlist.
+- [ ] Types, units, ranges, and size are validated.
+- [ ] URLs and resource references pass through the applicable outbound controls.
+- [ ] The value reaches only the intended style sink, without active content or isolation breach.
+- [ ] Cache, persistence, and per-tenant scope do not leak configuration between users.
 
-Tokens locais de build não geram achado de segurança sem entrada controlável, caminho alcançável, controle ausente e impacto.
+Local build tokens do not produce a security finding without controllable input, a reachable path, a missing control, and impact.
 
-## Testes mínimos por risco
+## Minimum tests by risk
 
-- [ ] Sem credencial, credencial inválida e sessão expirada.
-- [ ] Papel inferior, objeto de outro usuário e outro tenant.
-- [ ] Input vazio, limite, acima do limite, tipo errado e campo inesperado.
-- [ ] Burst, taxa sustentada, batch, página/upload grandes e operação cara.
-- [ ] Repetição, replay, concorrência e ordem de etapas inválida.
-- [ ] Dependência/serviço externo lento, indisponível ou malformado.
-- [ ] Usuário/tenant ruidoso consumindo recursos compartilhados enquanto outro uso legítimo continua operando.
-- [ ] Logs e respostas revisados para vazamento.
+- [ ] No credential, invalid credential, and expired session.
+- [ ] Lower role, another user's object, and another tenant.
+- [ ] Empty input, boundary, above the limit, wrong type, and unexpected field.
+- [ ] Burst, sustained rate, batch, large page/upload, and expensive operation.
+- [ ] Repetition, replay, concurrency, and invalid step order.
+- [ ] Slow, unavailable, or malformed external dependency/service.
+- [ ] Noisy user/tenant consuming shared resources while other legitimate use continues operating.
+- [ ] Logs and responses reviewed for leakage.

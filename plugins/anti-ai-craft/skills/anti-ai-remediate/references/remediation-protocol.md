@@ -1,88 +1,88 @@
-# Protocolo de remediação
+# Remediation protocol
 
-## 1. Estado inicial
+## 1. Initial state
 
-- Resolver raiz e instruções do projeto.
-- Detectar primeiro se o alvo pertence a um repositório Git.
-- Quando Git existir, registrar branch, HEAD, status, staged e untracked com comandos somente leitura.
-- Fora de Git, registrar inventário, metadados e hashes dos arquivos relevantes; não executar comandos Git nem tratar sua ausência como falha.
-- Usar status, diff e hashes somente leitura para comprovar preservação. Não duplicar arquivos do usuário como mecanismo de prova.
-- Não limpar, resetar, stashar ou sobrescrever mudanças preexistentes.
+- Resolve the project root and instructions.
+- First detect whether the target belongs to a Git repository.
+- When Git exists, record the branch, HEAD, status, staged, and untracked state using read-only commands.
+- Outside Git, record the inventory, metadata, and hashes of the relevant files; do not run Git commands or treat their absence as a failure.
+- Use read-only status, diff, and hashes to prove preservation. Do not duplicate user files as evidence.
+- Do not clean, reset, stash, or overwrite pre-existing changes.
 
-## 2. Gate de elegibilidade — somente leitura
+## 2. Eligibility gate — read-only only
 
-- Listar IDs aprovados.
-- Confirmar severidade, evidência, arquivos e dependências.
-- Revalidar estado atual, reachability e invariante antes de planejar mudança.
-- Classificar cada ID como pronto, já corrigido/sem mudança, bloqueado por prova, bloqueado por produto ou fora de escopo.
-- Ordenar por causa e dependência para evitar correções duplicadas.
+- List approved IDs.
+- Confirm severity, evidence, files, and dependencies.
+- Revalidate the current state, reachability, and invariant before planning a change.
+- Classify each ID as ready, already fixed/no change, blocked on evidence, blocked on product, or out of scope.
+- Order by cause and dependency to avoid duplicate fixes.
 
-## 3. Gate do plano — ainda sem editar
+## 3. Plan gate — still without editing
 
-- Executar caso original.
-- Registrar resultado antes da mudança.
-- Construir teste mínimo quando não existir.
-- Confirmar que falha pela causa descrita, não por ambiente.
-- Para UI, capturar estado/viewport anterior.
-- Mapear causa, boundary, arquivos, comportamento que muda e permanece, regressão, validação positiva, risco e rollback.
-- Agrupar IDs somente quando a relação com a mesma causa e mudança estiver explícita.
-- Para fluxo persistido, representar o lote por resultado, origem, dependências, critério de pronto e prova; o plano não amplia a lista de IDs autorizados.
+- Run the original case.
+- Record the outcome before the change.
+- Build a minimal test when none exists.
+- Confirm that it fails because of the described cause, not the environment.
+- For UI, capture the previous state/viewport.
+- Map the cause, boundary, files, behavior that changes and remains, regression, positive validation, risk, and rollback.
+- Group IDs only when their relationship to the same cause and change is explicit.
+- For a persisted flow, represent the batch by outcome, origin, dependencies, definition-of-done criterion, and evidence; the plan does not expand the list of authorized IDs.
 
-## 4. Gate de aplicação
+## 4. Application gate
 
-- Traçar entrada, estado, side effects e saída.
-- Identificar primeira violação de invariante.
-- Quando Git existir, revalidar HEAD e status; sempre revalidar o conteúdo dos arquivos imediatamente antes de editar.
-- Preferir correção no boundary certo.
-- Preservar API pública e arquitetura.
-- Evitar abstração/flag/config genérica.
-- Documentar tradeoff se mais de uma correção for válida.
+- Trace input, state, side effects, and output.
+- Identify the first invariant violation.
+- When Git exists, revalidate HEAD and status; always revalidate file contents immediately before editing.
+- Prefer a fix at the correct boundary.
+- Preserve the public API and architecture.
+- Avoid a generic abstraction/flag/configuration.
+- Document the trade-off if more than one fix is valid.
 
-## 5. Implementação
+## 5. Implementation
 
-- Editar somente arquivos necessários.
-- Preservar style e convenções.
-- Não engolir exceção, retornar sucesso falso ou relaxar validação.
-- Garantir transação, rollback, idempotência e concorrência conforme o caso.
-- Para UI, preservar identidade e implementar comportamento/acessibilidade completos.
-- Corrigir uma causa lógica por vez e executar uma prova antes da próxima.
-- Para navegação ou URL pública, preservar deep links, refresh, back/forward, retorno e compatibilidade, ou implementar migração/redirect aprovado.
-- Para tokens, editar a fonte autoritativa, regenerar outputs pelo comando oficial e validar consumidores, modos e estados afetados; não substituir valores em massa sem mapa de uso.
+- Edit only necessary files.
+- Preserve style and conventions.
+- Do not swallow an exception, return false success, or relax validation.
+- Ensure transaction, rollback, idempotency, and concurrency as applicable.
+- For UI, preserve identity and implement complete behavior/accessibility.
+- Fix one logical cause at a time and obtain evidence before the next.
+- For navigation or a public URL, preserve deep links, refresh, back/forward, return, and compatibility, or implement an approved migration/redirect.
+- For tokens, edit the authoritative source, regenerate outputs with the official command, and validate affected consumers, modes, and states; do not replace values in bulk without a usage map.
 
-## 6. Gate de verificação congelada
+## 6. Frozen verification gate
 
-- Demonstrar falha antes quando viável.
-- Demonstrar sucesso depois.
-- Cobrir limite/falha relacionada.
-- Evitar mock que confirma o próprio mock.
-- Não regravar snapshot sem revisão.
-- Confirmar que o teste falha se o controle corrigido for retirado.
-- Verificar siblings, aliases e bypasses relacionados.
-- Se falhar, marcar o ID como falhou na validação e voltar ao plano; não empilhar remendos.
+- Demonstrate the failure before the change when feasible.
+- Demonstrate success afterward.
+- Cover a related boundary/failure case.
+- Avoid a mock that confirms itself.
+- Do not re-record a snapshot without review.
+- Confirm that the test fails if the fixed control is removed.
+- Check related siblings, aliases, and bypasses.
+- If it fails, mark the ID as failed validation and return to the plan; do not stack patches.
 
-## 7. Validação
+## 7. Validation
 
-- Rodar teste focado.
-- Rodar suíte proporcional ao risco.
-- Rodar lint/typecheck/build/análise pertinente.
-- Revisar diff.
-- Reexecutar reprodução.
-- Para UI, capturar depois e comparar.
-- Confirmar que a estratégia de rollback está documentada e, quando o risco justificar, ensaiada em ambiente seguro ou por dry-run antes da entrega.
-- Quando houver fluxo de design, reconciliar código, evidência, status da tarefa e artefatos diretamente afetados. Atualizar documento apenas com autorização.
+- Run the focused test.
+- Run the suite proportionate to the risk.
+- Run pertinent lint/typecheck/build/analysis.
+- Review the diff.
+- Rerun the reproduction.
+- For UI, capture the after state and compare it.
+- Confirm that the rollback strategy is documented and, when the risk justifies it, rehearsed in a safe environment or through a dry run before handoff.
+- When there is a design flow, reconcile code, evidence, task status, and directly affected artifacts. Update a document only with authorization.
 
 ## 8. Handoff
 
-- Relacionar arquivos e achados.
-- Fornecer comandos e resultados exatos.
-- Informar validação não executada.
-- Listar risco restante.
-- Confirmar estado Git quando aplicável e ausência de commit/push.
-- Relatar status por ID, inclusive sem mudança e bloqueios.
+- Map files to findings.
+- Provide exact commands and outcomes.
+- Report validation that was not run.
+- List remaining risk.
+- Confirm Git state when applicable and the absence of commit/push.
+- Report status by ID, including no-change items and blockers.
 
 ## Rollback
 
-- Reverter somente hunks criados nesta remediação; nunca usar reset, checkout ou stash para apagar trabalho alheio.
-- Para dados/migrações, definir backup, compatibilidade e estratégia de reversão antes da mudança.
-- Ensaiar restauração, down migration, feature rollback ou procedimento equivalente em ambiente seguro quando falha de reversão puder causar perda, indisponibilidade ou inconsistência material. Se o ensaio não for possível, declarar a lacuna antes de aplicar.
-- Declarar irreversibilidade antes de agir e exigir autorização específica.
+- Revert only hunks created in this remediation; never use reset, checkout, or stash to erase someone else's work.
+- For data/migrations, define the backup, compatibility, and reversal strategy before the change.
+- Rehearse restoration, down migration, feature rollback, or an equivalent procedure in a safe environment when reversal failure could cause loss, unavailability, or material inconsistency. If rehearsal is not possible, state the gap before applying the change.
+- State irreversibility before acting and require specific authorization.

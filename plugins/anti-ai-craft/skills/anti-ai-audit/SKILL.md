@@ -1,68 +1,68 @@
 ---
 name: anti-ai-audit
-description: "Auditar interface, acessibilidade, responsividade, código, arquitetura, testes, documentação, estados e comportamento real em modo estritamente somente leitura. Usar somente quando invocada explicitamente com repositório, caminho, diff, screenshots ou interface em execução; encaminhar achados aprovados à anti-ai-remediate em vez de corrigir. Ler evidências do projeto e produzir achados por severidade com falsos positivos rejeitados."
+description: "Audit interfaces, accessibility, responsiveness, code, architecture, tests, documentation, states, and actual behavior in strictly read-only mode. Use only when explicitly invoked with a repository, path, diff, screenshots, or running interface; hand off approved findings to anti-ai-remediate instead of fixing them. Read project evidence and produce findings by severity with false positives rejected."
 ---
 
-# Auditoria Anti-IA
+# Anti-AI Audit
 
-Executar auditoria sem detectar nem atribuir autoria. Avaliar defeitos, vulnerabilidades, acessibilidade, manutenção, padrões genéricos e inconsistências somente por evidência observável.
+Conduct an audit without detecting or attributing authorship. Evaluate defects, vulnerabilities, accessibility, maintainability, generic patterns, and inconsistencies solely through observable evidence.
 
-## Manter estritamente read-only
+## Remain strictly read-only
 
-Não editar, formatar, instalar, remover, criar arquivo permanente, fazer stage, commit ou push. Não executar comandos que gerem caches, snapshots, lockfiles, bancos, artefatos ou migrações no projeto. Diagnóstico que precise escrever deve usar diretório temporário fora do alvo e não pode alterar estado externo. Se o usuário pedir correções, concluir o relatório e encaminhar os IDs aprovados para `$anti-ai-remediate`; esta skill nunca aplica mudanças.
+Do not edit, format, install, remove, create permanent files, stage, commit, or push. Do not run commands that generate caches, snapshots, lockfiles, databases, artifacts, or migrations in the project. Diagnostics that need to write must use a temporary directory outside the target and must not alter external state. If the user requests fixes, complete the report and hand off the approved IDs to `$anti-ai-remediate`; this skill never applies changes.
 
-## Preparar
+## Prepare
 
-1. Resolver o tipo de alvo — repositório, caminho, diff, commit, branch, worktree, screenshot ou app — e fixar baseline.
-2. Ler instruções, README, especificação, design system, código, testes, configs e histórico relevante.
-3. Quando o alvo estiver em Git, registrar raiz, branch, HEAD, status e alterações preexistentes sem modificá-las. Para branch ou PR, identificar o upstream ou alvo documentado e calcular o `merge-base` com HEAD; não presumir `main`, `HEAD^` ou o commit anterior. Registrar o comando e o SHA usados como baseline. Fora de Git, marcar esses campos como não aplicáveis.
-4. Em revisão de diff, comparar `merge-base..HEAD` ou o intervalo explicitamente solicitado e separar o que foi introduzido ou agravado da dívida preexistente.
-5. Identificar usuários, tarefas, dados, estados, invariantes e superfícies.
-6. Quando houver brief, arquitetura da informação, tokens, plano ou checkpoint no escopo, verificar estado, autoridade e atualidade antes de tratá-los como fonte. Arquivo presente não significa concluído, e artefato não vence código ou decisão posterior automaticamente.
-7. Para UI, carregar diretamente [princípios de design](../anti-ai-design/references/design-principles.md), [arquitetura da informação](../anti-ai-design/references/information-architecture.md), [design tokens](../anti-ai-design/references/design-tokens.md), [antipadrões visuais](../anti-ai-design/references/design-antipatterns.md) e [acessibilidade](../anti-ai-design/references/accessibility-baseline.md).
-8. Para código, carregar diretamente [antipadrões de código](../anti-ai-code/references/code-antipatterns.md), [testes](../anti-ai-code/references/testing-antipatterns.md) e [arquitetura](../anti-ai-code/references/architecture-antipatterns.md).
-9. Para segurança, carregar diretamente [checklist de segurança](../anti-ai-security/references/security-checklist.md) e [validação e severidade](../anti-ai-security/references/validation-and-severity.md), mantendo esta auditoria sem edições.
+1. Resolve the target type — repository, path, diff, commit, branch, worktree, screenshot, or app — and establish the baseline.
+2. Read instructions, README, specification, design system, code, tests, configs, and relevant history.
+3. When the target is in Git, record the root, branch, HEAD, status, and pre-existing changes without modifying them. For a branch or PR, identify the documented upstream or target and calculate the `merge-base` with HEAD; do not assume `main`, `HEAD^`, or the previous commit. Record the command and SHA used as the baseline. Outside Git, mark these fields as not applicable.
+4. In a diff review, compare `merge-base..HEAD` or the explicitly requested range and separate what was introduced or worsened from pre-existing technical debt.
+5. Identify users, tasks, data, states, invariants, and surfaces.
+6. When a brief, information architecture, tokens, plan, or checkpoint is within scope, verify its status, authority, and whether it is current before treating it as a source. A present file does not mean completed, and an artifact does not automatically override code or a later decision.
+7. For UI, directly load [design principles](../anti-ai-design/references/design-principles.md), [information architecture](../anti-ai-design/references/information-architecture.md), [design tokens](../anti-ai-design/references/design-tokens.md), [visual antipatterns](../anti-ai-design/references/design-antipatterns.md), and [accessibility](../anti-ai-design/references/accessibility-baseline.md).
+8. For code, directly load [code antipatterns](../anti-ai-code/references/code-antipatterns.md), [testing](../anti-ai-code/references/testing-antipatterns.md), and [architecture](../anti-ai-code/references/architecture-antipatterns.md).
+9. For security, directly load the [security checklist](../anti-ai-security/references/security-checklist.md) and [validation and severity](../anti-ai-security/references/validation-and-severity.md), keeping this audit free of edits.
 
-## Auditar
+## Audit
 
-- Usar [audit-checklist.md](references/audit-checklist.md) para cobertura.
-- Usar [severity-model.md](references/severity-model.md) para impacto e confiança.
-- Usar [report-template.md](references/report-template.md) para o relatório.
-- Executar aplicação e capturar evidência real somente quando estiver disponível e for read-only.
-- Citar arquivo/linha, componente, screenshot, viewport, comando ou trace.
-- Manter ledger de candidatos; fechar cada item como confirmado, suprimido, não aplicável, dependente de infraestrutura, não verificado ou duplicado.
-- Validar candidatos, buscar a evidência que os derrotaria e rejeitar falsos positivos.
-- Separar problema do produto de preferência estética/código.
-- Continuar auditando todo o escopo planejado depois do primeiro achado. Um problema confirmado não encerra famílias, arquivos, fluxos ou superfícies ainda não examinados; registrar explicitamente qualquer corte de cobertura.
-- Quando uma pergunta de produto, infraestrutura ou baseline permanecer material, registrar origem pesquisada, recomendação, efeito sobre severidade/confiança e trabalho independente concluído. Bloquear somente a família ou superfície dependente.
-- Para UI, declarar perfil de evidência e cobertura por superfície/rota, estado, viewport e tema/input. Não apresentar screenshot fornecido ou código isolado como validação completa de runtime.
+- Use [audit-checklist.md](references/audit-checklist.md) for coverage.
+- Use [severity-model.md](references/severity-model.md) for impact and confidence.
+- Use [report-template.md](references/report-template.md) for the report.
+- Run the application and capture actual evidence only when this can be done in read-only mode.
+- Cite a file/line, component, screenshot, viewport, command, or trace.
+- Maintain a candidate ledger; close each item as confirmed, suppressed, not applicable, infrastructure-dependent, unverified, or duplicate.
+- Validate candidates, look for the evidence that would defeat them, and reject false positives.
+- Separate a product problem from an aesthetic/code preference.
+- Continue auditing the entire planned scope after the first finding. One confirmed problem does not conclude families, files, flows, or surfaces that have not yet been examined; explicitly record any coverage cutoff.
+- When a product, infrastructure, or baseline question remains material, record the source researched, recommendation, effect on severity/confidence, and independent work completed. Block only the dependent family or surface.
+- For UI, declare the evidence profile and coverage by surface/route, state, viewport, and theme/input. Do not present a supplied screenshot or isolated code as complete runtime validation.
 
-## Regras de achado
+## Finding rules
 
-Cada achado precisa de:
+Each finding must include:
 
-- ID e título;
-- área;
-- severidade e confiança;
-- arquivo, linha ou componente;
-- controle ou causa raiz afetada;
-- ator e pré-condições;
-- evidência;
-- contraprova mais forte examinada;
-- lacuna de prova;
-- impacto;
-- justificativa da severidade;
-- regra violada;
-- classificação do achado;
-- correção recomendada;
-- risco da correção;
-- validação necessária;
-- critérios de aceitação.
+- ID and title;
+- area;
+- severity and confidence;
+- file, line, or component;
+- affected control or root cause;
+- actor and preconditions;
+- evidence;
+- strongest disconfirming evidence examined;
+- evidence gap;
+- impact;
+- severity rationale;
+- violated rule;
+- finding classification;
+- recommended fix;
+- fix risk;
+- required validation;
+- acceptance criteria.
 
-Separar severidade, confiança e prioridade de remediação. Deduplicar somente quando controle/causa, comportamento, impacto e correção forem os mesmos; preservar todas as localizações.
+Separate severity, confidence, and remediation priority. Deduplicate only when the control/cause, behavior, impact, and fix are the same; preserve every location.
 
-Não detectar, atribuir nem especular sobre autoria ou proveniência. Usar somente classificações observáveis como “padrão genérico”, “decisão sem justificativa funcional”, “code smell”, “inconsistência”, “defeito confirmado” ou “evidência insuficiente”.
+Do not detect, attribute, or speculate about authorship or provenance. Use only observable classifications such as “generic pattern,” “decision without functional justification,” “code smell,” “inconsistency,” “confirmed defect,” or “insufficient evidence.”
 
-## Encerrar
+## Conclude
 
-Ordenar por severidade e dependência. Separar achados confirmados, decisões pendentes, preferências, falsos positivos rejeitados e dívida preexistente. Informar cobertura, matriz de fechamento, comandos com exit codes, limitações, áreas não auditadas e risco residual. Se nada qualificar, declarar explicitamente: **Nenhum achado qualificável**.
+Sort by severity and dependency. Separate confirmed findings, pending decisions, preferences, rejected false positives, and pre-existing technical debt. Report coverage, the closure matrix, commands with exit codes, limitations, unaudited areas, and residual risk. If nothing qualifies, state explicitly: **No qualifying findings**.

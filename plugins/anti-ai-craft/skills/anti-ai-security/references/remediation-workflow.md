@@ -1,80 +1,80 @@
-# Workflow de remediação de segurança
+# Security remediation workflow
 
-## 1. Fixar evidência e escopo
+## 1. Lock evidence and scope
 
-Registrar:
+Record:
 
-- ativo e boundary;
-- ator e pré-condição;
-- caminho controlável;
-- controle atual e bypass;
-- impacto;
-- evidência reproduzível segura;
-- arquivos/configurações autorizados;
-- teste que deve falhar antes da correção.
+- asset and boundary;
+- actor and precondition;
+- controllable path;
+- current control and bypass;
+- impact;
+- safe reproducible evidence;
+- authorized files/configurations;
+- test that must fail before the fix.
 
-Se a proteção puder estar em gateway, WAF, IAM, RLS, service mesh ou plataforma externa não fornecida, não afirmar ausência. Pedir configuração ou relatar `depende de infraestrutura`.
+If the protection may be in a gateway, WAF, IAM, RLS, service mesh, or external platform that was not provided, do not assert its absence. Request the configuration or report `depends on infrastructure`.
 
-## 2. Escolher o boundary correto
+## 2. Choose the correct boundary
 
-- Autorização: servidor e acesso ao recurso, não apenas rota/UI.
-- Isolamento: query/policy/storage/cache/evento, não filtro posterior.
-- Validação: antes do sink ou mudança de confiança.
-- Rate limit: próximo da superfície de abuso, com chave e storage coerentes com a implantação.
-- Segredo: secret manager/configuração segura, não ofuscação.
-- Estado: transação, constraint, idempotência ou máquina de estados, não flag visual.
+- Authorization: server and resource access, not only route/UI.
+- Isolation: query/policy/storage/cache/event, not a subsequent filter.
+- Validation: before the sink or change in trust.
+- Rate limit: close to the abuse surface, with a key and storage consistent with the deployment.
+- Secret: secret manager/secure configuration, not obfuscation.
+- State: transaction, constraint, idempotency, or state machine, not a visual flag.
 
-Se um segredo já foi exposto, removê-lo do código impede novas exposições, mas não invalida cópias existentes. Registrar alcance e janela, bloquear novo uso quando autorizado e exigir revogação ou rotação confirmada. Não executar rotação real, alteração de produção ou revogação sem autorização específica; escalar como risco residual até a confirmação.
+If a secret has already been exposed, removing it from the code prevents new exposures but does not invalidate existing copies. Record scope and window, block new use when authorized, and require confirmed revocation or rotation. Do not perform actual rotation, production changes, or revocation without specific authorization; escalate it as residual risk until confirmation.
 
-## 3. Corrigir rate limiting e consumo
+## 3. Fix rate limiting and consumption
 
-Antes de implementar, definir:
+Before implementing, define:
 
-1. ação protegida e custo;
-2. ator/chave do limite;
-3. burst, janela e taxa sustentada;
-4. comportamento em múltiplas instâncias;
-5. resposta e retry;
-6. observabilidade;
-7. impacto em NAT, proxies, acessibilidade e usuários legítimos;
-8. limites complementares de payload, batch, paginação, timeout, concorrência, fila e gasto.
+1. protected action and cost;
+2. actor/limit key;
+3. burst, window, and sustained rate;
+4. behavior across multiple instances;
+5. response and retry;
+6. observability;
+7. impact on NAT, proxies, accessibility, and legitimate users;
+8. complementary limits for payload, batch, pagination, timeout, concurrency, queue, and spend.
 
-Preferir mecanismo já adotado no gateway/framework. Um contador em memória local não protege implantação com múltiplas instâncias e reinicia com o processo. Não copiar `100 requests/minute` como valor universal. Se produto/capacidade não definir limiar, implementar estrutura configurável somente quando a necessidade for real e registrar o valor como decisão pendente.
+Prefer the mechanism already adopted in the gateway/framework. A local in-memory counter does not protect a deployment with multiple instances and resets with the process. Do not copy `100 requests/minute` as a universal value. If the product/capacity does not define a threshold, implement a configurable structure only when the need is real and record the value as a pending decision.
 
-Testar pelo menos: abaixo do limite, no limite, acima do limite, recuperação após janela, chaves distintas, concorrência e bypass por header/endpoint alternativo.
+Test at least: below the limit, at the limit, above the limit, recovery after the window, distinct keys, concurrency, and bypass through a header/alternative endpoint.
 
-## 4. Preservar função e usabilidade
+## 4. Preserve function and usability
 
-- Não remover código funcional apenas para silenciar scanner.
-- Não bloquear todo usuário para impedir abuso de poucos.
-- Não transformar falha de autorização em vazamento por mensagens diferentes.
-- Não degradar criptografia, validação ou teste para recuperar compatibilidade.
-- Não introduzir dependência sem verificar existência, versão, manutenção e arquitetura local.
+- Do not remove functional code merely to silence a scanner.
+- Do not block every user to prevent abuse by a few.
+- Do not turn an authorization failure into a leak through differing messages.
+- Do not weaken cryptography, validation, or a test to restore compatibility.
+- Do not introduce a dependency without verifying existence, version, maintenance, and local architecture.
 
-## 5. Validar em camadas
+## 5. Validate in layers
 
-1. teste negativo específico;
-2. teste positivo que preserva uso legítimo;
-3. regressão da área;
-4. análise estática/configuração já adotada pelo projeto;
-5. revisão manual do diff e do caminho de dados;
-6. verificação de logs, erros e telemetria;
-7. suíte proporcional ao impacto.
+1. specific negative test;
+2. positive test that preserves legitimate use;
+3. regression for the area;
+4. static analysis/configuration already adopted by the project;
+5. manual review of the diff and data path;
+6. verification of logs, errors, and telemetry;
+7. suite proportionate to the impact.
 
-Atualizar o modelo de ameaça se a correção alterar arquitetura, fluxo, ativo, ator, fronteira, integração ou ambiente. Para controles de consumo compartilhado, validar também noisy neighbor e uso legítimo concorrente.
+Update the threat model if the fix changes architecture, flow, asset, actor, boundary, integration, or environment. For shared-consumption controls, also validate noisy neighbor behavior and concurrent legitimate use.
 
-Scanner limpo não encerra o trabalho. Resultado de scanner precisa de validação manual; ausência de alerta não cobre lógica de negócio, autorização contextual, tenant, rate limit externo ou concorrência.
+A clean scanner does not conclude the work. A scanner outcome requires manual validation; the absence of an alert does not cover business logic, contextual authorization, tenant, external rate limit, or concurrency.
 
-## 6. Relatar
+## 6. Report
 
-Por achado, informar:
+For each finding, report:
 
-- causa e risco;
-- controle implementado;
-- arquivo/configuração;
-- teste antes/depois;
-- comandos e resultados;
-- comportamento legítimo preservado;
-- limitações e dependências externas;
-- risco residual e monitoramento;
-- aprovação adicional necessária.
+- cause and risk;
+- implemented control;
+- file/configuration;
+- test before/after;
+- commands and outcomes;
+- legitimate behavior preserved;
+- limitations and external dependencies;
+- residual risk and monitoring;
+- additional approval required.

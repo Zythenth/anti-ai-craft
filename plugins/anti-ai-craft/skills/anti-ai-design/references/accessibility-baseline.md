@@ -1,131 +1,131 @@
-# Baseline de acessibilidade
+# Accessibility baseline
 
-## Sumário
+## Summary
 
-- [Autoridade](#autoridade)
-- [Semântica e estrutura](#semântica-e-estrutura)
-- [Teclado e foco](#teclado-e-foco)
-- [Menus e overflow](#menus-e-overflow)
-- [Modais](#modais)
-- [Abas](#abas)
-- [Formulários e erros](#formulários-e-erros)
-- [Estados e mensagens](#estados-e-mensagens)
-- [Contraste, cor e alvos](#contraste-cor-e-alvos)
-- [Reflow, zoom e texto](#reflow-zoom-e-texto)
-- [Movimento](#movimento)
-- [Matriz manual mínima](#matriz-manual-mínima)
-- [Validação por fatia e em mobile](#validação-por-fatia-e-em-mobile)
+- [Authority](#authority)
+- [Semantics and structure](#semantics-and-structure)
+- [Keyboard and focus](#keyboard-and-focus)
+- [Menus and overflow](#menus-and-overflow)
+- [Modals](#modals)
+- [Tabs](#tabs)
+- [Forms and errors](#forms-and-errors)
+- [States and messages](#states-and-messages)
+- [Contrast, color, and targets](#contrast-color-and-targets)
+- [Reflow, zoom, and text](#reflow-zoom-and-text)
+- [Motion](#motion)
+- [Minimum manual matrix](#minimum-manual-matrix)
+- [Validation by slice and on mobile](#validation-by-slice-and-on-mobile)
 
-## Autoridade
+## Authority
 
-Usar WCAG 2.2 A/AA aplicável como baseline normativo para web. Tratar WAI-ARIA APG, GOV.UK, Carbon, Material, Fluent, Apple HIG, Xbox XAG, MDN e NN/g como guidance ou heurística. Preferir HTML nativo. Testar padrões ARIA nas combinações reais de navegador e tecnologia assistiva.
+Use applicable WCAG 2.2 A/AA as the normative baseline for the web. Treat WAI-ARIA APG, GOV.UK, Carbon, Material, Fluent, Apple HIG, Xbox XAG, MDN, and NN/g as guidance or heuristics. Prefer native HTML. Test ARIA patterns with the actual browser and assistive-technology combinations.
 
-## Semântica e estrutura
+## Semantics and structure
 
-- Preservar ordem de leitura, DOM e foco.
-- Usar landmarks, headings, listas, tabelas, links, buttons e campos conforme sua finalidade.
-- Expor nome, role, value, state e relationships.
-- Fazer o nome acessível conter o texto visível.
-- Não comunicar informação apenas por cor, posição, forma ou movimento.
+- Preserve reading, DOM, and focus order.
+- Use landmarks, headings, lists, tables, links, buttons, and fields according to their purpose.
+- Expose name, role, value, state, and relationships.
+- Make the accessible name contain the visible text.
+- Do not communicate information through color, position, shape, or motion alone.
 
-## Teclado e foco
+## Keyboard and focus
 
-- Tornar toda funcionalidade operável por teclado, sem timing específico.
-- Evitar tabindex positivo.
-- Manter foco visível, lógico e não totalmente encoberto.
-- Não mover foco por atualização comum.
-- Após remoção de um trigger, enviar foco ao próximo ponto lógico.
-- Testar Tab, Shift+Tab, Enter, Space, setas, Home, End e Escape conforme o widget.
+- Make all functionality keyboard-operable without specific timing.
+- Avoid positive tabindex values.
+- Keep focus visible, logical, and not entirely obscured.
+- Do not move focus during an ordinary update.
+- After removing a trigger, move focus to the next logical point.
+- Test Tab, Shift+Tab, Enter, Space, arrow keys, Home, End, and Escape as appropriate to the widget.
 
-## Menus e overflow
+## Menus and overflow
 
-- Usar button como trigger, com nome e estado expandido.
-- Ao abrir, mover foco segundo o padrão escolhido.
-- Navegar itens por setas; ativar por teclado; fechar com Escape.
-- Devolver foco ao trigger ou contexto lógico.
-- Manter alternativa de touch e voz; não depender de hover.
-- Manter ações primárias/frequentes fora do overflow.
+- Use a button as the trigger, with a name and expanded state.
+- On open, move focus according to the selected pattern.
+- Navigate items with arrow keys; activate by keyboard; close with Escape.
+- Return focus to the trigger or logical context.
+- Preserve a touch and voice alternative; do not depend on hover.
+- Keep primary/frequent actions outside overflow.
 
-## Modais
+## Modals
 
-- Fornecer título/nome e fechamento visível.
-- Tornar o fundo realmente inerte.
-- Definir foco inicial pela tarefa.
-- Conter Tab e Shift+Tab.
-- Fechar diálogo comum com Escape.
-- Devolver foco ao invocador ou próximo ponto lógico.
-- Preferir ação menos destrutiva como foco inicial em confirmação irreversível.
+- Provide a title/name and a visible close control.
+- Make the background genuinely inert.
+- Set initial focus according to the task.
+- Contain Tab and Shift+Tab.
+- Close an ordinary dialog with Escape.
+- Return focus to the invoker or next logical point.
+- Prefer the least destructive action as initial focus in an irreversible confirmation.
 
-## Abas
+## Tabs
 
-- Relacionar tab e tabpanel.
-- Manter apenas a tab ativa na sequência de Tab.
-- Usar setas para navegação interna.
-- Usar ativação automática somente sem latência perceptível; caso contrário, ativação manual.
-- Não quebrar tabs em múltiplas linhas sem padrão acessível.
+- Associate each tab with its tabpanel.
+- Keep only the active tab in the Tab sequence.
+- Use arrow keys for internal navigation.
+- Use automatic activation only when there is no perceptible latency; otherwise, use manual activation.
+- Do not wrap tabs across multiple lines without an accessible pattern.
 
-## Formulários e erros
+## Forms and errors
 
-- Fornecer label persistente e associada.
-- Não usar placeholder como label.
-- Associar hint e erro ao campo.
-- Identificar o erro em texto e sugerir correção quando conhecida.
-- Preservar dados e permitir colar/gerenciador de senhas.
-- Em formulários extensos, combinar mensagens inline e resumo navegável.
-- Em operações relevantes, oferecer reversão, revisão ou confirmação apropriada.
+- Provide a persistent, associated label.
+- Do not use a placeholder as a label.
+- Associate hints and errors with the field.
+- Identify the error in text and suggest a correction when known.
+- Preserve data and allow pasting/password managers.
+- In long forms, combine inline messages with a navigable summary.
+- For consequential operations, offer appropriate reversal, review, or confirmation.
 
-## Estados e mensagens
+## States and messages
 
-- Expor selected, checked, expanded, disabled, read-only, busy e invalid programaticamente.
-- Explicar indisponibilidade quando necessário; disabled não é explicação.
-- Anunciar status sem mover foco.
-- Reservar alert/assertive para urgência real.
-- Não anunciar página inteira ou histórico como atualização.
+- Expose selected, checked, expanded, disabled, read-only, busy, and invalid programmatically.
+- Explain unavailability when necessary; disabled is not an explanation.
+- Announce status without moving focus.
+- Reserve alert/assertive for genuine urgency.
+- Do not announce an entire page or history as an update.
 
-## Contraste, cor e alvos
+## Contrast, color, and targets
 
-- Texto normal: 4,5:1; texto grande: 3:1.
-- Componentes e indicadores essenciais: 3:1.
-- Foco visível precisa sobreviver a temas e forced colors.
-- Alvo mínimo WCAG 2.2 AA: 24×24 CSS px ou exceção normativa.
-- Usar meta maior da plataforma/produto para ações frequentes e mobile.
-- Não converter dp, pt e CSS px como equivalentes.
+- Normal text: 4.5:1; large text: 3:1.
+- Components and essential indicators: 3:1.
+- Visible focus must survive themes and forced colors.
+- WCAG 2.2 AA minimum target: 24×24 CSS px or a normative exception.
+- Use the platform/product's larger target for frequent actions and mobile.
+- Do not treat dp, pt, and CSS px as equivalent units.
 
-## Reflow, zoom e texto
+## Reflow, zoom, and text
 
-- Testar reflow em 320 CSS px sem rolagem bidimensional, salvo conteúdo essencialmente 2D.
-- Testar texto a 200% e zoom a 400% quando aplicável.
-- Testar override de text spacing, strings longas, tradução e RTL.
-- Permitir overflow local para tabelas/mapas genuínos, preservando headers e contexto.
+- Test reflow at 320 CSS px without two-dimensional scrolling, except for essentially two-dimensional content.
+- Test text at 200% and zoom at 400% when applicable.
+- Test text-spacing overrides, long strings, translation, and RTL.
+- Allow local overflow for genuine tables/maps while preserving headers and context.
 
-## Movimento
+## Motion
 
-- Permitir pausar, parar ou ocultar conteúdo automático quando WCAG exigir.
-- Não exceder limites de flashes.
-- Respeitar prefers-reduced-motion e preferências nativas.
-- Substituir movimento intenso por alternativa estática ou discreta.
-- Não usar movimento como único feedback.
+- Allow users to pause, stop, or hide automatic content when WCAG requires it.
+- Do not exceed flash thresholds.
+- Respect prefers-reduced-motion and native preferences.
+- Replace intense motion with a static or subtle alternative.
+- Do not use motion as the only feedback.
 
-## Matriz manual mínima
+## Minimum manual matrix
 
-Esta é uma matriz de seleção, não uma lista universal. Escolher somente dimensões
-aplicáveis ao widget, fluxo, risco, plataforma e suporte real; registrar como `não
-aplicável` ou `não exercitado` o restante, com motivo.
+This is a selection matrix, not a universal list. Choose only the dimensions
+applicable to the widget, flow, risk, platform, and actual support; record the rest as `not
+applicable` or `not exercised`, with a reason.
 
-1. Para fluxos operáveis, percorrer caminho principal e recuperação por teclado.
-2. Para menu, modal, tabs ou drawer alterado, registrar foco antes/depois e os comandos correspondentes.
-3. Para semântica ou atualização dinâmica, verificar leitor de tela na combinação suportada.
-4. Para escopo responsivo, testar viewports representativos definidos pelo projeto ou risco.
-5. Para conteúdo que precisa refluir, testar 320 CSS px, 200%, 400%, text spacing e strings longas conforme o critério aplicável.
-6. Para cor, tema ou estilos de sistema afetados, verificar contraste e os modos realmente suportados, incluindo forced colors quando aplicável.
-7. Para superfícies touch, testar alvos e operação por toque.
-8. Para movimento introduzido ou alterado, testar reduced motion.
-9. Para estados presentes no escopo, exercitar vazio, loading, erro, offline, permissão e dados extremos pertinentes.
-10. Quando houver automação acessível compatível, executá-la sem tratá-la como substituto dos passes manuais selecionados.
+1. For operable flows, traverse the primary and recovery paths by keyboard.
+2. For a changed menu, modal, tabs, or drawer, record focus before/after and the corresponding commands.
+3. For semantics or dynamic updates, verify a screen reader in the supported combination.
+4. For responsive scope, test representative viewports defined by the project or risk.
+5. For content that must reflow, test 320 CSS px, 200%, 400%, text spacing, and long strings according to the applicable criterion.
+6. For affected color, theme, or system styles, verify contrast and the modes actually supported, including forced colors when applicable.
+7. For touch surfaces, test targets and touch operation.
+8. For introduced or changed motion, test reduced motion.
+9. For states present in scope, exercise relevant empty, loading, error, offline, permission, and extreme-data states.
+10. When compatible accessibility automation is available, run it without treating it as a replacement for the selected manual passes.
 
-## Validação por fatia e em mobile
+## Validation by slice and on mobile
 
-- Anexar a cada fatia interativa somente os checks de semântica, teclado, foco, mensagem e estado que ela introduz ou altera; manter um passe integrado do fluxo ao final.
-- Em superfícies de leitura, verificar medida de linha, ritmo e continuidade nos viewports pertinentes sem transformar preferência editorial em norma.
-- Em formulários mobile, testar foco, zoom do navegador, teclado virtual, safe area, clipping, scroll e acesso à ação principal.
-- Registrar navegador, viewport, input e estado; separar falha normativa de problema de usabilidade ou preferência.
+- Attach to each interactive slice only the checks for semantics, keyboard, focus, messages, and state that it introduces or changes; retain an integrated flow pass at the end.
+- On reading surfaces, verify line measure, rhythm, and continuity in the relevant viewports without turning editorial preference into a norm.
+- In mobile forms, test focus, browser zoom, the virtual keyboard, safe area, clipping, scrolling, and access to the primary action.
+- Record browser, viewport, input, and state; separate normative failure from a usability issue or preference.

@@ -1,8 +1,8 @@
-# Fontes e limites de evidência
+# Sources and evidence limits
 
-Estas fontes sustentam controles e métodos de verificação. Nenhuma demonstra que todo código assistido por IA contém o mesmo defeito. Pesquisas sobre código gerado dependem de modelo, linguagem, tarefa, dataset e detector; usar como justificativa para revisão independente, não para atribuir autoria.
+These sources support controls and verification methods. None demonstrates that all AI-assisted code contains the same defect. Research on generated code depends on model, language, task, dataset, and detector; use it to justify independent review, not to attribute authorship.
 
-## Padrões e guias primários
+## Primary standards and guides
 
 - [OWASP Application Security Verification Standard 5.0](https://owasp.org/www-project-application-security-verification-standard/)
 - [OWASP API Security Top 10 — 2023](https://owasp.org/API-Security/editions/2023/en/0x11-t10/)
@@ -37,11 +37,11 @@ Estas fontes sustentam controles e métodos de verificação. Nenhuma demonstra 
 - [CISA — Shifting the Balance of Cybersecurity Risk](https://www.cisa.gov/sites/default/files/2023-10/Shifting-the-Balance-of-Cybersecurity-Risk-Principles-and-Approaches-for-Secure-by-Design-Software.pdf)
 - [MITRE — 2025 CWE Top 25](https://cwe.mitre.org/top25/archive/2025/2025_cwe_top25.html)
 
-## IA assistindo código — fontes primárias e cautelas
+## AI-assisted coding — primary sources and caveats
 
 - [GitHub Docs — Review AI-generated code](https://docs.github.com/en/copilot/tutorials/review-ai-generated-code)
 - [GitHub Docs — Responsible use of Copilot agents](https://docs.github.com/en/enterprise-cloud@latest/copilot/responsible-use/agents)
 - [Security Weaknesses of Copilot-Generated Code in GitHub Projects](https://arxiv.org/abs/2310.02059)
 - [A Comprehensive Study of LLM Secure Code Generation](https://arxiv.org/abs/2503.15554)
 
-Os estudos sustentam revisão humana, testes funcionais e de segurança conjuntos e múltiplas formas de validação. Eles também mostram limitações de scanners e possibilidade de falsos positivos; portanto, esta skill exige caminho de impacto e preservação funcional antes de corrigir.
+The studies support combining human review with functional and security testing and multiple forms of validation. They also show scanner limitations and the possibility of false positives; therefore, this skill requires an impact path and functional preservation before fixing.

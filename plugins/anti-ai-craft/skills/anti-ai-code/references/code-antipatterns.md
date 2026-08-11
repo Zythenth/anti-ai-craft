@@ -1,153 +1,153 @@
-# Antipadrões de código e correção
+# Code and correctness antipatterns
 
-## Sumário
+## Summary
 
-- [Taxonomia](#taxonomia)
-- [Contratos inventados](#contratos-inventados)
-- [Certeza fabricada](#certeza-fabricada)
-- [Erros escondidos e falso sucesso](#erros-escondidos-e-falso-sucesso)
-- [Estado, persistência e transações](#estado-persistência-e-transações)
-- [Concorrência e async](#concorrência-e-async)
-- [Validação, autorização e segurança](#validação-autorização-e-segurança)
-- [Qualidade local](#qualidade-local)
-- [Interseção entre código e UI](#interseção-entre-código-e-ui)
+- [Taxonomy](#taxonomy)
+- [Invented contracts](#invented-contracts)
+- [Fabricated certainty](#fabricated-certainty)
+- [Hidden errors and false success](#hidden-errors-and-false-success)
+- [State, persistence, and transactions](#state-persistence-and-transactions)
+- [Concurrency and async](#concurrency-and-async)
+- [Validation, authorization, and security](#validation-authorization-and-security)
+- [Local quality](#local-quality)
+- [Intersection between code and UI](#intersection-between-code-and-ui)
 
-## Taxonomia
+## Taxonomy
 
-1. **Defeito funcional confirmado:** reprodução, contrato ou teste demonstra comportamento errado.
-2. **Vulnerabilidade:** caminho de impacto e controle ausente são demonstráveis.
-3. **Smell tradicional:** eleva custo/risco, mas não prova bug.
-4. **Padrão genérico contextual:** combinação observável sem justificativa na tarefa, no domínio ou na arquitetura.
-5. **Heurística comunitária:** hipótese para investigar.
-6. **Preferência estilística:** não reportar como defeito.
-7. **Evidência insuficiente ou falso positivo:** rejeitar.
+1. **Confirmed functional defect:** reproduction, contract, or test demonstrates incorrect behavior.
+2. **Vulnerability:** the impact path and missing control are demonstrable.
+3. **Traditional smell:** increases cost/risk but does not prove a bug.
+4. **Contextual generic pattern:** observable combination without justification in the task, domain, or architecture.
+5. **Community heuristic:** hypothesis to investigate.
+6. **Stylistic preference:** do not report as a defect.
+7. **Insufficient evidence or false positive:** reject.
 
-## Contratos inventados
+## Invented contracts
 
-- API, método, parâmetro, evento ou endpoint inexistente.
-- Dependência/pacote inexistente, desatualizado, incompatível ou fora do lockfile.
-- Import quebrado, nome indefinido ou feature não disponível na versão instalada.
-- Configuração, variável de ambiente, flag ou arquivo fictício.
-- Versão, comando, citação, estatística ou comportamento de biblioteca afirmado sem verificação.
-- README/docstring que promete feature não implementada.
-- Stub, placeholder ou mock deixado em caminho de produção.
-- Caminho absoluto, host ou segredo embutido.
+- Nonexistent API, method, parameter, event, or endpoint.
+- Nonexistent, outdated, incompatible dependency/package, or one absent from the lockfile.
+- Broken import, undefined name, or feature unavailable in the installed version.
+- Fictitious configuration, environment variable, flag, or file.
+- Version, command, citation, statistic, or library behavior asserted without verification.
+- README/docstring that promises an unimplemented feature.
+- Stub, placeholder, or mock left in a production path.
+- Embedded absolute path, host, or secret.
 
-Verificar existência, versão, assinatura, licença/política local e uso real. Não instalar pacote apenas porque o nome parece plausível.
+Verify existence, version, signature, license/local policy, and actual use. Do not install a package merely because its name seems plausible.
 
-## Certeza fabricada
+## Fabricated certainty
 
-- apresentar inferência como fato observado;
-- completar requisito ausente com comportamento plausível;
-- citar documentação que existe, mas não sustenta a afirmação;
-- inventar fonte, autor, número, versão ou resultado de benchmark;
-- defender uma afirmação anterior em vez de revalidá-la;
-- dizer que comando, teste, build ou revisão passou sem execução e saída.
+- presenting an inference as an observed fact;
+- filling in a missing requirement with plausible behavior;
+- citing documentation that exists but does not support the claim;
+- inventing a source, author, number, version, or benchmark outcome;
+- defending an earlier claim instead of revalidating it;
+- saying that a command, test, build, or review passed without execution and output.
 
-Rotular fato, inferência e desconhecido. Verificar detalhes voláteis ou precisos na fonte primária. Quando não houver evidência suficiente, pedir contexto ou declarar a limitação.
+Label fact, inference, and unknown. Verify volatile or precise details in the primary source. When there is insufficient evidence, ask for context or state the limitation.
 
-## Erros escondidos e falso sucesso
+## Hidden errors and false success
 
-- catch amplo que ignora exceção relevante;
-- retorno vazio/default após falha sem distinguir erro legítimo;
-- log e continuação quando a operação deveria falhar;
-- mensagem genérica que perde causa e próxima ação;
-- status de sucesso antes de concluir side effects;
-- retry infinito ou sem idempotência;
-- fallback que muda semântica silenciosamente;
-- teste contornado por branch exclusivo de ambiente;
-- erro substituído por placeholder fictício.
+- broad catch that ignores a relevant exception;
+- empty/default return after a failure without distinguishing the legitimate error condition;
+- log and continuation when the operation should fail;
+- generic message that loses the cause and next action;
+- success status before side effects are complete;
+- infinite retry or retry without idempotency;
+- fallback that silently changes semantics;
+- test bypassed by an environment-only branch;
+- error replaced with a fictitious placeholder.
 
-Exigir contrato explícito: propagar, traduzir com causa, recuperar com estado observável ou compensar. Preservar stack/cause quando a linguagem permitir.
+Require an explicit contract: propagate, translate while preserving the cause, recover with observable state, or compensate. Preserve stack/cause when the language permits.
 
-Não proibir `??`, `||`, valores padrão ou `try/catch` por sintaxe. Reportar somente quando o fallback mascara violação de contrato ou o catch apaga uma falha que deveria permanecer observável.
+Do not prohibit `??`, `||`, default values, or `try/catch` based on syntax. Report only when the fallback masks a contract violation or the catch erases a failure that should remain observable.
 
-## Estado, persistência e transações
+## State, persistence, and transactions
 
-- mutação parcial antes de validação;
-- gravações relacionadas fora de transação;
-- rollback que cobre apenas parte dos side effects;
-- cache atualizado antes da fonte de verdade;
-- evento emitido sem commit ou duplicado em retry;
-- estado impossível representável sem validação;
-- valores sentinela/magic strings que misturam estados;
-- leitura-modificação-gravação sem controle de concorrência;
-- operação não idempotente repetida após timeout.
+- partial mutation before validation;
+- related writes outside a transaction;
+- rollback that covers only some side effects;
+- cache updated before the source of truth;
+- event emitted without a commit or duplicated on retry;
+- impossible state representable without validation;
+- sentinel values/magic strings that mix states;
+- read-modify-write without concurrency control;
+- non-idempotent operation repeated after a timeout.
 
-Traçar estados inicial, intermediários, terminal e falhas. Confirmar atomicidade, compensação e invariantes.
+Trace the initial, intermediate, terminal, and failure states. Confirm atomicity, compensation, and invariants.
 
-## Concorrência e async
+## Concurrency and async
 
-- promise/coroutine criada sem await, join ou owner;
-- callback executado depois de objeto/escopo invalidado;
-- listener/timer registrado mais de uma vez;
-- task sem cancelamento, timeout ou tratamento de falha;
-- lock ausente, largo demais ou adquirido em ordem inconsistente;
-- variável compartilhada sem sincronização;
-- resposta enviada antes de persistência/processamento;
-- chamada bloqueante em caminho async;
-- race entre validação e uso;
-- concorrência adicionada sem medição ou requisito.
+- promise/coroutine created without await, join, or owner;
+- callback executed after an object/scope becomes invalid;
+- listener/timer registered more than once;
+- task without cancellation, timeout, or failure handling;
+- lock missing, overly broad, or acquired in an inconsistent order;
+- shared variable without synchronization;
+- response sent before persistence/processing;
+- blocking call in an async path;
+- race between validation and use;
+- concurrency added without measurement or requirement.
 
-Reproduzir com interleavings relevantes, não apenas leitura superficial.
+Reproduce with relevant interleavings, not merely a superficial reading.
 
-## Validação, autorização e segurança
+## Validation, authorization, and security
 
-- validar formato sem validar semântica/faixa;
-- confiar em dado de cliente, header ou UI;
-- autenticar sem autorizar o recurso/ação;
-- autorização somente no frontend;
-- objeto acessado por ID sem verificar ownership/tenant;
-- input concatenado em SQL, shell, HTML, URL, path ou template;
-- segredo, token, chave ou PII em código/log;
-- permissões excessivas e default allow;
-- criptografia caseira ou uso inseguro de primitive;
-- dependência não auditada;
-- mensagem que expõe detalhe sensível.
+- validating format without validating semantics/range;
+- trusting client data, a header, or the UI;
+- authenticating without authorizing the resource/action;
+- authorization only in the frontend;
+- object accessed by ID without verifying ownership/tenant;
+- input concatenated into SQL, shell, HTML, URL, path, or template;
+- secret, token, key, or PII in code/log;
+- excessive permissions and default allow;
+- homegrown cryptography or unsafe use of a primitive;
+- unaudited dependency;
+- message that exposes sensitive detail.
 
-Separar claramente validação, autenticação e autorização. Usar padrões oficiais do stack; não improvisar segurança.
+Clearly separate validation, authentication, and authorization. Use the stack's official patterns; do not improvise security.
 
-## Qualidade local
+## Local quality
 
-- magic number/string sem domínio explícito;
-- nomes genéricos como data, item, handler ou manager quando ocultam propósito;
-- comentário que repete sintaxe;
-- docstring promocional que afirma robustez, produção ou performance sem evidência;
-- código morto, branch impossível ou compatibilidade especulativa;
-- duplicação que já divergiu;
-- função/bloco grande com responsabilidades concretamente distintas;
-- fragmentação em helpers triviais que obriga saltos sem reduzir complexidade.
-- wrapper, facade ou service que só encaminha argumentos;
-- tipo intermediário convertido imediatamente para outro tipo idêntico;
-- opções, callbacks ou hooks públicos sem consumidor;
-- tratamento “defensivo” duplicado depois de uma fronteira que já validou o dado;
-- comentário de cabeçalho para cada função óbvia;
-- branch de compatibilidade sem versão suportada, teste ou prazo de remoção.
-- tabela de retornos ou casos especiais ajustada apenas aos exemplos/testes conhecidos, sem regra de domínio que generalize.
+- magic number/string without explicit domain meaning;
+- generic names such as data, item, handler, or manager when they obscure purpose;
+- comment that repeats syntax;
+- promotional docstring that claims robustness, production readiness, or performance without evidence;
+- dead code, impossible branch, or speculative compatibility;
+- duplication that has already diverged;
+- large function/block with concretely distinct responsibilities;
+- fragmentation into trivial helpers that forces jumps without reducing complexity.
+- wrapper, facade, or service that only forwards arguments;
+- intermediate type immediately converted into another identical type;
+- public options, callbacks, or hooks without a consumer;
+- duplicated “defensive” handling after a boundary has already validated the data;
+- header comment for every obvious function;
+- compatibility branch without a supported version, test, or removal deadline.
+- table of returns or special cases fitted only to known examples/tests, without a domain rule that generalizes.
 
-Não transformar preferência de nome/tamanho em achado sem impacto verificável. Preferir remover volume sem função, mas preservar abstrações que concentrem política, invariantes, boundaries, reuso real ou test seams.
+Do not turn a naming/size preference into a finding without verifiable impact. Prefer removing volume without a function, while preserving abstractions that concentrate policy, invariants, boundaries, real reuse, or test seams.
 
-## Interseção entre código e UI
+## Intersection between code and UI
 
-- kebab repetido em toda linha/card sem modelo de ações;
-- ícone sem label ou nome acessível;
-- ação primária escondida;
-- cards produzidos por map sem hierarquia ou semântica;
-- componente genérico aplicado a dados incompatíveis;
-- estado fictício embutido no HTML;
-- loading teatral, delay artificial ou progresso inventado;
-- animação sem função ou reduced motion;
-- estilo inline usado para contornar arquitetura sem justificativa;
-- responsividade resolvida apenas empilhando;
-- listener duplicado, ID frágil ou estado DOM desincronizado;
-- foco e teclado ausentes;
-- modal visual sem comportamento modal;
-- tabs visuais sem semântica;
-- erro real substituído por placeholder.
-- alias de token ausente/circular, tipo ou unidade incompatível;
-- output de tokens editado manualmente em vez da fonte;
-- hardcode que contorna a camada semântica existente;
-- branch de tema duplicada, token sem consumidor ou substituição textual sem confirmar função;
-- rota que perde filtro, página, retorno ou autorização em link direto/refresh;
+- kebab menu repeated in every row/card without an action model;
+- icon without a label or accessible name;
+- hidden primary action;
+- cards produced by map without hierarchy or semantics;
+- generic component applied to incompatible data;
+- fictitious state embedded in HTML;
+- theatrical loading, artificial delay, or invented progress;
+- motion without a function or reduced motion;
+- inline style used to bypass the architecture without justification;
+- responsiveness solved only by stacking;
+- duplicated listener, fragile ID, or unsynchronized DOM state;
+- missing focus and keyboard support;
+- visual modal without modal behavior;
+- visual tabs without semantics;
+- real error replaced by a placeholder.
+- missing/circular token alias, or incompatible type or unit;
+- token output edited manually instead of the source;
+- hardcoding that bypasses the existing semantic layer;
+- duplicated theme branch, token without a consumer, or textual replacement without confirming function;
+- route that loses filter, page, return destination, or authorization on a direct link/refresh;
 
-Analisar como decisão de implementação e comportamento, nunca como prova de autoria.
+Analyze as an implementation decision and behavior, never as proof of authorship.

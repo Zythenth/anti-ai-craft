@@ -1,108 +1,108 @@
-# Métricas, pesquisa e experimentação
+# Metrics, research, and experimentation
 
-## Sumário
+## Summary
 
-- [ADO-087 — Ligar a métrica a um resultado do usuário](#ado-087--ligar-a-métrica-a-um-resultado-do-usuário)
-- [ADO-088 — Registrar baseline antes de declarar melhora](#ado-088--registrar-baseline-antes-de-declarar-melhora)
-- [ADO-089 — Separar sinal inicial de resultado duradouro](#ado-089--separar-sinal-inicial-de-resultado-duradouro)
-- [ADO-090 — Definir métricas de proteção](#ado-090--definir-métricas-de-proteção)
-- [ADO-091 — Instrumentar eventos com semântica e minimização](#ado-091--instrumentar-eventos-com-semântica-e-minimização)
-- [ADO-092 — Planejar o experimento antes de observar o resultado](#ado-092--planejar-o-experimento-antes-de-observar-o-resultado)
-- [ADO-093 — Usar pesquisa qualitativa quando o volume não prova causalidade](#ado-093--usar-pesquisa-qualitativa-quando-o-volume-não-prova-causalidade)
-- [ADO-094 — Comparar segmentos e coortes compatíveis](#ado-094--comparar-segmentos-e-coortes-compatíveis)
+- [ADO-087 — Connect the metric to a user outcome](#ado-087--connect-the-metric-to-a-user-outcome)
+- [ADO-088 — Record a baseline before claiming improvement](#ado-088--record-a-baseline-before-claiming-improvement)
+- [ADO-089 — Separate an initial signal from a lasting outcome](#ado-089--separate-an-initial-signal-from-a-lasting-outcome)
+- [ADO-090 — Define guardrail metrics](#ado-090--define-guardrail-metrics)
+- [ADO-091 — Instrument events with semantics and minimization](#ado-091--instrument-events-with-semantics-and-minimization)
+- [ADO-092 — Plan the experiment before observing the outcome](#ado-092--plan-the-experiment-before-observing-the-outcome)
+- [ADO-093 — Use qualitative research when volume cannot prove causality](#ado-093--use-qualitative-research-when-volume-cannot-prove-causality)
+- [ADO-094 — Compare compatible segments and cohorts](#ado-094--compare-compatible-segments-and-cohorts)
 
-## ADO-087 — Ligar a métrica a um resultado do usuário
+## ADO-087 — Connect the metric to a user outcome
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** Uma decisão de design é justificada por cadastro, clique, tempo, visita, receita ou outra métrica agregada.
+**Apply when.** A design decision is justified by sign-ups, clicks, time, visits, revenue, or another aggregate metric.
 
-**Decisão.** Explicar qual tarefa ou valor humano o indicador representa, em que janela e para qual população. Se a relação for indireta, rotular a métrica como proxy e buscar evidência complementar.
+**Decision.** Explain which task or human value the indicator represents, over which window, and for which population. If the relationship is indirect, label the metric as a proxy and seek complementary evidence.
 
-**Prova.** O contrato liga evento, comportamento, resultado percebido e consequência de negócio sem confundir correlação com causa.
+**Evidence.** The contract connects event, behavior, perceived outcome, and business consequence without confusing correlation with cause.
 
-**Evitar.** Otimizar volume vazio, tempo de tela sem utilidade, clique acidental, receita sem qualidade ou métrica escolhida apenas porque já existe no dashboard.
+**Avoid.** Optimizing empty volume, screen time without utility, accidental clicks, revenue without quality, or a metric selected merely because it already exists in the dashboard.
 
-## ADO-088 — Registrar baseline antes de declarar melhora
+## ADO-088 — Record a baseline before claiming improvement
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** Uma tela, fluxo ou mensagem será comparada como antes/depois.
+**Apply when.** A screen, flow, or message will be compared before and after.
 
-**Decisão.** Capturar estado inicial, período, segmento, definição do evento, qualidade dos dados e fatores externos relevantes antes da mudança. Preservar a comparação equivalente.
+**Decision.** Capture the initial state, period, segment, event definition, data quality, and relevant external factors before the change. Preserve an equivalent comparison.
 
-**Prova.** Baseline e resultado usam a mesma definição, população, janela e instrumentação, ou a diferença está declarada como limitação.
+**Evidence.** Baseline and outcome use the same definition, population, window, and instrumentation, or the difference is stated as a limitation.
 
-**Evitar.** Comparar semanas sazonais, públicos distintos, eventos redefinidos, screenshot com dados diferentes ou ausência de medição como se fosse zero.
+**Avoid.** Comparing seasonal weeks, different audiences, redefined events, screenshots with different data, or absence of measurement as though it were zero.
 
-## ADO-089 — Separar sinal inicial de resultado duradouro
+## ADO-089 — Separate an initial signal from a lasting outcome
 
-**Força.** padrão
+**Strength.** default
 
-**Aplicar quando.** Uma alteração aumenta atenção, cadastro, início de fluxo, uso inicial ou compra, mas seu efeito posterior ainda é desconhecido.
+**Apply when.** A change increases attention, sign-ups, flow starts, initial use, or purchases, but its later effect remains unknown.
 
-**Decisão.** Acompanhar indicador de entrada junto de ativação, conclusão útil, retorno, suporte, reembolso, cancelamento ou outro resultado tardio aplicável.
+**Decision.** Track the entry indicator alongside activation, useful completion, return, support load, refunds, cancellation, or another applicable later outcome.
 
-**Prova.** O plano diferencia métricas antecedentes e posteriores e define por quanto tempo a leitura precisa continuar.
+**Evidence.** The plan distinguishes leading and lagging metrics and defines how long observation must continue.
 
-**Evitar.** Chamar curiosidade de adoção, cadastro de retenção, compra de satisfação ou aumento momentâneo de clique de sucesso sustentável.
+**Avoid.** Calling curiosity adoption, sign-up retention, purchase satisfaction, or a momentary increase in clicks sustainable success.
 
-## ADO-090 — Definir métricas de proteção
+## ADO-090 — Define guardrail metrics
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** Uma hipótese busca elevar conversão, uso, velocidade, receita, adoção ou retenção.
+**Apply when.** A hypothesis seeks to increase conversion, use, speed, revenue, adoption, or retention.
 
-**Decisão.** Definir sinais que não podem piorar: erro, abandono involuntário, acessibilidade, suporte, privacidade, reclamação, reembolso, cancelamento, tempo da tarefa ou satisfação, conforme o risco.
+**Decision.** Define signals that must not deteriorate: errors, unintended abandonment, accessibility, support load, privacy, complaints, refunds, cancellation, task time, or satisfaction, according to the risk.
 
-**Prova.** Critérios de aprovação e reversão incluem o indicador principal e os limites de proteção, com responsável e janela de observação.
+**Evidence.** Approval and reversal criteria include the primary indicator and guardrail limits, with an owner and observation window.
 
-**Evitar.** Declarar vitória por uma métrica isolada enquanto custos, dano, exclusão ou dificuldade de saída aumentam.
+**Avoid.** Declaring victory from an isolated metric while costs, harm, exclusion, or exit difficulty increase.
 
-## ADO-091 — Instrumentar eventos com semântica e minimização
+## ADO-091 — Instrument events with semantics and minimization
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** A validação depende de analytics, logs de interação, replay, experimento ou segmentação.
+**Apply when.** Validation depends on analytics, interaction logs, replay, an experiment, or segmentation.
 
-**Decisão.** Nomear eventos pelo comportamento do domínio, documentar gatilho e propriedades, coletar somente o necessário e respeitar consentimento, retenção, redação e acesso. Testar duplicação, perda e mudança de versão.
+**Decision.** Name events according to domain behavior, document triggers and properties, collect only what is necessary, and respect consent, retention, redaction, and access. Test duplication, loss, and version changes.
 
-**Prova.** Existe dicionário de eventos, exemplo verificável, política de dados e teste que relaciona a emissão ao estado real da interface.
+**Evidence.** There is an event dictionary, verifiable example, data policy, and test connecting emission to the interface's actual state.
 
-**Evitar.** Captura indiscriminada, PII desnecessária, evento que mede renderização como conclusão, propriedades ambíguas ou telemetria inventada para preencher relatório.
+**Avoid.** Indiscriminate capture, unnecessary PII, an event that measures rendering as completion, ambiguous properties, or fabricated telemetry to fill a report.
 
-## ADO-092 — Planejar o experimento antes de observar o resultado
+## ADO-092 — Plan the experiment before observing the outcome
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** A equipe pretende usar teste controlado para escolher entre alternativas.
+**Apply when.** The team intends to use a controlled test to choose among alternatives.
 
-**Decisão.** Definir hipótese, unidade de análise, população, métrica, efeito mínimo relevante, tamanho ou duração adequados, regra de parada e tratamento de múltiplas leituras antes de iniciar.
+**Decision.** Before starting, define the hypothesis, unit of analysis, population, metric, minimum relevant effect, adequate size or duration, stopping rule, and treatment of multiple readings.
 
-**Prova.** O plano é revisável sem conhecer o vencedor e registra desvios, falhas de exposição e qualidade da amostra.
+**Evidence.** The plan can be reviewed without knowing the winner and records deviations, exposure failures, and sample quality.
 
-**Evitar.** Encerrar ao primeiro número favorável, testar muitas mudanças sem diagnóstico, ignorar poder estatístico ou apresentar associação como causalidade.
+**Avoid.** Stopping at the first favorable number, testing many changes without diagnosis, ignoring statistical power, or presenting association as causality.
 
-## ADO-093 — Usar pesquisa qualitativa quando o volume não prova causalidade
+## ADO-093 — Use qualitative research when volume cannot prove causality
 
-**Força.** padrão
+**Strength.** default
 
-**Aplicar quando.** O tráfego, a frequência ou o número de usuários não sustenta experimento quantitativo confiável.
+**Apply when.** Traffic, frequency, or user count cannot support a reliable quantitative experiment.
 
-**Decisão.** Usar observação de tarefa, entrevista, teste de compreensão, análise de suporte, revisão de sessões autorizadas ou protótipo comparativo para descobrir mecanismos e falhas. Registrar alcance e não generalizar além da amostra.
+**Decision.** Use task observation, interviews, comprehension tests, support analysis, authorized session review, or a comparative prototype to discover mechanisms and failures. Record reach and do not generalize beyond the sample.
 
-**Prova.** Há protocolo, participantes compatíveis, notas ligadas a comportamentos e hipóteses que podem ser confirmadas ou rejeitadas depois.
+**Evidence.** There is a protocol, compatible participants, notes tied to behavior, and hypotheses that can later be confirmed or rejected.
 
-**Evitar.** Chamar cinco opiniões de taxa universal, conduzir respostas, usar colega interno como único usuário ou inventar precisão estatística.
+**Avoid.** Calling five opinions a universal rate, leading answers, using an internal colleague as the only user, or inventing statistical precision.
 
-## ADO-094 — Comparar segmentos e coortes compatíveis
+## ADO-094 — Compare compatible segments and cohorts
 
-**Força.** padrão
+**Strength.** default
 
-**Aplicar quando.** O resultado varia por origem, experiência, plano, dispositivo, papel, mercado, período ou versão.
+**Apply when.** The outcome varies by origin, experience, plan, device, role, market, period, or version.
 
-**Decisão.** Separar populações com contexto materialmente diferente e comparar coortes equivalentes. Investigar se uma média agregada esconde benefício para um grupo e dano para outro.
+**Decision.** Separate populations with materially different contexts and compare equivalent cohorts. Investigate whether an aggregate average hides benefit for one group and harm for another.
 
-**Prova.** Segmentação possui motivo anterior à leitura, tamanho suficiente ou limitação declarada e não usa característica sensível sem base legítima.
+**Evidence.** Segmentation has a rationale established before reading the result, sufficient size or a stated limitation, and does not use a sensitive characteristic without a legitimate basis.
 
-**Evitar.** Misturar tráfego conhecido com público novo, comparar clientes maduros com recém-chegados, escolher segmento depois do resultado ou transformar benchmark externo em meta universal.
+**Avoid.** Mixing known traffic with a new audience, comparing mature customers with newcomers, choosing a segment after the outcome, or turning an external benchmark into a universal target.

@@ -1,134 +1,134 @@
-# Posicionamento e promessa
+# Positioning and promise
 
-## Sumário
+## Summary
 
-- [ADO-011 — Definir público por contexto de decisão](#ado-011--definir-público-por-contexto-de-decisão)
-- [ADO-012 — Manter promessa, capacidade e primeiro uso coerentes](#ado-012--manter-promessa-capacidade-e-primeiro-uso-coerentes)
-- [ADO-013 — Escolher o quadro de referência da categoria](#ado-013--escolher-o-quadro-de-referência-da-categoria)
-- [ADO-014 — Explicar o mecanismo de valor](#ado-014--explicar-o-mecanismo-de-valor)
-- [ADO-015 — Ordenar a mensagem pelas dúvidas decisivas](#ado-015--ordenar-a-mensagem-pelas-dúvidas-decisivas)
-- [ADO-016 — Usar o vocabulário do público sem perder precisão](#ado-016--usar-o-vocabulário-do-público-sem-perder-precisão)
-- [ADO-017 — Construir uma escada de evidência](#ado-017--construir-uma-escada-de-evidência)
-- [ADO-018 — Definir elegibilidade e desajuste](#ado-018--definir-elegibilidade-e-desajuste)
-- [ADO-019 — Manter a promessa coerente entre canais](#ado-019--manter-a-promessa-coerente-entre-canais)
-- [ADO-020 — Diferenciar pelo trabalho que o produto realiza](#ado-020--diferenciar-pelo-trabalho-que-o-produto-realiza)
+- [ADO-011 — Define the audience by decision context](#ado-011--define-the-audience-by-decision-context)
+- [ADO-012 — Keep promise, capability, and first use consistent](#ado-012--keep-promise-capability-and-first-use-consistent)
+- [ADO-013 — Choose the category frame of reference](#ado-013--choose-the-category-frame-of-reference)
+- [ADO-014 — Explain the value mechanism](#ado-014--explain-the-value-mechanism)
+- [ADO-015 — Order the message by decisive questions](#ado-015--order-the-message-by-decisive-questions)
+- [ADO-016 — Use the audience's vocabulary without losing precision](#ado-016--use-the-audiences-vocabulary-without-losing-precision)
+- [ADO-017 — Build an evidence ladder](#ado-017--build-an-evidence-ladder)
+- [ADO-018 — Define eligibility and mismatch](#ado-018--define-eligibility-and-mismatch)
+- [ADO-019 — Keep the promise consistent across channels](#ado-019--keep-the-promise-consistent-across-channels)
+- [ADO-020 — Differentiate through the work the product performs](#ado-020--differentiate-through-the-work-the-product-performs)
 
-## ADO-011 — Definir público por contexto de decisão
+## ADO-011 — Define the audience by decision context
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** Uma página, fluxo de entrada ou mensagem precisa falar com um grupo que pode escolher, recomendar, configurar ou pagar por um produto.
+**Apply when.** A page, entry flow, or message must address a group that may choose, recommend, configure, or pay for a product.
 
-**Decisão.** Descrever o público pela situação, tarefa, urgência, restrições, linguagem, alternativa atual e prova de que precisa; usar dados demográficos apenas quando mudarem de fato a decisão de design.
+**Decision.** Describe the audience by situation, task, urgency, constraints, language, current alternative, and evidence they need; use demographic data only when it genuinely changes the design decision.
 
-**Prova.** O brief distingue pessoas com necessidades diferentes mesmo quando compartilham cargo, idade, localização ou setor, e explica por que a superfície atende uma delas.
+**Evidence.** The brief distinguishes people with different needs even when they share a job title, age, location, or industry, and explains why the surface serves one of them.
 
-**Evitar.** Chamar qualquer visitante de público ideal, usar persona decorativa ou escrever para uma massa abstrata quando o produto exige contexto específico.
+**Avoid.** Calling every visitor the ideal audience, using a decorative persona, or writing for an abstract mass when the product requires specific context.
 
-## ADO-012 — Manter promessa, capacidade e primeiro uso coerentes
+## ADO-012 — Keep promise, capability, and first use consistent
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** A interface apresenta uma transformação, um prazo, facilidade de uso, resultado esperado ou oferta antes de alguém iniciar o produto.
+**Apply when.** The interface presents a transformation, deadline, ease of use, expected outcome, or offer before someone starts using the product.
 
-**Decisão.** Fazer a promessa refletir o que a experiência realmente entrega, nas condições e no tempo que ela consegue sustentar. Preparar o primeiro uso para confirmar a expectativa sem ocultar configuração, requisito, limitação ou custo relevante.
+**Decision.** Make the promise reflect what the experience actually delivers, under the conditions and within the timeframe it can support. Prepare first use to confirm the expectation without hiding relevant configuration, requirements, limitations, or costs.
 
-**Prova.** A revisão consegue seguir a promessa até a primeira entrega concreta e identifica onde requisitos, dependências, limites e elegibilidade são comunicados.
+**Evidence.** The review can trace the promise to the first concrete delivery and identifies where requirements, dependencies, limits, and eligibility are communicated.
 
-**Evitar.** Prometer resultado automático para uma ferramenta que só oferece meio, chamar fluxo complexo de imediato ou atrair um público que a experiência não suporta.
+**Avoid.** Promising an automatic outcome for a tool that only provides a means, calling a complex flow immediate, or attracting an audience the experience does not support.
 
-## ADO-013 — Escolher o quadro de referência da categoria
+## ADO-013 — Choose the category frame of reference
 
-**Força.** padrão
+**Strength.** default
 
-**Aplicar quando.** O produto pode ser entendido como pertencente a categorias diferentes ou a uma categoria conhecida que produz expectativas erradas.
+**Apply when.** The product can be understood as belonging to different categories, or to a known category that creates the wrong expectations.
 
-**Decisão.** Escolher a referência que ajuda o público a compreender rapidamente o produto, as alternativas que ele substitui ou complementa e os critérios pelos quais deve ser avaliado. Declarar diferenças materiais sem inventar uma categoria apenas para parecer novo.
+**Decision.** Choose the reference that helps the audience quickly understand the product, the alternatives it replaces or complements, and the criteria by which it should be evaluated. State material differences without inventing a category merely to appear new.
 
-**Prova.** Pessoas do público conseguem dizer o que o produto é, quando o considerariam e contra quais alternativas o comparariam.
+**Evidence.** People in the audience can say what the product is, when they would consider it, and which alternatives they would compare it against.
 
-**Evitar.** Jargão de categoria interna, rótulo tão amplo que nada diferencia ou neologismo que obriga a pessoa a aprender a linguagem da empresa antes do valor.
+**Avoid.** Internal category jargon, a label so broad that nothing is differentiated, or a neologism that forces the person to learn company language before understanding the value.
 
-## ADO-014 — Explicar o mecanismo de valor
+## ADO-014 — Explain the value mechanism
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** A promessa descreve um resultado, mas ainda não explica por que o produto seria capaz de produzi-lo.
+**Apply when.** The promise describes an outcome but does not yet explain why the product would be capable of producing it.
 
-**Decisão.** Conectar problema, capacidade diferenciadora, mudança no trabalho e resultado esperado em uma cadeia compreensível. Expor dependências e limites que alteram a entrega.
+**Decision.** Connect the problem, differentiating capability, change in the work, and expected outcome in a comprehensible chain. Expose dependencies and limits that alter delivery.
 
-**Prova.** A explicação pode ser ligada a comportamento real do produto e testada em demonstração, documentação ou uso representativo.
+**Evidence.** The explanation can be linked to real product behavior and tested through a demonstration, documentation, or representative use.
 
-**Evitar.** Promessa separada da capacidade, causalidade mágica, verbos vagos ou explicação que apenas repete o benefício com outras palavras.
+**Avoid.** A promise separated from capability, magical causality, vague verbs, or an explanation that merely restates the benefit in different words.
 
-## ADO-015 — Ordenar a mensagem pelas dúvidas decisivas
+## ADO-015 — Order the message by decisive questions
 
-**Força.** padrão
+**Strength.** default
 
-**Aplicar quando.** Uma superfície tenta comunicar proposta, diferenciação, funcionamento, confiança e condições em uma única sequência.
+**Apply when.** A surface attempts to communicate proposition, differentiation, operation, trust, and conditions in one sequence.
 
-**Decisão.** Ordenar os blocos pelas perguntas que impedem a decisão naquele contexto: relevância, entendimento, adequação, credibilidade, esforço, risco e próximo passo. Permitir aprofundamento sem repetir o mesmo argumento em formatos diferentes.
+**Decision.** Order blocks by the questions preventing a decision in that context: relevance, understanding, fit, credibility, effort, risk, and next step. Allow deeper exploration without repeating the same argument in different formats.
 
-**Prova.** Cada bloco responde a uma dúvida distinta e sua posição pode ser justificada pelo estado de decisão do público.
+**Evidence.** Each block answers a distinct question, and its position can be justified by the audience's decision state.
 
-**Evitar.** Sequência baseada em template, prova antes de compreensão, lista de recursos sem contexto ou repetição usada para simular substância.
+**Avoid.** A template-based sequence, proof before understanding, a feature list without context, or repetition used to simulate substance.
 
-## ADO-016 — Usar o vocabulário do público sem perder precisão
+## ADO-016 — Use the audience's vocabulary without losing precision
 
-**Força.** padrão
+**Strength.** default
 
-**Aplicar quando.** A linguagem interna, técnica ou promocional diverge dos termos que as pessoas usam para descrever tarefa, problema e resultado.
+**Apply when.** Internal, technical, or promotional language differs from the terms people use to describe the task, problem, and outcome.
 
-**Decisão.** Adotar termos reconhecíveis pelo público e manter um nome consistente para cada conceito ao longo do fluxo. Introduzir vocabulário técnico apenas quando ele acrescentar precisão, com explicação no ponto de necessidade.
+**Decision.** Adopt terms the audience recognizes and keep one consistent name for each concept throughout the flow. Introduce technical vocabulary only when it adds precision, with an explanation at the point of need.
 
-**Prova.** Pesquisa, busca, suporte, entrevistas ou teste de compreensão sustentam os termos escolhidos; pessoas diferentes interpretam ações e resultados de forma compatível.
+**Evidence.** Research, search, support, interviews, or comprehension testing supports the selected terms; different people interpret actions and outcomes compatibly.
 
-**Evitar.** Alternar sinônimos por variedade, cunhar termos sem necessidade, imitar a fala do público de forma caricata ou simplificar até perder uma condição importante.
+**Avoid.** Alternating synonyms for variety, coining terms without need, mimicking the audience's speech in a caricatured way, or simplifying until an important condition is lost.
 
-## ADO-017 — Construir uma escada de evidência
+## ADO-017 — Build an evidence ladder
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** A proposta contém afirmações com níveis diferentes de risco, novidade ou dificuldade de verificação.
+**Apply when.** The proposition contains claims with different levels of risk, novelty, or difficulty of verification.
 
-**Decisão.** Associar cada afirmação ao tipo de prova proporcional: comportamento demonstrável, documentação, método, dado contextualizado, caso atribuível ou validação independente. Quanto maior a consequência da escolha, mais direta e verificável deve ser a evidência.
+**Decision.** Associate each claim with proportionate evidence: demonstrable behavior, documentation, method, contextualized data, attributable case, or independent validation. The greater the consequence of the choice, the more direct and verifiable the evidence must be.
 
-**Prova.** O mapa de mensagens identifica alegação, evidência, contexto, validade, responsável e lacuna; uma prova não é reutilizada para sustentar conclusão que não mediu.
+**Evidence.** The message map identifies the claim, evidence, context, validity, owner, and gap; evidence is not reused to support a conclusion it did not measure.
 
-**Evitar.** Acumular selos, números e depoimentos sem relação com a afirmação, esconder limitações ou tratar popularidade como prova de adequação.
+**Avoid.** Accumulating badges, numbers, and testimonials unrelated to the claim, hiding limitations, or treating popularity as proof of fit.
 
-## ADO-018 — Definir elegibilidade e desajuste
+## ADO-018 — Define eligibility and mismatch
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** O produto atende melhor alguns contextos, portes, níveis de maturidade, restrições ou modos de trabalho do que outros.
+**Apply when.** The product serves some contexts, scales, maturity levels, constraints, or ways of working better than others.
 
-**Decisão.** Explicar para quem a proposta funciona, quais pré-condições importam e em quais situações ela não é a escolha adequada. Oferecer caminho alternativo quando houver um encaixe melhor conhecido.
+**Decision.** Explain whom the proposition works for, which preconditions matter, and in which situations it is not the right choice. Offer an alternative path when a better known fit exists.
 
-**Prova.** Critérios de adequação correspondem a capacidades e limitações reais; vendas, produto, suporte e interface não prometem públicos incompatíveis.
+**Evidence.** Fit criteria correspond to real capabilities and limitations; sales, product, support, and interface do not promise incompatible audiences.
 
-**Evitar.** Declarar solução universal, esconder dependência material, excluir por estereótipo ou usar desqualificação para pressionar a compra.
+**Avoid.** Claiming a universal solution, hiding a material dependency, excluding based on stereotypes, or using disqualification to pressure a purchase.
 
-## ADO-019 — Manter a promessa coerente entre canais
+## ADO-019 — Keep the promise consistent across channels
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** A pessoa passa por anúncio, página, demonstração, cadastro, onboarding, produto, cobrança, suporte ou renovação.
+**Apply when.** A person moves through an advertisement, page, demonstration, sign-up, onboarding, product, billing, support, or renewal.
 
-**Decisão.** Preservar o mesmo significado para proposta, capacidade, condição, preço e próximo passo em todos os pontos da jornada. Quando o contexto exigir síntese, omitir detalhe sem alterar a interpretação material.
+**Decision.** Preserve the same meaning for proposition, capability, condition, price, and next step at every point in the journey. When context requires a summary, omit detail without changing the material interpretation.
 
-**Prova.** Uma matriz de canais identifica as afirmações materiais e seus responsáveis; divergências são corrigidas na fonte e revalidadas nos consumidores.
+**Evidence.** A channel matrix identifies material claims and their owners; divergences are corrected at the source and revalidated in consumers.
 
-**Evitar.** Prometer no anúncio o que o produto não entrega, mudar o nome da ação entre etapas ou esconder condição descoberta apenas depois do compromisso.
+**Avoid.** Promising in an advertisement what the product does not deliver, changing the action name between stages, or hiding a condition discovered only after commitment.
 
-## ADO-020 — Diferenciar pelo trabalho que o produto realiza
+## ADO-020 — Differentiate through the work the product performs
 
-**Força.** heurística
+**Strength.** heuristic
 
-**Aplicar quando.** A proposta parece intercambiável com concorrentes, descreve apenas tecnologia ou foi montada a partir de componentes visuais genéricos.
+**Apply when.** The proposition appears interchangeable with competitors, describes only technology, or was assembled from generic visual components.
 
-**Decisão.** Explicitar a situação específica que o produto melhora, o fluxo ou conhecimento de domínio que sustenta a diferença e os detalhes de interação que reduzem esforço, erro ou incerteza. Fazer identidade visual reforçar essa diferença sem prometer exclusividade que não existe.
+**Decision.** Make explicit the specific situation the product improves, the domain workflow or knowledge supporting the difference, and the interaction details that reduce effort, error, or uncertainty. Make visual identity reinforce that difference without promising exclusivity that does not exist.
 
-**Prova.** A descrição de valor pode ser conectada a tarefas, dados, estados, regras e exemplos representativos do domínio; a interface continua coerente quando nomes de tecnologias e adjetivos promocionais são removidos.
+**Evidence.** The value description can be connected to representative domain tasks, data, states, rules, and examples; the interface remains coherent when technology names and promotional adjectives are removed.
 
-**Evitar.** Chamar modelo, automação ou estética de diferencial por si só, copiar a apresentação de outro produto, esconder ausência de escopo sob linguagem grandiosa ou confundir novidade visual com utilidade.
+**Avoid.** Calling a model, automation, or aesthetic a differentiator by itself, copying another product's presentation, hiding lack of scope behind grandiose language, or confusing visual novelty with utility.

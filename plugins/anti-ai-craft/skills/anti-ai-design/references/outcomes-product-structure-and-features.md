@@ -1,173 +1,173 @@
-# Estrutura de produto e foco de funcionalidades
+# Product structure and feature focus
 
-## Sumário
+## Summary
 
-- [ADO-046 — Tratar cada funcionalidade como compromisso contínuo](#ado-046--tratar-cada-funcionalidade-como-compromisso-contínuo)
-- [ADO-047 — Justificar escopo pelo valor sustentado](#ado-047--justificar-escopo-pelo-valor-sustentado)
-- [ADO-048 — Projetar descoberta no ponto de necessidade](#ado-048--projetar-descoberta-no-ponto-de-necessidade)
-- [ADO-049 — Distinguir abertura de uso recorrente](#ado-049--distinguir-abertura-de-uso-recorrente)
-- [ADO-050 — Dar precedência visual ao caminho de valor](#ado-050--dar-precedência-visual-ao-caminho-de-valor)
-- [ADO-051 — Fazer a complexidade pagar seu custo cognitivo](#ado-051--fazer-a-complexidade-pagar-seu-custo-cognitivo)
-- [ADO-052 — Reduzir superfície sem retirar autonomia](#ado-052--reduzir-superfície-sem-retirar-autonomia)
-- [ADO-053 — Preservar hábitos validados durante mudanças](#ado-053--preservar-hábitos-validados-durante-mudanças)
-- [ADO-054 — Fechar o ciclo de vida da funcionalidade](#ado-054--fechar-o-ciclo-de-vida-da-funcionalidade)
-- [ADO-055 — Mudar para resolver fricção demonstrada](#ado-055--mudar-para-resolver-fricção-demonstrada)
-- [ADO-056 — Distinguir demanda, ativação, adoção e continuidade](#ado-056--distinguir-demanda-ativação-adoção-e-continuidade)
-- [ADO-057 — Transformar painéis em orientação acionável](#ado-057--transformar-painéis-em-orientação-acionável)
-- [ADO-058 — Usar o comportamento da interface como evidência](#ado-058--usar-o-comportamento-da-interface-como-evidência)
+- [ADO-046 — Treat every feature as an ongoing commitment](#ado-046--treat-every-feature-as-an-ongoing-commitment)
+- [ADO-047 — Justify scope through sustained value](#ado-047--justify-scope-through-sustained-value)
+- [ADO-048 — Design discovery at the point of need](#ado-048--design-discovery-at-the-point-of-need)
+- [ADO-049 — Distinguish opening from recurring use](#ado-049--distinguish-opening-from-recurring-use)
+- [ADO-050 — Give visual precedence to the path to value](#ado-050--give-visual-precedence-to-the-path-to-value)
+- [ADO-051 — Make complexity pay its cognitive cost](#ado-051--make-complexity-pay-its-cognitive-cost)
+- [ADO-052 — Reduce surface area without removing autonomy](#ado-052--reduce-surface-area-without-removing-autonomy)
+- [ADO-053 — Preserve validated habits during change](#ado-053--preserve-validated-habits-during-change)
+- [ADO-054 — Close the feature lifecycle](#ado-054--close-the-feature-lifecycle)
+- [ADO-055 — Change to resolve demonstrated friction](#ado-055--change-to-resolve-demonstrated-friction)
+- [ADO-056 — Distinguish demand, activation, adoption, and continuity](#ado-056--distinguish-demand-activation-adoption-and-continuity)
+- [ADO-057 — Turn dashboards into actionable guidance](#ado-057--turn-dashboards-into-actionable-guidance)
+- [ADO-058 — Use interface behavior as evidence](#ado-058--use-interface-behavior-as-evidence)
 
-## ADO-046 — Tratar cada funcionalidade como compromisso contínuo
+## ADO-046 — Treat every feature as an ongoing commitment
 
-**Força.** padrão
+**Strength.** default
 
-**Aplicar quando.** uma funcionalidade nova parece pequena, mas adiciona conceitos, estados, suporte, documentação ou permissão ao produto.
+**Apply when.** A new feature appears small but adds concepts, states, support, documentation, or permissions to the product.
 
-**Decisão.** avaliar a proposta pelo benefício duradouro, pelo público que a usará, pelo custo de aprendizagem, pelos estados necessários e pela manutenção futura; preferir a menor versão que permita verificar a hipótese.
+**Decision.** Evaluate the proposal by its lasting benefit, the audience that will use it, learning cost, required states, and future maintenance; prefer the smallest version that can verify the hypothesis.
 
-**Prova.** há uma tarefa identificável, usuário ou segmento definido, fluxo completo, estados de erro e recuperação previstos, além de critério observável de adoção ou sucesso.
+**Evidence.** There is an identifiable task, a defined user or segment, a complete flow, anticipated error and recovery states, and an observable adoption or success criterion.
 
-**Evitar.** aceitar funcionalidades apenas porque são fáceis de implementar, foram pedidas isoladamente ou tornam uma demonstração mais impressionante.
+**Avoid.** Accepting features merely because they are easy to implement, were requested in isolation, or make a demonstration more impressive.
 
-## ADO-047 — Justificar escopo pelo valor sustentado
+## ADO-047 — Justify scope through sustained value
 
-**Força.** heurística
+**Strength.** heuristic
 
-**Aplicar quando.** for preciso priorizar entre várias melhorias, integrações ou variações de uma mesma capacidade.
+**Apply when.** Several improvements, integrations, or variations of the same capability must be prioritized.
 
-**Decisão.** comparar contribuição para a tarefa principal, especificidade para o público, esforço de entrega e custo de operação; tratar a priorização como hipótese explícita, não como fórmula automática.
+**Decision.** Compare contribution to the primary task, specificity to the audience, delivery effort, and operating cost; treat prioritization as an explicit hypothesis, not an automatic formula.
 
-**Prova.** a escolha registra qual resultado do usuário ela melhora, qual alternativa foi adiada e quais sinais poderão invalidar a prioridade.
+**Evidence.** The choice records which user outcome it improves, which alternative was deferred, and which signals may invalidate the priority.
 
-**Evitar.** converter pontuações em autoridade falsa, ignorar requisitos normativos ou sacrificar acessibilidade, segurança e compatibilidade por uma estimativa de retorno.
+**Avoid.** Turning scores into false authority, ignoring normative requirements, or sacrificing accessibility, security, and compatibility for an estimated return.
 
-## ADO-048 — Projetar descoberta no ponto de necessidade
+## ADO-048 — Design discovery at the point of need
 
-**Força.** padrão
+**Strength.** default
 
-**Aplicar quando.** uma capacidade relevante existe, mas as pessoas não a encontram durante a tarefa em que ela seria útil.
+**Apply when.** A relevant capability exists but people do not find it during the task in which it would be useful.
 
-**Decisão.** tornar a capacidade recuperável no contexto de uso, com estado vazio orientador, sugestão contextual ou próximo passo visível; preservar opção de dispensar a orientação.
+**Decision.** Make the capability recoverable in the context of use with a guiding empty state, contextual suggestion, or visible next step; preserve the option to dismiss the guidance.
 
-**Prova.** o ponto de necessidade, a ação que a antecede e o caminho de retorno estão documentados; usuários conseguem descobrir e compreender a capacidade sem depender de anúncio externo.
+**Evidence.** The point of need, preceding action, and return path are documented; users can discover and understand the capability without depending on an external announcement.
 
-**Evitar.** bloquear a tarefa com tours longos, repetir avisos ignorados, usar badges permanentes ou confundir descoberta com pressão para adoção.
+**Avoid.** Blocking the task with long tours, repeating ignored notices, using permanent badges, or confusing discovery with pressure to adopt.
 
-## ADO-049 — Distinguir abertura de uso recorrente
+## ADO-049 — Distinguish opening from recurring use
 
-**Força.** heurística
+**Strength.** heuristic
 
-**Aplicar quando.** a equipe usa cliques, visitas ou abertura de menu como prova de que uma funcionalidade criou valor.
+**Apply when.** The team uses clicks, visits, or opening a menu as proof that a feature created value.
 
-**Decisão.** definir uso significativo conforme a tarefa, sua frequência esperada e o resultado produzido; analisar recorrência, abandono e necessidade de assistência junto da simples exposição.
+**Decision.** Define meaningful use according to the task, its expected frequency, and the outcome produced; analyze recurrence, abandonment, and need for assistance alongside simple exposure.
 
-**Prova.** a métrica ou estudo diferencia curiosidade, teste pontual e conclusão de uma tarefa útil, com período e população declarados.
+**Evidence.** The metric or study distinguishes curiosity, one-off testing, and completion of a useful task, with a stated period and population.
 
-**Evitar.** impor uma frequência universal, tratar telemetria incompleta como comportamento humano completo ou coletar dados além do necessário.
+**Avoid.** Imposing a universal frequency, treating incomplete telemetry as complete human behavior, or collecting more data than necessary.
 
-## ADO-050 — Dar precedência visual ao caminho de valor
+## ADO-050 — Give visual precedence to the path to value
 
-**Força.** padrão
+**Strength.** default
 
-**Aplicar quando.** uma tela organiza muitas informações, mas não deixa claro qual ação ou informação permite avançar na tarefa principal.
+**Apply when.** A screen organizes large amounts of information but does not make clear which action or information enables progress on the primary task.
 
-**Decisão.** usar posição, sequência, contraste, agrupamento e linguagem para distinguir contexto, ação dominante, informação de apoio e detalhes progressivos; manter alternativas importantes acessíveis.
+**Decision.** Use position, sequence, contrast, grouping, and language to distinguish context, dominant action, supporting information, and progressive details; keep important alternatives accessible.
 
-**Prova.** a hierarquia continua perceptível sem cor decorativa ou efeitos, e usuários conseguem identificar o próximo passo sem memorizar caminhos ocultos.
+**Evidence.** The hierarchy remains perceptible without decorative color or effects, and users can identify the next step without memorizing hidden paths.
 
-**Evitar.** fazer uma ação dominante parecer obrigatória quando há escolhas legítimas, esconder consequências materiais ou reduzir todas as opções secundárias a menus opacos.
+**Avoid.** Making a dominant action appear mandatory when there are legitimate choices, hiding material consequences, or reducing every secondary option to opaque menus.
 
-## ADO-051 — Fazer a complexidade pagar seu custo cognitivo
+## ADO-051 — Make complexity pay its cognitive cost
 
-**Força.** heurística
+**Strength.** heuristic
 
-**Aplicar quando.** a superfície acumula opções, campos, configurações ou módulos que tornam a tarefa mais difícil de compreender.
+**Apply when.** The surface accumulates options, fields, settings, or modules that make the task harder to understand.
 
-**Decisão.** manter complexidade apenas quando ela sustentar uma necessidade real; agrupar por intenção, revelar detalhe conforme a tarefa e oferecer rotas avançadas sem degradar o fluxo frequente.
+**Decision.** Retain complexity only when it supports a real need; group by intent, reveal detail according to the task, and provide advanced routes without degrading the frequent flow.
 
-**Prova.** cada grupo, escolha ou configuração tem finalidade, público e estado definidos; testes ou evidências de uso mostram que a organização reduz erro ou esforço.
+**Evidence.** Every group, choice, or setting has a defined purpose, audience, and state; tests or usage evidence show that the organization reduces error or effort.
 
-**Evitar.** aplicar limite numérico de recursos, esconder controles necessários para especialistas ou transformar simplificação em perda de poder e transparência.
+**Avoid.** Applying a numerical feature limit, hiding controls needed by experts, or turning simplification into a loss of power and transparency.
 
-## ADO-052 — Reduzir superfície sem retirar autonomia
+## ADO-052 — Reduce surface area without removing autonomy
 
-**Força.** padrão
+**Strength.** default
 
-**Aplicar quando.** dados de uso indicam que partes da interface são raramente usadas, confusas ou competem com a tarefa principal.
+**Apply when.** Usage data indicates that parts of the interface are rarely used, confusing, or compete with the primary task.
 
-**Decisão.** considerar simplificar, reordenar, tornar progressivo ou mover o acesso para contexto apropriado; preservar uma rota encontrável para capacidades ainda necessárias a grupos menores.
+**Decision.** Consider simplifying, reordering, progressively revealing, or moving access to the appropriate context; preserve a discoverable route to capabilities still needed by smaller groups.
 
-**Prova.** a decisão identifica quem será afetado, como a capacidade continua acessível, que documentação ou migração é necessária e como reversões serão tratadas.
+**Evidence.** The decision identifies who will be affected, how the capability remains accessible, which documentation or migration is necessary, and how reversals will be handled.
 
-**Evitar.** remover comportamento sem evidência, esconder configurações críticas, quebrar links ou fluxos de pessoas experientes e tratar baixa frequência como ausência de valor.
+**Avoid.** Removing behavior without evidence, hiding critical settings, breaking links or experienced users' flows, and treating low frequency as absence of value.
 
-## ADO-053 — Preservar hábitos validados durante mudanças
+## ADO-053 — Preserve validated habits during change
 
-**Força.** padrão
+**Strength.** default
 
-**Aplicar quando.** uma parte frequente e reconhecida do produto será reorganizada, renomeada ou receberá novo padrão de interação.
+**Apply when.** A frequent, familiar part of the product will be reorganized, renamed, or given a new interaction pattern.
 
-**Decisão.** preservar invariantes úteis, introduzir transição proporcional e testar o percurso de quem já usa a área; mudar o mapa mental apenas quando o ganho demonstrado superar o custo de reaprendizagem.
+**Decision.** Preserve useful invariants, introduce a proportionate transition, and test the path of existing users; change the mental model only when the demonstrated gain exceeds the cost of relearning.
 
-**Prova.** há evidência de frequência, comportamento atual e motivo da mudança; navegação, atalhos, foco, URLs e retorno continuam coerentes ou têm migração clara.
+**Evidence.** There is evidence of frequency, current behavior, and reason for the change; navigation, shortcuts, focus, URLs, and return remain consistent or have a clear migration.
 
-**Evitar.** redesenhar por novidade, chamar preferência interna de melhoria ou presumir que familiaridade é resistência irracional.
+**Avoid.** Redesigning for novelty, calling an internal preference an improvement, or assuming familiarity is irrational resistance.
 
-## ADO-054 — Fechar o ciclo de vida da funcionalidade
+## ADO-054 — Close the feature lifecycle
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** uma funcionalidade será criada, modificada, descontinuada ou removida.
+**Apply when.** A feature will be created, changed, deprecated, or removed.
 
-**Decisão.** projetar introdução, descoberta, permissões, estados, manutenção, migração, descontinuação, remoção e recuperação. Definir desde o início qual evidência sustentará expansão, correção ou encerramento.
+**Decision.** Design introduction, discovery, permissions, states, maintenance, migration, deprecation, removal, and recovery. Define from the outset which evidence will support expansion, correction, or retirement.
 
-**Prova.** o plano identifica responsáveis, consumidores, dados, estados, dependências, política de compatibilidade e condição de saída; remoções preservam trabalho e oferecem caminho verificável.
+**Evidence.** The plan identifies owners, consumers, data, states, dependencies, compatibility policy, and exit condition; removals preserve work and provide a verifiable path.
 
-**Evitar.** tratar lançamento como fim do trabalho, manter opção sem dono, retirar capacidade silenciosamente ou deixar dados e navegação órfãos.
+**Avoid.** Treating launch as the end of the work, retaining an ownerless option, silently removing a capability, or leaving orphaned data and navigation.
 
-## ADO-055 — Mudar para resolver fricção demonstrada
+## ADO-055 — Change to resolve demonstrated friction
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** houver vontade de refatorar ou redesenhar uma interface que já funciona.
+**Apply when.** There is a desire to refactor or redesign an interface that already works.
 
-**Decisão.** declarar a fricção de usuário, requisito ou falha observável que a mudança resolve e delimitar os invariantes que não podem regredir; preferir refinamento verificável a substituição cosmética.
+**Decision.** State the user friction, requirement, or observable failure that the change resolves, and bound the invariants that must not regress; prefer verifiable refinement over cosmetic replacement.
 
-**Prova.** a proposta aponta comportamento anterior, evidência, resultado esperado, risco de regressão e validação proporcional antes da implementação.
+**Evidence.** Before implementation, the proposal identifies prior behavior, evidence, expected outcome, regression risk, and proportionate validation.
 
-**Evitar.** justificar trabalho amplo por cansaço visual, tendência de mercado, disponibilidade de componente ou promessa vaga de modernização.
+**Avoid.** Justifying broad work through visual fatigue, a market trend, component availability, or a vague promise of modernization.
 
-## ADO-056 — Distinguir demanda, ativação, adoção e continuidade
+## ADO-056 — Distinguish demand, activation, adoption, and continuity
 
-**Força.** padrão
+**Strength.** default
 
-**Aplicar quando.** uma métrica de abertura, cadastro, clique ou uso é apresentada como prova de que uma funcionalidade gera valor.
+**Apply when.** An opening, sign-up, click, or usage metric is presented as proof that a feature creates value.
 
-**Decisão.** separar interesse inicial, primeiro resultado, incorporação ao trabalho e continuidade útil. Projetar e avaliar cada etapa com sinais próprios sem presumir que avanço em uma garante as seguintes.
+**Decision.** Separate initial interest, first outcome, incorporation into work, and useful continuity. Design and evaluate each stage with its own signals without assuming that progress in one guarantees the next.
 
-**Prova.** a análise usa coortes compatíveis e mostra transições entre etapas, tempo, abandono e valor percebido; a ausência de instrumentação aparece como lacuna.
+**Evidence.** The analysis uses compatible cohorts and shows transitions between stages, time, abandonment, and perceived value; missing instrumentation appears as a gap.
 
-**Evitar.** chamar clique de adoção, confundir curiosidade com demanda ou celebrar uso recorrente de uma tarefa que não beneficia a pessoa.
+**Avoid.** Calling a click adoption, confusing curiosity with demand, or celebrating recurring use of a task that does not benefit the person.
 
-## ADO-057 — Transformar painéis em orientação acionável
+## ADO-057 — Turn dashboards into actionable guidance
 
-**Força.** padrão
+**Strength.** default
 
-**Aplicar quando.** um dashboard, relatório ou página inicial concentra métricas, tabelas e alertas sem orientar o que a pessoa pode fazer em seguida.
+**Apply when.** A dashboard, report, or home page concentrates metrics, tables, and alerts without guiding what the person can do next.
 
-**Decisão.** priorizar a pergunta que a superfície ajuda a responder, destacar informação interpretável no contexto e conectar desvios relevantes a uma próxima ação segura; manter dados detalhados disponíveis para investigação.
+**Decision.** Prioritize the question the surface helps answer, highlight information interpretable in context, and connect relevant deviations to a safe next action; keep detailed data available for investigation.
 
-**Prova.** cada visualização tem público, decisão apoiada, origem dos dados, estado vazio/erro e limite de interpretação; a ação relacionada respeita permissões e não produz efeito sem confirmação apropriada.
+**Evidence.** Every visualization has an audience, supported decision, data source, empty/error state, and interpretation limit; the related action respects permissions and does not produce an effect without appropriate confirmation.
 
-**Evitar.** converter todo número em CTA, inventar causalidade, esconder dados brutos necessários ou usar cor e urgência para simular gravidade.
+**Avoid.** Turning every number into a CTA, inventing causality, hiding necessary raw data, or using color and urgency to simulate severity.
 
-## ADO-058 — Usar o comportamento da interface como evidência
+## ADO-058 — Use interface behavior as evidence
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** uma decisão visual, estrutural ou de fluxo pretende melhorar resultado de usuário ou produto.
+**Apply when.** A visual, structural, or flow decision is intended to improve a user or product outcome.
 
-**Decisão.** formular uma hipótese falsificável, escolher evidência proporcional — pesquisa, observação, suporte, acessibilidade, telemetria minimizada ou experimento — e registrar a condição que mostraria que a hipótese falhou.
+**Decision.** Formulate a falsifiable hypothesis, select proportionate evidence—research, observation, support, accessibility, minimized telemetry, or an experiment—and record the condition that would show the hypothesis failed.
 
-**Prova.** baseline, segmento, período, limitação, efeito esperado e possível dano são declarados; resultados não confundem correlação, preferência interna e causalidade.
+**Evidence.** Baseline, segment, period, limitation, expected effect, and possible harm are stated; results do not confuse correlation, internal preference, and causality.
 
-**Evitar.** usar métricas de vaidade, declarar êxito sem comparação adequada, coletar telemetria sensível sem necessidade ou manter uma mudança que prejudica acesso e autonomia.
+**Avoid.** Using vanity metrics, declaring success without an adequate comparison, collecting sensitive telemetry without need, or retaining a change that harms access and autonomy.

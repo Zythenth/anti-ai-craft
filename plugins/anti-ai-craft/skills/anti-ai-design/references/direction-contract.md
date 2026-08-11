@@ -1,129 +1,129 @@
-# Contrato de direção
+# Direction contract
 
-## Sumário
+## Summary
 
-- [Classificar a superfície](#1-classificar-a-superfície)
-- [Fixar o mandato](#2-fixar-o-mandato)
-- [Escrever o contrato](#3-escrever-o-contrato-antes-do-código)
-- [Travar referências](#4-travar-referências)
-- [Preservar mídia e conteúdo](#5-preservar-mídia-e-conteúdo)
-- [Contratar estados](#6-contratar-estados)
-- [Checar prontidão da implementação](#7-checar-prontidão-da-implementação)
-- [Preservar estrutura, URL e estado](#8-preservar-estrutura-url-e-estado)
-- [Contratar temas e recursos externos](#9-contratar-temas-e-recursos-externos)
-- [Manter checkpoint e invalidação](#10-manter-checkpoint-e-invalidação)
-- [Limites](#limites)
+- [Classify the surface](#1-classify-the-surface)
+- [Set the mandate](#2-set-the-mandate)
+- [Write the contract](#3-write-the-contract-before-coding)
+- [Lock references](#4-lock-references)
+- [Preserve media and content](#5-preserve-media-and-content)
+- [Contract states](#6-contract-states)
+- [Check implementation readiness](#7-check-implementation-readiness)
+- [Preserve structure, URL, and state](#8-preserve-structure-url-and-state)
+- [Contract themes and external resources](#9-contract-themes-and-external-resources)
+- [Maintain checkpoints and invalidation](#10-maintain-checkpoints-and-invalidation)
+- [Boundaries](#boundaries)
 
-Usar antes de criar, refinar ou redesenhar. O contrato é curto e verificável; não é um manifesto estético.
+Use before creating, refining, or redesigning. The contract is short and verifiable; it is not an aesthetic manifesto.
 
-## 1. Classificar a superfície
+## 1. Classify the surface
 
-- **Persuadir:** explicar valor e conduzir uma decisão. A mensagem e a sequência narrativa dominam.
-- **Operar:** executar tarefas repetidas com velocidade, clareza, recuperação e baixa carga de memória.
-- **Ler:** sustentar compreensão, navegação e continuidade em conteúdo.
-- **Experienciar:** criar presença, exploração ou atmosfera sem esconder a tarefa.
+- **Persuade:** explain value and guide a decision. The message and narrative sequence dominate.
+- **Operate:** perform repeated tasks with speed, clarity, recovery, and low memory load.
+- **Read:** sustain comprehension, navigation, and continuity through content.
+- **Experience:** create presence, exploration, or atmosphere without hiding the task.
 
-Combinações são possíveis, mas declarar qual modo domina cada viewport ou etapa.
+Combinations are possible, but state which mode dominates each viewport or stage.
 
-## 2. Fixar o mandato
+## 2. Set the mandate
 
-- **Preservar:** manter identidade, comportamento, copy e estrutura; corrigir somente a falha indicada.
-- **Refinar:** manter identidade e produto; melhorar hierarquia, ritmo, estados, acessibilidade e responsividade.
-- **Redesenhar:** pode substituir o mundo visual, mas preserva verdade do produto, conteúdo, função, restrições, acessibilidade e integrações.
+- **Preserve:** retain identity, behavior, copy, and structure; fix only the stated failure.
+- **Refine:** retain identity and product; improve hierarchy, rhythm, states, accessibility, and responsiveness.
+- **Redesign:** may replace the visual world, but preserves product truth, content, function, constraints, accessibility, and integrations.
 
-Mesmo em redesign, não alterar silenciosamente rotas, slugs, anchors, navegação primária, nomes/ordem de campos, eventos analíticos, consentimento, SEO, metadados, dados estruturados ou acessibilidade existente.
+Even in a redesign, do not silently change routes, slugs, anchors, primary navigation, field names/order, analytics events, consent, SEO, metadata, structured data, or existing accessibility.
 
-## 3. Escrever o contrato antes do código
+## 3. Write the contract before coding
 
-Registrar:
+Record:
 
-1. tese de uma frase;
-2. modo e tarefa dominante;
-3. promessa do primeiro viewport;
-4. caminho principal do usuário;
-5. estrutura e hierarquia;
-6. papéis semânticos de cor e tipografia;
-7. uma assinatura significativa;
-8. default da categoria conscientemente rejeitado;
-9. risco principal e como será testado;
-10. elementos que devem permanecer invariáveis.
+1. a one-sentence thesis;
+2. dominant mode and task;
+3. first-viewport promise;
+4. primary user path;
+5. structure and hierarchy;
+6. semantic color and typography roles;
+7. one meaningful signature;
+8. category default consciously rejected;
+9. primary risk and how it will be tested;
+10. elements that must remain invariant.
 
-A assinatura deve servir ao domínio, conteúdo ou interação. Criar uma decisão memorável e manter contenção ao redor costuma produzir mais identidade do que espalhar vários gestos decorativos.
+The signature must serve the domain, content, or interaction. Creating one memorable decision and maintaining restraint around it generally produces more identity than scattering multiple decorative gestures.
 
-Quando relevantes, transformar a direção em decisões verificáveis por eixo: tipografia, papéis de cor, composição/grid, densidade/espaçamento, movimento, superfícies/detalhes e mídia/iconografia. Omitir eixos não aplicáveis; não preencher com adjetivos vagos ou presets.
+When relevant, turn direction into verifiable decisions along these axes: typography, color roles, composition/grid, density/spacing, motion, surfaces/details, and media/iconography. Omit inapplicable axes; do not fill them with vague adjectives or presets.
 
-## 4. Travar referências
+## 4. Lock references
 
-- Eleger uma fonte dominante para composição e linguagem.
-- Dar às secundárias papéis limitados, como tipografia, movimento ou densidade.
-- Registrar a decisão adotada e a alternativa rejeitada.
-- Registrar exatamente quais arquivos, versões, seções, telas ou artefatos foram realmente lidos e qual decisão cada um sustenta. Não citar uma coleção inteira quando apenas um documento foi consultado.
-- Preservar a cadeia `token primitivo → token semântico → token de componente ou consumidor real`. Componentes não devem consumir valores primitivos diretamente quando o sistema define uma camada semântica.
-- Verificar consumidores reais no código e nos estados da interface; declarar token sem uso ou componente com valor solto como lacuna, não como sistema concluído.
-- Preservar relações entre tokens, componentes, conteúdo e mídia; não copiar somente a aparência superficial.
-- Quando fontes conflitarem, decidir por tarefa e restrição. Não produzir uma média visual.
+- Select one dominant source for composition and language.
+- Give secondary sources limited roles, such as typography, motion, or density.
+- Record the adopted decision and rejected alternative.
+- Record exactly which files, versions, sections, screens, or artifacts were actually read and which decision each supports. Do not cite an entire collection when only one document was consulted.
+- Preserve the `primitive token → semantic token → component token or real consumer` chain. Components must not consume primitive values directly when the system defines a semantic layer.
+- Verify real consumers in the code and interface states; declare an unused token or component with a loose value as a gap, not as a complete system.
+- Preserve relationships among tokens, components, content, and media; do not copy only the superficial appearance.
+- When sources conflict, decide according to the task and constraint. Do not produce a visual average.
 
-Para componentes do escopo, registrar candidato encontrado, API/estados relevantes e decisão `reutilizar`, `compor`, `estender` ou `criar`. Não exigir censo completo do repositório.
+For components in scope, record the candidate found, relevant API/states, and the decision to `reuse`, `compose`, `extend`, or `create`. Do not require a complete repository census.
 
-## 5. Preservar mídia e conteúdo
+## 5. Preserve media and content
 
-Se a direção depende de fotografia, ilustração, vídeo, mapa, diagrama ou screenshot de produto, usar o asset fornecido ou uma alternativa legítima e adequada. Não substituir mídia essencial por gradientes, blobs, cartões vazios ou desenhos CSS genéricos.
+If the direction depends on photography, illustration, video, a map, diagram, or product screenshot, use the supplied asset or a legitimate, suitable alternative. Do not replace essential media with gradients, blobs, empty cards, or generic CSS drawings.
 
-Preservar slot, proporção, crop, `alt`, legenda e estado de carregamento. Se o asset não existir, declarar a lacuna; não inventar prova de produto.
+Preserve the slot, proportion, crop, `alt`, caption, and loading state. If the asset does not exist, state the gap; do not invent product proof.
 
-## 6. Contratar estados
+## 6. Contract states
 
-Para cada componente interativo relevante, definir:
+For each relevant interactive component, define:
 
-- gatilho;
-- alteração visual;
-- estado semântico e de acessibilidade;
-- ação permitida;
-- recuperação ou próxima transição.
+- trigger;
+- visual change;
+- semantic and accessibility state;
+- permitted action;
+- recovery or next transition.
 
-Cobrir carregando, vazio, parcial, erro, sucesso, indisponível, somente leitura, foco, seleção, expansão e confirmação quando aplicáveis.
+Cover loading, empty, partial, error, success, unavailable, read-only, focus, selection, expansion, and confirmation when applicable.
 
-## 7. Checar prontidão da implementação
+## 7. Check implementation readiness
 
-- Usar `type`, `inputmode`, `autocomplete` e validação coerentes.
-- Fazer navegação real funcionar; refletir filtro, aba ou página na URL quando o produto depende disso.
-- Preservar scroll, filtros e formulários no retorno quando esperado.
-- Testar clipping de overlays, safe areas, orientação, teclado virtual, ponteiro e ausência de hover.
-- Reservar proporção de mídia, priorizar imagens críticas e atrasar as demais para evitar layout shift.
-- Usar fallback de fonte compatível e conteúdo visível sem depender da animação.
-- Tornar movimento interrompível e respeitar preferências de redução.
+- Use coherent `type`, `inputmode`, `autocomplete`, and validation.
+- Make real navigation work; reflect a filter, tab, or page in the URL when the product depends on it.
+- Preserve scroll, filters, and forms on return when expected.
+- Test overlay clipping, safe areas, orientation, virtual keyboard, pointer, and absence of hover.
+- Reserve media proportions, prioritize critical images, and defer the rest to avoid layout shift.
+- Use a compatible font fallback and keep content visible without depending on animation.
+- Make motion interruptible and respect reduction preferences.
 
-## 8. Preservar estrutura, URL e estado
+## 8. Preserve structure, URL, and state
 
-Quando a mudança afetar várias superfícies, declarar:
+When the change affects multiple surfaces, state:
 
-- entradas e destinos;
-- navegação global, local, contextual e de retorno;
-- rotas, slugs, aliases, parâmetros e deep links;
-- comportamento de refresh, back/forward e retomada;
-- estado autoritativo, representado na URL, local ou efêmero;
-- compatibilidade, redirects ou migração necessários.
+- entry points and destinations;
+- global, local, contextual, and return navigation;
+- routes, slugs, aliases, parameters, and deep links;
+- refresh, back/forward, and resumption behavior;
+- authoritative, URL-represented, local, or ephemeral state;
+- required compatibility, redirects, or migration.
 
-Usar [information-architecture.md](information-architecture.md) para o contrato completo. Mudança de navegação ou URL pública é material mesmo quando o diff visual parece pequeno.
+Use [information-architecture.md](information-architecture.md) for the complete contract. A navigation or public-URL change is material even when the visual diff appears small.
 
-## 9. Contratar temas e recursos externos
+## 9. Contract themes and external resources
 
-Quando houver múltiplos temas, registrar fonte de verdade, modos suportados, precedência entre preferência do sistema e escolha manual, persistência, estado antes da hidratação, papéis semânticos, assets, controles nativos, overlays, contraste, forced colors e reduced motion. Não criar tema novo sem requisito ou autorização.
+When there are multiple themes, record the source of truth, supported modes, precedence between system preference and manual choice, persistence, pre-hydration state, semantic roles, assets, native controls, overlays, contrast, forced colors, and reduced motion. Do not create a new theme without a requirement or authorization.
 
-Antes de adicionar fonte, imagem, stylesheet, script ou biblioteca visual externa, procurar alternativa local aprovada e verificar necessidade, origem, política do projeto, privacidade, CSP, integridade, performance, cache, fallback e funcionamento degradado aplicáveis.
+Before adding an external font, image, stylesheet, script, or visual library, look for an approved local alternative and verify applicable necessity, origin, project policy, privacy, CSP, integrity, performance, caching, fallback, and degraded operation.
 
-## 10. Manter checkpoint e invalidação
+## 10. Maintain checkpoints and invalidation
 
-No fluxo completo ou retomável, registrar feature, fase, artefatos, decisões, bloqueios, próxima entrada e estado do código usado como referência. Arquivo presente não significa fase concluída.
+In the complete or resumable flow, record the feature, phase, artifacts, decisions, blockers, next input, and code state used as a reference. A file's presence does not mean the phase is complete.
 
-Dependências usuais:
+Common dependencies:
 
 ```text
-brief → estrutura e direção → tokens → plano → implementação → revisão
+brief → structure and direction → tokens → plan → implementation → review
 ```
 
-Adaptar a relação ao projeto. Quando uma decisão anterior mudar, marcar somente os dependentes reais como `revalidar`; não atualizar silenciosamente nem reescrever todo o conjunto.
+Adapt the relationship to the project. When an earlier decision changes, mark only the actual dependents as `revalidate`; do not update silently or rewrite the entire set.
 
-## Limites
+## Boundaries
 
-Não tratar como absolutos: número fixo de cores/fontes, risco visual obrigatório, stack específica, duração universal de animação, aleatoriedade de direção ou obrigação de usar imagens.
+Do not treat as absolutes: a fixed number of colors/fonts, mandatory visual risk, a specific stack, universal animation duration, random direction, or a requirement to use images.

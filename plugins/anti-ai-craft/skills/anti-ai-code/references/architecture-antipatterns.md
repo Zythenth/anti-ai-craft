@@ -1,150 +1,150 @@
-# Antipadrões de arquitetura e manutenção
+# Architecture and maintenance antipatterns
 
-## Sumário
+## Summary
 
-- [Preservar antes de expandir](#preservar-antes-de-expandir)
-- [Abstração sem valor](#abstração-sem-valor)
-- [Fragmentação e volume](#fragmentação-e-volume)
-- [Prolixidade e superengenharia](#prolixidade-e-superengenharia)
-- [Compatibilidade e configuração especulativas](#compatibilidade-e-configuração-especulativas)
-- [Duplicação e inconsistência](#duplicação-e-inconsistência)
-- [API e contrato](#api-e-contrato)
-- [Performance, cache e concorrência](#performance-cache-e-concorrência)
-- [Logging e observabilidade](#logging-e-observabilidade)
-- [Documentação e comentários](#documentação-e-comentários)
-- [Falsos sinais](#falsos-sinais)
+- [Preserve before expanding](#preserve-before-expanding)
+- [Abstraction without value](#abstraction-without-value)
+- [Fragmentation and volume](#fragmentation-and-volume)
+- [Verbosity and overengineering](#verbosity-and-overengineering)
+- [Speculative compatibility and configuration](#speculative-compatibility-and-configuration)
+- [Duplication and inconsistency](#duplication-and-inconsistency)
+- [API and contract](#api-and-contract)
+- [Performance, cache, and concurrency](#performance-cache-and-concurrency)
+- [Logging and observability](#logging-and-observability)
+- [Documentation and comments](#documentation-and-comments)
+- [False signals](#false-signals)
 
-## Preservar antes de expandir
+## Preserve before expanding
 
-Ler a arquitetura existente e distinguir dívida real de preferência. Uma correção localizada não autoriza redesenho amplo.
+Read the existing architecture and distinguish real debt from preference. A localized fix does not authorize a broad redesign.
 
-## Abstração sem valor
+## Abstraction without value
 
-- helper de uma linha que só renomeia operação clara;
-- wrapper que replica interface sem adaptar, proteger ou observar;
-- factory para construção única e invariável;
-- interface/protocolo com uma implementação sem necessidade de teste ou fronteira;
-- strategy/adapter/repository introduzido por “profissionalismo” genérico;
-- classe para estado que uma função/estrutura simples representa;
-- genericidade para casos hipotéticos;
-- configuração que substitui código claro por strings;
-- base class com hooks nunca usados;
-- camadas que apenas encaminham parâmetros.
+- one-line helper that merely renames a clear operation;
+- wrapper that replicates an interface without adapting, protecting, or observing;
+- factory for a single, invariant construction;
+- interface/protocol with one implementation and no testing or boundary need;
+- strategy/adapter/repository introduced for generic “professionalism”;
+- class for state that a simple function/structure can represent;
+- genericity for hypothetical cases;
+- configuration that replaces clear code with strings;
+- base class with hooks that are never used;
+- layers that merely forward parameters.
 
-Perguntar: qual variação, invariante, boundary, test seam ou política a abstração concentra? Se não houver resposta concreta, simplificar.
+Ask: what variation, invariant, boundary, test seam, or policy does the abstraction concentrate? If there is no concrete answer, simplify.
 
-## Fragmentação e volume
+## Fragmentation and volume
 
-- dezenas de arquivos pequenos sem ownership ou coesão;
-- função dividida em helpers que exigem navegação constante;
-- módulo “utils/common/helpers” sem domínio;
-- tipo por operação simples;
-- boilerplate maior que a lógica;
-- duplicação de DTOs/mappers sem fronteira real;
-- bloco enorme com responsabilidades realmente distintas.
+- dozens of small files without ownership or cohesion;
+- function split into helpers that require constant navigation;
+- “utils/common/helpers” module without a domain;
+- one type per simple operation;
+- boilerplate larger than the logic;
+- duplicated DTOs/mappers without a real boundary;
+- huge block with genuinely distinct responsibilities.
 
-O alvo é coesão e compreensão, não número universal de linhas ou arquivos.
+The target is cohesion and understanding, not a universal number of lines or files.
 
-## Prolixidade e superengenharia
+## Verbosity and overengineering
 
-- validação repetida em várias camadas sem mudança de confiança;
-- objeto de opções para dois parâmetros estáveis sem evolução real;
-- enum, DTO, mapper e service que apenas renomeiam os mesmos campos;
-- pipeline de handlers para uma sequência curta e fixa;
-- guard clauses redundantes depois de tipos ou invariantes já comprovados;
-- comentário, docstring e log repetindo a mesma informação;
-- duas implementações equivalentes mantidas por compatibilidade imaginária;
-- arquitetura “enterprise” aplicada a script, endpoint ou fluxo local simples.
-- tarefa de abstração, tokens, configuração, estrutura ou documentação declarada pronta sem consumidor conhecido ou comportamento verificável no mesmo incremento ou no dependente imediato.
+- validation repeated across several layers without a change in trust;
+- options object for two stable parameters without real evolution;
+- enum, DTO, mapper, and service that merely rename the same fields;
+- handler pipeline for a short, fixed sequence;
+- redundant guard clauses after types or invariants have already been proven;
+- comment, docstring, and log repeating the same information;
+- two equivalent implementations maintained for imaginary compatibility;
+- “enterprise” architecture applied to a simple script, endpoint, or local flow.
+- abstraction, tokens, configuration, structure, or documentation task declared complete without a known consumer or verifiable behavior in the same increment or the immediately dependent one.
 
-Aplicar o teste de remoção: retirar a estrutura suspeita e comparar contrato, legibilidade, testes, reuso e limites arquiteturais. Se nada material for perdido, escolher a implementação menor. Não usar contagem de linhas como objetivo e não esconder domínio complexo em código compacto demais.
+Apply the removal test: remove the suspect structure and compare the contract, readability, tests, reuse, and architectural boundaries. If nothing material is lost, choose the smaller implementation. Do not use line count as an objective, and do not hide a complex domain in overly compact code.
 
-Fundação horizontal pode ser legítima quando possui consumidor confirmado, dependência real e prova própria, como migração compatível, contrato compartilhado ou token semântico consumido. Não rejeitar por formato; exigir valor observável.
+A horizontal foundation may be legitimate when it has a confirmed consumer, real dependency, and its own evidence, such as a compatible migration, shared contract, or consumed semantic token. Do not reject it because of its format; require observable value.
 
-## Compatibilidade e configuração especulativas
+## Speculative compatibility and configuration
 
-- feature flag sem rollout, experimento ou rollback;
-- compatibilidade com versão/plataforma não suportada;
-- branches para config inexistente;
-- fallback para API antiga sem teste;
-- opção exposta e nunca usada;
-- migração parcialmente implementada;
-- versão duplicada em múltiplos registries;
-- default silencioso que esconde configuração ausente.
+- feature flag without rollout, experiment, or rollback;
+- compatibility with an unsupported version/platform;
+- branches for nonexistent config;
+- fallback for an old API without a test;
+- exposed option that is never used;
+- partially implemented migration;
+- version duplicated across multiple registries;
+- silent default that hides missing configuration.
 
-Exigir consumidor, cronograma, teste e remoção.
+Require a consumer, schedule, test, and removal.
 
-## Duplicação e inconsistência
+## Duplication and inconsistency
 
-- copiar implementação em vez de usar padrão local;
-- validação/autorização divergente entre caminhos;
-- nomes iguais com semântica diferente;
-- error model diferente sem boundary;
-- serialização duplicada;
-- lógica repetida que já divergiu.
+- copying an implementation instead of using the local pattern;
+- divergent validation/authorization across paths;
+- identical names with different semantics;
+- different error model without a boundary;
+- duplicated serialization;
+- repeated logic that has already diverged.
 
-Não abstrair duas coincidências cegamente. Primeiro confirmar regra comum e direção de mudança.
+Do not blindly abstract two coincidences. First confirm the shared rule and direction of change.
 
-## API e contrato
+## API and contract
 
-- alterar API pública sem migração/justificativa;
-- aceitar parâmetros ignorados;
-- retorno polimórfico não documentado;
-- null/exception/status usados de forma inconsistente;
-- comportamento default inventado;
-- side effect surpreendente;
-- contrato documentado sem implementação.
+- changing a public API without migration/justification;
+- accepting ignored parameters;
+- undocumented polymorphic return;
+- inconsistent use of null/exception/status;
+- invented default behavior;
+- surprising side effect;
+- documented contract without implementation.
 
-Preservar compatibilidade válida e tornar mudança explícita.
+Preserve valid compatibility and make the change explicit.
 
-## Performance, cache e concorrência
+## Performance, cache, and concurrency
 
-- otimização sem perfil ou requisito;
-- cache sem invalidação, ownership ou limite;
-- memoization de dado mutável/sensível;
-- paralelismo para operação pequena;
-- batch que muda semântica;
-- pooling/retry sem backpressure;
-- índice ou denormalização sem query medida;
-- logging em loop quente.
+- optimization without profiling or a requirement;
+- cache without invalidation, ownership, or a limit;
+- memoization of mutable/sensitive data;
+- parallelism for a small operation;
+- batch that changes semantics;
+- pooling/retry without backpressure;
+- index or denormalization without a measured query;
+- logging in a hot loop.
 
-Medir baseline, definir métrica e validar antes/depois.
+Measure the baseline, define the metric, and validate before/after.
 
-## Logging e observabilidade
+## Logging and observability
 
-- log em cada função/branch;
-- mensagem genérica sem contexto acionável;
-- segredo/PII em log;
-- mesmo erro registrado em todas as camadas;
-- catch-log-rethrow que duplica ruído;
-- nível incorreto;
-- métrica sem consumidor;
-- tracing adicionado a caminho fora de escopo.
+- log in every function/branch;
+- generic message without actionable context;
+- secret/PII in a log;
+- same error logged at every layer;
+- catch-log-rethrow that duplicates noise;
+- incorrect level;
+- metric without a consumer;
+- tracing added to an out-of-scope path.
 
-Registrar boundary, correlação e ação. Logging não substitui tratamento de erro.
+Record the boundary, correlation, and action. Logging does not replace error handling.
 
-## Documentação e comentários
+## Documentation and comments
 
-- comentário que narra a próxima linha;
-- docstring que promete “robusto”, “escalável” ou “production-ready”;
-- exemplo de API inexistente;
-- README/CI/config criado automaticamente sem pedido;
-- comentário obsoleto após mudança;
-- rationale ausente onde decisão não óbvia realmente existe.
+- comment that narrates the next line;
+- docstring that promises “robust,” “scalable,” or “production-ready” behavior;
+- example of a nonexistent API;
+- README/CI/config created automatically without a request;
+- comment made obsolete by a change;
+- missing rationale where a non-obvious decision genuinely exists.
 
-Documentar por que, contrato, risco e decisão; deixar o código expressar o como.
+Document why, the contract, risk, and decision; let the code express how.
 
-## Falsos sinais
+## False signals
 
-Não inferir autoria por:
+Do not infer authorship from:
 
-- muitos ou poucos comentários;
-- nomes muito descritivos ou genéricos isolados;
-- estilo consistente;
-- uso de pattern conhecido;
-- número de arquivos/classes;
-- código polido ou verboso;
-- presença de TODO;
-- erro simples.
+- many or few comments;
+- very descriptive or generic names in isolation;
+- consistent style;
+- use of a known pattern;
+- number of files/classes;
+- polished or verbose code;
+- presence of a TODO;
+- a simple error.
 
-Reportar apenas impacto e evidência observáveis.
+Report only observable impact and evidence.

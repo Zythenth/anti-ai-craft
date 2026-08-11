@@ -1,173 +1,173 @@
-# Onboarding, ativação e primeiro valor
+# Onboarding, activation, and first value
 
-## Sumário
+## Summary
 
-- [ADO-033 — Definir o evento de ativação](#ado-033--definir-o-evento-de-ativação)
-- [ADO-034 — Entregar valor antes de instruir em excesso](#ado-034--entregar-valor-antes-de-instruir-em-excesso)
-- [ADO-035 — Não entregar uma tela inicial sem rumo](#ado-035--não-entregar-uma-tela-inicial-sem-rumo)
-- [ADO-036 — Usar evidência da jornada real](#ado-036--usar-evidência-da-jornada-real)
-- [ADO-037 — Separar fricção útil de burocracia](#ado-037--separar-fricção-útil-de-burocracia)
-- [ADO-038 — Fazer a primeira tarefa parecer possível](#ado-038--fazer-a-primeira-tarefa-parecer-possível)
-- [ADO-039 — Tornar orientação uma ação, não um tour passivo](#ado-039--tornar-orientação-uma-ação-não-um-tour-passivo)
-- [ADO-040 — Revelar valor progressivamente](#ado-040--revelar-valor-progressivamente)
-- [ADO-041 — Personalizar com intenção declarada](#ado-041--personalizar-com-intenção-declarada)
-- [ADO-042 — Usar exemplos claramente identificados](#ado-042--usar-exemplos-claramente-identificados)
-- [ADO-043 — Tornar progresso e recuperação verdadeiros](#ado-043--tornar-progresso-e-recuperação-verdadeiros)
-- [ADO-044 — Celebrar conquista sem simular sucesso](#ado-044--celebrar-conquista-sem-simular-sucesso)
-- [ADO-045 — Escolher padrão de onboarding pelo contexto](#ado-045--escolher-padrão-de-onboarding-pelo-contexto)
+- [ADO-033 — Define the activation event](#ado-033--define-the-activation-event)
+- [ADO-034 — Deliver value before over-instructing](#ado-034--deliver-value-before-over-instructing)
+- [ADO-035 — Do not deliver a directionless home screen](#ado-035--do-not-deliver-a-directionless-home-screen)
+- [ADO-036 — Use evidence from the real journey](#ado-036--use-evidence-from-the-real-journey)
+- [ADO-037 — Separate useful friction from bureaucracy](#ado-037--separate-useful-friction-from-bureaucracy)
+- [ADO-038 — Make the first task feel achievable](#ado-038--make-the-first-task-feel-achievable)
+- [ADO-039 — Make guidance an action, not a passive tour](#ado-039--make-guidance-an-action-not-a-passive-tour)
+- [ADO-040 — Reveal value progressively](#ado-040--reveal-value-progressively)
+- [ADO-041 — Personalize with a stated purpose](#ado-041--personalize-with-a-stated-purpose)
+- [ADO-042 — Use clearly identified examples](#ado-042--use-clearly-identified-examples)
+- [ADO-043 — Make progress and recovery truthful](#ado-043--make-progress-and-recovery-truthful)
+- [ADO-044 — Celebrate achievement without simulating success](#ado-044--celebrate-achievement-without-simulating-success)
+- [ADO-045 — Choose an onboarding pattern according to context](#ado-045--choose-an-onboarding-pattern-according-to-context)
 
-## ADO-033 — Definir o evento de ativação
+## ADO-033 — Define the activation event
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** o produto possui cadastro, avaliação, primeiro uso ou fluxo que antecede retenção e pagamento.
+**Apply when.** The product has sign-up, a trial, first use, or a flow preceding retention and payment.
 
-**Decisão.** identificar a ação ou resultado observável que diferencia pessoas que obtêm valor das que abandonam. Projetar o caminho inicial para essa ação e medir tempo até ela, repetição pertinente e retorno posterior.
+**Decision.** Identify the observable action or outcome that distinguishes people who obtain value from those who abandon the product. Design the initial path toward that action and measure time to it, relevant repetition, and subsequent return.
 
-**Prova.** relacionar o evento a telemetria, pesquisa, entrevistas, suporte ou análise de coortes; documentar a definição e suas limitações em vez de usar cadastro como substituto.
+**Evidence.** Relate the event to telemetry, research, interviews, support, or cohort analysis; document the definition and its limitations instead of using sign-up as a substitute.
 
-**Evitar.** chamar abertura de conta, visualização de tutorial ou clique em botão de ativação sem demonstrar que eles predizem valor real.
+**Avoid.** Calling account creation, tutorial viewing, or a button click activation without demonstrating that they predict real value.
 
-## ADO-034 — Entregar valor antes de instruir em excesso
+## ADO-034 — Deliver value before over-instructing
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** o fluxo inicial pede configuração, dados, integrações, convites ou aprendizado antes de qualquer resultado perceptível.
+**Apply when.** The initial flow requests configuration, data, integrations, invitations, or learning before any perceptible outcome.
 
-**Decisão.** reordenar o fluxo para chegar a uma primeira consequência útil o mais cedo possível. Ensinar somente o necessário para a próxima ação e revelar detalhes adicionais no ponto em que passam a ser necessários.
+**Decision.** Reorder the flow to reach a first useful consequence as early as possible. Teach only what is necessary for the next action and reveal additional details when they become necessary.
 
-**Prova.** medir a sequência real, o tempo até o primeiro resultado compreensível e os pontos de desistência; confirmar que o valor exibido é produzido ou claramente rotulado como exemplo.
+**Evidence.** Measure the real sequence, time to the first comprehensible outcome, and abandonment points; confirm that the displayed value is produced or clearly labeled as an example.
 
-**Evitar.** tour longo, manual obrigatório, pedir toda configuração antecipadamente, promessa de resultado que aparece só após trabalho desproporcional ou reduzir controles de segurança necessários.
+**Avoid.** A long tour, required manual, requesting all configuration up front, a promised outcome that appears only after disproportionate work, or removing necessary security controls.
 
-## ADO-035 — Não entregar uma tela inicial sem rumo
+## ADO-035 — Do not deliver a directionless home screen
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** uma pessoa chega a dashboard, lista, espaço de trabalho ou área recém-criada sem dados próprios.
+**Apply when.** A person arrives at a dashboard, list, workspace, or newly created area without their own data.
 
-**Decisão.** explicar o estado, apontar uma próxima ação concreta, comunicar o benefício de realizá-la e, quando útil, oferecer exemplo ou modelo explicitamente identificado. Priorizar um caminho inicial em vez de muitas opções equivalentes.
+**Decision.** Explain the state, point to a concrete next action, communicate the benefit of taking it, and, when useful, provide an explicitly identified example or template. Prioritize one initial path instead of many equivalent options.
 
-**Prova.** testar se alguém sem conhecimento prévio identifica o que fazer, por que fazer e como recuperar-se após erro ou interrupção.
+**Evidence.** Test whether someone without prior knowledge can identify what to do, why to do it, and how to recover after an error or interruption.
 
-**Evitar.** painel vazio tratado como neutro, métricas fictícias sem rótulo, checklist burocrático, múltiplos CTAs concorrentes e orientação dependente de tooltip invisível.
+**Avoid.** Treating an empty panel as neutral, unlabeled fictional metrics, a bureaucratic checklist, multiple competing CTAs, or guidance dependent on an invisible tooltip.
 
-## ADO-036 — Usar evidência da jornada real
+## ADO-036 — Use evidence from the real journey
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** houver hipótese de que onboarding, trial ou primeira sessão está falhando.
+**Apply when.** There is a hypothesis that onboarding, the trial, or the first session is failing.
 
-**Decisão.** comparar o fluxo desenhado com comportamento real em sessões, entrevistas, tickets e dados de funil. Transformar divergências em hipóteses priorizadas, sem atribuir intenção à pessoa usuária.
+**Decision.** Compare the designed flow with actual behavior in sessions, interviews, tickets, and funnel data. Turn divergences into prioritized hypotheses without attributing intent to the user.
 
-**Prova.** registrar origem das observações, segmento, momento da jornada, evidência contrária e severidade do impacto antes de alterar a interface.
+**Evidence.** Record the origin of observations, segment, point in the journey, contrary evidence, and impact severity before changing the interface.
 
-**Evitar.** redesenhar pelo mapa interno, usar uma sessão isolada como regra, coletar conteúdo pessoal além do necessário ou confundir gravação incompleta com prova de compreensão.
+**Avoid.** Redesigning from the internal map, using one isolated session as a rule, collecting personal content beyond what is necessary, or confusing an incomplete recording with proof of comprehension.
 
-## ADO-037 — Separar fricção útil de burocracia
+## ADO-037 — Separate useful friction from bureaucracy
 
-**Força.** padrão
+**Strength.** default
 
-**Aplicar quando.** houver debate sobre remover campos, criar qualificação, solicitar configuração ou exigir uma etapa inicial.
+**Apply when.** There is debate about removing fields, creating qualification, requesting configuration, or requiring an initial stage.
 
-**Decisão.** manter esforço apenas quando ele protege a pessoa, cumpre requisito legítimo, permite personalização de valor ou produz compromisso consciente. Cortar, adiar ou automatizar coleta administrativa que não muda a experiência imediata.
+**Decision.** Retain effort only when it protects the person, fulfills a legitimate requirement, enables value personalization, or produces conscious commitment. Remove, defer, or automate administrative collection that does not change the immediate experience.
 
-**Prova.** para cada passo, descrever o valor para a pessoa, a necessidade do sistema, o risco de removê-lo e a alternativa menos intrusiva.
+**Evidence.** For each step, describe the value to the person, system need, risk of removal, and least intrusive alternative.
 
-**Evitar.** usar dificuldade para prender a pessoa, pedir dados sensíveis sem finalidade, tratar opt-in como obrigatório ou eliminar consentimento, segurança e conformidade em nome de conversão.
+**Avoid.** Using difficulty to trap the person, requesting sensitive data without a purpose, treating opt-in as mandatory, or removing consent, security, and compliance in the name of conversion.
 
-## ADO-038 — Fazer a primeira tarefa parecer possível
+## ADO-038 — Make the first task feel achievable
 
-**Força.** heurística
+**Strength.** heuristic
 
-**Aplicar quando.** a primeira ação exige importação, criação, convite, publicação, integração ou outra tarefa percebida como grande.
+**Apply when.** The first action requires an import, creation, invitation, publication, integration, or another task perceived as large.
 
-**Decisão.** dividir a entrada em uma unidade honesta e pequena, mostrar o que já foi concluído e deixar claro o próximo passo. Priorizar a menor ação que produz consequência útil, não a menor ação possível sem valor.
+**Decision.** Divide entry into an honest, small unit, show what is already complete, and make the next step clear. Prioritize the smallest action that produces a useful consequence, not the smallest possible action without value.
 
-**Prova.** verificar esforço percebido em teste de uso, taxa de início, conclusão, abandono e tempo até valor; confirmar que qualquer progresso exibido corresponde a trabalho real.
+**Evidence.** Verify perceived effort in a usability test, start rate, completion, abandonment, and time to value; confirm that any displayed progress corresponds to real work.
 
-**Evitar.** porcentagem fabricada, metas artificialmente baixas que não levam a nada, checklist infinito ou ocultar esforço futuro relevante.
+**Avoid.** Fabricated percentages, artificially low goals that lead nowhere, an endless checklist, or hiding relevant future effort.
 
-## ADO-039 — Tornar orientação uma ação, não um tour passivo
+## ADO-039 — Make guidance an action, not a passive tour
 
-**Força.** padrão
+**Strength.** default
 
-**Aplicar quando.** a proposta é usar tooltips, walkthrough, vídeo, documentação ou uma sequência guiada no primeiro acesso.
+**Apply when.** The proposal is to use tooltips, a walkthrough, video, documentation, or a guided sequence on first access.
 
-**Decisão.** converter orientação em passos contextualizados que permitem executar uma ação real e observar efeito. O conteúdo de apoio deve ser dispensável, recuperável e compatível com teclado, leitor de tela e redução de movimento.
+**Decision.** Convert guidance into contextual steps that let people perform a real action and observe its effect. Supporting content must be dismissible, recoverable, and compatible with keyboard, screen reader, and reduced motion.
 
-**Prova.** verificar que cada passo habilita uma tarefa, pode ser ignorado e retomado sem perda de estado, e não bloqueia quem já sabe operar o produto.
+**Evidence.** Verify that each step enables a task, can be skipped and resumed without losing state, and does not block people who already know how to operate the product.
 
-**Evitar.** sequência que exige leitura sem ação, modal impossível de fechar, foco perdido, vídeo com informação exclusiva sem alternativa textual ou tour que reaparece após rejeição.
+**Avoid.** A sequence requiring reading without action, an impossible-to-close modal, lost focus, video with exclusive information and no text alternative, or a tour that reappears after rejection.
 
-## ADO-040 — Revelar valor progressivamente
+## ADO-040 — Reveal value progressively
 
-**Força.** padrão
+**Strength.** default
 
-**Aplicar quando.** o produto tem superfície extensa, recursos avançados, custo de erro alto ou muitas possibilidades logo no início.
+**Apply when.** The product has an extensive surface, advanced capabilities, a high cost of error, or many possibilities at the outset.
 
-**Decisão.** mostrar primeiro a capacidade necessária para a tarefa atual e apresentar recursos adicionais quando houver contexto de necessidade. Manter caminhos de descoberta, busca e ajuda para quem precisa ir além.
+**Decision.** First show the capability necessary for the current task and present additional capabilities when there is a context of need. Preserve discovery, search, and help paths for those who need to go further.
 
-**Prova.** mapear qual recurso é necessário em cada etapa, verificar descobribilidade posterior e acompanhar se o ocultamento reduziu erro sem criar dependência de suporte.
+**Evidence.** Map which capability is necessary at each stage, verify later discoverability, and monitor whether hiding it reduced errors without creating support dependency.
 
-**Evitar.** esconder controles críticos, tornar recursos pagos ou de segurança invisíveis, usar progressão como desculpa para limitar autonomia ou assumir que todas as pessoas seguem a mesma sequência.
+**Avoid.** Hiding critical controls, making paid or security capabilities invisible, using progression as an excuse to limit autonomy, or assuming everyone follows the same sequence.
 
-## ADO-041 — Personalizar com intenção declarada
+## ADO-041 — Personalize with a stated purpose
 
-**Força.** padrão
+**Strength.** default
 
-**Aplicar quando.** o produto atende perfis com objetivos, maturidade, função ou fluxos iniciais diferentes.
+**Apply when.** The product serves profiles with different objectives, maturity, roles, or initial flows.
 
-**Decisão.** pedir uma declaração de objetivo curta e explicada apenas quando ela altera recomendação, conteúdo, ordem ou rota de forma percebida. Permitir corrigir a escolha posteriormente.
+**Decision.** Ask for a short, explained statement of intent only when it perceptibly changes a recommendation, content, order, or route. Allow the choice to be corrected later.
 
-**Prova.** demonstrar como cada resposta muda a experiência, registrar finalidade e retenção do dado, e validar se a personalização reduz esforço ou melhora o primeiro resultado.
+**Evidence.** Demonstrate how each answer changes the experience, record the data's purpose and retention, and validate whether personalization reduces effort or improves the first outcome.
 
-**Evitar.** questionário longo, segmentação opaca, dados sensíveis sem necessidade, personalização que limita opções sem aviso ou escolha que não pode ser alterada.
+**Avoid.** A long questionnaire, opaque segmentation, unnecessary sensitive data, personalization that limits options without warning, or a choice that cannot be changed.
 
-## ADO-042 — Usar exemplos claramente identificados
+## ADO-042 — Use clearly identified examples
 
-**Força.** padrão
+**Strength.** default
 
-**Aplicar quando.** um espaço vazio precisa demonstrar o resultado possível antes de a pessoa inserir dados próprios.
+**Apply when.** An empty space must demonstrate a possible outcome before the person enters their own data.
 
-**Decisão.** oferecer exemplos, modelos ou dados de demonstração que se pareçam com o domínio, estejam visivelmente rotulados e possam ser substituídos, ocultados ou removidos. Distinguir exemplo de dado observado.
+**Decision.** Provide examples, templates, or demonstration data that resemble the domain, are visibly labeled, and can be replaced, hidden, or removed. Distinguish examples from observed data.
 
-**Prova.** confirmar que nenhum gráfico, atividade, indicador ou registro demonstra fato inexistente; testar se a pessoa entende a origem do conteúdo e consegue iniciar com dados próprios.
+**Evidence.** Confirm that no chart, activity, indicator, or record demonstrates a nonexistent fact; test whether the person understands the content's origin and can begin with their own data.
 
-**Evitar.** números que parecem reais, exemplo misturado à produção, dados pessoais, screenshot como substituto de interação ou estado vazio sem saída clara.
+**Avoid.** Numbers that look real, examples mixed with production, personal data, a screenshot as a substitute for interaction, or an empty state without a clear exit.
 
-## ADO-043 — Tornar progresso e recuperação verdadeiros
+## ADO-043 — Make progress and recovery truthful
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** a jornada inclui etapas, processamento, importação, aprovação, falha, pausa ou retorno posterior.
+**Apply when.** The journey includes stages, processing, import, approval, failure, pause, or a later return.
 
-**Decisão.** apresentar progresso somente quando o sistema conhece estágio ou consequência correspondente; informar o que ocorreu, o que falta, o que permanece salvo e como retomar ou desfazer. Preservar estado com segurança.
+**Decision.** Present progress only when the system knows the corresponding stage or consequence; explain what occurred, what remains, what stays saved, and how to resume or undo. Preserve state securely.
 
-**Prova.** testar interrupção, recarregamento, erro, permissão insuficiente, conexão instável e retorno ao fluxo; revisar mensagens com tecnologias assistivas.
+**Evidence.** Test interruption, reload, error, insufficient permission, unstable connection, and return to the flow; review messages with assistive technologies.
 
-**Evitar.** barra simulada, sucesso antes da confirmação, perda silenciosa de dados, erro genérico, recomeço obrigatório sem necessidade ou recuperação que dependa de suporte para casos comuns.
+**Avoid.** A simulated bar, success before confirmation, silent data loss, a generic error, an unnecessary forced restart, or recovery that depends on support for common cases.
 
-## ADO-044 — Celebrar conquista sem simular sucesso
+## ADO-044 — Celebrate achievement without simulating success
 
-**Força.** heurística
+**Strength.** heuristic
 
-**Aplicar quando.** a pessoa conclui uma ação de esforço relevante ou alcança um primeiro resultado útil.
+**Apply when.** A person completes an action requiring meaningful effort or reaches a first useful outcome.
 
-**Decisão.** dar feedback que reconheça a conquista, explique seu efeito e apresente uma próxima ação opcional. Calibrar movimento, cor e intensidade ao contexto, respeitando preferência de movimento reduzido.
+**Decision.** Provide feedback that recognizes the achievement, explains its effect, and presents an optional next action. Calibrate motion, color, and intensity to the context while respecting reduced-motion preferences.
 
-**Prova.** verificar que a conquista existe, que o feedback não interrompe tarefa crítica e que a pessoa entende o estado sem depender de animação, cor ou som.
+**Evidence.** Verify that the achievement exists, the feedback does not interrupt a critical task, and the person understands the state without depending on animation, color, or sound.
 
-**Evitar.** confete automático, linguagem exagerada, tratar configuração incompleta como vitória, recompensas que pressionam continuidade ou animação que bloqueia a próxima ação.
+**Avoid.** Automatic confetti, exaggerated language, treating incomplete configuration as a win, rewards that pressure continuation, or animation that blocks the next action.
 
-## ADO-045 — Escolher padrão de onboarding pelo contexto
+## ADO-045 — Choose an onboarding pattern according to context
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** for escolhido modal de boas-vindas, checklist, tour, tooltip, modelo, exemplo, definição de objetivo ou demonstração.
+**Apply when.** A welcome modal, checklist, tour, tooltip, template, example, goal-setting step, or demonstration is selected.
 
-**Decisão.** selecionar o padrão conforme familiaridade da pessoa, complexidade, risco de erro, valor da primeira tarefa, variedade de rotas e necessidade de acessibilidade. Combinar padrões somente se cada um tiver papel distinto e percurso recuperável.
+**Decision.** Select the pattern according to the person's familiarity, complexity, risk of error, value of the first task, variety of routes, and accessibility needs. Combine patterns only when each has a distinct role and recoverable path.
 
-**Prova.** documentar o problema que cada padrão resolve, seus estados, critérios de saída, alternativa acessível e resultado esperado; validar em pessoas novatas e experientes quando ambas existirem.
+**Evidence.** Document the problem each pattern solves, its states, exit criteria, accessible alternative, and expected outcome; validate with novice and experienced users when both exist.
 
-**Evitar.** adotar componente porque é tendência, checklist para tarefas sem sequência real, tooltip como única instrução, modal aninhado, onboarding que bloqueia uso normal ou uma única jornada imposta a todos.
+**Avoid.** Adopting a component because it is fashionable, a checklist for tasks without a real sequence, a tooltip as the only instruction, a nested modal, onboarding that blocks normal use, or one journey imposed on everyone.

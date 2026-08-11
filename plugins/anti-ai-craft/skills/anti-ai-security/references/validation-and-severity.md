@@ -1,75 +1,75 @@
-# Validação e severidade de segurança
+# Security validation and severity
 
-## Registro de candidato
+## Candidate record
 
-Para cada candidato, registrar:
+For each candidate, record:
 
-- ID estável;
-- fonte ou ação controlável pelo atacante;
-- controle mais próximo;
-- sink, operação protegida ou invariante;
-- caminho alcançável e superfície do produto;
-- boundary e ambiente;
-- pré-condições;
-- depende de;
-- decisão necessária e origem pesquisada;
-- postura recomendada e efeito se não respondida;
-- trabalho independente concluído;
-- evidência favorável;
-- contraprova mais forte;
-- lacunas de prova;
-- disposição: confirmado, suprimido, não aplicável, depende de infraestrutura, não verificado ou duplicado.
+- stable ID;
+- source or action controllable by the attacker;
+- nearest control;
+- sink, protected operation, or invariant;
+- reachable path and product surface;
+- boundary and environment;
+- preconditions;
+- depends on;
+- required decision and researched source;
+- recommended posture and effect if unanswered;
+- independent work completed;
+- supporting evidence;
+- strongest disconfirming evidence;
+- evidence gaps;
+- disposition: confirmed, suppressed, not applicable, depends on infrastructure, unverified, or duplicate.
 
-Não promover item de checklist a vulnerabilidade sem esse caminho.
+Do not promote a checklist item to a vulnerability without this path.
 
-## Falsificação
+## Falsification
 
-1. Procurar o controle no ponto mais próximo da operação.
-2. Exercitar o caminho real, não apenas função isolada.
-3. Tentar derrotar a hipótese com autenticação, autorização, validação, estado, configuração e infraestrutura.
-4. Não usar um vizinho seguro para suprimir outra rota.
-5. Tratar configuração de produção ausente do repositório como lacuna de confiança.
-6. Tratar falha de setup, scanner ou teste como prova incompleta.
-7. Preservar instâncias independentes mesmo quando compartilham categoria.
+1. Look for the control at the point nearest the operation.
+2. Exercise the actual path, not only an isolated function.
+3. Try to defeat the hypothesis through authentication, authorization, validation, state, configuration, and infrastructure.
+4. Do not use a safe neighboring path to suppress another route.
+5. Treat production configuration absent from the repository as a confidence gap.
+6. Treat a setup, scanner, or test failure as incomplete evidence.
+7. Preserve independent instances even when they share a category.
 
-## Severidade
+## Severity
 
-Calibrar separadamente:
+Calibrate separately:
 
-- **Impacto máximo realista:** confidencialidade, integridade, disponibilidade, fraude, privacidade, segurança física ou custo.
-- **Reachability e pré-condições:** acesso público/interno, papel, interação da vítima, segredo, timing, estado e controle de infraestrutura.
-- **Probabilidade:** facilidade, confiabilidade, detectabilidade e incentivo.
-- **Alcance:** um objeto, usuário, tenant, serviço ou plataforma.
-- **Sensibilidade:** natureza e volume de dados/recursos.
-- **Reversibilidade:** detecção, recuperação, rotação, estorno e perda permanente.
+- **Realistic maximum impact:** confidentiality, integrity, availability, fraud, privacy, physical safety, or cost.
+- **Reachability and preconditions:** public/internal access, role, victim interaction, secret, timing, state, and infrastructure control.
+- **Likelihood:** ease, reliability, detectability, and incentive.
+- **Scope:** one object, user, tenant, service, or platform.
+- **Sensitivity:** nature and volume of data/resources.
+- **Reversibility:** detection, recovery, rotation, chargeback, and permanent loss.
 
-Alta/crítica exige caminho real e impacto material. Manter **severidade**, **confiança** e **prioridade de remediação** como eixos distintos.
+High/critical requires a real path and material impact. Keep **severity**, **confidence**, and **remediation priority** as distinct axes.
 
-## Deduplicação
+## Deduplication
 
-Agrupar somente quando os itens compartilham:
+Group only when the items share:
 
-1. mesmo controle ou causa raiz;
-2. mesmo comportamento explorável;
-3. mesmo impacto;
-4. mesma correção.
+1. the same control or root cause;
+2. the same exploitable behavior;
+3. the same impact;
+4. the same fix.
 
-Conservar todas as localizações e suas disposições. Uma correção comum não torna as ocorrências indistinguíveis.
+Preserve all locations and their dispositions. A shared fix does not make occurrences indistinguishable.
 
-## Gate de correção
+## Fix gate
 
-Antes de editar:
+Before editing:
 
-- confirmar que o achado ainda existe;
-- congelar o caminho e o resultado esperado;
-- definir teste negativo e uso legítimo positivo;
-- mapear siblings, aliases e bypasses;
-- separar hardening estrutural do fix aprovado.
+- confirm that the finding still exists;
+- freeze the path and expected outcome;
+- define a negative test and positive legitimate use;
+- map siblings, aliases, and bypasses;
+- separate structural hardening from the approved fix.
 
-Depois:
+Afterward:
 
-- o caminho original não reproduz;
-- uso legítimo continua funcionando;
-- o teste falha se o controle for retirado;
-- siblings e bypasses foram verificados;
-- evidência foi reexecutada após a última mudança.
+- the original path no longer reproduces;
+- legitimate use continues to work;
+- the test fails if the control is removed;
+- siblings and bypasses were verified;
+- the evidence was rerun after the latest change.

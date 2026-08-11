@@ -1,181 +1,181 @@
-# Workflow de revisão visual
+# Visual review workflow
 
-## Sumário
+## Summary
 
 - [Preflight](#1-preflight)
-- [Estrutura sem decoração](#2-estrutura-sem-decoração)
-- [Conteúdo e estados](#3-conteúdo-e-estados)
-- [Direção e alternativas](#4-direção-e-alternativas)
-- [Implementação autorizada](#5-implementação-autorizada)
-- [Captura e perfil de evidência](#6-captura-e-perfil-de-evidência)
-- [Passes separados](#7-passes-separados)
-- [Comparação antes/depois](#8-comparação-antesdepois)
-- [Gate humano](#9-gate-humano)
-- [Relatório](#10-relatório)
+- [Structure without decoration](#2-structure-without-decoration)
+- [Content and states](#3-content-and-states)
+- [Direction and alternatives](#4-direction-and-alternatives)
+- [Authorized implementation](#5-authorized-implementation)
+- [Capture and evidence profile](#6-capture-and-evidence-profile)
+- [Separate passes](#7-separate-passes)
+- [Before/after comparison](#8-beforeafter-comparison)
+- [Human gate](#9-human-gate)
+- [Report](#10-report)
 
 ## 1. Preflight
 
-- Registrar escopo e se edição está autorizada.
-- Ler fontes de verdade e estado do código.
-- Listar usuários, tarefas, telas, rotas, dados e estados.
-- Classificar elementos relevantes como reutilização direta, composição, extensão, criação, fora do escopo ou desconhecido, com evidência.
-- Classificar a superfície e o mandato de preservação/refino/redesign.
-- Listar defaults prováveis relevantes; não impor quantidade ritual.
-- Separar identidade existente de decoração.
-- Definir critérios de aceitação e viewports.
-- Confirmar se o alvo é local, preview, staging ou produção e quais operações são
-  somente leitura. Não presumir que executar a UI autoriza efeitos externos.
-- Fixar contrato de direção e referência dominante quando houver criação ou redesign.
-- Registrar os arquivos, versões, seções, telas e artefatos realmente lidos, vinculando cada decisão à evidência correspondente.
-- Registrar decisões materiais por ID, dependência, origem e estado quando forem necessárias; encerrar quando nenhum ramo aberto alterar direção ou critérios.
+- Record the scope and whether editing is authorized.
+- Read sources of truth and the code state.
+- List users, tasks, screens, routes, data, and states.
+- Classify relevant elements as direct reuse, composition, extension, creation, out of scope, or unknown, with evidence.
+- Classify the surface and preserve/refine/redesign mandate.
+- List relevant likely defaults; do not impose a ritual count.
+- Separate existing identity from decoration.
+- Define acceptance criteria and viewports.
+- Confirm whether the target is local, preview, staging, or production, and which operations are
+  read-only. Do not assume running the UI authorizes external effects.
+- Set the direction contract and dominant reference when there is creation or redesign.
+- Record the files, versions, sections, screens, and artifacts actually read, linking every decision to the corresponding evidence.
+- Record material decisions by ID, dependency, origin, and state when necessary; stop when no open branch changes direction or criteria.
 
-## 2. Estrutura sem decoração
+## 2. Structure without decoration
 
-Revisar em escala de cinza e, quando possível, sem efeitos:
+Review in grayscale and, when possible, without effects:
 
-- ordem de leitura;
-- ação primária;
-- hierarquia;
-- agrupamentos;
-- densidade;
-- sequência de foco;
-- prioridade por viewport.
+- reading order;
+- primary action;
+- hierarchy;
+- grouping;
+- density;
+- focus sequence;
+- priority by viewport.
 
-Para produto navegável, executar também um passe estrutural no runtime alcançável:
+For a navigable product, also run a structural pass in the reachable runtime:
 
-- conferir pontos de entrada, destinos, navegação global/local/contextual e rótulos;
-- exercer URL direta, refresh, back/forward, retorno ao contexto e persistência;
-- verificar estados sem acesso, destino ausente, interrupção, erro e recuperação;
-- comparar a hierarquia percebida com a tarefa e a arquitetura da informação vigente.
+- check entry points, destinations, global/local/contextual navigation, and labels;
+- exercise direct URLs, refresh, back/forward, return to context, and persistence;
+- verify no-access, missing-destination, interruption, error, and recovery states;
+- compare the perceived hierarchy with the task and current information architecture.
 
-Quando não houver runtime, limitar o passe ao perfil disponível e registrar quais
-desses comportamentos permanecem `não exercitados`.
+When there is no runtime, limit the pass to the available profile and record which
+of these behaviors remain `not exercised`.
 
-## 3. Conteúdo e estados
+## 3. Content and states
 
-Preferir fixtures ou dados representativos explicitamente marcados. Usar dados
-reais somente quando a evidência exigir, houver autorização e eles puderem ser
-minimizados e redigidos. Exercitar:
+Prefer fixtures or explicitly marked representative data. Use real data
+only when the evidence requires it, authorization exists, and it can be
+minimized and redacted. Exercise:
 
-- mínimo e máximo;
-- títulos e valores longos;
-- vazio;
-- loading/processamento;
-- sucesso;
-- erro/retry;
-- offline/indisponível;
-- permissão;
-- estado crítico.
+- minimum and maximum;
+- long titles and values;
+- empty;
+- loading/processing;
+- success;
+- error/retry;
+- offline/unavailable;
+- permission;
+- critical state.
 
-## 4. Direção e alternativas
+## 4. Direction and alternatives
 
-Quando houver decisão material:
+When there is a material decision:
 
-1. formular duas ou três teses de composição;
-2. explicar vínculo de cada uma com produto e tarefa;
-3. comparar legibilidade, densidade, responsividade, acessibilidade, custo e risco;
-4. escolher uma direção ou pedir decisão humana.
+1. formulate two or three composition theses;
+2. explain each one's connection to the product and task;
+3. compare legibility, density, responsiveness, accessibility, cost, and risk;
+4. select a direction or request a human decision.
 
-Não gerar variantes cosméticas equivalentes.
+Do not generate equivalent cosmetic variants.
 
-## 5. Implementação autorizada
+## 5. Authorized implementation
 
-- Preservar arquitetura, tokens, componentes e alterações preexistentes.
-- Implementar comportamento e estados reais.
-- Evitar dependência, asset, framework ou refatoração não solicitada.
-- Manter mudança pequena e rastreável.
-- Rodar lint, testes e build pertinentes.
+- Preserve architecture, tokens, components, and pre-existing changes.
+- Implement real behavior and states.
+- Avoid an unrequested dependency, asset, framework, or refactor.
+- Keep the change small and traceable.
+- Run the relevant lint, tests, and build.
 
-## 6. Captura e perfil de evidência
+## 6. Capture and evidence profile
 
-Selecionar primeiro o perfil de evidência. Para `runtime completo` ou `runtime
-parcial`, executar a aplicação e capturar evidência real, usando os mesmos
-dados/estado no antes/depois e registrando viewport, escala, tema e fluxo. Incluir
-estados críticos alcançáveis, não apenas happy path.
+Select the evidence profile first. For `full runtime` or `partial
+runtime`, run the application and capture real evidence, using the same
+data/state before and after and recording viewport, scale, theme, and flow. Include
+reachable critical states, not only the happy path.
 
-Antes de interagir, confirmar o ambiente e separar navegação somente leitura de
-operações mutáveis. Submeter formulário, enviar mensagem, fazer upload, pagamento,
-exclusão, escrita em banco ou chamada externa com efeito exige autorização
-específica. Não usar produção quando local, preview ou staging provarem o mesmo
-comportamento. Redigir segredos, credenciais, PII e conteúdo de cliente de
-screenshots, arquivos e respostas; se a redação destruir a prova, registrar a
-limitação em vez de expor o dado.
+Before interacting, confirm the environment and separate read-only navigation from
+mutable operations. Submitting a form, sending a message, uploading, paying,
+deleting, writing to a database, or making an external call with effects requires
+specific authorization. Do not use production when local, preview, or staging can prove the same
+behavior. Redact secrets, credentials, PII, and customer content from
+screenshots, files, and responses; if redaction destroys the evidence, record the
+limitation instead of exposing the data.
 
-Para `artefato visual`, analisar apenas o screenshot ou vídeo fornecido. Para
-`código apenas`, inspecionar estrutura e risco potencial sem exigir execução ou
-captura e sem afirmar resultado renderizado.
+For a `visual artifact`, analyze only the supplied screenshot or video. For
+`code only`, inspect structure and potential risk without requiring execution or
+capture and without claiming a rendered result.
 
-Quando o escopo for responsivo e o projeto não definir breakpoints ou viewports de
-teste, usar `375×812`, `768×1024` e `1280×800` como sondas reproduzíveis de
-estreito, intermediário e amplo. Elas são fallbacks de investigação, não novos
-breakpoints nem matriz obrigatória; reduzir ou ampliar a amostra conforme risco,
-plataforma e superfícies afetadas.
+When the scope is responsive and the project defines no breakpoints or test
+viewports, use `375×812`, `768×1024`, and `1280×800` as reproducible probes for
+narrow, intermediate, and wide. They are investigative fallbacks, not new
+breakpoints or a mandatory matrix; reduce or expand the sample according to risk,
+platform, and affected surfaces.
 
-Revisão não edita por padrão. Sem autorização, manter capturas em local temporário fora do alvo ou apresentá-las na conversa. Persistir screenshots ou relatório no projeto somente em caminho autorizado e coerente com suas convenções.
+Review does not edit by default. Without authorization, keep captures in a temporary location outside the target or present them in the conversation. Persist screenshots or a report in the project only at an authorized path consistent with its conventions.
 
-Perfis disponíveis:
+Available profiles:
 
-1. **Runtime completo:** app executável, superfícies e estados alcançáveis.
-2. **Runtime parcial:** alegações limitadas ao que foi alcançado.
-3. **Artefato visual:** apenas o que está visível no screenshot ou vídeo fornecido.
-4. **Código apenas:** estrutura e risco potencial, sem afirmar qualidade visual renderizada.
+1. **Full runtime:** executable app, reachable surfaces and states.
+2. **Partial runtime:** claims limited to what was reached.
+3. **Visual artifact:** only what is visible in the supplied screenshot or video.
+4. **Code only:** structure and potential risk, without claiming rendered visual quality.
 
-Antes de declarar validação final, exigir alvo executável, entrada conhecida, estado/dados reproduzíveis, viewport/tema definidos e critérios anteriores. Caso contrário, rotular revisão de plano, estática ou de protótipo e declarar o que ela não prova.
+Before declaring final validation, require an executable target, known input, reproducible state/data, defined viewport/theme, and prior criteria. Otherwise, label the review as a plan, static, or prototype review and state what it does not prove.
 
-Criar matriz proporcional por superfície, criticidade, estados, viewports, tema/input, evidência e disposição. Usar `coberto`, `parcial`, `bloqueado`, `não exercitado` ou `não aplicável`; não exigir produto cartesiano de combinações.
+Create a proportional matrix by surface, criticality, states, viewports, theme/input, evidence, and disposition. Use `covered`, `partial`, `blocked`, `not exercised`, or `not applicable`; do not require the Cartesian product of combinations.
 
-## 7. Passes separados
+## 7. Separate passes
 
-Fazer dois passes independentes antes da síntese:
+Conduct two independent passes before synthesis:
 
-1. **Visual/UX, sem consultar detector ou checklist de estilo:** função, conteúdo, tarefa, hierarquia, linguagem, densidade e recuperação.
-2. **Técnico/determinístico:** teclado/foco, semântica/leitor de tela, contraste/forced colors, zoom/reflow/text spacing, motion/reduced motion, performance e regressões.
+1. **Visual/UX, without consulting a detector or style checklist:** function, content, task, hierarchy, language, density, and recovery.
+2. **Technical/deterministic:** keyboard/focus, semantics/screen reader, contrast/forced colors, zoom/reflow/text spacing, motion/reduced motion, performance, and regressions.
 
-Para cada candidato, aplicar o gate:
+For each candidate, apply the gate:
 
-1. qual contrato, tarefa ou requisito é relevante;
-2. se o caminho/componente está alcançável no runtime;
-3. qual correção a evidência realmente determina;
-4. qual observação derrotaria o achado.
+1. which contract, task, or requirement is relevant;
+2. whether the path/component is reachable in the runtime;
+3. which correction the evidence actually determines;
+4. which observation would defeat the finding.
 
-Exercitar cenários representativos: iniciante e experiente, teclado e leitor de tela, mobile com interrupção, erro/undo/recuperação e conteúdo extremo. Não substituir isso por limites numéricos universais.
+Exercise representative scenarios: novice and experienced user, keyboard and screen reader, mobile with interruption, error/undo/recovery, and extreme content. Do not replace this with universal numerical limits.
 
-No passe de conteúdo, confirmar reconhecimento em vez de memorização, termos do usuário, voz ativa, nome consistente da ação em todo o fluxo e numeração reservada a sequências reais. No passe visual/técnico, confirmar a cadeia `primitivo → semântico → componente` em consumidores e estados reais.
+In the content pass, confirm recognition rather than recall, user terminology, active voice, a consistent name for the action throughout the flow, and numbering reserved for real sequences. In the visual/technical pass, confirm the `primitive → semantic → component` chain in real consumers and states.
 
-Quando tokens forem alterados, verificar aliases, fonte versus output gerado, consumidores representativos, modos e estados. Quando múltiplos temas estiverem no escopo, cruzar estados críticos com ao menos um viewport estreito e um amplo, incluindo foco, erro, disabled, loading, overlays, mídia, forced colors e reduced motion quando aplicáveis.
+When tokens are changed, verify aliases, source versus generated output, representative consumers, modes, and states. When multiple themes are in scope, cross critical states with at least one narrow and one wide viewport, including focus, error, disabled, loading, overlays, media, forced colors, and reduced motion when applicable.
 
-Ligar sintoma renderizado à causa técnica e procurar contraprova. Screenshot não prova sozinho a causa; código não prova sozinho o resultado visual.
+Connect the rendered symptom to the technical cause and look for disconfirming evidence. A screenshot alone does not prove the cause; code alone does not prove the visual result.
 
-## 8. Comparação antes/depois
+## 8. Before/after comparison
 
-Para cada mudança, registrar:
+For each change, record:
 
-- problema anterior;
-- evidência;
-- decisão;
-- resultado observável;
-- regressão potencial;
-- validação executada.
+- previous problem;
+- evidence;
+- decision;
+- observable outcome;
+- potential regression;
+- validation performed.
 
-Não declarar “melhor” apenas por preferência. Comparar tarefa, tempo, erro, legibilidade, acesso, densidade e coerência.
+Do not declare “better” based on preference alone. Compare task, time, error, legibility, access, density, and consistency.
 
-Quando houver artefatos do fluxo, comparar tarefa, brief, arquitetura da informação, tokens, plano, implementação e runtime. Classificar divergência como defeito, decisão posterior válida, artefato superado, ambiguidade ou lacuna de prova.
+When flow artifacts exist, compare the task, brief, information architecture, tokens, plan, implementation, and runtime. Classify divergence as a defect, valid later decision, superseded artifact, ambiguity, or evidence gap.
 
-## 9. Gate humano
+## 9. Human gate
 
-Solicitar aprovação antes de:
+Request approval before:
 
-- mudar identidade, navegação principal ou tese de composição;
-- substituir design system;
-- alterar muitas telas;
-- remover padrão reconhecível;
-- escolher entre alternativas com tradeoffs de produto;
-- aceitar mudança visual ampla mesmo quando tecnicamente válida.
+- changing identity, primary navigation, or composition thesis;
+- replacing the design system;
+- changing many screens;
+- removing a recognizable pattern;
+- choosing among alternatives with product tradeoffs;
+- accepting a broad visual change even when technically valid.
 
-Bloquear entrega diante de falha funcional, perda de dados/foco, ação primária oculta, conteúdo inventado, overflow global, estado só por cor ou regressão WCAG aplicável.
+Block delivery for a functional failure, loss of data/focus, hidden primary action, fabricated content, global overflow, state communicated only by color, or applicable WCAG regression.
 
-## 10. Relatório
+## 10. Report
 
-Usar [design-review-template.md](design-review-template.md) para revisão formal. Separar severidade, confiança, prioridade e gate. Incluir perfil de evidência, cobertura, manifesto de capturas, fonte de verdade, screenshot/viewport/estado/tema, componente/arquivo/linha, desvio, impacto, contraprova, correção sugerida, risco e critérios de aceitação. Registrar decisões eficazes que devem ser preservadas e declarar o que não foi testado.
+Use [design-review-template.md](design-review-template.md) for a formal review. Separate severity, confidence, priority, and gate. Include the evidence profile, coverage, capture manifest, source of truth, screenshot/viewport/state/theme, component/file/line, deviation, impact, disconfirming evidence, suggested fix, risk, and acceptance criteria. Record effective decisions that must be preserved and state what was not tested.
 
-Emitir IDs `ADR-*` para achados sustentados. Revisão termina no relatório; oferecer aplicação somente após seleção explícita dos IDs, preferencialmente por `$anti-ai-remediate`.
+Emit `ADR-*` IDs for supported findings. Review ends with the report; offer application only after explicit selection of IDs, preferably through `$anti-ai-remediate`.

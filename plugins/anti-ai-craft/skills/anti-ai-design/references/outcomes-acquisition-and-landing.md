@@ -1,160 +1,160 @@
-# Aquisição, proposta e páginas de entrada
+# Acquisition, proposition, and entry pages
 
-## Sumário
+## Summary
 
-- [ADO-021 — Começar pelo problema e pelo público](#ado-021--começar-pelo-problema-e-pelo-público)
-- [ADO-022 — Adequar a mensagem ao estágio de decisão](#ado-022--adequar-a-mensagem-ao-estágio-de-decisão)
-- [ADO-023 — Tornar a primeira dobra autoexplicativa](#ado-023--tornar-a-primeira-dobra-autoexplicativa)
-- [ADO-024 — Nomear a consequência do CTA](#ado-024--nomear-a-consequência-do-cta)
-- [ADO-025 — Sustentar promessas com prova verificável](#ado-025--sustentar-promessas-com-prova-verificável)
-- [ADO-026 — Qualificar sem ocultar informação material](#ado-026--qualificar-sem-ocultar-informação-material)
-- [ADO-027 — Diminuir esforço decisório legítimo](#ado-027--diminuir-esforço-decisório-legítimo)
-- [ADO-028 — Projetar a ação principal para ser encontrada](#ado-028--projetar-a-ação-principal-para-ser-encontrada)
-- [ADO-029 — Corrigir percepção antes de polir a copy](#ado-029--corrigir-percepção-antes-de-polir-a-copy)
-- [ADO-030 — Tratar referências externas como hipóteses](#ado-030--tratar-referências-externas-como-hipóteses)
-- [ADO-031 — Medir a jornada inteira, não a aparência isolada](#ado-031--medir-a-jornada-inteira-não-a-aparência-isolada)
-- [ADO-032 — Preservar saídas necessárias no caminho comercial](#ado-032--preservar-saídas-necessárias-no-caminho-comercial)
+- [ADO-021 — Start with the problem and audience](#ado-021--start-with-the-problem-and-audience)
+- [ADO-022 — Match the message to the decision stage](#ado-022--match-the-message-to-the-decision-stage)
+- [ADO-023 — Make the first viewport self-explanatory](#ado-023--make-the-first-viewport-self-explanatory)
+- [ADO-024 — Name the consequence of the CTA](#ado-024--name-the-consequence-of-the-cta)
+- [ADO-025 — Support promises with verifiable evidence](#ado-025--support-promises-with-verifiable-evidence)
+- [ADO-026 — Qualify without hiding material information](#ado-026--qualify-without-hiding-material-information)
+- [ADO-027 — Reduce legitimate decision effort](#ado-027--reduce-legitimate-decision-effort)
+- [ADO-028 — Design the primary action to be found](#ado-028--design-the-primary-action-to-be-found)
+- [ADO-029 — Correct perception before polishing copy](#ado-029--correct-perception-before-polishing-copy)
+- [ADO-030 — Treat external references as hypotheses](#ado-030--treat-external-references-as-hypotheses)
+- [ADO-031 — Measure the entire journey, not isolated appearance](#ado-031--measure-the-entire-journey-not-isolated-appearance)
+- [ADO-032 — Preserve necessary exits in the commercial path](#ado-032--preserve-necessary-exits-in-the-commercial-path)
 
-## ADO-021 — Começar pelo problema e pelo público
+## ADO-021 — Start with the problem and audience
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** a tarefa envolver página de entrada, campanha, proposta comercial ou primeiro contato de um produto digital.
+**Apply when.** The task involves an entry page, campaign, commercial proposition, or a digital product's first contact.
 
-**Decisão.** definir antes da composição qual grupo se pretende atender, qual situação ele quer resolver, que linguagem reconhece e qual resultado concreto o produto pode entregar. Fazer o primeiro argumento responder a essa situação, não à categoria interna do produto.
+**Decision.** Before composition, define which group is to be served, which situation it wants to resolve, which language it recognizes, and which concrete outcome the product can deliver. Make the first argument respond to that situation, not to the product's internal category.
 
-**Prova.** registrar o ICP, a tarefa, a dor ou objetivo, as evidências disponíveis e a relação entre promessa, funcionalidade real e próximo passo.
+**Evidence.** Record the ICP, task, pain point or objective, available evidence, and relationship among promise, real functionality, and next step.
 
-**Evitar.** título intercambiável, categoria genérica, promessa que serve a qualquer pessoa ou visual escolhido antes de saber para quem a página fala.
+**Avoid.** An interchangeable title, generic category, promise that serves anyone, or visual direction selected before knowing whom the page addresses.
 
-## ADO-022 — Adequar a mensagem ao estágio de decisão
+## ADO-022 — Match the message to the decision stage
 
-**Força.** padrão
+**Strength.** default
 
-**Aplicar quando.** pessoas chegam com conhecimento desigual sobre o problema, alternativas ou produto.
+**Apply when.** People arrive with unequal knowledge about the problem, alternatives, or product.
 
-**Decisão.** para quem ainda não reconhece a necessidade, explicar sintoma e impacto; para quem já compara soluções, esclarecer critérios, diferenças e riscos; para quem conhece o produto, reduzir dúvida prática e tornar a ação previsível.
+**Decision.** For those who do not yet recognize the need, explain the symptom and impact; for those already comparing solutions, clarify criteria, differences, and risks; for those who know the product, reduce practical doubt and make the action predictable.
 
-**Prova.** relacionar o estágio assumido a pesquisa, termos de busca, origem do tráfego, entrevistas, tickets ou comportamento observado; declarar a lacuna quando a evidência não existir.
+**Evidence.** Relate the assumed stage to research, search terms, traffic source, interviews, tickets, or observed behavior; state the gap when evidence does not exist.
 
-**Evitar.** apresentar comparação técnica a quem ainda não entende a dor, repetir explicações introdutórias para quem já decidiu ou misturar mensagens de estágios incompatíveis na mesma prioridade visual.
+**Avoid.** Presenting a technical comparison to someone who does not yet understand the pain point, repeating introductory explanations for someone who has already decided, or mixing messages for incompatible stages at the same visual priority.
 
-## ADO-023 — Tornar a primeira dobra autoexplicativa
+## ADO-023 — Make the first viewport self-explanatory
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** a pessoa precisa decidir rapidamente se continua, pede uma demonstração, inicia uma avaliação ou cria conta.
+**Apply when.** A person must quickly decide whether to continue, request a demonstration, start a trial, or create an account.
 
-**Decisão.** garantir que a área inicial comunique o que é oferecido, para quem, qual mudança prática pode ocorrer, como o produto funciona em nível suficiente e qual ação é segura tomar agora. Mostrar o produto quando isso diminuir ambiguidade.
+**Decision.** Ensure that the initial area communicates what is offered, for whom, which practical change may occur, how the product works at a sufficient level, and which action is safe to take now. Show the product when doing so reduces ambiguity.
 
-**Prova.** executar revisão com pessoa sem contexto ou teste de compreensão curta; verificar se ela identifica proposta, público, benefício e próximo passo sem ajuda.
+**Evidence.** Conduct a review with a person lacking context or a short comprehension test; verify that they identify the proposition, audience, benefit, and next step without help.
 
-**Evitar.** hero abstrato, imagem decorativa sem relação com o produto, frase de efeito sem consequência e CTA cuja ação não seja compreensível.
+**Avoid.** An abstract hero, decorative image unrelated to the product, catchphrase without consequence, or CTA whose action is incomprehensible.
 
-## ADO-024 — Nomear a consequência do CTA
+## ADO-024 — Name the consequence of the CTA
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** houver CTA de cadastro, teste, demonstração, compra, importação ou ação que altere o estado da pessoa.
+**Apply when.** There is a CTA for sign-up, trial, demonstration, purchase, import, or an action that changes the person's state.
 
-**Decisão.** escrever o CTA e seu apoio para tornar explícitos o resultado imediato, o esforço esperado, a duração relevante e qualquer compromisso material, como cobrança, contato comercial ou dados solicitados.
+**Decision.** Write the CTA and supporting text to make the immediate outcome, expected effort, relevant duration, and any material commitment explicit, such as billing, sales contact, or requested data.
 
-**Prova.** confirmar por inspeção que uma pessoa consegue antecipar o que ocorre após o clique e que o fluxo cumpre exatamente essa expectativa.
+**Evidence.** Confirm by inspection that a person can anticipate what happens after the click and that the flow fulfills that exact expectation.
 
-**Evitar.** verbos vagos, pressão ambígua, custo ou renovação escondidos, texto auxiliar inacessível e promessa diferente da tela seguinte.
+**Avoid.** Vague verbs, ambiguous pressure, hidden cost or renewal, inaccessible supporting text, and a promise different from the next screen.
 
-## ADO-025 — Sustentar promessas com prova verificável
+## ADO-025 — Support promises with verifiable evidence
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** a página usar avaliações, resultados, logos, números, comparações, depoimentos ou afirmações de desempenho.
+**Apply when.** The page uses ratings, results, logos, numbers, comparisons, testimonials, or performance claims.
 
-**Decisão.** usar somente prova autorizada, datada quando necessário, atribuível e proporcional ao claim. Explicar limites relevantes e separar ilustração, fixture, projeção e dado observado.
+**Decision.** Use only evidence that is authorized, dated when necessary, attributable, and proportionate to the claim. Explain relevant limits and separate illustrations, fixtures, projections, and observed data.
 
-**Prova.** manter origem, permissão, método de cálculo e contexto da evidência; confirmar que cada número e caso apresentado corresponde ao produto e ao público atuais.
+**Evidence.** Maintain the origin, permission, calculation method, and context of the evidence; confirm that each number and case presented corresponds to the current product and audience.
 
-**Evitar.** precisão inventada, depoimento sintético apresentado como real, selo sem critério, avaliação manipulada, marca sem autorização ou resultado isolado tratado como garantia.
+**Avoid.** Fabricated precision, a synthetic testimonial presented as real, a badge without criteria, a manipulated rating, a brand without authorization, or an isolated outcome treated as a guarantee.
 
-## ADO-026 — Qualificar sem ocultar informação material
+## ADO-026 — Qualify without hiding material information
 
-**Força.** padrão
+**Strength.** default
 
-**Aplicar quando.** a oferta é adequada apenas a certos perfis, faixas de uso, orçamentos, regiões, integrações ou requisitos técnicos.
+**Apply when.** The offer is suitable only for certain profiles, usage ranges, budgets, regions, integrations, or technical requirements.
 
-**Decisão.** deixar critérios importantes visíveis e, se uma pergunta inicial for necessária, pedir apenas o dado que muda a rota, a elegibilidade ou o atendimento. Usar linguagem que permita autoqualificação consciente.
+**Decision.** Make important criteria visible and, if an initial question is necessary, ask only for data that changes routing, eligibility, or service. Use language that enables conscious self-qualification.
 
-**Prova.** demonstrar a conexão entre cada critério ou pergunta e uma decisão real do fluxo, da oferta ou do suporte.
+**Evidence.** Demonstrate the connection between each criterion or question and a real flow, offer, or support decision.
 
-**Evitar.** formulário longo para curiosidade comercial, esconder preço ou limitação para capturar lead, segmentação baseada em dado sensível sem necessidade e rotas sem explicação após a resposta.
+**Avoid.** A long form for commercial curiosity, hiding price or a limitation to capture a lead, segmentation based on sensitive data without need, and routes without an explanation after the answer.
 
-## ADO-027 — Diminuir esforço decisório legítimo
+## ADO-027 — Reduce legitimate decision effort
 
-**Força.** padrão
+**Strength.** default
 
-**Aplicar quando.** a pessoa recebe muitas opções, campos, blocos de texto ou etapas antes de chegar ao valor principal.
+**Apply when.** A person receives many options, fields, text blocks, or stages before reaching the primary value.
 
-**Decisão.** remover, adiar ou agrupar decisões que não são necessárias naquele momento; dividir escolhas complexas por consequência; oferecer uma recomendação justificável quando o contexto permitir, preservando escolha e reversão.
+**Decision.** Remove, defer, or group decisions unnecessary at that moment; divide complex choices by consequence; offer a justifiable recommendation when context permits, preserving choice and reversibility.
 
-**Prova.** mapear cada campo, escolha e bloco para uma necessidade da pessoa ou do sistema; revisar abandono, erro, tempo de tarefa e compreensão após a mudança.
+**Evidence.** Map each field, choice, and block to a need of the person or system; review abandonment, error, task time, and comprehension after the change.
 
-**Evitar.** esconder alternativas relevantes, usar default como consentimento, criar urgência falsa ou reduzir informação necessária apenas para elevar conversão aparente.
+**Avoid.** Hiding relevant alternatives, using a default as consent, creating false urgency, or removing necessary information merely to increase apparent conversion.
 
-## ADO-028 — Projetar a ação principal para ser encontrada
+## ADO-028 — Design the primary action to be found
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** uma página possui uma ação que inicia o caminho mais importante para a pessoa e para o produto.
+**Apply when.** A page has an action that starts the most important path for both the person and the product.
 
-**Decisão.** conceder à ação primária contraste, posição, texto, tamanho e espaço suficientes para que seja percebida sem competir com controles secundários. Manter ações de risco diferenciadas e acessíveis.
+**Decision.** Give the primary action enough contrast, position, text, size, and space to be noticed without competing with secondary controls. Keep risky actions differentiated and accessible.
 
-**Prova.** revisar em viewport estreito, intermediário e amplo, por teclado e com zoom; confirmar que a ação pode ser localizada sem depender apenas de cor, hover ou memória.
+**Evidence.** Review at narrow, intermediate, and wide viewports, by keyboard and with zoom; confirm that the action can be located without depending only on color, hover, or memory.
 
-**Evitar.** CTA principal em menu, excesso de ações com o mesmo peso, contraste insuficiente, alvo pequeno, ícone sem nome acessível ou ação destrutiva com aparência de confirmação positiva.
+**Avoid.** A primary CTA in a menu, too many actions with equal weight, insufficient contrast, a small target, an icon without an accessible name, or a destructive action that looks like positive confirmation.
 
-## ADO-029 — Corrigir percepção antes de polir a copy
+## ADO-029 — Correct perception before polishing copy
 
-**Força.** padrão
+**Strength.** default
 
-**Aplicar quando.** há pressão para reescrever títulos repetidamente enquanto a página permanece difícil de ler, confiar ou percorrer.
+**Apply when.** There is pressure to repeatedly rewrite headings while the page remains difficult to read, trust, or navigate.
 
-**Decisão.** verificar primeiro legibilidade, contraste, ordem de leitura, posição dos alvos, coerência entre promessa e mecanismo, evidência de confiança e previsibilidade da próxima tela. Só então refinar o texto.
+**Decision.** First verify legibility, contrast, reading order, target position, consistency between promise and mechanism, trust evidence, and predictability of the next screen. Only then refine the text.
 
-**Prova.** registrar problemas encontrados em leitura, contraste, foco, interação, confiança e compreensão; comparar o mesmo conteúdo em uma hierarquia corrigida antes de atribuir o resultado à copy.
+**Evidence.** Record issues found in reading, contrast, focus, interaction, trust, and comprehension; compare the same content in a corrected hierarchy before attributing the outcome to copy.
 
-**Evitar.** tratar texto como solução isolada, depender de cor sem semântica, alterar claims sem revisar sua veracidade ou assumir que acessibilidade é apenas uma verificação final.
+**Avoid.** Treating text as an isolated solution, depending on color without semantics, changing claims without reviewing their truthfulness, or assuming accessibility is only a final check.
 
-## ADO-030 — Tratar referências externas como hipóteses
+## ADO-030 — Treat external references as hypotheses
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** houver desejo de reproduzir a estrutura de uma página, campanha ou concorrente que parece performar bem.
+**Apply when.** There is a desire to reproduce the structure of a page, campaign, or competitor that appears to perform well.
 
-**Decisão.** decompor a referência em público, contexto, promessa, prova, objeções, mecanismo, canal, dados e restrições; adotar somente o que continua verdadeiro para o produto atual e documentar o que foi rejeitado.
+**Decision.** Decompose the reference into audience, context, promise, proof, objections, mechanism, channel, data, and constraints; adopt only what remains true for the current product and document what was rejected.
 
-**Prova.** relacionar cada decisão adotada a uma necessidade local, conteúdo real, pesquisa ou métrica; testar a versão integrada em vez de assumir transferência de resultado.
+**Evidence.** Relate each adopted decision to a local need, real content, research, or metric; test the integrated version instead of assuming the outcome will transfer.
 
-**Evitar.** copiar layout, texto, paleta, urgência, depoimentos ou ordem de blocos como se a aparência explicasse o desempenho.
+**Avoid.** Copying layout, text, palette, urgency, testimonials, or block order as though appearance explained performance.
 
-## ADO-031 — Medir a jornada inteira, não a aparência isolada
+## ADO-031 — Measure the entire journey, not isolated appearance
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** uma página de aquisição, proposta ou teste estiver sendo criada, revisada ou comparada.
+**Apply when.** An acquisition, proposition, or trial page is being created, reviewed, or compared.
 
-**Decisão.** definir hipótese e indicador de sucesso que conectem origem, compreensão, ação, ativação posterior, qualidade do lead e retenção quando aplicável. Analisar também efeitos negativos, como suporte, desistência, erro ou público inadequado.
+**Decision.** Define a hypothesis and success indicator connecting origin, comprehension, action, subsequent activation, lead quality, and retention when applicable. Also analyze negative effects such as support load, abandonment, errors, or an unsuitable audience.
 
-**Prova.** declarar baseline, segmento, período, instrumentação, limitações e critério de decisão; se não houver volume para experimento quantitativo, usar pesquisa qualitativa estruturada e não alegar causalidade.
+**Evidence.** State the baseline, segment, period, instrumentation, limitations, and decision criterion; if there is insufficient volume for a quantitative experiment, use structured qualitative research and do not claim causality.
 
-**Evitar.** aprovar por screenshot, usar taxa isolada como vitória, encerrar teste ao primeiro resultado favorável ou confundir mais cadastros com mais valor entregue.
+**Avoid.** Approving from a screenshot, using an isolated rate as a win, ending a test at the first favorable result, or confusing more sign-ups with more value delivered.
 
-## ADO-032 — Preservar saídas necessárias no caminho comercial
+## ADO-032 — Preserve necessary exits in the commercial path
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** for reduzida a dispersão de uma landing page, checkout, trial ou fluxo de conversão.
+**Apply when.** Distraction is reduced on a landing page, checkout, trial, or conversion flow.
 
-**Decisão.** simplificar caminhos secundários sem remover acesso a preço, termos, privacidade, acessibilidade, suporte, recuperação, segurança ou informações necessárias para uma escolha informada. Manter esses recursos claros e alcançáveis.
+**Decision.** Simplify secondary paths without removing access to pricing, terms, privacy, accessibility, support, recovery, security, or information necessary for an informed choice. Keep these resources clear and reachable.
 
-**Prova.** revisar o fluxo com as obrigações aplicáveis, cenários de teclado e leitor de tela, e confirmar que a pessoa consegue interromper, obter ajuda e compreender compromisso antes de concluir.
+**Evidence.** Review the flow against applicable obligations and keyboard and screen-reader scenarios, and confirm that the person can interrupt, get help, and understand the commitment before completing it.
 
-**Evitar.** becos sem saída, links legais escondidos, cancelamento inacessível, suporte bloqueado, navegação que depende de mouse ou redução de informação material para elevar uma métrica.
+**Avoid.** Dead ends, hidden legal links, inaccessible cancellation, blocked support, navigation that depends on a mouse, or removal of material information to improve a metric.

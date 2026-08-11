@@ -1,114 +1,114 @@
-# Checklist de auditoria
+# Audit checklist
 
-## Sumário
+## Summary
 
-- [Escopo e fontes de verdade](#escopo-e-fontes-de-verdade)
-- [Ledger e fechamento](#ledger-e-fechamento)
-- [Interface e experiência](#interface-e-experiência)
-- [Acessibilidade](#acessibilidade)
-- [Código e comportamento](#código-e-comportamento)
-- [Arquitetura e manutenção](#arquitetura-e-manutenção)
-- [Testes e documentação](#testes-e-documentação)
-- [Classificação](#classificação)
-- [Evidência por família](#evidência-por-família)
+- [Scope and sources of truth](#scope-and-sources-of-truth)
+- [Ledger and closure](#ledger-and-closure)
+- [Interface and experience](#interface-and-experience)
+- [Accessibility](#accessibility)
+- [Code and behavior](#code-and-behavior)
+- [Architecture and maintainability](#architecture-and-maintainability)
+- [Tests and documentation](#tests-and-documentation)
+- [Classification](#classification)
+- [Evidence by family](#evidence-by-family)
 
-## Escopo e fontes de verdade
+## Scope and sources of truth
 
-- [ ] Tipo de alvo, raiz, escopo, objetivo, autorização e não edição confirmados.
-- [ ] Instruções, README, especificação, design/code guides e configs lidos.
-- [ ] Se Git existir, branch, HEAD, status, alterações preexistentes, upstream/alvo e `merge-base` exato estão registrados; fora de Git, os campos estão marcados como não aplicáveis.
-- [ ] O baseline não foi presumido como `main`, `HEAD^` ou commit anterior; o SHA e o comando usados para o diff foram registrados.
-- [ ] Em diff, itens introduzidos/agravados estão separados da dívida preexistente.
-- [ ] Usuários, tarefas, dados, estados e invariantes identificados.
-- [ ] Artefatos de fluxo relevantes têm estado, autoridade, atualidade e vínculo com o código verificados.
-- [ ] Comandos oficiais e ambiente conhecidos.
-- [ ] Comandos que escreveriam caches, snapshots, lockfiles, bancos ou artefatos no alvo foram evitados.
+- [ ] Target type, root, scope, objective, authorization, and no-editing constraint confirmed.
+- [ ] Instructions, README, specification, design/code guides, and configs read.
+- [ ] If Git exists, branch, HEAD, status, pre-existing changes, upstream/target, and exact `merge-base` are recorded; outside Git, the fields are marked as not applicable.
+- [ ] The baseline was not assumed to be `main`, `HEAD^`, or the previous commit; the SHA and command used for the diff were recorded.
+- [ ] In a diff, introduced/worsened items are separated from pre-existing technical debt.
+- [ ] Users, tasks, data, states, and invariants identified.
+- [ ] Relevant flow artifacts have their status, authority, whether they are current, and their relationship to the code verified.
+- [ ] Official commands and environment known.
+- [ ] Commands that would write caches, snapshots, lockfiles, databases, or artifacts to the target were avoided.
 
-## Ledger e fechamento
+## Ledger and closure
 
-- [ ] Todo candidato tem ID, localização, família, método de validação, controle examinado e disposição.
-- [ ] Disposição é confirmado, suprimido, não aplicável, depende de infraestrutura, não verificado ou duplicado.
-- [ ] Contraprova mais forte e lacuna de prova estão registradas.
-- [ ] Falha de ambiente/setup não foi usada como contraprova.
-- [ ] Um caminho vizinho seguro não suprimiu uma instância independente.
-- [ ] Duplicatas compartilham causa/controle, comportamento, impacto e correção.
-- [ ] A auditoria continuou por todo o escopo depois do primeiro achado; qualquer corte está registrado como área não auditada.
+- [ ] Every candidate has an ID, location, family, validation method, examined control, and disposition.
+- [ ] Disposition is confirmed, suppressed, not applicable, depends on infrastructure, unverified, or duplicate.
+- [ ] Strongest disconfirming evidence and evidence gap are recorded.
+- [ ] Environment/setup failure was not used as disconfirming evidence.
+- [ ] A safe adjacent path did not suppress an independent instance.
+- [ ] Duplicates share cause/control, behavior, impact, and fix.
+- [ ] The audit continued across the entire scope after the first finding; any cutoff is recorded as an unaudited area.
 
-## Interface e experiência
+## Interface and experience
 
-- [ ] Tarefa principal e hierarquia correspondem ao produto.
-- [ ] Composição, densidade, cards, bento, sidebar, topbar e hero têm função.
-- [ ] Tabelas, listas, formulários, modais, tabs, menus e busca usam forma adequada.
-- [ ] Kebab contém apenas ações secundárias coerentes; primárias ficam visíveis.
-- [ ] Conteúdo, microcopy, dados e estados são reais.
-- [ ] Tipografia, cor, sombra, borda, radius, ícones e movimento têm papéis.
-- [ ] Desktop, tablet e mobile repriorizam corretamente.
-- [ ] Antes/depois ou screenshots reais foram comparados quando disponíveis.
-- [ ] Perfil de evidência e matriz superfície/rota × estado × viewport × tema/input estão registrados de forma proporcional ao risco.
-- [ ] Mapa de superfícies, navegação por papel, deep links, URL/redirects, retorno, crescimento e persistência foram exercitados quando aplicáveis.
-- [ ] Duplicação visual ou reuso proposto foi validado contra componente real, API, alcance e limitações; sem inferência apenas por aparência.
-- [ ] Fonte autoritativa de tokens, outputs gerados, camadas, aliases, consumidores, hardcodes e paridade entre modos/estados foram examinados quando tokens estavam no escopo.
+- [ ] The primary task and hierarchy match the product.
+- [ ] Composition, density, cards, bento, sidebar, topbar, and hero have a function.
+- [ ] Tables, lists, forms, modals, tabs, menus, and search use an appropriate form.
+- [ ] Kebab menus contain only coherent secondary actions; primary actions remain visible.
+- [ ] Content, microcopy, data, and states are real.
+- [ ] Typography, color, shadow, border, radius, icons, and motion have roles.
+- [ ] Desktop, tablet, and mobile reprioritize correctly.
+- [ ] Before/after views or actual screenshots were compared when available.
+- [ ] The evidence profile and surface/route × state × viewport × theme/input matrix are recorded in proportion to the risk.
+- [ ] The surface map, role-based navigation, deep links, URLs/redirects, return paths, growth, and persistence were exercised when applicable.
+- [ ] Visual duplication or proposed reuse was validated against the actual component, API, reach, and limitations; no inference based only on appearance.
+- [ ] The authoritative token source, generated outputs, layers, aliases, consumers, hardcodes, and parity across modes/states were examined when tokens were in scope.
 
-## Acessibilidade
+## Accessibility
 
-- [ ] Semântica, nome, role, value e state.
-- [ ] Teclado, foco, Escape e retorno de foco.
-- [ ] Modal, tabs, menu e tooltip completos.
-- [ ] Labels, erros e recuperação de formulário.
-- [ ] Contraste, cor não exclusiva e forced colors.
-- [ ] Alvos, reflow 320 CSS px, 200%, 400% e text spacing.
-- [ ] Reduced motion e conteúdo automático.
-- [ ] Status/live regions sem ruído.
+- [ ] Semantics, name, role, value, and state.
+- [ ] Keyboard, focus, Escape, and focus return.
+- [ ] Complete modal, tabs, menu, and tooltip behavior.
+- [ ] Labels, errors, and form recovery.
+- [ ] Contrast, non-exclusive use of color, and forced colors.
+- [ ] Targets, reflow at 320 CSS px, 200%, 400%, and text spacing.
+- [ ] Reduced motion and automatic content.
+- [ ] Status/live regions without noise.
 
-## Código e comportamento
+## Code and behavior
 
-- [ ] Requisitos/invariantes ligados a caminhos executáveis.
-- [ ] APIs, imports, dependências e configuração existem.
-- [ ] Sem falso sucesso, erro engolido ou fallback oculto.
-- [ ] Validação, autenticação e autorização corretas.
-- [ ] Mutação, transação, rollback e idempotência.
-- [ ] Concorrência, async, cancelamento, timeout e listeners.
-- [ ] Estado impossível e magic values.
-- [ ] Segredos, paths absolutos e dados sensíveis.
-- [ ] Performance, cache e logging têm evidência/necessidade.
-- [ ] Evidência forma entrada/caminho executável → invariante violada → resultado observável.
+- [ ] Requirements/invariants linked to executable paths.
+- [ ] APIs, imports, dependencies, and configuration exist.
+- [ ] No false success, swallowed error, or hidden fallback.
+- [ ] Validation, authentication, and authorization are correct.
+- [ ] Mutation, transaction, rollback, and idempotency.
+- [ ] Concurrency, async, cancellation, timeout, and listeners.
+- [ ] Impossible state and magic values.
+- [ ] Secrets, absolute paths, and sensitive data.
+- [ ] Performance, caching, and logging have supporting evidence or a need.
+- [ ] Evidence forms input/executable path → violated invariant → observable outcome.
 
-## Arquitetura e manutenção
+## Architecture and maintainability
 
-- [ ] Arquitetura e padrões locais preservados.
-- [ ] Wrappers/helpers/factories/interfaces agregam valor.
-- [ ] Sem abstração prematura ou configuração excessiva.
-- [ ] Sem dezenas de arquivos pequenos sem ganho.
-- [ ] Duplicação, código morto e compatibilidade especulativa avaliados.
-- [ ] API pública não muda silenciosamente.
-- [ ] Comentários/docstrings não repetem nem prometem sem evidência.
+- [ ] Local architecture and patterns preserved.
+- [ ] Wrappers/helpers/factories/interfaces add value.
+- [ ] No premature abstraction or excessive configuration.
+- [ ] No dozens of small files without benefit.
+- [ ] Duplication, dead code, and speculative compatibility evaluated.
+- [ ] Public API does not change silently.
+- [ ] Comments/docstrings do not repeat or make promises without evidence.
 
-## Testes e documentação
+## Tests and documentation
 
-- [ ] Regressão reproduz o problema.
-- [ ] Happy path e falhas/limites pertinentes.
-- [ ] Mocks não confirmam a si mesmos.
-- [ ] Snapshots são pequenos e semanticamente revisados.
-- [ ] Integração cobre wiring/config/serialização/transação relevantes.
-- [ ] Comandos realmente executados e resultados registrados.
-- [ ] Docs não prometem feature inexistente.
+- [ ] The regression test reproduces the problem.
+- [ ] Happy path and relevant failures/limits.
+- [ ] Mocks do not confirm themselves.
+- [ ] Snapshots are small and semantically reviewed.
+- [ ] Integration covers relevant wiring/config/serialization/transaction behavior.
+- [ ] Commands actually executed and results recorded.
+- [ ] Documentation does not promise a nonexistent feature.
 
-## Classificação
+## Classification
 
-- [ ] Bug confirmado.
-- [ ] Acessibilidade.
-- [ ] Segurança.
-- [ ] Manutenção.
-- [ ] Aparência genérica contextual.
-- [ ] Inconsistência.
-- [ ] Decisão pendente.
-- [ ] Preferência subjetiva.
-- [ ] Falso positivo rejeitado.
+- [ ] Confirmed bug.
+- [ ] Accessibility.
+- [ ] Security.
+- [ ] Maintainability.
+- [ ] Contextual generic appearance.
+- [ ] Inconsistency.
+- [ ] Pending decision.
+- [ ] Subjective preference.
+- [ ] Rejected false positive.
 
-## Evidência por família
+## Evidence by family
 
-- [ ] Correção: entrada/caminho executável → invariante → resultado observável.
-- [ ] Segurança: fonte controlável → controle mais próximo → sink/operação → pré-condições → impacto.
-- [ ] Acessibilidade: ação/estado → semântica/operação esperada → falha observada.
-- [ ] Design: tarefa → ação/hierarquia → viewport/estado → dano concreto.
-- [ ] Fluxo de design: decisão/requisito → artefato vigente → implementação/runtime → evidência/disposição.
+- [ ] Correctness: input/executable path → invariant → observable outcome.
+- [ ] Security: controllable source → nearest control → sink/operation → preconditions → impact.
+- [ ] Accessibility: action/state → expected semantics/operation → observed failure.
+- [ ] Design: task → action/hierarchy → viewport/state → concrete harm.
+- [ ] Design flow: decision/requirement → current artifact → implementation/runtime → evidence/disposition.

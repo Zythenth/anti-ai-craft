@@ -1,27 +1,27 @@
-# Fontes e matriz de evidência
+# Sources and evidence matrix
 
-Corpus desta versão: 52 fontes públicas, incluindo 44 padrões ou guias reconhecidos e 8 pesquisas ou estudos.
+Corpus for this version: 52 public sources, including 44 recognized standards or guides and 8 research papers or studies.
 
-## Sumário
+## Summary
 
-- [Como usar evidência](#como-usar-evidência)
-- [Padrões e guidance reconhecidos](#padrões-e-guidance-reconhecidos--44)
-- [Pesquisa e estudos](#pesquisa-e-estudos--8)
-- [Critérios de aplicação](#critérios-de-aplicação)
+- [How to use evidence](#how-to-use-evidence)
+- [Recognized standards and guidance](#recognized-standards-and-guidance--44)
+- [Research and studies](#research-and-studies--8)
+- [Application criteria](#application-criteria)
 
-## Como usar evidência
+## How to use evidence
 
-1. **Normativo:** WCAG 2.2 aplicável. Pode bloquear entrega.
-2. **Pesquisa empírica:** informa risco e método; registrar amostra e limitação.
-3. **Guidance oficial:** adaptar ao produto e à plataforma; não declarar como norma universal.
-4. **Heurística não normativa:** usar apenas para formular hipóteses; exigir contexto e validação.
-5. **Preferência:** rotular e pedir aprovação quando material.
+1. **Normative:** applicable WCAG 2.2. May block delivery.
+2. **Empirical research:** informs risk and method; record sample and limitations.
+3. **Official guidance:** adapt to the product and platform; do not state as a universal norm.
+4. **Non-normative heuristic:** use only to formulate hypotheses; require context and validation.
+5. **Preference:** label it and request approval when material.
 
-Não detectar, atribuir nem especular sobre autoria ou proveniência. Popularidade, screenshots escolhidos e avaliação por outro LLM não demonstram eficácia.
+Do not detect, attribute, or speculate about authorship or provenance. Popularity, selected screenshots, and evaluation by another LLM do not demonstrate effectiveness.
 
-Em cada execução, registrar somente o que foi realmente consultado: caminho ou título exato, versão/data quando disponível, seção, decisão sustentada e limitação. Não declarar que uma coleção inteira foi lida a partir de um único documento. Manter essa rastreabilidade no relatório de trabalho, não em uma seção de créditos.
+For each execution, record only what was actually consulted: exact path or title, version/date when available, section, supported decision, and limitation. Do not claim an entire collection was read based on a single document. Keep this traceability in the work report, not in a credits section.
 
-## Padrões e guidance reconhecidos — 44
+## Recognized standards and guidance — 44
 
 - [WCAG 2.2](https://www.w3.org/TR/WCAG22/)
 - [WAI-ARIA APG — Introduction](https://www.w3.org/WAI/ARIA/apg/about/introduction/)
@@ -68,7 +68,7 @@ Em cada execução, registrar somente o que foi realmente consultado: caminho ou
 - [NN/g — Overflow menu icons](https://www.nngroup.com/videos/overflow-menu-icons/)
 - [NN/g — Visual design principles](https://www.nngroup.com/articles/principles-visual-design/)
 
-## Pesquisa e estudos — 8
+## Research and studies — 8
 
 - [Microsoft Research — Design homogenization in web vibe coding](https://www.microsoft.com/en-us/research/publication/interrogating-design-homogenization-in-web-vibe-coding/)
 - [Apple ML Research — Designer feedback for UI generation](https://machinelearning.apple.com/research/designer-feedback)
@@ -79,9 +79,9 @@ Em cada execução, registrar somente o que foi realmente consultado: caminho ou
 - [UI-Bench](https://arxiv.org/abs/2508.20410)
 - [UI2App](https://arxiv.org/abs/2607.06306)
 
-## Critérios de aplicação
+## Application criteria
 
-- Adotar tese visual antes do código, primeiro viewport intencional, estrutura ligada a conteúdo representativo do domínio, assinatura visual com contenção, escrita consistente, autocrítica e validação proporcional ao perfil de evidência.
-- Adotar mandato explícito de preservar, refinar ou redesenhar, referência dominante, integridade de mídia, contratos de estado, passes visual e técnico independentes e cenários representativos.
-- Rejeitar como absolutos quantidade fixa de cores ou fontes, stack obrigatória, duração universal de animação, risco visual obrigatório, aleatoriedade de direção, imagem obrigatória e proibição geral de gradiente ou menu.
-- Manter qualquer heurística não normativa subordinada às fontes de verdade do projeto, à acessibilidade, ao comportamento real e à validação.
+- Adopt a visual thesis before code, an intentional first viewport, structure connected to representative domain content, a restrained visual signature, consistent writing, self-critique, and validation proportionate to the evidence profile.
+- Adopt an explicit preserve, refine, or redesign mandate, a dominant reference, media integrity, state contracts, independent visual and technical passes, and representative scenarios.
+- Reject as absolutes a fixed number of colors or fonts, a mandatory stack, universal animation duration, mandatory visual risk, random direction, mandatory imagery, and a general prohibition on gradients or menus.
+- Keep every non-normative heuristic subordinate to project sources of truth, accessibility, actual behavior, and validation.

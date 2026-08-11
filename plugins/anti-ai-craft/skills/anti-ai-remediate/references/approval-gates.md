@@ -1,71 +1,71 @@
-# Gates de aprovação
+# Approval gates
 
-## Permitido pela invocação
+## Allowed by invocation
 
-Somente:
+Only:
 
-- achados explicitamente listados/aprovados;
-- arquivos e comportamento necessários;
-- testes e validações diretamente relacionados;
-- artefatos temporários seguros e removíveis, quando necessários.
+- explicitly listed/approved findings;
+- necessary files and behavior;
+- directly related tests and validations;
+- safe, removable temporary artifacts, when necessary.
 
-## Pedir nova aprovação
+## Request new approval
 
-- identidade ou navegação visual ampla;
-- mudança de API pública;
-- migração de dados;
-- dependência/framework novo;
-- atualização ampla de dependências;
-- remoção de feature/compatibilidade;
-- acesso externo, credencial ou serviço;
-- ação destrutiva ou difícil de recuperar;
-- correção que afeta área não incluída;
-- alternativa com tradeoff material de produto.
-- mudança material do plano, risco, comportamento, IDs ou escopo já aprovados.
-- mudança de navegação principal, URL pública, slug, parâmetro persistido ou estratégia de retorno;
-- troca de token global, namespace, provider, pipeline ou estratégia de tema com alcance em múltiplas superfícies, marcas, modos ou plataformas.
+- broad visual identity or navigation;
+- public API change;
+- data migration;
+- new dependency/framework;
+- broad dependency update;
+- feature/compatibility removal;
+- external access, credential, or service;
+- destructive or difficult-to-recover action;
+- fix that affects an area not included;
+- alternative with a material product trade-off.
+- material change to the already approved plan, risk, behavior, IDs, or scope.
+- change to primary navigation, public URL, slug, persisted parameter, or return strategy;
+- replacement of a global token, namespace, provider, pipeline, or theme strategy that reaches multiple surfaces, brands, modes, or platforms.
 
-## Classificar dúvidas
+## Classify questions
 
-- **Descobrível no alvo:** investigar antes de perguntar.
-- **Assumível sem alterar contrato:** declarar pressuposto e continuar.
-- **Bloqueante por autorização, produto ou risco:** perguntar com recomendação e consequências; não tratar default como consentimento.
+- **Discoverable in the target:** investigate before asking.
+- **Safe to assume without changing the contract:** state the assumption and continue.
+- **Blocking due to authorization, product, or risk:** ask with a recommendation and consequences; do not treat a default as consent.
 
-Um brief ou plano fornece requisitos e critérios, mas não autoriza remediação. Mudança material nesses artefatos exige revalidar o achado e, quando afetar comportamento, risco ou escopo, obter nova aprovação.
+A brief or plan provides requirements and criteria but does not authorize remediation. A material change to these artifacts requires revalidating the finding and, when it affects behavior, risk, or scope, obtaining new approval.
 
-## Interromper
+## Stop
 
-- achado não reproduz;
-- relatório contradiz o código atual;
-- causa está fora do escopo;
-- mudanças preexistentes colidem;
-- teste exige ambiente/segredo indisponível;
-- correção segura depende de decisão do usuário;
-- validação crítica não pode ser executada.
-- verificação congelada falha e a próxima tentativa exigiria outra hipótese ou mudança material.
+- finding cannot be reproduced;
+- report contradicts the current code;
+- cause is out of scope;
+- pre-existing changes conflict;
+- test requires an unavailable environment/secret;
+- a safe fix depends on a user decision;
+- critical validation cannot be run.
+- frozen verification fails and the next attempt would require another hypothesis or material change.
 
-Interromper não significa inventar fallback. Relatar evidência e pedir direção.
+Stopping does not mean inventing a fallback. Report the evidence and ask for direction.
 
-## Proibido sem autorização específica
+## Prohibited without specific authorization
 
-- stage, commit, push, PR, release ou deploy;
-- reset, checkout destrutivo, clean ou descarte de mudanças;
-- apagar dados, migrações ou snapshots;
-- modificar licenças;
-- reduzir testes/cobertura;
-- desativar controle de segurança;
-- aprovar automaticamente resultado visual;
-- marcar achado como corrigido sem reprodução e validação.
+- stage, commit, push, PR, release, or deploy;
+- reset, destructive checkout, clean, or discarding changes;
+- deleting data, migrations, or snapshots;
+- modifying licenses;
+- reducing tests/coverage;
+- disabling a security control;
+- automatically approving a visual outcome;
+- marking a finding as fixed without reproduction and validation.
 
-## Critério de conclusão
+## Completion criterion
 
-Concluir somente quando cada ID aprovado tiver status e evidência:
+Conclude only when every approved ID has a status and evidence:
 
-- corrigido e validado;
-- corrigido com validação parcial explicitada;
-- não reproduzido;
-- bloqueado por decisão/ambiente;
-- rejeitado após nova evidência.
-- já corrigido/sem mudança;
-- bloqueado por prova, produto ou escopo;
-- falhou na validação.
+- fixed and validated;
+- fixed with partial validation explicitly stated;
+- not reproduced;
+- blocked by a decision/environment;
+- rejected after new evidence.
+- already fixed/no change;
+- blocked on evidence, product, or scope;
+- failed validation.

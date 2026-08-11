@@ -1,7 +1,0 @@
-interface:
-  display_name: "Design Anti-IA"
-  short_description: "Contextual, outcome-oriented interfaces"
-  default_prompt: "Use $anti-ai-design to design this interface with context, evidence, and ethical boundaries."
-
-policy:
-  allow_implicit_invocation: true

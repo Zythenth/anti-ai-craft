@@ -1,69 +1,69 @@
-# Depuração e evidência
+# Debugging and evidence
 
-## Ciclo de investigação
+## Investigation cycle
 
-1. Ler o erro e a stack completos.
-2. Reproduzir com o menor caso fiel.
-3. Conferir mudanças recentes e um caminho vizinho que funciona.
-4. Traçar o valor incorreto até sua origem, atravessando boundaries.
-5. Formular **uma** hipótese falsificável.
-6. Executar o menor experimento que separa essa hipótese das alternativas.
-7. Se falhar, isolar ou desfazer o experimento antes do próximo. Falhas repetidas exigem revisar o modelo mental, não declarar automaticamente que toda a arquitetura está errada.
+1. Read the complete error and stack.
+2. Reproduce it with the smallest faithful case.
+3. Check recent changes and a neighboring path that works.
+4. Trace the incorrect value back to its source across boundaries.
+5. Formulate **one** falsifiable hypothesis.
+6. Run the smallest experiment that separates that hypothesis from the alternatives.
+7. If it fails, isolate or undo the experiment before the next one. Repeated failures require revisiting the mental model, not automatically declaring that the entire architecture is wrong.
 
-Evitar patches sucessivos sem nova evidência, alterações simultâneas que impedem atribuir causa e explicações depois do fato.
+Avoid successive patches without new evidence, simultaneous changes that prevent attributing the cause, and explanations after the fact.
 
-## Mudança e prova
+## Change and evidence
 
-Cada passo não trivial deve formar um par:
+Every non-trivial step must form a pair:
 
-- mudança observável;
-- prova específica executada depois dela.
+- observable change;
+- specific evidence gathered after it.
 
-Congelar a alegação antes de escolher o comando. Exemplos:
+Lock the claim before choosing the command. Examples:
 
-| Alegação | Evidência mínima adequada |
+| Claim | Minimum adequate evidence |
 |---|---|
-| bug corrigido | reprodução original deixa de falhar e regressão passa |
-| API compatível | tipo/assinatura da versão exata e execução ou build |
-| código compila | build/typecheck real |
-| requisito atendido | cenário de aceitação exercitado |
-| refactor sem mudança | caracterização antes e suíte proporcional depois |
-| espera robusta | evento/condição observável e timeout diagnóstico |
+| bug fixed | original reproduction no longer fails and regression passes |
+| API compatible | type/signature for the exact version and execution or build |
+| code compiles | real build/typecheck |
+| requirement met | acceptance scenario exercised |
+| refactor without change | characterization before and proportionate suite afterward |
+| robust wait | observable event/condition and diagnostic timeout |
 
-Teste não prova build, lint não prova runtime e suíte verde não prova um requisito ausente do oráculo.
+A test does not prove a build, lint does not prove runtime behavior, and a green suite does not prove a requirement absent from the oracle.
 
-## Gate do oráculo
+## Oracle gate
 
-Antes do corpo de um teste não trivial:
+Before the body of a non-trivial test:
 
-1. nomear a mutação ou defeito de produção que ele deveria detectar;
-2. derivar o resultado esperado de contrato, regra de domínio ou cálculo independente;
-3. evitar usar o mesmo helper, builder ou algoritmo da unidade testada para construir o esperado;
-4. testar comportamento, efeito, saída ou exit code, não presença textual por `grep`.
+1. name the mutation or production defect it should detect;
+2. derive the expected outcome from a contract, domain rule, or independent calculation;
+3. avoid using the same helper, builder, or algorithm as the unit under test to construct the expected outcome;
+4. test behavior, effect, output, or exit code, not textual presence through `grep`.
 
-Se retirar o controle relevante e o teste continuar verde, o teste não prova aquele controle.
+If the relevant control is removed and the test remains green, the test does not prove that control.
 
-## Mocks e efeitos
+## Mocks and effects
 
-- Identificar efeitos que fazem parte do contrato antes de mockar.
-- Mockar a boundary externa/lenta mais baixa possível.
-- Preservar efeitos reais necessários e a estrutura real dos dados.
-- Não usar expectativas do mock como principal prova de correção.
-- Preferir integração quando wiring, serialização, transação ou persistência fazem parte do risco.
+- Identify effects that are part of the contract before mocking.
+- Mock the lowest possible external/slow boundary.
+- Preserve required real effects and the real data structure.
+- Do not use mock expectations as the main evidence of correctness.
+- Prefer integration when wiring, serialization, transaction, or persistence is part of the risk.
 
-## Tempo, concorrência e refactor
+## Time, concurrency, and refactoring
 
-Substituir `sleep` arbitrário por espera de evento ou condição com timeout que explique o estado observado. Atraso fixo só é adequado quando tempo é parte explícita do contrato.
+Replace arbitrary `sleep` with a wait for an event or condition, with a timeout that explains the observed state. A fixed delay is appropriate only when time is an explicit part of the contract.
 
-Antes de refatorar comportamento sem proteção, criar testes de caracterização. Fazer passos pequenos e provar ausência de mudança após cada um.
+Before refactoring unprotected behavior, create characterization tests. Take small steps and prove the absence of change after each one.
 
-## Escada contra API inventada
+## Ladder against invented APIs
 
-Verificar, em ordem:
+Verify, in order:
 
-1. repositório, lockfile, imports e tipos;
-2. pacote/CLI realmente instalado e `--help`;
-3. documentação oficial da versão exata;
-4. release notes ou repositório oficial.
+1. repository, lockfile, imports, and types;
+2. package/CLI actually installed and `--help`;
+3. official documentation for the exact version;
+4. release notes or official repository.
 
-Uma assinatura semelhante em outra versão, linguagem ou SDK não é prova. Se a evidência terminar, declarar o desconhecido.
+A similar signature in another version, language, or SDK is not evidence. If the evidence runs out, state the unknown.

@@ -1,144 +1,144 @@
 ---
 name: anti-ai-design-flow
-description: "Orquestrar uma jornada completa e retomável de produto, do briefing à arquitetura da informação, sistema visual, plano de build, implementação autorizada, revisão e handoff de achados. Usar somente quando invocada explicitamente para conduzir três ou mais fases, coordenar duas ou mais skills Anti-IA, começar uma feature do zero ou retomar um fluxo persistido; não usar para componente isolado, correção visual local, auditoria, código ou threat model avulsos."
+description: "Orchestrate a complete, resumable product journey, from briefing through information architecture, visual system, build plan, authorized implementation, review, and finding handoff. Use only when explicitly invoked to conduct three or more phases, coordinate two or more Anti-AI skills, start a feature from scratch, or resume a persisted flow; do not use for an isolated component, a local visual fix, or standalone audit, code, or threat-model work."
 ---
 
-# Fluxo de Design Anti-IA
+# Anti-AI Design Flow
 
-Orquestrar fases e handoffs sem substituir os contratos especializados. Tratar o fluxo como máquina de estados adaptativa, não como ritual linear. Planejamento não autoriza edição; uma autorização não atravessa silenciosamente fases, skills ou ações externas.
+Orchestrate phases and handoffs without replacing specialized contracts. Treat the flow as an adaptive state machine, not as a linear ritual. Planning does not authorize editing; authorization does not silently carry across phases, skills, or external actions.
 
-## Preparar o fluxo
+## Prepare the flow
 
-1. Confirmar feature, objetivo, escopo, definição de sucesso e se o usuário quer apenas planejar ou também implementar e revisar.
-2. Ler instruções, README, especificações, design system, código, testes, configurações, assets e histórico pertinente antes de perguntar.
-3. Localizar convenções de planejamento já existentes. Não criar `.design/` nem outro diretório se o projeto já define fonte de verdade.
-4. Ler integralmente [flow-state.md](references/flow-state.md) e criar o registro de execução.
-5. Classificar cada fase como `executar`, `reusar`, `atualizar` ou `não aplicável`, citando a evidência. Arquivo existente não comprova fase concluída.
-6. Resolver primeiro fatos verificáveis no projeto. Para decisão material ainda aberta, perguntar em rodada curta com recomendação, fundamento, consequência e trabalho que pode continuar.
-7. Solicitar autorização separada antes de criar ou atualizar artefatos persistentes. Sem autorização, manter o checkpoint na resposta e declarar que a retomada entre tarefas depende desse registro.
+1. Confirm the feature, objective, scope, definition of success, and whether the user wants only planning or also implementation and review.
+2. Read instructions, README files, specifications, the design system, code, tests, configurations, assets, and relevant history before asking questions.
+3. Locate existing planning conventions. Do not create `.design/` or another directory if the project already defines a source of truth.
+4. Read [flow-state.md](references/flow-state.md) in full and create the execution record.
+5. Classify each phase as `execute`, `reuse`, `update`, or `not applicable`, citing the evidence. An existing file does not prove that a phase is complete.
+6. Resolve verifiable facts in the project first. For any material decision that remains open, ask in a short round with a recommendation, rationale, consequence, and work that can continue.
+7. Request separate authorization before creating or updating persistent artifacts. Without authorization, keep the checkpoint in the response and state that resumption across tasks depends on that record.
 
-## Consultar contratos especializados
+## Consult specialized contracts
 
-Os arquivos irmãos são referências internas deste fluxo; lê-los não ativa outra
-skill e não deve ser descrito como se ela tivesse sido invocada. Ler somente o
-contrato aplicável à fase:
+The sibling files are internal references for this flow; reading them does not activate another
+skill and must not be described as though that skill had been invoked. Read only the
+contract applicable to the phase:
 
-- `../anti-ai-design/SKILL.md` para briefing, estrutura, tokens, direção, acessibilidade e revisão visual;
-- `../anti-ai-security/SKILL.md` quando dados, identidade, papéis, tenants, custo, integração, upload, automação ou operação protegida mudarem;
-- `../anti-ai-code/SKILL.md` para implementação delimitada e prova por tarefa;
-- `../anti-ai-audit/SKILL.md` para revisão independente e estritamente somente leitura;
-- `../anti-ai-remediate/SKILL.md` somente para preparar o handoff de IDs confirmados e aprovados.
+- `../anti-ai-design/SKILL.md` for briefing, structure, tokens, direction, accessibility, and visual review;
+- `../anti-ai-security/SKILL.md` when data, identity, roles, tenants, cost, integration, upload, automation, or a protected operation changes;
+- `../anti-ai-code/SKILL.md` for scoped implementation and per-task evidence;
+- `../anti-ai-audit/SKILL.md` for an independent, strictly read-only review;
+- `../anti-ai-remediate/SKILL.md` only to prepare the handoff of confirmed and approved IDs.
 
-Quando uma fase exigir o modo ou a autoridade própria de outra skill — auditoria
-independente, threat model completo ou remediação — entregar a entrada necessária
-e pedir sua invocação explícita. Não ativar, simular nem afirmar que outra skill
-foi executada. Não copiar versões resumidas desses contratos para esta skill.
+When a phase requires another skill's own mode or authority—independent audit,
+a complete threat model, or remediation—provide the necessary input
+and request its explicit invocation. Do not activate, simulate, or claim that another skill
+was executed. Do not copy condensed versions of those contracts into this skill.
 
-## Executar fases adaptativas
+## Execute adaptive phases
 
-### 1. Descoberta e brief
+### 1. Discovery and brief
 
-- Construir ledger de decisões materiais.
-- Identificar problema, usuários, tarefa, contexto, superfície, mandato, requisitos, invariantes, conteúdo, dados, estados, riscos, não escopo e critérios de aceitação.
-- Usar o contrato de brief de `anti-ai-design` como referência interna.
-- Marcar a saída como `rascunho`, `bloqueado` ou `aprovado`; somente confirmação explícita do usuário permite `aprovado`.
+- Build a ledger of material decisions.
+- Identify the problem, users, task, context, surface, mandate, requirements, invariants, content, data, states, risks, out-of-scope items, and acceptance criteria.
+- Use the `anti-ai-design` brief contract as an internal reference.
+- Mark the output as `draft`, `blocked`, or `approved`; only explicit user confirmation permits `approved`.
 
-**Pronto quando:** as decisões necessárias à próxima fase estão confirmadas, assumidas com baixo risco ou bloqueadas com condição precisa; nenhum requisito material foi inventado.
+**Ready when:** the decisions required for the next phase are confirmed, assumed with low risk, or blocked with a precise condition; no material requirement was invented.
 
-### 2. Arquitetura da informação
+### 2. Information architecture
 
-- Executar quando houver múltiplas superfícies, navegação, rotas, conteúdo crescente, papéis, retomada ou fluxo de várias etapas.
-- Mapear pontos de entrada, tarefas, hierarquia, navegação, URLs, persistência, fluxo principal, alternativas, erro e recuperação.
-- Cruzar UI, dados e autorização. Não tratar navegação escondida como controle de segurança.
+- Execute when there are multiple surfaces, navigation, routes, growing content, roles, resumption, or a multi-step flow.
+- Map entry points, tasks, hierarchy, navigation, URLs, persistence, the primary flow, alternatives, errors, and recovery.
+- Cross-check UI, data, and authorization. Do not treat hidden navigation as a security control.
 
-**Pronto quando:** superfícies e fluxos no escopo têm entrada, saída, estados, contrato de localização e critérios verificáveis; compatibilidade material está preservada ou aprovada.
+**Ready when:** in-scope surfaces and flows have entry, exit, states, a location contract, and verifiable criteria; material compatibility is preserved or approved.
 
-### 3. Sistema visual e tokens
+### 3. Visual system and tokens
 
-- Reusar a fonte autoritativa do projeto.
-- Distinguir fonte de outputs gerados, resolver aliases e mapear consumidores.
-- Criar ou ampliar somente famílias necessárias ao escopo.
-- Não obrigar dark mode, stack, escala, breakpoint ou formato.
+- Reuse the project's authoritative source.
+- Distinguish the source from generated outputs, resolve aliases, and map consumers.
+- Create or extend only the families required by the scope.
+- Do not require dark mode, a stack, scale, breakpoint, or format.
 
-**Pronto quando:** papéis semânticos e consumidores reais estão identificados, modos e estados aplicáveis foram cobertos e qualquer migração tem alcance delimitado.
+**Ready when:** semantic roles and real consumers are identified, applicable modes and states are covered, and any migration has a bounded reach.
 
-### 4. Plano de build
+### 4. Build plan
 
-- Decompor em fatias verticais por resultado observável, não por HTML/CSS/JS, arquivo ou disciplina.
-- Registrar origem, resultado, estratégia `reutilizar/alterar/criar`, dependências, risco, critério de pronto e prova.
-- Distinguir bloqueio duro, ordem preferencial e paralelismo seguro.
-- Antecipar dependências duras, hipótese de maior risco e uma primeira fatia representativa.
+- Decompose work into vertical slices by observable outcome, not by HTML/CSS/JS, file, or discipline.
+- Record origin, outcome, the `reuse/change/create` strategy, dependencies, risk, definition-of-done criterion, and evidence.
+- Distinguish hard blockers, preferred order, and safe parallelism.
+- Anticipate hard dependencies, the highest-risk hypothesis, and a representative first slice.
 
-**Pronto quando:** cada tarefa está ligada a requisito, decisão ou risco; não há infraestrutura sem consumidor nem decisão material escondida em subtarefa.
+**Ready when:** every task is tied to a requirement, decision, or risk; there is no infrastructure without a consumer and no material decision hidden in a subtask.
 
-### 5. Gate de segurança
+### 5. Security gate
 
-Executar somente quando houver superfície aplicável. Registrar ativos, atores, dados, fronteiras, tenants, operações caras ou destrutivas, controles esperados e histórias de abuso. Classificar cada ponto como `resolvido`, `decisão pendente`, `depende de infraestrutura` ou `não aplicável`.
+Execute only when there is an applicable surface. Record assets, actors, data, boundaries, tenants, expensive or destructive operations, expected controls, and abuse stories. Classify each item as `resolved`, `decision pending`, `depends on infrastructure`, or `not applicable`.
 
-**Pronto quando:** decisões que mudariam estrutura ou critérios de conclusão foram resolvidas ou bloqueadas antes do build.
+**Ready when:** decisions that would change the structure or completion criteria are resolved or blocked before the build.
 
-### 6. Implementação autorizada
+### 6. Authorized implementation
 
-- Confirmar autorização de edição e escopo de tarefas.
-- Implementar uma fatia por vez conforme o contrato interno de `anti-ai-code`, sem alegar que a skill foi invocada.
-- Mapear tarefa → arquivos → mudança → prova.
-- Não marcar concluída por ter editado; usar `validada`, `validação parcial`, `bloqueada`, `superada` ou `falhou`.
-- Revalidar somente artefatos dependentes quando nova evidência mudar decisão anterior.
+- Confirm editing authorization and task scope.
+- Implement one slice at a time according to the internal `anti-ai-code` contract, without claiming that the skill was invoked.
+- Map task → files → change → evidence.
+- Do not mark a task complete merely because it was edited; use `validated`, `partially validated`, `blocked`, `superseded`, or `failed`.
+- Revalidate only dependent artifacts when new evidence changes an earlier decision.
 
-**Pronto quando:** critérios da fatia foram exercitados depois da última mudança, uso legítimo permaneceu funcional e diff ficou limitado ao resultado.
+**Ready when:** the slice's criteria were exercised after the latest change, legitimate use remained functional, and the diff stayed limited to the outcome.
 
-### 7. Revisão independente
+### 7. Independent review
 
-- Executar somente quando houver evidência proporcional ao tipo de revisão.
-- Aplicar o contrato interno de revisão visual/técnica. Quando for necessária auditoria independente ampla, preparar o escopo e pedir invocação explícita de `$anti-ai-audit`.
-- Comparar tarefa, brief, estrutura, tokens, plano, código e runtime sem presumir que documento ou código é automaticamente a fonte vigente.
-- Produzir IDs estáveis; separar severidade, confiança, prioridade, gate, preferências e falsos positivos.
+- Execute only when there is evidence proportionate to the type of review.
+- Apply the internal visual/technical review contract. When a broad independent audit is required, prepare the scope and request explicit invocation of `$anti-ai-audit`.
+- Compare the task, brief, structure, tokens, plan, code, and runtime without assuming that a document or the code is automatically the current source.
+- Produce stable IDs; separate severity, confidence, priority, gate, preferences, and false positives.
 
-**Pronto quando:** cobertura, evidência, limitações, decisões preservadas e risco residual estão explícitos. Revisão não autoriza correção.
+**Ready when:** coverage, evidence, limitations, preserved decisions, and residual risk are explicit. Review does not authorize remediation.
 
-### 8. Remediação opcional
+### 8. Optional remediation
 
-- Aceitar somente IDs selecionados explicitamente.
-- Revalidar cada achado no estado atual.
-- Preparar um handoff para `$anti-ai-remediate`; aplicar correções somente após essa skill ser invocada explicitamente com os IDs e a autorização.
-- Atualizar artefatos de fluxo somente quando autorizado e necessário ao ID.
+- Accept only explicitly selected IDs.
+- Revalidate each finding against the current state.
+- Prepare a handoff to `$anti-ai-remediate`; apply fixes only after that skill is explicitly invoked with the IDs and authorization.
+- Update flow artifacts only when authorized and required by the ID.
 
-**Pronto quando:** cada ID tem status e prova; código, evidência, tarefa e artefatos autorizados não se contradizem.
+**Ready when:** every ID has a status and evidence; code, evidence, the task, and authorized artifacts do not contradict one another.
 
-## Transicionar e invalidar
+## Transition and invalidate
 
-- Avançar entre fases read-only quando a saída estiver suficiente e nenhuma decisão material estiver aberta.
-- Pedir confirmação para mudança de identidade, navegação, contrato, escopo, risco, edição, ação externa ou trade-off de produto.
-- Não pedir confirmação ritual após cada pergunta, fase ou tarefa.
-- Se decisão anterior mudar, marcar apenas dependentes como `revalidar`; não reescrever todo o fluxo.
-- Se o usuário pausar, emitir checkpoint com fase, saídas, decisões, bloqueios, arquivos e próxima ação segura.
-- Se houver múltiplas features, exigir identificador inequívoco; não escolher silenciosamente pela data de modificação.
+- Advance through read-only phases when the output is sufficient and no material decision remains open.
+- Request confirmation for changes to identity, navigation, contract, scope, risk, editing, external action, or product trade-off.
+- Do not request ritual confirmation after every question, phase, or task.
+- If an earlier decision changes, mark only dependents as `revalidate`; do not rewrite the entire flow.
+- If the user pauses, emit a checkpoint with the phase, outputs, decisions, blockers, files, and next safe action.
+- If there are multiple features, require an unambiguous identifier; do not silently choose based on modification date.
 
-## Limites
+## Boundaries
 
-Não:
+Do not:
 
-- ativar implicitamente ou substituir `$anti-ai-design`;
-- impor conjunto fixo de documentos a tarefa pequena;
-- herdar autorização para commit, push, deploy, rotação, migração ou produção;
-- mover correções para a auditoria;
-- considerar arquivo presente, checklist marcado ou build verde como prova suficiente;
-- escolher tema, estética, stack, biblioteca ou breakpoint por preset;
-- sobrescrever artefato existente ou persistir segredos e dados pessoais;
-- tratar preferência visual como defeito ou vulnerabilidade;
-- continuar uma fase bloqueada inventando produto, dados, APIs ou comportamento.
+- implicitly activate or replace `$anti-ai-design`;
+- impose a fixed set of documents on a small task;
+- inherit authorization for commit, push, deploy, rotation, migration, or production;
+- move fixes into the audit;
+- treat an existing file, a checked checklist, or a green build as sufficient evidence;
+- choose a theme, aesthetic, stack, library, or breakpoint from a preset;
+- overwrite an existing artifact or persist secrets and personal data;
+- treat a visual preference as a defect or vulnerability;
+- continue a blocked phase by inventing product details, data, APIs, or behavior.
 
-## Contrato de saída
+## Output contract
 
-Entregar:
+Deliver:
 
-- feature e objetivo;
-- fase atual e classificação de todas as fases;
-- fontes de verdade e estado do código usados;
-- decisões, pressupostos, bloqueios e invalidações;
-- artefatos produzidos ou atualizados e autorização correspondente;
-- tarefas e provas por estado;
-- IDs de revisão ou remediação, quando houver;
-- validações executadas e não executadas;
-- risco residual;
-- checkpoint e próxima ação segura.
+- feature and objective;
+- current phase and classification of all phases;
+- sources of truth and code state used;
+- decisions, assumptions, blockers, and invalidations;
+- artifacts produced or updated and the corresponding authorization;
+- tasks and evidence by state;
+- review or remediation IDs, when applicable;
+- validations executed and not executed;
+- residual risk;
+- checkpoint and next safe action.

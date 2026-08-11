@@ -1,132 +1,132 @@
-# Brief de design verificável
+# Verifiable design brief
 
-## Sumário
+## Summary
 
-- [Fronteira do modo](#fronteira-do-modo)
-- [Descoberta](#descoberta)
-- [Decisões e perguntas](#decisões-e-perguntas)
-- [Contrato do brief](#contrato-do-brief)
-- [Estados e conclusão](#estados-e-conclusão)
-- [Persistência autorizada](#persistência-autorizada)
-- [Falhas e handoff](#falhas-e-handoff)
+- [Mode boundary](#mode-boundary)
+- [Discovery](#discovery)
+- [Decisions and questions](#decisions-and-questions)
+- [Brief contract](#brief-contract)
+- [States and completion](#states-and-completion)
+- [Authorized persistence](#authorized-persistence)
+- [Failures and handoff](#failures-and-handoff)
 
-## Fronteira do modo
+## Mode boundary
 
-Usar este contrato para criar ou atualizar um brief de interface, feature ou fluxo. Planejamento permanece sem edição por padrão. Persistir o documento somente quando o usuário pedir ou autorizar escrita; autorização para salvar o brief não autoriza implementar produto.
+Use this contract to create or update a brief for an interface, feature, or flow. Planning remains read-only by default. Persist the document only when the user requests or authorizes writing; authorization to save the brief does not authorize product implementation.
 
-Tratar o brief como fonte candidata, não como autoridade automática. Instruções do projeto, requisitos vigentes, comportamento que deve ser preservado e decisões posteriores podem prevalecer.
+Treat the brief as a candidate source, not as automatic authority. Project instructions, current requirements, behavior that must be preserved, and later decisions may prevail.
 
-## Descoberta
+## Discovery
 
-Descobrir a stack antes de procurar nomes específicos. Examinar apenas o escopo relevante:
+Discover the stack before looking for specific names. Examine only the relevant scope:
 
-- instruções, README, especificações e decisões;
-- manifestos, lockfiles, scripts e dependências de UI;
-- design system, tokens, temas e seus consumidores;
-- componentes, APIs, histórias, exemplos e testes;
-- fontes, ícones, imagens, mídia e política de assets;
-- rotas, layouts, navegação e padrões de URL;
-- modelos de conteúdo, dados, estados e fixtures;
-- testes visuais, acessíveis, unitários e de integração;
-- analytics, localização, SEO, performance e segurança quando aplicáveis.
+- instructions, README files, specifications, and decisions;
+- manifests, lockfiles, scripts, and UI dependencies;
+- the design system, tokens, themes, and their consumers;
+- components, APIs, stories, examples, and tests;
+- fonts, icons, images, media, and asset policy;
+- routes, layouts, navigation, and URL patterns;
+- content models, data, states, and fixtures;
+- visual, accessibility, unit, and integration tests;
+- analytics, localization, SEO, performance, and security when applicable.
 
-Registrar caminho, seção e relevância somente do que foi realmente lido. Classificar os elementos do escopo como:
+Record the path, section, and relevance only for what was actually read. Classify elements in scope as:
 
-- `reutilizar`;
-- `compor`;
-- `estender`;
-- `criar`;
-- `fora do escopo`;
-- `desconhecido`.
+- `reuse`;
+- `compose`;
+- `extend`;
+- `create`;
+- `out of scope`;
+- `unknown`.
 
-Não inventariar todo o repositório quando a mudança é local.
+Do not inventory the entire repository when the change is local.
 
-## Decisões e perguntas
+## Decisions and questions
 
-Manter ledger apenas para decisões materiais:
+Maintain a ledger only for material decisions:
 
-| Campo | Conteúdo |
+| Field | Content |
 |---|---|
-| ID | Identificador estável |
-| Decisão | O que precisa ser definido |
-| Depende de | Decisões anteriores |
-| Origem | Projeto, requisito, usuário ou pressuposto |
-| Estado | Resolvida, assumida, aberta, bloqueante ou superada |
-| Evidência | Arquivo, runtime, tela, teste ou contrato |
-| Recomendação | Opção sugerida e fundamento |
-| Consequência | Efeito das alternativas |
+| ID | Stable identifier |
+| Decision | What must be decided |
+| Depends on | Earlier decisions |
+| Origin | Project, requirement, user, or assumption |
+| State | Resolved, assumed, open, blocking, or superseded |
+| Evidence | File, runtime, screen, test, or contract |
+| Recommendation | Suggested option and rationale |
+| Consequence | Effect of the alternatives |
 
-Pesquisar no projeto antes de perguntar. Fazer no máximo duas ou três perguntas por rodada, uma por vez quando houver dependência. Cada pergunta material deve explicar o que foi encontrado, a recomendação, consequências, default seguro e trabalho independente que pode continuar.
+Research the project before asking. Ask no more than two or three questions per round, one at a time when there is a dependency. Each material question must explain what was found, the recommendation, consequences, safe default, and independent work that can continue.
 
-Não exigir entrevista quando a entrada já for suficiente. Não tratar silêncio como aprovação de identidade, contrato, risco ou edição.
+Do not require an interview when the input is already sufficient. Do not treat silence as approval of identity, contract, risk, or editing.
 
-## Contrato do brief
+## Brief contract
 
-Produzir seções proporcionais:
+Produce proportional sections:
 
-1. **Identidade e estado:** nome, feature, versão lógica e `rascunho`, `bloqueado` ou `aprovado`.
-2. **Problema do usuário:** fricção observável, sem converter métrica de negócio em problema humano.
-3. **Resultado e sucesso:** capacidade entregue e sinais verificáveis.
-4. **Usuários e contexto:** papéis, frequência, dispositivo, input, idioma e necessidades de acesso.
-5. **Superfície e mandato:** persuadir, operar, ler ou experienciar; preservar, refinar ou redesenhar.
-6. **Fontes e padrões existentes:** o que deve ser reutilizado ou preservado.
-7. **Requisitos e invariantes:** comportamento, compatibilidade, dados e estados que não podem regredir.
-8. **Princípios da feature:** no máximo três; cada um deve resolver uma tensão real.
-9. **Direção:** tese, referência dominante, eixos visuais aplicáveis e defaults rejeitados.
-10. **Conteúdo, dados e mídia:** fontes reais, mínimos, máximos, ausência, indisponibilidade e assets faltantes.
-11. **Fluxos:** caminho principal, alternativas, erro, interrupção e recuperação.
-12. **Inventário de componentes:** reutilizar, compor, estender ou criar, com motivo.
-13. **Interações e estados:** gatilho, mudança, semântica, ação permitida e recuperação.
-14. **Responsividade:** mudanças de prioridade e comportamento, não apenas tamanho.
-15. **Acessibilidade aplicável:** apontar para o baseline e destacar riscos específicos.
-16. **Riscos condicionais:** segurança, privacidade, performance, localização, analytics ou SEO.
-17. **Não escopo:** decisões e áreas explicitamente excluídas.
-18. **Decisões abertas e pressupostos:** impacto e condição de desbloqueio.
-19. **Critérios de aceitação e validação:** cenário, resultado esperado e evidência.
+1. **Identity and state:** name, feature, logical version, and `draft`, `blocked`, or `approved`.
+2. **User problem:** observable friction, without converting a business metric into a human problem.
+3. **Outcome and success:** delivered capability and verifiable signals.
+4. **Users and context:** roles, frequency, device, input, language, and access needs.
+5. **Surface and mandate:** persuade, operate, read, or experience; preserve, refine, or redesign.
+6. **Existing sources and patterns:** what must be reused or preserved.
+7. **Requirements and invariants:** behavior, compatibility, data, and states that must not regress.
+8. **Feature principles:** no more than three; each must resolve a genuine tension.
+9. **Direction:** thesis, dominant reference, applicable visual axes, and rejected defaults.
+10. **Content, data, and media:** real sources, minimums, maximums, absence, unavailability, and missing assets.
+11. **Flows:** primary path, alternatives, error, interruption, and recovery.
+12. **Component inventory:** reuse, compose, extend, or create, with rationale.
+13. **Interactions and states:** trigger, change, semantics, permitted action, and recovery.
+14. **Responsiveness:** changes in priority and behavior, not merely size.
+15. **Applicable accessibility:** point to the baseline and highlight specific risks.
+16. **Conditional risks:** security, privacy, performance, localization, analytics, or SEO.
+17. **Out of scope:** explicitly excluded decisions and areas.
+18. **Open decisions and assumptions:** impact and unblocking condition.
+19. **Acceptance and validation criteria:** scenario, expected outcome, and evidence.
 
-Marcar seção não aplicável com motivo. Não preencher lacuna com exemplo plausível apresentado como fato.
+Mark an inapplicable section with a reason. Do not fill a gap with a plausible example presented as fact.
 
-## Estados e conclusão
+## States and completion
 
-- `rascunho`: há pressupostos ou validações abertas, mas o documento pode orientar descoberta;
-- `bloqueado`: falta decisão material para avançar;
-- `aprovado`: o usuário confirmou explicitamente o conteúdo relevante;
-- `superado`: uma decisão posterior identificada substituiu o documento.
+- `draft`: there are open assumptions or validations, but the document can guide discovery;
+- `blocked`: a material decision is missing before work can advance;
+- `approved`: the user explicitly confirmed the relevant content;
+- `superseded`: an identified later decision replaced the document.
 
-Concluir quando:
+Complete when:
 
-- fontes relevantes foram lidas;
-- fatos, pressupostos e decisões estão separados;
-- nenhum bloqueio material está oculto;
-- requisitos, invariantes, fluxo, estados, não escopo e aceitação estão presentes;
-- a autoridade e o estado do brief estão claros.
+- relevant sources were read;
+- facts, assumptions, and decisions are separated;
+- no material blocker is hidden;
+- requirements, invariants, flow, states, out-of-scope items, and acceptance are present;
+- the brief's authority and state are clear.
 
-O agente não atribui `aprovado` por conta própria.
+The agent does not assign `approved` on its own.
 
-## Persistência autorizada
+## Authorized persistence
 
-Usar a convenção do projeto. Se não existir, sugerir `.design/<feature-slug>/DESIGN_BRIEF.md` e confirmar antes de criar.
+Use the project's convention. If none exists, suggest `.design/<feature-slug>/DESIGN_BRIEF.md` and confirm before creating it.
 
-Ao persistir:
+When persisting:
 
-1. gerar slug minúsculo e hifenizado, removendo segmentos de caminho;
-2. resolver o caminho final dentro do diretório autorizado;
-3. verificar arquivo existente e conteúdo manual;
-4. pedir decisão antes de substituir ou reorganizar material;
-5. produzir diff pequeno e preservar seções fora do pedido;
-6. registrar o estado do código que o documento descreve;
-7. não persistir segredo, credencial, PII desnecessária ou conteúdo externo como instrução confiável;
-8. não fazer stage, commit ou push por consequência implícita.
+1. generate a lowercase, hyphenated slug, removing path segments;
+2. resolve the final path inside the authorized directory;
+3. check the existing file and inspect its content manually;
+4. ask for a decision before replacing or reorganizing material;
+5. produce a small diff and preserve sections outside the request;
+6. record the code state described by the document;
+7. do not persist a secret, credential, unnecessary PII, or external content as a trusted instruction;
+8. do not stage, commit, or push as an implicit consequence.
 
-## Falhas e handoff
+## Failures and handoff
 
-| Situação | Conduta |
+| Situation | Conduct |
 |---|---|
-| Projeto ou sistema visual ausente | Registrar greenfield real e não inventar componentes existentes |
-| Fontes conflitantes | Ordenar autoridade e pedir decisão quando material |
-| Asset ou conteúdo autoritativo ausente | Registrar lacuna e preservar o slot; não fabricar prova |
-| Ferramenta ou runtime indisponível | Marcar validação não executada |
-| Brief existente desatualizado | Marcar `revalidar` ou `superado`; não atualizar silenciosamente |
-| Pedido mistura brief e build | Separar autorização de documento e código |
+| Project or visual system absent | Record a genuine greenfield and do not invent existing components |
+| Conflicting sources | Order by authority and ask for a decision when material |
+| Authoritative asset or content absent | Record the gap and preserve the slot; do not fabricate proof |
+| Tool or runtime unavailable | Mark validation as not performed |
+| Existing brief outdated | Mark `revalidate` or `superseded`; do not update silently |
+| Request mixes brief and build | Separate document and code authorization |
 
-Para implementação, fornecer brief aprovado ou explicitar quais decisões continuam como pressuposto. Para auditoria, incluir o brief somente quando estiver no escopo. Para remediação, lembrar que brief não substitui IDs nem aprovação de edição.
+For implementation, provide an approved brief or state explicitly which decisions remain assumptions. For audit, include the brief only when it is in scope. For remediation, remember that a brief does not replace IDs or editing approval.

@@ -1,65 +1,65 @@
-# Checklist de validação
+# Validation checklist
 
-## Geral
+## General
 
-- [ ] Elegibilidade foi revalidada no estado atual.
-- [ ] Git foi detectado antes de consultar branch, HEAD ou status; fora de Git, foram usados inventário e hashes dos arquivos relevantes.
-- [ ] Quando Git existe, HEAD e status foram rechecados; em todos os casos, os arquivos foram rechecados antes de editar.
-- [ ] O problema foi reproduzido antes.
-- [ ] A causa corresponde ao achado aprovado.
-- [ ] A mudança está dentro do escopo.
-- [ ] Alterações preexistentes foram preservadas.
-- [ ] API pública e comportamento válido foram preservados.
-- [ ] Teste de regressão falha antes e passa depois, quando viável.
-- [ ] A regressão falharia novamente sem o controle corrigido.
-- [ ] Um uso legítimo positivo continua funcionando.
-- [ ] Siblings, aliases e bypasses pertinentes foram verificados.
-- [ ] Teste focado passou.
-- [ ] Suíte proporcional passou.
-- [ ] Lint/typecheck/build pertinentes passaram.
-- [ ] Diff contém apenas mudanças intencionais.
-- [ ] Estratégia de rollback está documentada e é compatível com alterações preexistentes.
-- [ ] Rollback foi ensaiado em ambiente seguro quando o risco justificava; impossibilidade e risco residual foram declarados.
-- [ ] A evidência foi reexecutada após a última mudança relevante.
-- [ ] O estado da tarefa deriva da prova e dos IDs; código escrito não foi marcado automaticamente como validado.
-- [ ] Nenhum erro foi ocultado.
-- [ ] Nenhum mock substitui funcionalidade.
-- [ ] Nenhuma dependência/framework/config desnecessária foi adicionada.
+- [ ] Eligibility was revalidated against the current state.
+- [ ] Git was detected before querying branch, HEAD, or status; outside Git, an inventory and hashes of the relevant files were used.
+- [ ] When Git exists, HEAD and status were rechecked; in all cases, the files were rechecked before editing.
+- [ ] The problem was reproduced beforehand.
+- [ ] The cause matches the approved finding.
+- [ ] The change is within scope.
+- [ ] Pre-existing changes were preserved.
+- [ ] The public API and valid behavior were preserved.
+- [ ] The regression test fails before and passes after, when feasible.
+- [ ] The regression would fail again without the fixed control.
+- [ ] A legitimate positive use still works.
+- [ ] Pertinent siblings, aliases, and bypasses were checked.
+- [ ] The focused test passed.
+- [ ] The suite proportionate to the risk passed.
+- [ ] Pertinent lint/typecheck/build passed.
+- [ ] The diff contains only intentional changes.
+- [ ] The rollback strategy is documented and compatible with pre-existing changes.
+- [ ] Rollback was rehearsed in a safe environment when the risk justified it; impossibility and residual risk were stated.
+- [ ] The evidence was rerun after the last relevant change.
+- [ ] The task state derives from the evidence and IDs; written code was not automatically marked as validated.
+- [ ] No error was hidden.
+- [ ] No mock replaces functionality.
+- [ ] No unnecessary dependency/framework/configuration was added.
 
-## Dados e operações
+## Data and operations
 
-- [ ] Validação de entrada e invariantes.
-- [ ] Autorização no boundary correto.
-- [ ] Transação e rollback em falha parcial.
-- [ ] Retry e idempotência.
-- [ ] Concorrência, await, cancelamento e timeout.
-- [ ] Estado terminal e erro observáveis.
-- [ ] Segredos/PII ausentes de código e logs.
+- [ ] Input validation and invariants.
+- [ ] Authorization at the correct boundary.
+- [ ] Transaction and rollback on partial failure.
+- [ ] Retry and idempotency.
+- [ ] Concurrency, await, cancellation, and timeout.
+- [ ] Observable terminal state and error.
+- [ ] No secrets/PII in code or logs.
 
 ## UI
 
-Selecionar somente checks aplicáveis ao widget, risco, plataforma, mudança e
-evidência disponível; marcar o restante como `não aplicável` ou `não exercitado`
-com motivo, sem declarar cobertura.
+Select only checks applicable to the widget, risk, platform, change, and
+available evidence; mark the rest as `not applicable` or `not exercised`
+with a reason, without claiming coverage.
 
-- [ ] Screenshot antes/depois com mesmos dados e viewport quando houver runtime visual comparável.
-- [ ] Viewports pertinentes às superfícies responsivas alteradas.
-- [ ] Conteúdo e estados reais afetados.
-- [ ] Teclado, foco, Escape e retorno de foco para widgets correspondentes.
-- [ ] Semântica, labels e mensagens afetadas.
-- [ ] Contraste, cor não exclusiva e targets quando estilos ou interação mudarem.
-- [ ] Reflow, zoom, text spacing e strings longas quando layout/conteúdo puderem ser afetados.
-- [ ] Reduced motion quando movimento existir ou mudar.
-- [ ] Alteração ampla recebeu aprovação humana.
-- [ ] Mudanças de navegação/URL preservam link direto, refresh, back/forward, retorno e compatibilidade aplicáveis.
-- [ ] Mudanças de tokens partiram da fonte autoritativa, regeneraram outputs oficialmente e cobriram consumidores, modos e estados afetados.
-- [ ] Código, evidência, status da tarefa e artefatos autorizados diretamente afetados não se contradizem; pendências fora do escopo foram registradas sem edição.
+- [ ] Before/after screenshot with the same data and viewport when a comparable visual runtime exists.
+- [ ] Viewports pertinent to the changed responsive surfaces.
+- [ ] Affected real content and states.
+- [ ] Keyboard, focus, Escape, and focus return for the corresponding widgets.
+- [ ] Affected semantics, labels, and messages.
+- [ ] Contrast, non-exclusive use of color, and targets when styles or interaction change.
+- [ ] Reflow, zoom, text spacing, and long strings when layout/content may be affected.
+- [ ] Reduced motion when motion exists or changes.
+- [ ] Broad change received human approval.
+- [ ] Navigation/URL changes preserve applicable direct links, refresh, back/forward, return, and compatibility.
+- [ ] Token changes originated from the authoritative source, officially regenerated outputs, and covered affected consumers, modes, and states.
+- [ ] Code, evidence, task status, and directly affected authorized artifacts do not contradict each other; out-of-scope pending work was recorded without editing.
 
 ## Handoff
 
-- [ ] Cada ID tem status final independente.
-- [ ] Comandos e códigos de saída registrados.
-- [ ] Limitações declaradas.
-- [ ] Risco restante declarado.
-- [ ] Git rechecado quando aplicável.
-- [ ] Nenhum stage, commit ou push não autorizado.
+- [ ] Each ID has an independent final status.
+- [ ] Commands and exit codes were recorded.
+- [ ] Limitations were stated.
+- [ ] Remaining risk was stated.
+- [ ] Git was rechecked when applicable.
+- [ ] No unauthorized stage, commit, or push.

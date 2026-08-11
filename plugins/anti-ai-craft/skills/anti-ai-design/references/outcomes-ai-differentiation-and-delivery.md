@@ -1,95 +1,95 @@
-# Diferenciação e entrega responsável com IA
+# Responsible AI differentiation and delivery
 
-## Sumário
+## Summary
 
-- [ADO-095 — Trocar velocidade de entrega por clareza de chegada](#ado-095--trocar-velocidade-de-entrega-por-clareza-de-chegada)
-- [ADO-096 — Tornar resultados gerados inspecionáveis e corrigíveis](#ado-096--tornar-resultados-gerados-inspecionáveis-e-corrigíveis)
-- [ADO-097 — Graduar autonomia pelo risco da decisão](#ado-097--graduar-autonomia-pelo-risco-da-decisão)
-- [ADO-098 — Comprimir abundância gerada em hierarquia útil](#ado-098--comprimir-abundância-gerada-em-hierarquia-útil)
-- [ADO-099 — Demonstrar capacidade com cenário falsificável](#ado-099--demonstrar-capacidade-com-cenário-falsificável)
-- [ADO-100 — Manter a direção visual e a implementação sincronizadas](#ado-100--manter-a-direção-visual-e-a-implementação-sincronizadas)
-- [ADO-101 — Humanizar a automação nos momentos que importam](#ado-101--humanizar-a-automação-nos-momentos-que-importam)
+- [ADO-095 — Trade delivery speed for clarity at the destination](#ado-095--trade-delivery-speed-for-clarity-at-the-destination)
+- [ADO-096 — Make generated outcomes inspectable and correctable](#ado-096--make-generated-outcomes-inspectable-and-correctable)
+- [ADO-097 — Scale autonomy to decision risk](#ado-097--scale-autonomy-to-decision-risk)
+- [ADO-098 — Compress generated abundance into useful hierarchy](#ado-098--compress-generated-abundance-into-useful-hierarchy)
+- [ADO-099 — Demonstrate capability with a falsifiable scenario](#ado-099--demonstrate-capability-with-a-falsifiable-scenario)
+- [ADO-100 — Keep visual direction and implementation synchronized](#ado-100--keep-visual-direction-and-implementation-synchronized)
+- [ADO-101 — Humanize automation at the moments that matter](#ado-101--humanize-automation-at-the-moments-that-matter)
 
-## ADO-095 — Trocar velocidade de entrega por clareza de chegada
+## ADO-095 — Trade delivery speed for clarity at the destination
 
-**Força.** padrão
+**Strength.** default
 
-**Aplicar quando.** geração assistida reduz o tempo de construir telas, mas pessoas ainda não entendem a primeira tarefa, o resultado prometido ou o próximo passo.
+**Apply when.** Assisted generation reduces the time required to build screens, but people still do not understand the first task, promised outcome, or next step.
 
-**Decisão.** avaliar a entrega pelo tempo, esforço e compreensão necessários para alcançar um primeiro resultado útil; investir em sequência, conteúdo, estados e recuperação antes de ampliar a superfície.
+**Decision.** Evaluate delivery by the time, effort, and comprehension required to reach a first useful outcome; invest in sequence, content, states, and recovery before expanding the surface.
 
-**Prova.** a primeira tarefa e sua conclusão são reproduzíveis para uma pessoa nova, com dados representativos, caminho de erro e critério observável de entendimento.
+**Evidence.** The first task and its completion are reproducible for a new person with representative data, an error path, and an observable comprehension criterion.
 
-**Evitar.** usar quantidade de telas, velocidade de código ou aparência de completude como substituto de valor entregue.
+**Avoid.** Using the number of screens, coding speed, or appearance of completeness as a substitute for delivered value.
 
-## ADO-096 — Tornar resultados gerados inspecionáveis e corrigíveis
+## ADO-096 — Make generated outcomes inspectable and correctable
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** o produto gera recomendação, texto, mídia, classificação ou decisão por um processo probabilístico ou por contexto incompleto.
+**Apply when.** The product generates a recommendation, text, media, classification, or decision through a probabilistic process or incomplete context.
 
-**Decisão.** permitir inspecionar entrada, contexto, limites e origem quando forem relevantes; oferecer edição, nova tentativa, comparação, reversão ou relato antes de um uso consequente.
+**Decision.** Allow people to inspect input, context, limits, and origin when relevant; provide editing, retry, comparison, reversal, or reporting before consequential use.
 
-**Prova.** testes representativos incluem saída correta, saída plausível porém errada, recusa e informação desatualizada; a pessoa consegue identificar e corrigir o resultado sem reiniciar todo o trabalho.
+**Evidence.** Representative tests include a correct output, a plausible but incorrect output, refusal, and stale information; the person can identify and correct the outcome without restarting all work.
 
-**Evitar.** apresentar saída como autoridade, esconder contexto decisivo, substituir revisão humana por um selo de confiança ou tornar a automação irreversível.
+**Avoid.** Presenting output as authority, hiding decisive context, replacing human review with a confidence badge, or making automation irreversible.
 
-## ADO-097 — Graduar autonomia pelo risco da decisão
+## ADO-097 — Scale autonomy to decision risk
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** uma automação recomenda ou executa ações que afetam dinheiro, dados, acesso, comunicação, reputação, segurança ou outras pessoas.
+**Apply when.** Automation recommends or executes actions affecting money, data, access, communication, reputation, security, or other people.
 
-**Decisão.** aumentar confirmação, explicação, pré-visualização, limites, registro e reversibilidade conforme consequência e dificuldade de recuperação. Manter aprovação humana significativa nos pontos de risco elevado.
+**Decision.** Increase confirmation, explanation, preview, limits, records, and reversibility according to the consequence and difficulty of recovery. Retain meaningful human approval at high-risk points.
 
-**Prova.** a matriz de ações relaciona nível de risco, autorização, informação exibida, responsável, log, cancelamento e recuperação; limites são testados com abuso e erro plausíveis.
+**Evidence.** The action matrix relates risk level, authorization, displayed information, owner, log, cancellation, and recovery; limits are tested against plausible abuse and error.
 
-**Evitar.** executar porque a tecnologia permite, usar confirmação ritual que ninguém consegue avaliar ou ocultar qual ação foi tomada e por quem.
+**Avoid.** Executing merely because the technology permits it, using ritual confirmation no one can evaluate, or hiding which action was taken and by whom.
 
-## ADO-098 — Comprimir abundância gerada em hierarquia útil
+## ADO-098 — Compress generated abundance into useful hierarchy
 
-**Força.** padrão
+**Strength.** default
 
-**Aplicar quando.** geração rápida produz muitas sugestões, rascunhos, alertas, variações ou resultados concorrentes.
+**Apply when.** Rapid generation produces many suggestions, drafts, alerts, variations, or competing outcomes.
 
-**Decisão.** agrupar duplicações, ordenar pelo objetivo da tarefa, revelar o critério de seleção e preservar acesso a detalhe, filtro e refinamento. Tratar volume como matéria-prima, não como valor entregue.
+**Decision.** Group duplicates, order by the task objective, reveal the selection criterion, and preserve access to detail, filtering, and refinement. Treat volume as raw material, not delivered value.
 
-**Prova.** pessoas encontram o resultado pertinente, reconhecem itens críticos e entendem por que algo recebeu prioridade; a avaliação inclui omissões e falsos destaques.
+**Evidence.** People find the relevant outcome, recognize critical items, and understand why something received priority; evaluation includes omissions and false emphasis.
 
-**Evitar.** despejar todas as saídas, usar novidade como prioridade, esconder diversidade útil ou apresentar ordenação opaca como verdade objetiva.
+**Avoid.** Dumping every output, using novelty as priority, hiding useful diversity, or presenting opaque ordering as objective truth.
 
-## ADO-099 — Demonstrar capacidade com cenário falsificável
+## ADO-099 — Demonstrate capability with a falsifiable scenario
 
-**Força.** padrão
+**Strength.** default
 
-**Aplicar quando.** uma página, demonstração ou onboarding precisa explicar o que uma capacidade automatizada realmente faz.
+**Apply when.** A page, demonstration, or onboarding flow must explain what an automated capability actually does.
 
-**Decisão.** mostrar um cenário representativo com entrada, saída, tempo, papel humano, dependências, limites e recuperação. Identificar claramente se a experiência é ao vivo, gravada, simulada ou hipotética.
+**Decision.** Show a representative scenario with input, output, time, human role, dependencies, limits, and recovery. Clearly identify whether the experience is live, recorded, simulated, or hypothetical.
 
-**Prova.** o cenário pode ser reproduzido na versão atual ou possui dados e condições documentados; falhas conhecidas aparecem junto da capacidade que qualificam.
+**Evidence.** The scenario can be reproduced in the current version or has documented data and conditions; known failures appear alongside the capability they qualify.
 
-**Evitar.** animação teatral apresentada como produto, latência ou progresso inventado, resultado escolhido sem condições ou demonstração que depende de intervenção oculta.
+**Avoid.** Theatrical animation presented as the product, fabricated latency or progress, a cherry-picked outcome without conditions, or a demonstration that depends on hidden intervention.
 
-## ADO-100 — Manter a direção visual e a implementação sincronizadas
+## ADO-100 — Keep visual direction and implementation synchronized
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** protótipos, geração visual, design system e código evoluem por ferramentas ou pessoas diferentes.
+**Apply when.** Prototypes, visual generation, the design system, and code evolve through different tools or people.
 
-**Decisão.** definir fonte de verdade, cadeia de tokens e componentes, responsáveis por atualização e validação de consumidores reais; alterar a menor camada que expresse a intenção.
+**Decision.** Define the source of truth, token and component chain, owners of updates, and validation of real consumers; change the smallest layer that expresses the intent.
 
-**Prova.** componentes e estados implementados usam a cadeia prevista, mudanças têm origem rastreável, build não contém divergência conhecida e a revisão compara runtime com direção vigente.
+**Evidence.** Implemented components and states use the intended chain, changes have a traceable origin, the build contains no known divergence, and review compares runtime with current direction.
 
-**Evitar.** manter cópias concorrentes de estilo, ajustar valores soltos para imitar um protótipo, importar biblioteca visual sem necessidade ou tratar screenshot como especificação completa.
+**Avoid.** Maintaining competing style copies, adjusting loose values to imitate a prototype, importing a visual library without need, or treating a screenshot as a complete specification.
 
-## ADO-101 — Humanizar a automação nos momentos que importam
+## ADO-101 — Humanize automation at the moments that matter
 
-**Força.** padrão
+**Strength.** default
 
-**Aplicar quando.** uma interação automatizada confirma, falha, recusa, orienta recuperação ou representa uma consequência que pode afetar confiança.
+**Apply when.** An automated interaction confirms, fails, refuses, guides recovery, or represents a consequence that may affect trust.
 
-**Decisão.** usar linguagem direta, feedback proporcional, expectativa explícita e próximo passo recuperável; antecipar erros previsíveis sem ocultar limites, incerteza ou decisão humana necessária.
+**Decision.** Use direct language, proportionate feedback, explicit expectations, and a recoverable next step; anticipate predictable errors without hiding limits, uncertainty, or a necessary human decision.
 
-**Prova.** mensagens explicam o que ocorreu, efeito atual, dados envolvidos quando relevante, opções seguras e como obter ajuda; os mesmos estados funcionam sem animação, cor isolada ou hover.
+**Evidence.** Messages explain what occurred, the current effect, data involved when relevant, safe options, and how to obtain help; the same states work without animation, color alone, or hover.
 
-**Evitar.** simular compreensão humana, inventar progresso, usar celebração desproporcional, culpar a pessoa pelo erro ou ocultar que uma decisão foi automatizada.
+**Avoid.** Simulating human understanding, fabricating progress, using disproportionate celebration, blaming the person for the error, or hiding that a decision was automated.

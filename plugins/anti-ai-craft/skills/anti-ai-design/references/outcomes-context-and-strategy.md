@@ -1,134 +1,134 @@
-# Resultados, contexto e estratégia
+# Outcomes, context, and strategy
 
-## Sumário
+## Summary
 
-- [ADO-001 — Separar resultado da pessoa e resultado da organização](#ado-001--separar-resultado-da-pessoa-e-resultado-da-organização)
-- [ADO-002 — Classificar a superfície antes de orientar comportamento](#ado-002--classificar-a-superfície-antes-de-orientar-comportamento)
-- [ADO-003 — Declarar êxito e limites de proteção](#ado-003--declarar-êxito-e-limites-de-proteção)
-- [ADO-004 — Começar pela tarefa compreendida](#ado-004--começar-pela-tarefa-compreendida)
-- [ADO-005 — Separar fato, hipótese e preferência](#ado-005--separar-fato-hipótese-e-preferência)
-- [ADO-006 — Ajustar o investimento ao momento do produto](#ado-006--ajustar-o-investimento-ao-momento-do-produto)
-- [ADO-007 — Tratar hábito existente como requisito](#ado-007--tratar-hábito-existente-como-requisito)
-- [ADO-008 — Mapear a cadeia entre ação, valor e resultado](#ado-008--mapear-a-cadeia-entre-ação-valor-e-resultado)
-- [ADO-009 — Definir não escopo e condição de retorno](#ado-009--definir-não-escopo-e-condição-de-retorno)
-- [ADO-010 — Subordinar o resultado à autonomia e à verdade](#ado-010--subordinar-o-resultado-à-autonomia-e-à-verdade)
+- [ADO-001 — Separate the person's outcome from the organization's outcome](#ado-001--separate-the-persons-outcome-from-the-organizations-outcome)
+- [ADO-002 — Classify the surface before guiding behavior](#ado-002--classify-the-surface-before-guiding-behavior)
+- [ADO-003 — State success and guardrails](#ado-003--state-success-and-guardrails)
+- [ADO-004 — Start with the understood task](#ado-004--start-with-the-understood-task)
+- [ADO-005 — Separate fact, hypothesis, and preference](#ado-005--separate-fact-hypothesis-and-preference)
+- [ADO-006 — Match investment to the product's stage](#ado-006--match-investment-to-the-products-stage)
+- [ADO-007 — Treat established habits as requirements](#ado-007--treat-established-habits-as-requirements)
+- [ADO-008 — Map the chain from action to value to outcome](#ado-008--map-the-chain-from-action-to-value-to-outcome)
+- [ADO-009 — Define out of scope and the return condition](#ado-009--define-out-of-scope-and-the-return-condition)
+- [ADO-010 — Subordinate the outcome to autonomy and truth](#ado-010--subordinate-the-outcome-to-autonomy-and-truth)
 
-## ADO-001 — Separar resultado da pessoa e resultado da organização
+## ADO-001 — Separate the person's outcome from the organization's outcome
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** Uma tela precisa apoiar simultaneamente uma tarefa da pessoa e um resultado de produto, serviço ou negócio.
+**Apply when.** A screen must simultaneously support a person's task and a product, service, or business outcome.
 
-**Decisão.** Nomear os dois resultados antes de definir hierarquia, fluxo ou chamada à ação. Projetar uma ação predominante apenas quando ela também for uma escolha informada e útil para quem a executa; registrar o conflito se os resultados não puderem coexistir.
+**Decision.** Name both outcomes before defining hierarchy, flow, or call to action. Design a predominant action only when it is also an informed, useful choice for the person performing it; record the conflict if the outcomes cannot coexist.
 
-**Prova.** A tarefa, a consequência para a pessoa, o indicador de resultado e pelo menos um critério de proteção estão explícitos no brief, na especificação ou na revisão.
+**Evidence.** The task, consequence for the person, outcome indicator, and at least one guardrail criterion are explicit in the brief, specification, or review.
 
-**Evitar.** Tratar receita, clique, coleta de dado ou tempo de tela como justificativa suficiente para esconder custo, reduzir controle ou piorar a tarefa da pessoa.
+**Avoid.** Treating revenue, a click, data collection, or screen time as sufficient justification to hide cost, reduce control, or worsen the person's task.
 
-## ADO-002 — Classificar a superfície antes de orientar comportamento
+## ADO-002 — Classify the surface before guiding behavior
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** O pedido menciona melhorar resultado, engajamento ou adoção, mas não deixa claro se a superfície informa, opera, compara, aprende ou convida a iniciar uma relação.
+**Apply when.** The request mentions improving outcomes, engagement, or adoption but does not make clear whether the surface informs, operates, compares, teaches, or invites the start of a relationship.
 
-**Decisão.** Classificar a superfície e sua tarefa crítica. Usar persuasão somente em superfícies em que escolher ou aderir é parte legítima da tarefa; em áreas operacionais, priorizar precisão, recuperação, contexto e continuidade.
+**Decision.** Classify the surface and its critical task. Use persuasion only on surfaces where choosing or opting in is a legitimate part of the task; in operational areas, prioritize precision, recovery, context, and continuity.
 
-**Prova.** O contrato de direção identifica o tipo de superfície, a ação crítica, a frequência, o custo do erro e a razão de uma orientação mais forte ou mais discreta.
+**Evidence.** The direction contract identifies the surface type, critical action, frequency, cost of error, and reason for stronger or more subtle guidance.
 
-**Evitar.** Converter painel, prontuário, ferramenta de trabalho, configuração ou leitura longa em página promocional por reflexo visual.
+**Avoid.** Reflexively converting a dashboard, medical record, work tool, settings, or long-form reading into a promotional page.
 
-## ADO-003 — Declarar êxito e limites de proteção
+## ADO-003 — State success and guardrails
 
-**Força.** padrão
+**Strength.** default
 
-**Aplicar quando.** Uma mudança pretende aumentar conclusão, descoberta, uso recorrente, compra ou retorno.
+**Apply when.** A change is intended to increase completion, discovery, recurring use, purchase, or return.
 
-**Decisão.** Formular uma hipótese com indicador principal, período de observação e limites que não podem piorar, como abandono involuntário, erro, acessibilidade, suporte, cancelamento ou confiança. Definir antes da implementação que sinal exigirá revisão ou reversão.
+**Decision.** Formulate a hypothesis with a primary indicator, observation period, and guardrails that must not deteriorate, such as unintended abandonment, error, accessibility, support, cancellation, or trust. Define before implementation which signal will require review or reversal.
 
-**Prova.** Há uma hipótese falsificável, uma fonte de dados ou método de pesquisa e critérios de aceitação que não dependem apenas de aparência ou opinião da equipe.
+**Evidence.** There is a falsifiable hypothesis, a data source or research method, and acceptance criteria that do not depend solely on appearance or team opinion.
 
-**Evitar.** Declarar melhora com base em um único clique, em captura estática, em volume sem qualidade ou em experimento sem volume e método adequados.
+**Avoid.** Declaring improvement based on a single click, static capture, volume without quality, or an experiment without adequate volume and method.
 
-## ADO-004 — Começar pela tarefa compreendida
+## ADO-004 — Start with the understood task
 
-**Força.** padrão
+**Strength.** default
 
-**Aplicar quando.** A primeira reação a um desempenho fraco é trocar cor, tipografia, ilustração, ordem visual ou componente.
+**Apply when.** The first reaction to weak performance is to change color, typography, illustration, visual order, or component.
 
-**Decisão.** Verificar primeiro quem chega, que problema tenta resolver, que vocabulário entende, que informação já possui e qual próximo passo é razoável. Só então escolher mensagem, forma, ordem, contraste e detalhe visual.
+**Decision.** First verify who arrives, which problem they are trying to solve, which vocabulary they understand, which information they already have, and which next step is reasonable. Only then choose the message, form, order, contrast, and visual detail.
 
-**Prova.** A proposta consegue explicar, em linguagem do usuário, a tarefa, a promessa verificável, a informação necessária e a consequência do próximo passo.
+**Evidence.** In the user's language, the proposition can explain the task, verifiable promise, necessary information, and consequence of the next step.
 
-**Evitar.** Usar ajuste de acabamento como substituto para ausência de público definido, instrução compreensível, conteúdo fiel ou caminho funcional.
+**Avoid.** Using finish adjustments as a substitute for an undefined audience, comprehensible instruction, faithful content, or functional path.
 
-## ADO-005 — Separar fato, hipótese e preferência
+## ADO-005 — Separate fact, hypothesis, and preference
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** Uma recomendação, decisão de design ou revisão mistura comportamento observado, inferência, referência externa e gosto.
+**Apply when.** A recommendation, design decision, or review mixes observed behavior, inference, external reference, and taste.
 
-**Decisão.** Rotular cada afirmação material como fato, hipótese ou preferência. Ligar fatos ao projeto ou ao runtime, dar a hipóteses uma forma de teste e contraevidência, e deixar preferências explícitas para decisão humana.
+**Decision.** Label every material statement as fact, hypothesis, or preference. Link facts to the project or runtime, give hypotheses a test and disconfirming evidence, and make preferences explicit for human decision.
 
-**Prova.** O brief, plano ou relatório registra a origem e o estado de cada afirmação importante sem transformar plausibilidade em certeza.
+**Evidence.** The brief, plan, or report records the origin and state of each important statement without turning plausibility into certainty.
 
-**Evitar.** Apresentar uma narrativa convincente como fato, tratar benchmark externo como requisito local ou converter gosto em defeito.
+**Avoid.** Presenting a convincing narrative as fact, treating an external benchmark as a local requirement, or turning taste into a defect.
 
-## ADO-006 — Ajustar o investimento ao momento do produto
+## ADO-006 — Match investment to the product's stage
 
-**Força.** heurística
+**Strength.** heuristic
 
-**Aplicar quando.** A equipe precisa decidir entre ampliar acabamento visual, esclarecer o primeiro uso, estabilizar uma tarefa recorrente ou sistematizar componentes.
+**Apply when.** The team must decide whether to expand visual polish, clarify first use, stabilize a recurring task, or systematize components.
 
-**Decisão.** Direcionar esforço ao risco dominante do momento: compreensão inicial e caminho para valor quando ainda há incerteza; consistência e evolução coordenada quando há uso repetido e múltiplas superfícies. Reavaliar a prioridade quando a evidência mudar.
+**Decision.** Direct effort to the dominant current risk: initial comprehension and the path to value while uncertainty remains; consistency and coordinated evolution when there is repeated use and multiple surfaces. Reassess priority when the evidence changes.
 
-**Prova.** O plano relaciona o investimento ao problema atual, ao volume de uso, à maturidade dos fluxos e à capacidade real de manter a solução.
+**Evidence.** The plan relates investment to the current problem, usage volume, flow maturity, and actual ability to maintain the solution.
 
-**Evitar.** Assumir uma sequência universal de maturidade, usar aparência para encobrir falta de utilidade ou adiar acessibilidade e recuperação para uma etapa futura.
+**Avoid.** Assuming a universal maturity sequence, using appearance to conceal a lack of utility, or postponing accessibility and recovery to a future stage.
 
-## ADO-007 — Tratar hábito existente como requisito
+## ADO-007 — Treat established habits as requirements
 
-**Força.** padrão
+**Strength.** default
 
-**Aplicar quando.** Uma área usada com frequência será reorganizada, renomeada ou receberá nova interação.
+**Apply when.** A frequently used area will be reorganized, renamed, or given a new interaction.
 
-**Decisão.** Identificar o que as pessoas já sabem fazer, quais atalhos ou posições sustentam a tarefa e quais ganhos compensam reaprendizado. Preservar o caminho conhecido quando possível; se a mudança for necessária, oferecer transição, equivalência ou orientação contextual.
+**Decision.** Identify what people already know how to do, which shortcuts or positions sustain the task, and which gains justify relearning. Preserve the known path when possible; if change is necessary, provide a transition, equivalent path, or contextual guidance.
 
-**Prova.** O inventário registra comportamento atual, grupos afetados, custo de migração e como estados, foco, URLs, atalhos ou ações frequentes permanecem recuperáveis.
+**Evidence.** The inventory records current behavior, affected groups, migration cost, and how states, focus, URLs, shortcuts, or frequent actions remain recoverable.
 
-**Evitar.** Chamar toda mudança de melhoria, mover ações de alto uso para menus secundários ou impor uma nova taxonomia sem testar a perda de orientação.
+**Avoid.** Calling every change an improvement, moving high-use actions into secondary menus, or imposing a new taxonomy without testing the loss of orientation.
 
-## ADO-008 — Mapear a cadeia entre ação, valor e resultado
+## ADO-008 — Map the chain from action to value to outcome
 
-**Força.** padrão
+**Strength.** default
 
-**Aplicar quando.** Uma funcionalidade ou superfície é justificada por clique, uso, conversão, retenção ou receita sem explicar como isso beneficia a pessoa.
+**Apply when.** A feature or surface is justified by clicks, use, conversion, retention, or revenue without explaining how it benefits the person.
 
-**Decisão.** Mapear contexto e entrada, ação, resultado imediato da pessoa, valor recorrente e resultado da organização. Identificar em qual elo a hipótese pode falhar e impedir que uma métrica intermediária substitua o resultado pretendido.
+**Decision.** Map context and entry, action, the person's immediate outcome, recurring value, and the organization's outcome. Identify where in the chain the hypothesis can fail and prevent an intermediate metric from replacing the intended outcome.
 
-**Prova.** Cada elo da cadeia aponta para evidência disponível ou para uma hipótese com forma de validação e contraevidência.
+**Evidence.** Each link in the chain points to available evidence or to a hypothesis with a validation method and disconfirming evidence.
 
-**Evitar.** Equiparar interação a valor, otimizar resultado comercial sem benefício para a pessoa ou declarar causalidade a partir de correlação isolada.
+**Avoid.** Equating interaction with value, optimizing a business outcome without benefit to the person, or claiming causality from an isolated correlation.
 
-## ADO-009 — Definir não escopo e condição de retorno
+## ADO-009 — Define out of scope and the return condition
 
-**Força.** padrão
+**Strength.** default
 
-**Aplicar quando.** Pedidos, ideias ou referências ampliam a solução além do resultado e das restrições definidos para a rodada atual.
+**Apply when.** Requests, ideas, or references expand the solution beyond the outcome and constraints defined for the current iteration.
 
-**Decisão.** Registrar o que não será resolvido agora, por que ficou fora e qual evidência, dependência ou mudança de contexto justificaria reavaliar a decisão.
+**Decision.** Record what will not be solved now, why it is out of scope, and which evidence, dependency, or context change would justify revisiting the decision.
 
-**Prova.** O plano distingue escopo, não escopo, desconhecidos e condições de retorno; itens excluídos não reaparecem silenciosamente durante a implementação.
+**Evidence.** The plan distinguishes scope, out-of-scope items, unknowns, and return conditions; excluded items do not silently reappear during implementation.
 
-**Evitar.** Crescimento silencioso de escopo, rejeição permanente sem fundamento ou implementação de opções apenas para transmitir completude.
+**Avoid.** Silent scope growth, permanent rejection without a rationale, or implementation of options merely to convey completeness.
 
-## ADO-010 — Subordinar o resultado à autonomia e à verdade
+## ADO-010 — Subordinate the outcome to autonomy and truth
 
-**Força.** obrigatório
+**Strength.** required
 
-**Aplicar quando.** A estratégia considera urgência, preseleção, limitação, recomendação, coleta de informação, incentivo de retorno ou redução de cancelamento.
+**Apply when.** The strategy considers urgency, preselection, limitation, recommendation, information collection, an incentive to return, or reduced cancellation.
 
-**Decisão.** Tornar intenção, custo, consequência, alternativa e reversão compreensíveis no momento da escolha. Usar recomendação apenas quando houver motivo defensável para o usuário e preservar saída clara, dados exportáveis e cancelamento proporcional.
+**Decision.** Make intent, cost, consequence, alternative, and reversal comprehensible at the moment of choice. Use a recommendation only when there is a defensible reason for the user, and preserve a clear exit, exportable data, and proportionate cancellation.
 
-**Prova.** A revisão demonstra que não há escassez inventada, contagem ou progresso simulados, confirmação ambígua, prova social não verificável, taxa oculta ou obstáculo artificial à saída.
+**Evidence.** The review demonstrates that there is no fabricated scarcity, simulated countdown or progress, ambiguous confirmation, unverifiable social proof, hidden fee, or artificial barrier to exit.
 
-**Evitar.** Induzir compromisso por confusão, medo, dependência, atraso deliberado, padrão enganoso ou retenção baseada em impedir a pessoa de deixar o produto.
+**Avoid.** Inducing commitment through confusion, fear, dependency, deliberate delay, a deceptive pattern, or retention based on preventing the person from leaving the product.

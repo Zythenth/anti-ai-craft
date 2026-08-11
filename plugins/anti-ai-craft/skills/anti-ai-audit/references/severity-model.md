@@ -1,57 +1,57 @@
-# Modelo de severidade e confiança
+# Severity and confidence model
 
-## Severidade
+## Severity
 
-### Crítica
+### Critical
 
-Exploração provável com impacto grave; perda/corrupção ampla; exposição sensível; controle crítico ausente; uso essencial bloqueado para muitos usuários. Exigir caminho demonstrável, não hipótese abstrata.
+Likely exploitation with severe impact; broad loss/corruption; sensitive exposure; missing critical control; essential use blocked for many users. Require a demonstrable path, not an abstract hypothesis.
 
-### Alta
+### High
 
-Função principal quebrada, autorização incorreta, regressão de acessibilidade importante, mutação/rollback perigoso, ação crítica oculta ou arquitetura que causa falha concreta.
+Broken primary function, incorrect authorization, major accessibility regression, dangerous mutation/rollback, hidden critical action, or architecture that causes a concrete failure.
 
-### Média
+### Medium
 
-Comportamento secundário incorreto, manutenção materialmente frágil, teste com falsa confiança, responsividade/estado incompleto ou padrão genérico que prejudica tarefa/hierarquia.
+Incorrect secondary behavior, code that is materially fragile to maintain, a test that gives false confidence, incomplete responsiveness/state, or a generic pattern that harms the task/hierarchy.
 
-### Baixa
+### Low
 
-Problema localizado, risco limitado, inconsistência menor ou refinamento com impacto observável pequeno.
+Localized problem, limited risk, minor inconsistency, or refinement with small observable impact.
 
-### Observação
+### Observation
 
-Decisão pendente, oportunidade, preferência, dívida sem falha atual ou informação insuficiente. Não apresentar como defeito.
+Pending decision, opportunity, preference, technical debt without current failure, or insufficient information. Do not present as a defect.
 
-## Confiança
+## Confidence
 
-- **Alta:** reproduzido; contrato claro; caminho e impacto demonstrados.
-- **Média:** caminho plausível e evidência forte, mas ambiente/estado impede reprodução completa.
-- **Baixa:** heuristicamente suspeito; falta condição material. Manter fora dos achados principais ou como pergunta.
+- **High:** reproduced; clear contract; path and impact demonstrated.
+- **Medium:** plausible path and strong evidence, but the environment/state prevents complete reproduction.
+- **Low:** heuristically suspicious; a material condition is missing. Keep out of primary findings or present as a question.
 
-## Prioridade de remediação
+## Remediation priority
 
-Prioridade não é sinônimo de severidade. Considerar dependências, recorrência, custo de oportunidade, disponibilidade de correção segura, exigência normativa e janela operacional. Um achado de alta severidade pode aguardar uma decisão crítica de produto; um achado médio recorrente pode ser corrigido primeiro por reduzir vários riscos.
+Priority is not synonymous with severity. Consider dependencies, recurrence, opportunity cost, availability of a safe fix, normative requirements, and the operational window. A high-severity finding may await a critical product decision; a recurring medium-severity finding may be fixed first because it reduces several risks.
 
-## Classificação do achado
+## Finding classification
 
-- defeito funcional confirmado;
-- vulnerabilidade;
-- acessibilidade;
-- code smell tradicional;
-- padrão genérico contextual;
-- heurística comunitária;
-- preferência;
-- decisão do produto;
-- evidência insuficiente ou falso positivo rejeitado.
+- confirmed functional defect;
+- vulnerability;
+- accessibility;
+- traditional code smell;
+- contextual generic pattern;
+- community heuristic;
+- preference;
+- product decision;
+- insufficient evidence or rejected false positive.
 
-## Regras de calibragem
+## Calibration rules
 
-- Impacto sem alcançabilidade não define severidade.
-- Complexidade estética não aumenta severidade.
-- Um smell não vira bug sem comportamento.
-- Vulnerabilidade exige boundary, controle ausente e impacto.
-- Falha WCAG aplicável pode bloquear entrega mesmo sem crash.
-- Várias baixas repetidas podem formar problema sistêmico; registrar relação sem inflar cada item.
-- Confiança e severidade são eixos separados.
-- Calibrar impacto máximo realista, alcançabilidade/pré-condições, probabilidade, alcance, sensibilidade e reversibilidade.
-- Reportar severidade, confiança e prioridade em campos separados.
+- Impact without reachability does not determine severity.
+- Aesthetic complexity does not increase severity.
+- A smell does not become a bug without behavior.
+- A vulnerability requires a boundary, a missing control, and impact.
+- An applicable WCAG failure may block delivery even without a crash.
+- Multiple recurring low-severity findings may form a systemic problem; record the relationship without inflating each item.
+- Confidence and severity are separate axes.
+- Calibrate realistic maximum impact, reachability/preconditions, likelihood, scope, sensitivity, and reversibility.
+- Report severity, confidence, and priority in separate fields.
