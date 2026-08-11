@@ -8,11 +8,11 @@ Six skills for Codex to run design workflows, create interfaces, produce code, a
 
 ### Installation
 
-![Anti-AI Craft installation flow](docs/images/01-instalacao.png)
+![Anti-AI Craft installation flow](docs/images/01-installation.png)
 
 ### Available skills
 
-![Map of the six Anti-AI Craft skills](docs/images/02-skills-no-codex.png)
+![Map of the six Anti-AI Craft skills](docs/images/02-skills-in-codex.png)
 
 ### Controlled comparison
 
@@ -22,16 +22,16 @@ audited their equivalence; both versions passed the same functional flow in the 
 The capture makes it possible to compare hierarchy, density, context, and access to
 actions without presenting the baseline as a broken screen.
 
-![Real comparison between the neutral baseline and the version guided by Anti-AI Design](docs/images/03-antes-depois.png)
+![Real comparison between the neutral baseline and the version guided by Anti-AI Design](docs/images/03-before-after.png)
 
-[View the comparison brief, executable code, and audit (in Portuguese)](docs/demo-comparativo/AUDITORIA.md).
+[View the comparison brief, executable code, and audit](docs/comparison-demo/AUDIT.md).
 
 ### Using a skill
 
 Illustrative example of invocation and the expected response; this is not a capture
 of the Codex application.
 
-![Illustrative example of using the Anti-AI Design skill](docs/images/04-uso-da-skill.png)
+![Illustrative example of using the Anti-AI Design skill](docs/images/04-using-the-skill.png)
 
 ## What the plugin offers
 
@@ -182,7 +182,7 @@ codex plugin marketplace remove zythenth
 ```text
 .
 ├── .agents/plugins/marketplace.json
-├── docs/analises/
+├── docs/analyses/
 ├── plugins/anti-ai-craft/
 │   ├── .codex-plugin/plugin.json
 │   └── skills/
@@ -190,7 +190,7 @@ codex plugin marketplace remove zythenth
 ```
 
 Each skill keeps its primary contract in `SKILL.md` and specialized references in its own directory.
-The reports under `docs/analises/` record the technical evaluation used to evolve
+The reports under `docs/analyses/` record the technical evaluation used to evolve
 the plugin and the final coverage review.
 
 ## Contributing

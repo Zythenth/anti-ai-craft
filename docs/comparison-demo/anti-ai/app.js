@@ -4,15 +4,15 @@
   const fixture = window.DEMO_TRADUCAO;
 
   if (!fixture) {
-    document.body.textContent = "Não foi possível carregar os dados de demonstração.";
-    throw new Error("window.DEMO_TRADUCAO não está disponível.");
+    document.body.textContent = "The demonstration data could not be loaded.";
+    throw new Error("window.DEMO_TRADUCAO is unavailable.");
   }
 
   const stateLabels = {
-    ready: "Pronto",
-    blocked: "Bloqueado",
-    reviewing: "Em revisão",
-    queued: "Na fila"
+    ready: "Ready",
+    blocked: "Blocked",
+    reviewing: "Under review",
+    queued: "Queued"
   };
 
   const view = {
@@ -47,14 +47,14 @@
   };
 
   function formatNumber(value) {
-    return new Intl.NumberFormat("pt-BR").format(value);
+    return new Intl.NumberFormat("en-US").format(value);
   }
 
   function normalize(value) {
     return value
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
-      .toLocaleLowerCase("pt-BR");
+      .toLocaleLowerCase("en-US");
   }
 
   function appendText(element, text) {
@@ -82,12 +82,12 @@
     elements.batchName.textContent = meta.batchName;
     elements.referenceTime.textContent = meta.referenceDate + ", " + meta.referenceTime;
     elements.batchSummary.textContent =
-      summary.chapters + " capítulos · " +
-      formatNumber(summary.words) + " palavras · " +
-      summary.ready + " pronto · " +
-      summary.blocked + " bloqueado · " +
-      summary.reviewing + " em revisão · " +
-      summary.queued + " na fila";
+      summary.chapters + " chapters · " +
+      formatNumber(summary.words) + " words · " +
+      summary.ready + " ready · " +
+      summary.blocked + " blocked · " +
+      summary.reviewing + " under review · " +
+      summary.queued + " queued";
     elements.pipelineName.textContent = meta.pipeline;
     elements.executionModel.textContent = meta.executionModel;
     elements.actionMessage.textContent = meta.simulationNotice;
@@ -128,8 +128,8 @@
     checkbox.setAttribute(
       "aria-label",
       chapter.selectable
-        ? "Selecionar " + chapter.id + " " + chapter.title + " para aplicação em lote"
-        : chapter.id + " " + chapter.title + " indisponível para aplicação em lote"
+        ? "Select " + chapter.id + " " + chapter.title + " for batch application"
+        : chapter.id + " " + chapter.title + " unavailable for batch application"
     );
     label.appendChild(checkbox);
     cell.appendChild(label);
@@ -138,7 +138,7 @@
 
   function createChapterCell(chapter) {
     const cell = document.createElement("td");
-    cell.dataset.label = "Capítulo";
+    cell.dataset.label = "Chapter";
 
     const id = document.createElement("span");
     id.className = "chapter-id";
@@ -148,14 +148,14 @@
     title.textContent = chapter.title;
     const words = document.createElement("span");
     words.className = "chapter-words";
-    words.textContent = formatNumber(chapter.words) + " palavras";
+    words.textContent = formatNumber(chapter.words) + " words";
     cell.append(id, title, words);
     return cell;
   }
 
   function createStageCell(chapter) {
     const cell = document.createElement("td");
-    cell.dataset.label = "Etapa";
+    cell.dataset.label = "Stage";
     const state = document.createElement("span");
     state.className = "state-label";
     state.dataset.state = chapter.state;
@@ -169,10 +169,10 @@
 
   function createOperationCell(chapter) {
     const cell = document.createElement("td");
-    cell.dataset.label = "Situação operacional";
+    cell.dataset.label = "Operational status";
     const glossary = document.createElement("span");
     glossary.className = "glossary-label";
-    glossary.textContent = "Glossário: " + chapter.glossary.label;
+    glossary.textContent = "Glossary: " + chapter.glossary.label;
     const summary = document.createElement("p");
     summary.className = "summary-text";
     summary.textContent = chapter.summary;
@@ -182,7 +182,7 @@
 
   function createExpectedCell(chapter) {
     const cell = document.createElement("td");
-    cell.dataset.label = "Previsto";
+    cell.dataset.label = "Estimated";
     const expected = document.createElement("span");
     expected.className = "expected-at";
     expected.textContent = chapter.expectedAt;
@@ -192,7 +192,7 @@
 
   function createActionsCell(chapter) {
     const cell = document.createElement("td");
-    cell.dataset.label = "Ações";
+    cell.dataset.label = "Actions";
     const actions = document.createElement("div");
     actions.className = "row-actions";
 
@@ -218,7 +218,7 @@
       const help = document.createElement("span");
       help.className = "visually-hidden";
       help.id = "apply-help-" + chapter.id;
-      help.textContent = "Selecione o capítulo para habilitar a aplicação simulada.";
+      help.textContent = "Select the chapter to enable simulated application.";
       cell.appendChild(help);
     }
 
@@ -241,7 +241,7 @@
     const detailBlock = document.createElement("section");
     detailBlock.className = "detail-block";
     const detailTitle = document.createElement("h3");
-    detailTitle.textContent = "Detalhes de " + chapter.id;
+    detailTitle.textContent = "Details for " + chapter.id;
     const glossaryDetail = document.createElement("p");
     glossaryDetail.textContent = chapter.glossary.detail;
     const operationalSummary = document.createElement("p");
@@ -269,8 +269,8 @@
       help.className = "incident__help";
       help.id = "retry-help-" + chapter.id;
       help.textContent = view.glossaryConfirmed
-        ? "Decisões confirmadas nesta simulação; a nova tentativa está disponível."
-        : "Confirme as decisões simuladas antes de tentar novamente.";
+        ? "Decisions confirmed in this simulation; retry is available."
+        : "Confirm the simulated decisions before trying again.";
 
       const incidentActions = document.createElement("div");
       incidentActions.className = "incident__actions";
@@ -279,7 +279,7 @@
       confirm.className = "incident-action";
       confirm.dataset.action = "confirm-glossary";
       confirm.dataset.chapterId = chapter.id;
-      confirm.textContent = view.glossaryConfirmed ? "Decisões confirmadas" : "Confirmar decisões";
+      confirm.textContent = view.glossaryConfirmed ? "Decisions confirmed" : "Confirm decisions";
       confirm.disabled = view.glossaryConfirmed;
 
       const retry = makeButton(chapter.incident.retryAction.label, "incident-action", chapter.incident.retryAction, chapter);
@@ -330,8 +330,8 @@
     elements.tableScroll.hidden = matchingChapters.length === 0;
     elements.emptyState.hidden = matchingChapters.length !== 0;
     elements.resultCount.textContent = matchingChapters.length === 1
-      ? "1 capítulo visível"
-      : matchingChapters.length + " capítulos visíveis";
+      ? "1 visible chapter"
+      : matchingChapters.length + " visible chapters";
     elements.clearSearch.hidden = view.query.length === 0;
     updateBulkAction();
   }
@@ -344,7 +344,7 @@
     elements.bulkAction.disabled = selectedReady.length === 0;
     elements.bulkAction.setAttribute(
       "aria-label",
-      "Aplicar diff em lote; " + selectedReady.length + " capítulo selecionado"
+      "Apply diff as a batch; " + selectedReady.length + " selected chapter"
     );
   }
 
@@ -379,7 +379,7 @@
   function simulateAction(chapter, actionId, label) {
     if (actionId === "resolve-glossary") {
       toggleDetails(chapter.id, true);
-      announce("Decisões de glossário abertas para " + chapter.id + ". Nenhum arquivo foi alterado.");
+      announce("Glossary decisions opened for " + chapter.id + ". No files were changed.");
       return;
     }
 
@@ -391,16 +391,16 @@
         '[data-chapter-id="' + chapter.id + '"][data-action="retry"]'
       );
       if (retry) retry.focus();
-      announce("Decisões de " + chapter.id + " confirmadas somente nesta simulação. Tentar novamente foi habilitado.");
+      announce("Decisions for " + chapter.id + " were confirmed only in this simulation. Retry is now enabled.");
       return;
     }
 
     if (actionId === "retry") {
-      announce("Nova tentativa de " + chapter.id + " simulada. O capítulo e o fixture permanecem inalterados.");
+      announce("A new attempt for " + chapter.id + " was simulated. The chapter and fixture remain unchanged.");
       return;
     }
 
-    announce(label + " para " + chapter.id + " foi simulada. Nenhum arquivo foi alterado.");
+    announce(label + " for " + chapter.id + " was simulated. No files were changed.");
   }
 
   elements.search.addEventListener("input", function (event) {
@@ -451,7 +451,7 @@
     updateBulkAction();
     announce(
       checkbox.dataset.selectChapter +
-      (checkbox.checked ? " selecionado para aplicação simulada em lote." : " removido da aplicação simulada em lote.")
+      (checkbox.checked ? " selected for simulated batch application." : " removed from simulated batch application.")
     );
   });
 
@@ -465,8 +465,8 @@
       const opened = toggleDetails(chapter.id);
       announce(
         opened
-          ? button.textContent + " aberto para " + chapter.id + "."
-          : button.textContent + " fechado para " + chapter.id + "."
+          ? button.textContent + " opened for " + chapter.id + "."
+          : button.textContent + " closed for " + chapter.id + "."
       );
       return;
     }
@@ -477,7 +477,7 @@
   elements.bulkAction.addEventListener("click", function () {
     const selectedIds = Array.from(view.selected);
     announce(
-      "Aplicação de diff em lote simulada para " + selectedIds.join(", ") + ". Nenhum arquivo foi alterado."
+      "Batch diff application simulated for " + selectedIds.join(", ") + ". No files were changed."
     );
   });
 

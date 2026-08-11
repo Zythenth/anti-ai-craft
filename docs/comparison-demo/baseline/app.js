@@ -4,8 +4,8 @@
   const fixture = window.DEMO_TRADUCAO;
 
   if (!fixture) {
-    document.body.innerHTML = "<main><h1>Não foi possível carregar os dados de demonstração.</h1></main>";
-    throw new Error("window.DEMO_TRADUCAO não foi carregado");
+    document.body.innerHTML = "<main><h1>Unable to load the demo data.</h1></main>";
+    throw new Error("window.DEMO_TRADUCAO was not loaded");
   }
 
   const ui = {
@@ -49,12 +49,12 @@
     return value
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
-      .toLocaleLowerCase("pt-BR")
+      .toLocaleLowerCase("en-US")
       .trim();
   }
 
   function formatWords(value) {
-    return new Intl.NumberFormat("pt-BR").format(value);
+    return new Intl.NumberFormat("en-US").format(value);
   }
 
   function button(label, className, attributes) {
@@ -95,18 +95,18 @@
     setText("#batch-name", meta.batchName);
     setText("#fixture-label", meta.fixtureLabel);
     setText("#reference-time", `${meta.referenceDate} · ${meta.referenceTime}`);
-    setText("#summary-date", `Referência: ${meta.referenceTime}`);
+    setText("#summary-date", `Reference: ${meta.referenceTime}`);
     setText("#pipeline-name", meta.pipeline);
     setText("#execution-model", meta.executionModel);
     setText("#simulation-notice", meta.simulationNotice);
 
     const metrics = [
-      { label: "Capítulos", value: summary.chapters, tone: "" },
-      { label: "Palavras", value: formatWords(summary.words), tone: "" },
-      { label: "Pronto", value: summary.ready, tone: "ready" },
-      { label: "Bloqueado", value: summary.blocked, tone: "blocked" },
-      { label: "Em revisão", value: summary.reviewing, tone: "reviewing" },
-      { label: "Na fila", value: summary.queued, tone: "queued" },
+      { label: "Chapters", value: summary.chapters, tone: "" },
+      { label: "Words", value: formatWords(summary.words), tone: "" },
+      { label: "Ready", value: summary.ready, tone: "ready" },
+      { label: "Blocked", value: summary.blocked, tone: "blocked" },
+      { label: "Under review", value: summary.reviewing, tone: "reviewing" },
+      { label: "Queued", value: summary.queued, tone: "queued" },
     ];
 
     elements.summaryMetrics = document.querySelector("#summary-metrics");
@@ -130,7 +130,7 @@
         const control = button(filter.label, "filter-button", {
           "data-filter": filter.id,
           "aria-pressed": String(filter.id === "all"),
-          "aria-label": `${filter.label}, ${filter.count} capítulo${filter.count === 1 ? "" : "s"}`,
+          "aria-label": `${filter.label}, ${filter.count} chapter${filter.count === 1 ? "" : "s"}`,
         });
         if (filter.id === "all") control.classList.add("is-active");
         const count = document.createElement("span");
@@ -159,7 +159,7 @@
 
     const paths = document.createElement("div");
     paths.className = "incident__paths";
-    paths.textContent = `${chapter.glossary.detail} Caminhos: ${chapter.incident.recoveryAction.label}, ${chapter.incident.retryAction.label} e ${chapter.incident.reportAction.label}.`;
+    paths.textContent = `${chapter.glossary.detail} Paths: ${chapter.incident.recoveryAction.label}, ${chapter.incident.retryAction.label}, and ${chapter.incident.reportAction.label}.`;
 
     const actions = document.createElement("div");
     actions.className = "incident__actions";
@@ -199,9 +199,9 @@
     selection.checked = ui.selected.has(chapter.id);
     selection.disabled = !chapter.selectable;
     selection.setAttribute("aria-label", chapter.selectable
-      ? `Selecionar ${chapter.id} ${chapter.title} para aplicação em lote`
-      : `${chapter.id} ${chapter.title} indisponível para aplicação em lote`);
-    if (!chapter.selectable) selection.title = "Indisponível: o diff ainda não está pronto";
+      ? `Select ${chapter.id} ${chapter.title} for batch application`
+      : `${chapter.id} ${chapter.title} is unavailable for batch application`);
+    if (!chapter.selectable) selection.title = "Unavailable: the diff is not ready yet";
     selectionCell.append(selection);
 
     const chapterCell = document.createElement("td");
@@ -211,7 +211,7 @@
     const title = document.createElement("span");
     title.textContent = chapter.title;
     const words = document.createElement("small");
-    words.textContent = `${formatWords(chapter.words)} palavras`;
+    words.textContent = `${formatWords(chapter.words)} words`;
     chapterCell.append(id, title, words);
 
     const stageCell = document.createElement("td");
@@ -220,9 +220,9 @@
     stage.textContent = chapter.stage;
     stageCell.append(stage);
 
-    const glossaryCell = cell("Glossário", chapter.glossary.label, chapter.glossary.detail);
-    const summaryCell = cell("Situação", chapter.summary, null, "summary-cell");
-    const expectedCell = cell("Previsão", chapter.expectedAt, null, "expected-cell");
+    const glossaryCell = cell("Glossary", chapter.glossary.label, chapter.glossary.detail);
+    const summaryCell = cell("Status", chapter.summary, null, "summary-cell");
+    const expectedCell = cell("Estimated time", chapter.expectedAt, null, "expected-cell");
 
     const actionsCell = document.createElement("td");
     actionsCell.className = "actions-cell";
@@ -251,9 +251,9 @@
     elements.clearSearch.hidden = !ui.query;
     elements.applySelection.disabled = ui.selected.size === 0;
     elements.applySelection.textContent = ui.selected.size
-      ? `Aplicar seleção (${ui.selected.size})`
-      : "Aplicar seleção";
-    elements.resultSummary.textContent = `Exibindo ${visible.length} de ${fixture.summary.chapters} capítulos`;
+      ? `Apply selection (${ui.selected.size})`
+      : "Apply selection";
+    elements.resultSummary.textContent = `Showing ${visible.length} of ${fixture.summary.chapters} chapters`;
   }
 
   function updateFilter(filterId) {
@@ -289,10 +289,10 @@
 
     const details = document.createElement("dl");
     details.className = "detail-grid";
-    addDetailItem(details, "Quantidade", `${formatWords(chapter.words)} palavras`);
-    addDetailItem(details, "Etapa", chapter.stage);
-    addDetailItem(details, "Glossário", chapter.glossary.label);
-    addDetailItem(details, "Horário previsto", chapter.expectedAt);
+    addDetailItem(details, "Length", `${formatWords(chapter.words)} words`);
+    addDetailItem(details, "Stage", chapter.stage);
+    addDetailItem(details, "Glossary", chapter.glossary.label);
+    addDetailItem(details, "Estimated time", chapter.expectedAt);
 
     const glossary = document.createElement("p");
     glossary.className = "detail-summary";
@@ -319,7 +319,7 @@
       elements.chapterDialogBody.append(incident);
     }
 
-    const close = button("Fechar", "button button--secondary", { "data-close-dialog": "chapter-dialog" });
+    const close = button("Close", "button button--secondary", { "data-close-dialog": "chapter-dialog" });
     const inspect = button(chapter.inspectAction.label, "button button--quiet", {
       "data-simulate-id": chapter.id,
       "data-simulate-action": chapter.inspectAction.id,
@@ -330,7 +330,7 @@
         "data-retry-id": chapter.id,
       });
       retry.disabled = !ui.glossaryConfirmed;
-      retry.title = retry.disabled ? "Confirme as decisões de glossário antes de tentar novamente" : "Confirmação de glossário registrada";
+      retry.title = retry.disabled ? "Confirm the glossary decisions before trying again" : "Glossary confirmation recorded";
       const resolve = button(chapter.incident.recoveryAction.label, "button button--primary", {
         "data-resolve-id": chapter.id,
       });
@@ -368,7 +368,7 @@
   }
 
   function simulatedMessage(chapter, action) {
-    return `${action.label} · ${chapter.id}: ação simulada com sucesso; nenhum arquivo foi alterado.`;
+    return `${action.label} · ${chapter.id}: action successfully simulated; no files were changed.`;
   }
 
   function requestChapterAction(chapter, action) {
@@ -379,8 +379,8 @@
 
     openConfirmation(
       action.label,
-      `${chapter.id} · ${chapter.title}. Esta ação não executará scripts nem alterará arquivos.`,
-      `Confirmar ${action.label}`,
+      `${chapter.id} · ${chapter.title}. This action will not run scripts or change files.`,
+      `Confirm ${action.label}`,
       () => showFeedback(simulatedMessage(chapter, action)),
     );
   }
@@ -389,11 +389,11 @@
     closeDialog(elements.chapterDialog);
     openConfirmation(
       chapter.incident.recoveryAction.label,
-      `${chapter.id}: confirmar decisões simuladas para “${chapter.incident.terms[0]}” e “${chapter.incident.terms[1]}”?`,
-      "Confirmar decisões",
+      `${chapter.id}: confirm the simulated decisions for “${chapter.incident.terms[0]}” and “${chapter.incident.terms[1]}”?`,
+      "Confirm decisions",
       () => {
         ui.glossaryConfirmed = true;
-        showFeedback(`${chapter.id}: decisões de glossário confirmadas somente nesta interface. Tentar novamente está disponível.`);
+        showFeedback(`${chapter.id}: glossary decisions confirmed in this interface only. Retry is now available.`);
         openChapterDialog(chapter);
       },
     );
@@ -402,10 +402,10 @@
   function requestRetry(chapter) {
     openConfirmation(
       chapter.incident.retryAction.label,
-      `${chapter.id}: a confirmação simulada do glossário foi registrada. Nenhum script real será chamado.`,
+      `${chapter.id}: the simulated glossary confirmation was recorded. No real script will be invoked.`,
       chapter.incident.retryAction.label,
       () => {
-        showFeedback(`${chapter.id}: nova tentativa simulada; nenhum arquivo foi alterado.`);
+        showFeedback(`${chapter.id}: retry simulated; no files were changed.`);
         openChapterDialog(chapter);
       },
     );
@@ -504,10 +504,10 @@
     if (!selectedChapters.length) return;
     const selectionLabel = selectedChapters.map((chapter) => chapter.id).join(", ");
     openConfirmation(
-      "Aplicar diff em lote",
-      `${selectionLabel}: a aplicação será somente simulada e não alterará arquivos.`,
-      "Confirmar aplicação",
-      () => showFeedback(`${selectionLabel}: aplicação do diff em lote simulada com sucesso; nenhum arquivo foi alterado.`),
+      "Apply diff in batch",
+      `${selectionLabel}: application will only be simulated and will not change files.`,
+      "Confirm application",
+      () => showFeedback(`${selectionLabel}: batch diff application successfully simulated; no files were changed.`),
     );
   });
 

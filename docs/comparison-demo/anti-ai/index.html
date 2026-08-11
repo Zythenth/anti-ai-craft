@@ -1,19 +1,19 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cadência — Fila de tradução</title>
+    <title>Cadence — Translation queue</title>
     <link rel="stylesheet" href="./styles.css">
   </head>
   <body>
-    <a class="skip-link" href="#fila">Ir para a fila</a>
+    <a class="skip-link" href="#fila">Skip to the queue</a>
 
     <header class="masthead">
       <div class="masthead__inner">
-        <div class="brand" aria-label="Cadência">
+        <div class="brand" aria-label="Cadence">
           <span class="brand__mark" aria-hidden="true"><i></i><i></i><i></i></span>
-          <span>Cadência</span>
+          <span>Cadence</span>
         </div>
         <p class="fixture-label" id="fixture-label"></p>
       </div>
@@ -23,25 +23,25 @@
       <section class="workspace__heading" aria-labelledby="page-title">
         <div>
           <p class="eyebrow" id="surface-name"></p>
-          <h1 id="page-title">Fila de tradução</h1>
+          <h1 id="page-title">Translation queue</h1>
         </div>
-        <dl class="run-context" aria-label="Contexto do lote">
+        <dl class="run-context" aria-label="Batch context">
           <div>
-            <dt>Projeto</dt>
+            <dt>Project</dt>
             <dd id="project-name"></dd>
           </div>
           <div>
-            <dt>Lote</dt>
+            <dt>Batch</dt>
             <dd id="batch-name"></dd>
           </div>
           <div>
-            <dt>Referência</dt>
+            <dt>Reference</dt>
             <dd id="reference-time"></dd>
           </div>
         </dl>
       </section>
 
-      <section class="run-strip" aria-label="Resumo da execução">
+      <section class="run-strip" aria-label="Execution summary">
         <p class="run-strip__summary" id="batch-summary"></p>
         <div class="run-strip__pipeline">
           <strong id="pipeline-name"></strong>
@@ -50,58 +50,58 @@
       </section>
 
       <section class="queue-tools" aria-labelledby="queue-tools-title">
-        <h2 class="visually-hidden" id="queue-tools-title">Localizar e filtrar capítulos</h2>
+        <h2 class="visually-hidden" id="queue-tools-title">Find and filter chapters</h2>
         <div class="search-field">
-          <label for="chapter-search">Buscar capítulo ou título</label>
+          <label for="chapter-search">Search by chapter or title</label>
           <div class="search-field__control">
             <input id="chapter-search" type="search" autocomplete="off" spellcheck="false">
-            <button class="text-button" id="clear-search" type="button" hidden>Limpar</button>
+            <button class="text-button" id="clear-search" type="button" hidden>Clear</button>
           </div>
         </div>
-        <div class="filter-group" id="filter-group" role="group" aria-label="Filtrar a fila"></div>
+        <div class="filter-group" id="filter-group" role="group" aria-label="Filter the queue"></div>
         <button class="bulk-action" id="bulk-action" type="button" disabled>
-          Aplicar diff em lote <span aria-hidden="true" id="bulk-count">0</span>
+          Apply diff as a batch <span aria-hidden="true" id="bulk-count">0</span>
         </button>
       </section>
 
       <div class="result-line">
         <p id="result-count" aria-live="polite"></p>
-        <p class="queue-hint">A linha bloqueada indica a próxima intervenção segura.</p>
+        <p class="queue-hint">The blocked row indicates the next safe intervention.</p>
       </div>
 
       <section class="queue" id="fila" aria-labelledby="queue-title" tabindex="-1">
-        <h2 class="visually-hidden" id="queue-title">Capítulos no lote</h2>
-        <div class="table-scroll" tabindex="0" role="region" aria-label="Fila de capítulos" aria-describedby="table-help">
-          <p class="visually-hidden" id="table-help">A tabela se adapta à largura disponível. Use os botões de cada linha para consultar ou executar uma ação simulada.</p>
+        <h2 class="visually-hidden" id="queue-title">Chapters in the batch</h2>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Chapter queue" aria-describedby="table-help">
+          <p class="visually-hidden" id="table-help">The table adapts to the available width. Use the buttons in each row to view details or perform a simulated action.</p>
           <table>
-            <caption>Capítulos da fila de tradução</caption>
+            <caption>Chapters in the translation queue</caption>
             <thead>
               <tr>
-                <th class="select-column" scope="col"><span class="visually-hidden">Selecionar</span></th>
-                <th scope="col">Capítulo</th>
-                <th scope="col">Etapa</th>
-                <th scope="col">Situação operacional</th>
-                <th scope="col">Previsto</th>
-                <th scope="col">Ações</th>
+                <th class="select-column" scope="col"><span class="visually-hidden">Select</span></th>
+                <th scope="col">Chapter</th>
+                <th scope="col">Stage</th>
+                <th scope="col">Operational status</th>
+                <th scope="col">Estimated</th>
+                <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody id="queue-body"></tbody>
           </table>
         </div>
         <div class="empty-state" id="empty-state" hidden>
-          <h3>Nenhum capítulo encontrado</h3>
-          <p>A busca e o filtro atuais não retornaram capítulos.</p>
-          <button class="secondary-button" id="reset-view" type="button">Limpar busca e mostrar todos</button>
+          <h3>No chapters found</h3>
+          <p>The current search and filter returned no chapters.</p>
+          <button class="secondary-button" id="reset-view" type="button">Clear search and show all</button>
         </div>
       </section>
 
       <div class="status-line" id="action-status" role="status" aria-live="polite" aria-atomic="true">
-        <span class="status-line__label">Simulação local</span>
+        <span class="status-line__label">Local simulation</span>
         <span id="action-message"></span>
       </div>
     </main>
 
-    <script src="../dados.js"></script>
+    <script src="../data.js"></script>
     <script src="./app.js"></script>
   </body>
 </html>
