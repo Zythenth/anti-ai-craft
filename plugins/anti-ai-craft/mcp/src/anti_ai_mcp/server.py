@@ -11,9 +11,12 @@ from mcp.server import MCPServer
 from mcp.types import ToolAnnotations
 
 from . import __version__
+from .anti_ai_audit import AntiAiAuditService
+from .architecture import ArchitectureService
 from .checks import ProjectCheckService
 from .git import DiffMode, GitInspector
 from .graph import build_graph_provider
+from .impact import ChangeImpactService
 from .paths import resolve_within_repository
 from .repository import RepositoryInspector
 from .relevant_tests import RelevantTestService
@@ -58,6 +61,15 @@ def create_server(settings: ServerSettings) -> MCPServer:
         settings.repository_root,
         git_inspector,
         check_service,
+        provider,
+    )
+    impact_service = ChangeImpactService(git_inspector, provider)
+    architecture_service = ArchitectureService(git_inspector, provider)
+    anti_ai_audit_service = AntiAiAuditService(
+        settings.repository_root,
+        git_inspector,
+        provider,
+        architecture_service,
     )
     server = MCPServer(
         "anti-ai-craft",
@@ -171,9 +183,9 @@ def create_server(settings: ServerSettings) -> MCPServer:
         name="run_relevant_tests",
         description=(
             "Select and optionally run tests relevant to current Git changes using deterministic "
-            "path/name conventions and configured package suites. Use dry_run to inspect each "
-            "selection_reason. No Graphify relationships are used; when no direct mapping exists the "
-            "tool selects a configured package suite or requires manual review."
+            "path/name conventions and configured package suites, then add bounded Graphify candidates "
+            "without removing deterministic selections. Use dry_run to inspect each selection_reason. "
+            "When no direct deterministic mapping exists, the configured suite remains the fallback."
         ),
         annotations=ToolAnnotations(
             readOnlyHint=False,
@@ -192,6 +204,82 @@ def create_server(settings: ServerSettings) -> MCPServer:
             dry_run=dry_run,
             timeout_seconds=timeout_seconds,
         ).to_dict()
+
+    @server.tool(
+        name="analyze_change_impact",
+        description=(
+            "Map explicit files or current Git changes to bounded structural neighbors, indirect "
+            "candidates, graph communities, cross-community paths, and affected tests. The result "
+            "preserves relation provenance, freshness, direction, confidence, coverage, and truncation."
+        ),
+        annotations=ToolAnnotations(
+            readOnlyHint=True,
+            idempotentHint=True,
+            destructiveHint=False,
+            openWorldHint=False,
+        ),
+    )
+    def analyze_change_impact(
+        changed_files: list[str] | None = None,
+        max_depth: int = 2,
+        include_tests: bool = True,
+    ) -> dict[str, Any]:
+        return impact_service.analyze(
+            changed_files=changed_files,
+            max_depth=max_depth,
+            include_tests=include_tests,
+        ).to_dict()
+
+    @server.tool(
+        name="inspect_architecture",
+        description=(
+            "Return a compact graph-derived structural overview: graph communities, representative "
+            "nodes, bounded hotspots, and cross-community relations. Communities are structural "
+            "clusters, not automatically domains or architecture layers."
+        ),
+        annotations=ToolAnnotations(
+            readOnlyHint=True,
+            idempotentHint=True,
+            destructiveHint=False,
+            openWorldHint=False,
+        ),
+    )
+    def inspect_architecture() -> dict[str, Any]:
+        return architecture_service.inspect().to_dict()
+
+    @server.tool(
+        name="audit_architecture",
+        description=(
+            "Audit current Git changes for conservative structural signals: attributable new "
+            "cross-community relations, directed cycles only when direction is reliable, and changed "
+            "graph hotspots. It never treats a graph connection alone as an architecture violation."
+        ),
+        annotations=ToolAnnotations(
+            readOnlyHint=True,
+            idempotentHint=True,
+            destructiveHint=False,
+            openWorldHint=False,
+        ),
+    )
+    def audit_architecture(mode: DiffMode = "combined") -> dict[str, Any]:
+        return architecture_service.audit(mode=mode).to_dict()
+
+    @server.tool(
+        name="audit_anti_ai",
+        description=(
+            "Combine current-diff facts, bounded graph evidence, conservative architecture signals, "
+            "and a small documented set of Anti-AI heuristics. Findings describe observable code "
+            "patterns and uncertainty; they never infer authorship."
+        ),
+        annotations=ToolAnnotations(
+            readOnlyHint=True,
+            idempotentHint=True,
+            destructiveHint=False,
+            openWorldHint=False,
+        ),
+    )
+    def audit_anti_ai(mode: DiffMode = "combined") -> dict[str, Any]:
+        return anti_ai_audit_service.audit(mode=mode).to_dict()
 
     @server.resource(
         "anti-ai://project/status",

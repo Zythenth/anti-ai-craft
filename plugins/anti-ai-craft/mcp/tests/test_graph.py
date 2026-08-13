@@ -54,10 +54,45 @@ def test_graphify_provider_available_and_structural_operations(
     }
     assert provider.query("Graphify provider").nodes[0].id == "provider"
     assert provider.get_node("GraphifyProvider").evidence_kind is EvidenceKind.FACT
+    assert [node.id for node in provider.get_nodes_for_file("src/graph.py").nodes] == ["provider"]
     assert {node.id for node in provider.get_dependencies("status").nodes} == {"provider", "status"}
     assert {node.id for node in provider.get_dependents("provider").nodes} == {"provider", "status"}
     assert len(provider.find_path("status", "provider").edges) == 1
     assert len(provider.get_community(1).nodes) == 2
+    overview = provider.get_overview()
+    assert overview.directed is True
+    assert overview.communities[0].node_count == 2
+    assert overview.hotspots[0].degree == 1
+
+
+def test_neighbor_query_reports_fanout_truncation(
+    repository: Path, graph_path: Path
+) -> None:
+    payload = json.loads(graph_path.read_text(encoding="utf-8"))
+    payload["nodes"].append(
+        {
+            "id": "audit",
+            "label": "AuditService",
+            "type": "class",
+            "source_file": "src/audit.py",
+            "community": 2,
+        }
+    )
+    payload["links"].append(
+        {
+            "source": "status",
+            "target": "audit",
+            "type": "USES",
+            "provenance": "EXTRACTED",
+        }
+    )
+    graph_path.write_text(json.dumps(payload), encoding="utf-8")
+    provider = GraphifyProvider(repository, graph_path, freshness_probe=fresh)
+
+    neighborhood = provider.get_neighbors("status", limit=1)
+
+    assert len(neighborhood.edges) == 1
+    assert neighborhood.truncated is True
 
 
 def test_null_provider_is_explicitly_unavailable() -> None:

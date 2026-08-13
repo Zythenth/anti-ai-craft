@@ -26,6 +26,9 @@ from .evidence import (
 )
 from .execution import run_command
 from .git import DiffMode, GitInspector
+from .graph import GraphProvider
+from .graph_evidence import GraphEvidenceNormalizer
+from .impact import GraphImpactAnalyzer
 from .paths import PathBoundaryError, normalize_repository_path
 
 
@@ -40,10 +43,13 @@ class RelevantTestService:
         repository_root: Path,
         git_inspector: GitInspector,
         check_service: ProjectCheckService,
+        graph_provider: GraphProvider | None = None,
     ) -> None:
         self.repository_root = repository_root.resolve(strict=True)
         self.git_inspector = git_inspector
         self.check_service = check_service
+        self.graph_provider = graph_provider
+        self.impact_analyzer = GraphImpactAnalyzer(graph_provider) if graph_provider else None
 
     def run(
         self,
@@ -79,16 +85,80 @@ class RelevantTestService:
             )
         changes = tuple(change for change in snapshot.files if change.status != "deleted")
         if not changes:
+            graph_metadata = None
+            if self.graph_provider is not None:
+                normalizer = GraphEvidenceNormalizer(self.graph_provider.get_status())
+                graph_metadata = normalizer.graph_metadata(
+                    coverage={"changed_files": 0, "matched_files": 0}
+                )
+                graph_metadata["warnings"] = normalizer.warnings()
             return CheckResult(
                 status=CheckStatus.NOT_APPLICABLE,
                 summary="No changed files require relevant-test selection.",
                 evidence=(Evidence(EvidenceKind.FACT, "git diff", {"mode": mode, "changed_files": 0}),),
-                metadata={"dry_run": dry_run, "selection_reason": [], "executions": []},
+                metadata={
+                    "dry_run": dry_run,
+                    "selection_reason": [],
+                    "executions": [],
+                    "graph": graph_metadata,
+                    "graph_added_tests": [],
+                },
             )
         test_checks = tuple(
             check for check in self.check_service.discover() if check.category == "unit-tests"
         )
         selections, reasons, unmapped = self._select_direct(changes, test_checks)
+        graph_metadata: dict[str, Any] | None = None
+        graph_added_tests: list[str] = []
+        graph_duplicate_tests = 0
+        graph_non_fresh = False
+        if self.graph_provider is not None and self.impact_analyzer is not None:
+            graph_status = self.graph_provider.get_status()
+            normalizer = GraphEvidenceNormalizer(graph_status)
+            graph_non_fresh = normalizer.non_fresh
+            impact = self.impact_analyzer.analyze(
+                (change.path for change in changes),
+                max_depth=2,
+                include_tests=True,
+                graph_status=graph_status,
+            )
+            graph_metadata = normalizer.graph_metadata(
+                truncated=impact.truncated,
+                coverage=impact.coverage,
+            )
+            graph_metadata["warnings"] = list(impact.warnings)
+            if normalizer.usable:
+                mutable = {check: set(paths) for check, paths in selections.items()}
+                for candidate in impact.candidate_tests:
+                    test_path = normalize_repository_path(candidate["test_path"])
+                    owner = _closest_check(test_path, test_checks, self.repository_root)
+                    if owner is None or owner.runner != "pytest":
+                        continue
+                    relative = Path(test_path).relative_to(
+                        owner.cwd.relative_to(self.repository_root)
+                    ).as_posix()
+                    selected = mutable.setdefault(owner, set())
+                    if relative in selected:
+                        graph_duplicate_tests += 1
+                        continue
+                    selected.add(relative)
+                    graph_added_tests.append(test_path)
+                    reasons.append(
+                        {
+                            "changed_path": None,
+                            "test_path": relative,
+                            "reason": candidate["selection_reason"],
+                            "provenance": candidate["evidence_kind"],
+                            "source": "Graphify structural impact",
+                            "graph_distance": candidate["graph_distance"],
+                            "freshness": graph_status.freshness.value,
+                            "confidence": candidate["confidence"],
+                            "path": candidate["path"],
+                        }
+                    )
+                selections = {
+                    check: tuple(sorted(paths)) for check, paths in mutable.items()
+                }
         selection_truncated = False
         used_fallback = False
         if unmapped and test_checks:
@@ -146,6 +216,8 @@ class RelevantTestService:
                     "dry_run": dry_run,
                     "selection_reason": reasons[:MAX_SELECTION_REASONS],
                     "executions": [],
+                    "graph": graph_metadata,
+                    "graph_added_tests": sorted(graph_added_tests),
                     "limits": {
                         "max_selection_reasons": MAX_SELECTION_REASONS,
                         "truncated": len(changes) > MAX_SELECTION_REASONS,
@@ -159,7 +231,7 @@ class RelevantTestService:
         selection_evidence = tuple(
             Evidence(
                 EvidenceKind(reason["provenance"]),
-                "deterministic test selection",
+                reason.get("source", "deterministic test selection"),
                 reason,
             )
             for reason in reasons
@@ -178,11 +250,31 @@ class RelevantTestService:
                     evidence=selection_evidence,
                 ),
             )
+        graph_finding: tuple[Finding, ...] = ()
+        if graph_metadata is not None and graph_non_fresh:
+            graph_evidence = Evidence(
+                EvidenceKind.MANUAL_REVIEW_REQUIRED,
+                "graph provider status",
+                graph_metadata,
+            )
+            graph_finding = (
+                Finding(
+                    id="AA-TEST-008",
+                    category="tests",
+                    severity=Severity.INFO,
+                    confidence=Confidence.HIGH,
+                    message="Graph-aware test additions use non-fresh structural evidence.",
+                    evidence=(graph_evidence,),
+                    suggestion="Keep deterministic selections and review graph-only candidates before relying on them.",
+                ),
+            )
+            if base_status is CheckStatus.PASS:
+                base_status = CheckStatus.WARNING
         if dry_run:
             return CheckResult(
                 status=base_status,
                 summary=f"Dry run selected {len(selected_checks)} relevant test command(s); nothing executed.",
-                findings=fallback_finding,
+                findings=fallback_finding + graph_finding,
                 evidence=selection_evidence,
                 metadata={
                     "dry_run": True,
@@ -191,6 +283,9 @@ class RelevantTestService:
                         check.to_dict(self.repository_root) for check in selected_checks
                     ],
                     "executions": [],
+                    "graph": graph_metadata,
+                    "graph_added_tests": sorted(graph_added_tests),
+                    "graph_duplicate_candidates": graph_duplicate_tests,
                     "limits": {
                         "max_selection_reasons": MAX_SELECTION_REASONS,
                         "max_selected_test_paths": MAX_SELECTED_TEST_PATHS,
@@ -229,6 +324,9 @@ class RelevantTestService:
                         check.to_dict(self.repository_root) for check in selected_checks[:MAX_CHECKS]
                     ],
                     "executions": [],
+                    "graph": graph_metadata,
+                    "graph_added_tests": sorted(graph_added_tests),
+                    "graph_duplicate_candidates": graph_duplicate_tests,
                     "limits": {
                         "max_selection_reasons": MAX_SELECTION_REASONS,
                         "max_selected_test_paths": MAX_SELECTED_TEST_PATHS,
@@ -255,17 +353,20 @@ class RelevantTestService:
             repository_root=self.repository_root,
         )
         status = result.status
-        if status is CheckStatus.PASS and used_fallback:
+        if status is CheckStatus.PASS and (used_fallback or graph_non_fresh):
             status = CheckStatus.WARNING
         return CheckResult(
             status=status,
             summary=result.summary,
-            findings=fallback_finding + result.findings,
+            findings=fallback_finding + graph_finding + result.findings,
             evidence=selection_evidence + result.evidence,
             metadata={
                 **result.metadata,
                 "selection_reason": reasons,
                 "fallback_suite": used_fallback,
+                "graph": graph_metadata,
+                "graph_added_tests": sorted(graph_added_tests),
+                "graph_duplicate_candidates": graph_duplicate_tests,
                 "selection_limits": {
                     "max_selection_reasons": MAX_SELECTION_REASONS,
                     "max_selected_test_paths": MAX_SELECTED_TEST_PATHS,

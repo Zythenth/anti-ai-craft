@@ -113,6 +113,53 @@ class GraphQueryResult:
         }
 
 
+@dataclass(frozen=True)
+class GraphCommunitySummary:
+    id: int | str
+    name: str | None
+    node_count: int
+    internal_edge_count: int
+    external_edge_count: int
+    representative_nodes: tuple[GraphNode, ...] = ()
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "id": self.id,
+            "name": self.name,
+            "node_count": self.node_count,
+            "internal_edge_count": self.internal_edge_count,
+            "external_edge_count": self.external_edge_count,
+            "representative_nodes": [node.to_dict() for node in self.representative_nodes],
+        }
+
+
+@dataclass(frozen=True)
+class GraphHotspot:
+    node: GraphNode
+    degree: int
+
+    def to_dict(self) -> dict[str, Any]:
+        return {"node": self.node.to_dict(), "degree": self.degree}
+
+
+@dataclass(frozen=True)
+class GraphOverview:
+    communities: tuple[GraphCommunitySummary, ...] = ()
+    hotspots: tuple[GraphHotspot, ...] = ()
+    cross_community_edges: tuple[GraphEdge, ...] = ()
+    directed: bool = False
+    truncated: bool = False
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "communities": [community.to_dict() for community in self.communities],
+            "hotspots": [hotspot.to_dict() for hotspot in self.hotspots],
+            "cross_community_edges": [edge.to_dict() for edge in self.cross_community_edges],
+            "directed": self.directed,
+            "truncated": self.truncated,
+        }
+
+
 class GraphProviderError(RuntimeError):
     pass
 
@@ -132,20 +179,31 @@ class GraphProvider(Protocol):
 
     def get_node(self, identifier: str) -> GraphNode | None: ...
 
+    def get_nodes_for_file(self, source_file: str, *, limit: int = 100) -> GraphQueryResult: ...
+
     def get_neighbors(
         self,
         identifier: str,
         *,
         direction: Literal["incoming", "outgoing", "both"] = "both",
+        limit: int | None = None,
     ) -> GraphQueryResult: ...
 
-    def get_dependencies(self, identifier: str) -> GraphQueryResult: ...
+    def get_dependencies(self, identifier: str, *, limit: int | None = None) -> GraphQueryResult: ...
 
-    def get_dependents(self, identifier: str) -> GraphQueryResult: ...
+    def get_dependents(self, identifier: str, *, limit: int | None = None) -> GraphQueryResult: ...
 
     def find_path(self, source: str, target: str, *, max_hops: int = 8) -> GraphQueryResult: ...
 
     def get_community(self, community: int | str) -> GraphQueryResult: ...
+
+    def get_overview(
+        self,
+        *,
+        max_communities: int = 100,
+        max_hotspots: int = 20,
+        max_cross_edges: int = 100,
+    ) -> GraphOverview: ...
 
 
 class NullGraphProvider:
@@ -171,24 +229,37 @@ class NullGraphProvider:
     def get_node(self, identifier: str) -> GraphNode | None:
         raise self._unavailable()
 
+    def get_nodes_for_file(self, source_file: str, *, limit: int = 100) -> GraphQueryResult:
+        raise self._unavailable()
+
     def get_neighbors(
         self,
         identifier: str,
         *,
         direction: Literal["incoming", "outgoing", "both"] = "both",
+        limit: int | None = None,
     ) -> GraphQueryResult:
         raise self._unavailable()
 
-    def get_dependencies(self, identifier: str) -> GraphQueryResult:
+    def get_dependencies(self, identifier: str, *, limit: int | None = None) -> GraphQueryResult:
         raise self._unavailable()
 
-    def get_dependents(self, identifier: str) -> GraphQueryResult:
+    def get_dependents(self, identifier: str, *, limit: int | None = None) -> GraphQueryResult:
         raise self._unavailable()
 
     def find_path(self, source: str, target: str, *, max_hops: int = 8) -> GraphQueryResult:
         raise self._unavailable()
 
     def get_community(self, community: int | str) -> GraphQueryResult:
+        raise self._unavailable()
+
+    def get_overview(
+        self,
+        *,
+        max_communities: int = 100,
+        max_hotspots: int = 20,
+        max_cross_edges: int = 100,
+    ) -> GraphOverview:
         raise self._unavailable()
 
 
@@ -472,11 +543,42 @@ class GraphifyProvider:
         node_id = self._resolve_node_id(graph, identifier)
         return self._node(node_id, graph.nodes[node_id]) if node_id is not None else None
 
+    def get_nodes_for_file(self, source_file: str, *, limit: int = 100) -> GraphQueryResult:
+        graph = self._require_graph()
+        if limit < 1:
+            return GraphQueryResult()
+        matches = [
+            node_id
+            for node_id, data in graph.nodes(data=True)
+            if data.get("source_file") == source_file
+        ]
+        matches.sort(
+            key=lambda node_id: (
+                str(graph.nodes[node_id].get("label") or "") != Path(source_file).name,
+                graph.nodes[node_id].get("source_location") != "L1",
+                str(graph.nodes[node_id].get("source_location") or ""),
+                str(graph.nodes[node_id].get("label") or node_id),
+            )
+        )
+        selected = matches[:limit]
+        selected_set = set(selected)
+        edges = tuple(
+            self._edge(source, target, data)
+            for source, target, data in _iter_edges(graph)
+            if source in selected_set and target in selected_set
+        )
+        return GraphQueryResult(
+            nodes=tuple(self._node(node_id, graph.nodes[node_id]) for node_id in selected),
+            edges=edges,
+            truncated=len(matches) > limit,
+        )
+
     def get_neighbors(
         self,
         identifier: str,
         *,
         direction: Literal["incoming", "outgoing", "both"] = "both",
+        limit: int | None = None,
     ) -> GraphQueryResult:
         graph = self._require_graph()
         node_id = self._resolve_node_id(graph, identifier)
@@ -487,29 +589,27 @@ class GraphifyProvider:
             raise GraphUnavailableError("neighbor direction is unavailable for an undirected graph")
         edges = []
         neighbor_ids: set[str] = {node_id}
-        for source, target, data in _iter_edges(graph):
-            include = (
-                direction in {"outgoing", "both"} and source == node_id
-            ) or (
-                direction in {"incoming", "both"} and target == node_id
-            )
-            if include:
-                edges.append(self._edge(source, target, data))
-                neighbor_ids.update((source, target))
+        truncated = False
+        for source, target, data in _iter_node_edges(graph, node_id, direction):
+            if limit is not None and len(edges) >= max(0, limit):
+                truncated = True
+                break
+            edges.append(self._edge(source, target, data))
+            neighbor_ids.update((source, target))
         nodes = tuple(self._node(current, graph.nodes[current]) for current in sorted(neighbor_ids))
-        return GraphQueryResult(nodes=nodes, edges=tuple(edges))
+        return GraphQueryResult(nodes=nodes, edges=tuple(edges), truncated=truncated)
 
-    def get_dependencies(self, identifier: str) -> GraphQueryResult:
+    def get_dependencies(self, identifier: str, *, limit: int | None = None) -> GraphQueryResult:
         graph = self._require_graph()
         if not bool(graph.graph.get("_logical_directed", graph.is_directed())):
             raise GraphUnavailableError("dependency direction is unavailable for an undirected graph")
-        return self.get_neighbors(identifier, direction="outgoing")
+        return self.get_neighbors(identifier, direction="outgoing", limit=limit)
 
-    def get_dependents(self, identifier: str) -> GraphQueryResult:
+    def get_dependents(self, identifier: str, *, limit: int | None = None) -> GraphQueryResult:
         graph = self._require_graph()
         if not bool(graph.graph.get("_logical_directed", graph.is_directed())):
             raise GraphUnavailableError("dependent direction is unavailable for an undirected graph")
-        return self.get_neighbors(identifier, direction="incoming")
+        return self.get_neighbors(identifier, direction="incoming", limit=limit)
 
     def find_path(self, source: str, target: str, *, max_hops: int = 8) -> GraphQueryResult:
         graph = self._require_graph()
@@ -550,6 +650,102 @@ class GraphifyProvider:
             if str(data.get("community")) == target
         )
         return GraphQueryResult(nodes=nodes)
+
+    def get_overview(
+        self,
+        *,
+        max_communities: int = 100,
+        max_hotspots: int = 20,
+        max_cross_edges: int = 100,
+    ) -> GraphOverview:
+        graph = self._require_graph()
+        if min(max_communities, max_hotspots, max_cross_edges) < 1:
+            return GraphOverview(
+                directed=bool(graph.graph.get("_logical_directed", graph.is_directed())),
+                truncated=bool(graph.number_of_nodes() or graph.number_of_edges()),
+            )
+        degrees = {str(node_id): int(degree) for node_id, degree in graph.degree()}
+        grouped: dict[int | str, list[str]] = {}
+        names: dict[int | str, str | None] = {}
+        for node_id, data in graph.nodes(data=True):
+            community = data.get("community")
+            if community is None:
+                continue
+            grouped.setdefault(community, []).append(str(node_id))
+            if names.get(community) is None:
+                names[community] = _optional_text(data.get("community_name"))
+
+        internal_counts = {community: 0 for community in grouped}
+        external_counts = {community: 0 for community in grouped}
+        cross_edges: list[GraphEdge] = []
+        for source, target, data in _iter_edges(graph):
+            source_community = graph.nodes[source].get("community")
+            target_community = graph.nodes[target].get("community")
+            if source_community is None or target_community is None:
+                continue
+            if source_community == target_community:
+                internal_counts[source_community] = internal_counts.get(source_community, 0) + 1
+            else:
+                external_counts[source_community] = external_counts.get(source_community, 0) + 1
+                external_counts[target_community] = external_counts.get(target_community, 0) + 1
+                cross_edges.append(self._edge(source, target, data))
+
+        ordered_communities = sorted(
+            grouped,
+            key=lambda community: (-len(grouped[community]), str(community)),
+        )
+        communities: list[GraphCommunitySummary] = []
+        for community in ordered_communities[:max_communities]:
+            node_ids = sorted(
+                grouped[community],
+                key=lambda node_id: (
+                    -degrees.get(node_id, 0),
+                    str(graph.nodes[node_id].get("label") or node_id),
+                ),
+            )
+            communities.append(
+                GraphCommunitySummary(
+                    id=community,
+                    name=names.get(community),
+                    node_count=len(node_ids),
+                    internal_edge_count=internal_counts.get(community, 0),
+                    external_edge_count=external_counts.get(community, 0),
+                    representative_nodes=tuple(
+                        self._node(node_id, graph.nodes[node_id]) for node_id in node_ids[:3]
+                    ),
+                )
+            )
+
+        hotspot_ids = sorted(
+            degrees,
+            key=lambda node_id: (
+                -degrees[node_id],
+                str(graph.nodes[node_id].get("label") or node_id),
+            ),
+        )
+        hotspots = tuple(
+            GraphHotspot(self._node(node_id, graph.nodes[node_id]), degrees[node_id])
+            for node_id in hotspot_ids[:max_hotspots]
+        )
+        cross_edges.sort(
+            key=lambda edge: (
+                edge.evidence_kind is not EvidenceKind.FACT,
+                edge.source,
+                edge.target,
+                edge.relation or "",
+            )
+        )
+        return GraphOverview(
+            communities=tuple(communities),
+            hotspots=hotspots,
+            cross_community_edges=tuple(cross_edges[:max_cross_edges]),
+            directed=bool(graph.graph.get("_logical_directed", graph.is_directed())),
+            truncated=(
+                len(ordered_communities) > max_communities
+                or len(hotspot_ids) > max_hotspots
+                or len(cross_edges) > max_cross_edges
+            ),
+        )
 
 
 def build_graph_provider(
@@ -593,6 +789,45 @@ def _iter_edges(graph: nx.Graph):
     else:
         for source, target, data in graph.edges(data=True):
             yield str(source), str(target), data
+
+
+def _iter_node_edges(
+    graph: nx.Graph,
+    node_id: str,
+    direction: Literal["incoming", "outgoing", "both"],
+):
+    if not graph.is_directed():
+        if graph.is_multigraph():
+            for source, target, _, data in graph.edges(node_id, keys=True, data=True):
+                yield str(source), str(target), data
+        else:
+            for source, target, data in graph.edges(node_id, data=True):
+                yield str(source), str(target), data
+        return
+
+    seen: set[tuple[str, str, Any]] = set()
+    selectors = []
+    if direction in {"outgoing", "both"}:
+        selectors.append(graph.out_edges)
+    if direction in {"incoming", "both"}:
+        selectors.append(graph.in_edges)
+    for selector in selectors:
+        if graph.is_multigraph():
+            selected = selector(node_id, keys=True, data=True)
+            for source, target, key, data in selected:
+                identity = (str(source), str(target), key)
+                if identity in seen:
+                    continue
+                seen.add(identity)
+                yield str(source), str(target), data
+        else:
+            selected = selector(node_id, data=True)
+            for source, target, data in selected:
+                identity = (str(source), str(target), None)
+                if identity in seen:
+                    continue
+                seen.add(identity)
+                yield str(source), str(target), data
 
 
 def _first_edge_data(graph: nx.Graph, source: str, target: str) -> dict[str, Any]:

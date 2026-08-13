@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Literal
@@ -22,6 +23,7 @@ DiffMode = Literal["working_tree", "staged", "combined"]
 MAX_DIFF_FILES = 500
 MAX_GIT_OUTPUT_BYTES = 2 * 1024 * 1024
 MAX_UNTRACKED_FILE_BYTES = 1024 * 1024
+MAX_ADDED_LINES = 2_000
 
 
 @dataclass
@@ -63,6 +65,20 @@ class GitDiffSnapshot:
     head: str | None = None
     clean: bool = False
     truncated: bool = False
+
+
+@dataclass(frozen=True)
+class GitAddedLine:
+    path: str
+    line_number: int
+    text: str
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "path": self.path,
+            "line_number": self.line_number,
+            "text": self.text,
+        }
 
 
 class GitInspector:
@@ -209,6 +225,58 @@ class GitInspector:
             truncated=any(change.truncated for change in changes),
         )
 
+    def added_lines(
+        self,
+        mode: DiffMode = "combined",
+        *,
+        limit: int = MAX_ADDED_LINES,
+    ) -> tuple[tuple[GitAddedLine, ...], bool]:
+        if mode not in ("working_tree", "staged", "combined"):
+            raise ValueError(f"unsupported diff mode: {mode}")
+        if limit < 1 or limit > MAX_ADDED_LINES:
+            raise ValueError(f"added-line limit must be between 1 and {MAX_ADDED_LINES}")
+        snapshot = self.snapshot(mode)
+        result: list[GitAddedLine] = []
+        truncated = snapshot.truncated
+        for change in snapshot.files:
+            if change.status == "deleted":
+                continue
+            if change.untracked:
+                candidate = resolve_within_repository(self.repository_root, change.path)
+                if not candidate.is_file() or candidate.stat().st_size > MAX_UNTRACKED_FILE_BYTES:
+                    truncated = True
+                    continue
+                content = candidate.read_bytes()
+                if b"\0" in content[:8192]:
+                    continue
+                text = content.decode("utf-8", errors="replace")
+                lines = tuple(
+                    GitAddedLine(change.path, number, line)
+                    for number, line in enumerate(text.splitlines(), start=1)
+                )
+            else:
+                selector = (
+                    ("--cached",)
+                    if mode == "staged"
+                    else (() if mode == "working_tree" else (("HEAD",) if snapshot.head else ("--cached",)))
+                )
+                diff = self._git(
+                    "diff",
+                    *selector,
+                    "--unified=0",
+                    "--no-color",
+                    "--no-ext-diff",
+                    "--",
+                    change.path,
+                )
+                lines = _parse_added_lines(change.path, diff)
+            available = limit - len(result)
+            result.extend(lines[:available])
+            if len(lines) > available:
+                truncated = True
+                break
+        return tuple(result), truncated
+
     def _diff_records(self, *, cached: bool = False, head: bool = False) -> list[GitFileChange]:
         selector = ["HEAD"] if head else (["--cached"] if cached else [])
         name_output = self._git("diff", *selector, "--name-status", "-z", "-M", "--no-ext-diff")
@@ -320,3 +388,25 @@ def _parse_numstat(output: str) -> dict[str, tuple[int | None, int | None, bool]
             index += 1
         counts[path] = (added, removed, binary)
     return counts
+
+
+def _parse_added_lines(path: str, diff: str) -> tuple[GitAddedLine, ...]:
+    result: list[GitAddedLine] = []
+    line_number: int | None = None
+    for raw in diff.splitlines():
+        if raw.startswith("@@"):
+            match = re.search(r"\+(\d+)(?:,\d+)?", raw)
+            line_number = int(match.group(1)) if match else None
+            continue
+        if line_number is None:
+            continue
+        if raw.startswith("+++"):
+            continue
+        if raw.startswith("+"):
+            result.append(GitAddedLine(path, line_number, raw[1:]))
+            line_number += 1
+        elif raw.startswith("-") or raw.startswith("\\"):
+            continue
+        else:
+            line_number += 1
+    return tuple(result)

@@ -92,6 +92,10 @@ async def test_stage_two_tools_are_registered_and_deterministic_without_graph(
             "verify_change_scope",
             "run_project_validation",
             "run_relevant_tests",
+            "analyze_change_impact",
+            "inspect_architecture",
+            "audit_architecture",
+            "audit_anti_ai",
         ]
         repository = await client.call_tool("inspect_repository", {})
         assert repository.structured_content["status"] == "PASS"
@@ -111,6 +115,18 @@ async def test_stage_two_tools_are_registered_and_deterministic_without_graph(
         assert validation.structured_content["status"] == "NOT_APPLICABLE"
         tests = await client.call_tool("run_relevant_tests", {"dry_run": True})
         assert tests.structured_content["status"] == "MANUAL_REVIEW_REQUIRED"
+        impact = await client.call_tool(
+            "analyze_change_impact", {"changed_files": ["README.md"]}
+        )
+        assert impact.structured_content["status"] == "MANUAL_REVIEW_REQUIRED"
+        architecture = await client.call_tool("inspect_architecture", {})
+        assert architecture.structured_content["status"] == "MANUAL_REVIEW_REQUIRED"
+        architecture_audit = await client.call_tool("audit_architecture", {})
+        assert architecture_audit.structured_content["status"] == "MANUAL_REVIEW_REQUIRED"
+        anti_ai = await client.call_tool("audit_anti_ai", {})
+        assert anti_ai.structured_content["status"] == "WARNING"
+        assert anti_ai.structured_content["metadata"]["deterministic_evidence_available"] is True
+        assert anti_ai.structured_content["metadata"]["graph_evidence_available"] is False
 
 
 @pytest.mark.anyio

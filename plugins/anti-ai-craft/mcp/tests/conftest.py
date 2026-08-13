@@ -146,3 +146,124 @@ def graph_path(repository: Path) -> Path:
     }
     path.write_text(json.dumps(payload), encoding="utf-8")
     return path
+
+
+def write_graph_fixture(root: Path, payload: dict) -> Path:
+    path = root / "graphify-out" / "graph.json"
+    path.parent.mkdir(exist_ok=True)
+    path.write_text(json.dumps(payload), encoding="utf-8")
+    return path
+
+
+def graph_payload(nodes: list[dict], links: list[dict], *, directed: bool = True) -> dict:
+    return {
+        "directed": directed,
+        "multigraph": False,
+        "graph": {},
+        "nodes": nodes,
+        "links": links,
+    }
+
+
+def node(identifier: str, path: str, community: int, *, label: str | None = None) -> dict:
+    return {
+        "id": identifier,
+        "label": label or identifier,
+        "source_file": path,
+        "source_location": "L1",
+        "community": community,
+        "community_name": f"cluster-{community}",
+    }
+
+
+def edge(source: str, target: str, *, confidence: str = "EXTRACTED") -> dict:
+    return {
+        "source": source,
+        "target": target,
+        "relation": "uses",
+        "confidence": confidence,
+        "confidence_score": 1.0 if confidence == "EXTRACTED" else 0.5,
+    }
+
+
+@pytest.fixture
+def linear_graph() -> dict:
+    return graph_payload(
+        [
+            node("a", "src/a.py", 1),
+            node("b", "src/b.py", 1),
+            node("test_b", "tests/test_b.py", 2),
+        ],
+        [edge("a", "b"), edge("b", "test_b")],
+    )
+
+
+@pytest.fixture
+def branching_graph() -> dict:
+    return graph_payload(
+        [node("root", "src/root.py", 1), *[node(f"n{i}", f"src/n{i}.py", 1) for i in range(4)]],
+        [edge("root", f"n{i}") for i in range(4)],
+    )
+
+
+@pytest.fixture
+def cyclic_graph() -> dict:
+    return graph_payload(
+        [node("a", "src/a.py", 1), node("b", "src/b.py", 2), node("c", "src/c.py", 2)],
+        [edge("a", "b"), edge("b", "c"), edge("c", "a")],
+    )
+
+
+@pytest.fixture
+def undirected_graph(linear_graph: dict) -> dict:
+    return {**linear_graph, "directed": False}
+
+
+@pytest.fixture
+def stale_graph(linear_graph: dict) -> dict:
+    return linear_graph
+
+
+@pytest.fixture
+def inferred_edges_graph() -> dict:
+    return graph_payload(
+        [node("a", "src/a.py", 1), node("b", "src/b.py", 1)],
+        [edge("a", "b", confidence="INFERRED")],
+    )
+
+
+@pytest.fixture
+def mixed_provenance_graph() -> dict:
+    return graph_payload(
+        [node("a", "src/a.py", 1), node("b", "src/b.py", 1), node("c", "src/c.py", 2)],
+        [edge("a", "b"), edge("b", "c", confidence="INFERRED")],
+    )
+
+
+@pytest.fixture
+def cross_community_change() -> dict:
+    return graph_payload(
+        [node("new", "src/new.py", 1), node("existing", "src/existing.py", 2)],
+        [edge("new", "existing")],
+    )
+
+
+@pytest.fixture
+def isolated_new_abstraction() -> dict:
+    return graph_payload([node("isolated", "src/isolated.py", 1)], [])
+
+
+@pytest.fixture
+def affected_test_graph() -> dict:
+    return graph_payload(
+        [node("service", "src/orders/service.py", 1), node("test", "tests/integration/test_orders.py", 2)],
+        [edge("service", "test")],
+    )
+
+
+@pytest.fixture
+def large_fanout_graph() -> dict:
+    return graph_payload(
+        [node("root", "src/root.py", 1), *[node(f"n{i}", f"src/n{i}.py", i % 3) for i in range(250)]],
+        [edge("root", f"n{i}") for i in range(250)],
+    )

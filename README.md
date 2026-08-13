@@ -1,6 +1,6 @@
 # Anti-AI Craft
 
-Six skills for Codex to run design workflows, create interfaces, produce code, audit, remediate, and analyze security with greater intention, evidence, and control. The repository also contains the Stage 1 foundation of a local read-only MCP server and a stable Graphify adapter.
+Six skills for Codex to run design workflows, create interfaces, produce code, audit, remediate, and analyze security with greater intention, evidence, and control. The repository also contains a local MCP evidence service with deterministic checks, a stable Graphify adapter, bounded change-impact analysis, architecture inspection, and conservative Anti-AI rules.
 
 “Anti-AI” does not mean detecting authorship or banning the use of AI. The goal is to reduce recurring patterns of poorly conducted automated work: generic interfaces, unnecessary abstractions, silent fallbacks, changes without evidence, out-of-scope fixes, and overlooked security controls.
 
@@ -100,6 +100,13 @@ uv run --project plugins/anti-ai-craft/mcp anti-ai-mcp --repository-root . --plu
 Codex connects independently to `anti-ai-craft` and Graphify. The Anti-AI MCP
 does not call Graphify MCP; its adapter reads the bounded local graph artifact and
 uses Graphify's incremental detector for freshness when available.
+
+Stage 3 adds four graph-aware tools: `analyze_change_impact`,
+`inspect_architecture`, `audit_architecture`, and `audit_anti_ai`.
+`run_relevant_tests` keeps its deterministic Stage 2 baseline and permits Graphify
+only to add candidates. Every graph-aware response exposes provider, freshness,
+coverage, confidence, direction, and truncation; an undirected or stale graph is
+never presented as directional or fresh evidence.
 
 ## How to use
 
