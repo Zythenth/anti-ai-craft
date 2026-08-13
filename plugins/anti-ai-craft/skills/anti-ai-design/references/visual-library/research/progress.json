@@ -1,0 +1,50 @@
+{
+  "target": 100,
+  "accepted": 100,
+  "rejected": 121,
+  "themes": {
+    "light": 44,
+    "dark": 55,
+    "mixed": 1
+  },
+  "families": {
+    "technical-developer": 12,
+    "canvas-spatial": 10,
+    "dense-professional": 14,
+    "communication": 8,
+    "industrial-tool-like": 12,
+    "command-keyboard-first": 8,
+    "content-catalog": 8,
+    "document-centric": 10,
+    "expressive-playful": 10,
+    "minimal-utilitarian": 8
+  },
+  "products": {
+    "GitHub": 5,
+    "Blender": 5,
+    "Visual Studio Code": 3,
+    "Godot": 4,
+    "Penpot": 6,
+    "Zulip": 6,
+    "Mattermost": 6,
+    "Nextcloud": 5,
+    "GIMP": 6,
+    "FreeCAD": 6,
+    "KiCad": 5,
+    "OpenShot": 6,
+    "Actual Budget": 4,
+    "Immich": 5,
+    "Documenso": 5,
+    "Excalidraw": 3,
+    "Element": 2,
+    "darktable": 6,
+    "Kdenlive": 6,
+    "Grafana": 3,
+    "Apache Superset": 3
+  },
+  "local_images": 100,
+  "link_only": 0,
+  "last_id": "VR-100",
+  "last_checkpoint": 100,
+  "updated_at": "2026-08-13"
+}

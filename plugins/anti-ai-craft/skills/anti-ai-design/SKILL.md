@@ -28,6 +28,7 @@ Treat “anti-AI” as a design discipline, not an authorship detector. Never cl
 - Read [design-antipatterns.md](references/design-antipatterns.md) when detecting likely defaults or reviewing a generic appearance.
 - Read [accessibility-baseline.md](references/accessibility-baseline.md) for every interface creation, refactor, or audit.
 - Read [direction-contract.md](references/direction-contract.md) before creating, refining, or redesigning an interface.
+- Read [visual-library/README.md](references/visual-library/README.md) only when creation, refinement, or redesign would benefit from external visual references. Select a family from the task, inspect only the necessary items, treat the collection as non-normative, lock one dominant reference, and do not copy identity, brand, or a composition unrelated to the current domain.
 - Read [review-workflow.md](references/review-workflow.md) when implementing, capturing screenshots, or comparing before and after.
 - Read [design-review-template.md](references/design-review-template.md) when producing a formal review or finding handoff.
 - Read [sources.md](references/sources.md) when a rule needs justification, a conflict needs resolution, or a requirement must be distinguished from guidance or a heuristic.
