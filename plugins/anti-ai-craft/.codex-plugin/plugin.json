@@ -1,7 +1,7 @@
 {
   "name": "anti-ai-craft",
-  "version": "0.4.0",
-  "description": "Six reusable skills for design workflows, contextual and outcome-oriented interfaces, concise code, auditing, remediation, and verifiable security.",
+  "version": "0.5.0",
+  "description": "Six reusable engineering skills plus a local read-only MCP foundation with a Graphify adapter.",
   "author": {
     "name": "Zythenth",
     "url": "https://github.com/Zythenth"
@@ -14,13 +14,15 @@
     "design",
     "design-workflow",
     "code-quality",
-    "security"
+    "security",
+    "mcp",
+    "graphify"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Anti-AI Craft",
     "shortDescription": "Workflow, design, code, and security with evidence",
-    "longDescription": "Six skills with evidence contracts. Design includes 101 original principles for product outcomes with ethical safeguards; design, code, and security may be selected by context, while the complete workflow, audit, and remediation remain manual.",
+    "longDescription": "Six skills with evidence contracts plus a local read-only MCP status surface. Graphify remains the structural knowledge owner behind a small GraphProvider adapter; design, code, and security may be selected by context, while complete workflow, audit, and remediation remain manual.",
     "developerName": "Zythenth",
     "category": "Productivity",
     "capabilities": [

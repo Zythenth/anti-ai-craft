@@ -1,0 +1,30 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "anti-ai-craft-mcp"
+version = "0.1.0"
+description = "Local evidence and Graphify integration for Anti-AI Craft"
+requires-python = ">=3.11"
+dependencies = [
+  "mcp>=2,<3",
+  "networkx>=3.4,<4",
+]
+
+[project.scripts]
+anti-ai-mcp = "anti_ai_mcp.server:main"
+
+[dependency-groups]
+dev = [
+  "graphifyy[mcp]==0.9.38",
+  "pytest>=8.4,<9",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/anti_ai_mcp"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+

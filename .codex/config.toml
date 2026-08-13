@@ -1,0 +1,36 @@
+[mcp_servers.anti-ai-craft]
+command = "uv"
+args = [
+  "run",
+  "--project",
+  "plugins/anti-ai-craft/mcp",
+  "anti-ai-mcp",
+  "--repository-root",
+  ".",
+  "--plugin-root",
+  "plugins/anti-ai-craft",
+  "--graphify-freshness-kind",
+  "ast",
+]
+cwd = "."
+startup_timeout_sec = 30
+tool_timeout_sec = 30
+enabled = true
+required = false
+
+[mcp_servers.graphify]
+command = "uv"
+args = [
+  "run",
+  "--project",
+  "plugins/anti-ai-craft/mcp",
+  "python",
+  "-m",
+  "graphify.serve",
+  "graphify-out/graph.json",
+]
+cwd = "."
+startup_timeout_sec = 30
+tool_timeout_sec = 30
+enabled = true
+required = false

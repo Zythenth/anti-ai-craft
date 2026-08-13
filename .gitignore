@@ -1,0 +1,10 @@
+# Python development artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.venv/
+
+# Graphify output is a reproducible local cache.
+graphify-out/
+

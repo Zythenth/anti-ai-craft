@@ -1,6 +1,6 @@
 # Anti-AI Craft
 
-Six skills for Codex to run design workflows, create interfaces, produce code, audit, remediate, and analyze security with greater intention, evidence, and control.
+Six skills for Codex to run design workflows, create interfaces, produce code, audit, remediate, and analyze security with greater intention, evidence, and control. The repository also contains the Stage 1 foundation of a local read-only MCP server and a stable Graphify adapter.
 
 “Anti-AI” does not mean detecting authorship or banning the use of AI. The goal is to reduce recurring patterns of poorly conducted automated work: generic interfaces, unnecessary abstractions, silent fallbacks, changes without evidence, out-of-scope fixes, and overlooked security controls.
 
@@ -72,6 +72,34 @@ To confirm that the marketplace was recognized:
 ```bash
 codex plugin list --marketplace zythenth
 ```
+
+### Local MCP + Graphify development
+
+The MCP foundation is currently configured for this repository through
+`.codex/config.toml`; it is not yet an automatically installed plugin component.
+It requires Python 3.11 or newer and `uv`:
+
+```bash
+uv sync --project plugins/anti-ai-craft/mcp
+```
+
+Generate the deterministic code graph, query it, and update it incrementally:
+
+```bash
+uv run --project plugins/anti-ai-craft/mcp graphify extract . --code-only --out .
+uv run --project plugins/anti-ai-craft/mcp graphify query "GraphProvider status"
+uv run --project plugins/anti-ai-craft/mcp graphify update .
+```
+
+Run the Anti-AI MCP directly over stdio:
+
+```bash
+uv run --project plugins/anti-ai-craft/mcp anti-ai-mcp --repository-root . --plugin-root plugins/anti-ai-craft --graphify-freshness-kind ast
+```
+
+Codex connects independently to `anti-ai-craft` and Graphify. The Anti-AI MCP
+does not call Graphify MCP; its adapter reads the bounded local graph artifact and
+uses Graphify's incremental detector for freshness when available.
 
 ## How to use
 
@@ -146,7 +174,8 @@ For a broad audit, prefer `$anti-ai-audit`. For security risks, use `$anti-ai-se
 - An audit is always read-only.
 - Remediation requires confirmed and approved findings.
 - No skill authorizes commit, push, or any other external action on its own.
-- The package does not include apps, MCP, hooks, executables, telemetry, or external services.
+- The package does not include apps, Git hooks, telemetry, or required external services.
+- The local MCP foundation is read-only, exposes no arbitrary command execution, and is project-scoped in Stage 1.
 
 ## Updating
 
@@ -182,9 +211,13 @@ codex plugin marketplace remove zythenth
 ```text
 .
 ├── .agents/plugins/marketplace.json
+├── .codex/config.toml
+├── AGENTS.md
 ├── docs/analyses/
+├── docs/architecture/
 ├── plugins/anti-ai-craft/
 │   ├── .codex-plugin/plugin.json
+│   ├── mcp/
 │   └── skills/
 └── README.md
 ```
