@@ -3,6 +3,7 @@ from __future__ import annotations
 import sys
 import json
 import math
+import time
 from pathlib import Path
 
 import pytest
@@ -138,5 +139,76 @@ def test_no_matching_validation_is_not_applicable(clean_repo: Path) -> None:
 
 def test_non_finite_timeout_is_rejected(validation_pass_repo: Path) -> None:
     result = ProjectCheckService(validation_pass_repo).run(timeout_seconds=math.nan).to_dict()
+    assert result["schema_version"] == "1.0"
     assert result["status"] == "ERROR"
     assert result["errors"][0]["code"] == "AA-VAL-INPUT"
+    assert result["errors"][0]["type"] == "INVALID_INPUT"
+
+
+def test_timeout_terminates_child_process_tree(clean_repo: Path) -> None:
+    marker = clean_repo / "child-survived.txt"
+    child_code = (
+        "import time; from pathlib import Path; "
+        f"time.sleep(0.8); Path({str(marker)!r}).write_text('survived', encoding='utf-8'); "
+        "time.sleep(5)"
+    )
+    parent_code = (
+        "import subprocess, sys, time; "
+        f"subprocess.Popen([sys.executable, '-c', {child_code!r}]); "
+        "time.sleep(10)"
+    )
+
+    execution = run_command(
+        clean_repo,
+        CommandSpec((sys.executable, "-c", parent_code), clean_repo, "test", "fixture"),
+        timeout_seconds=0.2,
+    )
+    time.sleep(1.0)
+
+    assert execution.timed_out is True
+    assert marker.exists() is False
+
+
+@pytest.mark.parametrize(
+    ("kwargs", "message"),
+    [
+        ({"timeout_seconds": 0}, "timeout_seconds"),
+        ({"timeout_seconds": math.inf}, "timeout_seconds"),
+        ({"stdout_limit": -1}, "stdout_limit"),
+        ({"stderr_limit": -1}, "stderr_limit"),
+    ],
+)
+def test_run_command_rejects_invalid_limits(
+    clean_repo: Path, kwargs: dict[str, float | int], message: str
+) -> None:
+    execution = run_command(
+        clean_repo,
+        CommandSpec((sys.executable, "-c", "raise SystemExit(99)"), clean_repo, "test", "fixture"),
+        **kwargs,
+    )
+
+    assert execution.status == "ERROR"
+    assert execution.exit_code is None
+    assert message in (execution.error or "")
+
+
+def test_controlled_environment_does_not_forward_unlisted_secret(
+    clean_repo: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setenv("ANTI_AI_TEST_SECRET", "must-not-reach-child")
+    execution = run_command(
+        clean_repo,
+        CommandSpec(
+            (
+                sys.executable,
+                "-c",
+                "import os; print(os.environ.get('ANTI_AI_TEST_SECRET', 'absent'))",
+            ),
+            clean_repo,
+            "test",
+            "fixture",
+        ),
+    )
+
+    assert execution.status == "PASS"
+    assert execution.stdout.strip() == "absent"

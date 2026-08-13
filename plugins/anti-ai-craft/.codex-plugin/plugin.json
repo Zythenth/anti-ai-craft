@@ -1,7 +1,7 @@
 {
   "name": "anti-ai-craft",
-  "version": "0.5.0",
-  "description": "Six reusable engineering skills plus a local read-only MCP foundation with a Graphify adapter.",
+  "version": "0.6.0",
+  "description": "Six reusable engineering skills plus a local evidence MCP with optional Graphify integration.",
   "author": {
     "name": "Zythenth",
     "url": "https://github.com/Zythenth"
@@ -22,7 +22,7 @@
   "interface": {
     "displayName": "Anti-AI Craft",
     "shortDescription": "Workflow, design, code, and security with evidence",
-    "longDescription": "Six skills with evidence contracts plus a local read-only MCP status surface. Graphify remains the structural knowledge owner behind a small GraphProvider adapter; design, code, and security may be selected by context, while complete workflow, audit, and remediation remain manual.",
+    "longDescription": "Six skills with evidence contracts plus a bounded local MCP for repository, Git, validation, impact, architecture, Anti-AI, security, remediation, baselines, and release evidence. Graphify remains optional structural evidence behind GraphProvider.",
     "developerName": "Zythenth",
     "category": "Productivity",
     "capabilities": [

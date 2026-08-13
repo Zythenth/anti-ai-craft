@@ -1,6 +1,6 @@
 # Anti-AI Craft
 
-Six skills for Codex to run design workflows, create interfaces, produce code, audit, remediate, and analyze security with greater intention, evidence, and control. The repository also contains a local MCP evidence service with deterministic checks, a stable Graphify adapter, bounded change-impact analysis, architecture inspection, and conservative Anti-AI rules.
+Six skills for Codex to run design workflows, create interfaces, produce code, audit, remediate, and analyze security with greater intention, evidence, and control. The repository also contains a local MCP evidence service with deterministic checks, optional Graphify evidence, security auditing, remediation verification, versioned baselines, and a final evidence bundle.
 
 “Anti-AI” does not mean detecting authorship or banning the use of AI. The goal is to reduce recurring patterns of poorly conducted automated work: generic interfaces, unnecessary abstractions, silent fallbacks, changes without evidence, out-of-scope fixes, and overlooked security controls.
 
@@ -80,7 +80,7 @@ The MCP foundation is currently configured for this repository through
 It requires Python 3.11 or newer and `uv`:
 
 ```bash
-uv sync --project plugins/anti-ai-craft/mcp
+uv sync --locked --project plugins/anti-ai-craft/mcp
 ```
 
 Generate the deterministic code graph, query it, and update it incrementally:
@@ -101,12 +101,18 @@ Codex connects independently to `anti-ai-craft` and Graphify. The Anti-AI MCP
 does not call Graphify MCP; its adapter reads the bounded local graph artifact and
 uses Graphify's incremental detector for freshness when available.
 
-Stage 3 adds four graph-aware tools: `analyze_change_impact`,
-`inspect_architecture`, `audit_architecture`, and `audit_anti_ai`.
+The final MCP exposes graph-aware impact/architecture/Anti-AI tools plus
+`audit_security`, `verify_remediation`, and `collect_evidence`. Baseline creation is
+an explicit CLI operation rather than a write-capable MCP tool.
 `run_relevant_tests` keeps its deterministic Stage 2 baseline and permits Graphify
 only to add candidates. Every graph-aware response exposes provider, freshness,
 coverage, confidence, direction, and truncation; an undirected or stale graph is
 never presented as directional or fresh evidence.
+
+The target repository and plugin installation root are separate, explicit values.
+See the [MCP package guide](plugins/anti-ai-craft/mcp/README.md) for tool contracts and
+the [release and operations guide](docs/RELEASE.md) for clean installation, Codex
+configuration, baselines, recovery, upgrade, disable, and release criteria.
 
 ## How to use
 
@@ -182,7 +188,7 @@ For a broad audit, prefer `$anti-ai-audit`. For security risks, use `$anti-ai-se
 - Remediation requires confirmed and approved findings.
 - No skill authorizes commit, push, or any other external action on its own.
 - The package does not include apps, Git hooks, telemetry, or required external services.
-- The local MCP foundation is read-only, exposes no arbitrary command execution, and is project-scoped in Stage 1.
+- The local MCP exposes no arbitrary command execution or network access. Most tools are read-only; validation, relevant tests, and an executable evidence bundle can run only recognized manifest-derived project commands with explicit process bounds.
 
 ## Updating
 
@@ -194,6 +200,10 @@ codex plugin add anti-ai-craft@zythenth
 ```
 
 Then start a new task to ensure that Codex loads the current version.
+
+For the MCP, run `uv sync --locked --project plugins/anti-ai-craft/mcp`, validate the
+plugin artifacts, and update the local graph. Detailed recovery and compatibility
+steps are in [docs/RELEASE.md](docs/RELEASE.md).
 
 The marketplace upgrade may point to a new plugin revision. The process above
 remains the simplest; in sensitive environments, review the release notes and diff
@@ -222,6 +232,7 @@ codex plugin marketplace remove zythenth
 ├── AGENTS.md
 ├── docs/analyses/
 ├── docs/architecture/
+├── docs/RELEASE.md
 ├── plugins/anti-ai-craft/
 │   ├── .codex-plugin/plugin.json
 │   ├── mcp/

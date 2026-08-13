@@ -102,7 +102,7 @@ def plugin_root(repository: Path) -> Path:
     (root / ".codex-plugin").mkdir(parents=True)
     (root / "skills" / "anti-ai-code").mkdir(parents=True)
     (root / ".codex-plugin" / "plugin.json").write_text(
-        json.dumps({"version": "0.5.0"}), encoding="utf-8"
+        json.dumps({"version": "0.6.0"}), encoding="utf-8"
     )
     (root / "skills" / "anti-ai-code" / "SKILL.md").write_text(
         "# Test skill\n", encoding="utf-8"

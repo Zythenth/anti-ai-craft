@@ -177,8 +177,12 @@ class ArchitectureService:
         seeds = {node.id: node for node in analysis.changed_nodes}
         new_cross: list[ImpactCandidate] = []
         undetermined_cross: list[ImpactCandidate] = []
+        ignored_containment = 0
         for candidate in analysis.candidates:
             if candidate.distance != 1:
+                continue
+            if candidate.path_edges and _is_containment(candidate.path_edges[0].relation):
+                ignored_containment += 1
                 continue
             seed = seeds.get(candidate.path[0])
             if (
@@ -286,6 +290,7 @@ class ArchitectureService:
         observations = {
             "new_cross_community_relations": len(new_cross),
             "existing_or_undetermined_cross_community_relations": len(undetermined_cross),
+            "ignored_containment_relations": ignored_containment,
             "directed_cycles_checked": bool(
                 status.capabilities.dependencies and status.capabilities.dependents
             ),
@@ -427,5 +432,12 @@ def _delta_policy() -> dict[str, Any]:
     return {
         "new_file_relations": "attributable when the graph contains a relation from a Git added/untracked file",
         "modified_file_relations": "existing versus introduced cannot be distinguished without a historical graph baseline",
-        "historical_baseline": "deferred to Stage 4; no delta is simulated",
+        "historical_baseline": (
+            "the compact Stage 4 baseline compares finding signatures; it does not copy graph "
+            "edges or simulate modified-file structural deltas"
+        ),
     }
+
+
+def _is_containment(relation: str | None) -> bool:
+    return (relation or "").casefold() in {"contains", "contains_section", "defined_in"}

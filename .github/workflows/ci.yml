@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  mcp:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.14"]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@d0d8abe699bfb85fec6de9f7adb5ae17292296ff # v6
+        with:
+          enable-cache: true
+          cache-dependency-glob: plugins/anti-ai-craft/mcp/uv.lock
+
+      - name: Install locked dependencies
+        run: uv sync --locked --project plugins/anti-ai-craft/mcp
+
+      - name: Check lockfile
+        run: uv lock --check --project plugins/anti-ai-craft/mcp
+
+      - name: Compile package
+        run: uv run --project plugins/anti-ai-craft/mcp python -m compileall -q plugins/anti-ai-craft/mcp/src
+
+      - name: Run tests
+        run: uv run --project plugins/anti-ai-craft/mcp python -m pytest plugins/anti-ai-craft/mcp/tests
+
+      - name: Validate plugin artifacts
+        run: >-
+          uv run --project plugins/anti-ai-craft/mcp anti-ai-plugin-validate
+          plugins/anti-ai-craft --marketplace .agents/plugins/marketplace.json
+
+      - name: Ensure checks did not mutate tracked files
+        run: git diff --exit-code

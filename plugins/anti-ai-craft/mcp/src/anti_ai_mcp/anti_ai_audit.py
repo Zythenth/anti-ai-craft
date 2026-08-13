@@ -18,7 +18,7 @@ from .evidence import (
     Finding,
     Severity,
 )
-from .git import DiffMode, GitAddedLine, GitFileChange, GitInspector
+from .git import DiffMode, GitAddedLine, GitFileChange, GitInspector, GitRemovedLine
 from .graph import GraphProvider, GraphProviderError
 from .graph_evidence import GraphEvidenceNormalizer
 from .paths import resolve_within_repository
@@ -65,6 +65,8 @@ class AntiAiAuditContext:
     changes: tuple[GitFileChange, ...]
     added_lines: tuple[GitAddedLine, ...]
     added_lines_truncated: bool
+    removed_lines: tuple[GitRemovedLine, ...]
+    removed_lines_truncated: bool
     new_files: tuple[NewFileSignal, ...]
     new_files_truncated: bool
     graph: GraphEvidenceNormalizer
@@ -132,7 +134,24 @@ class TestBypassRule:
             if change.status == "deleted" and _is_test_path(change.path)
         ]
         skips = [line for line in context.added_lines if _is_skip_marker(line.text)]
-        if not deleted and not skips:
+        exclusions = [
+            line
+            for line in context.added_lines
+            if _is_validation_exclusion(line.text, line.path)
+        ]
+        added_assertions = [
+            line
+            for line in context.added_lines
+            if _is_test_path(line.path) and _is_assertion(line.text)
+        ]
+        removed_assertions = [
+            line
+            for line in context.removed_lines
+            if _is_test_path(line.path) and _is_assertion(line.text)
+        ]
+        net_removed_assertions = max(0, len(removed_assertions) - len(added_assertions))
+        removed_assertions = removed_assertions[:net_removed_assertions]
+        if not deleted and not skips and not exclusions and not removed_assertions:
             return ()
         evidence: list[Evidence] = [
             Evidence(
@@ -156,6 +175,34 @@ class TestBypassRule:
             )
             for line in skips[:available]
         )
+        available = max(0, MAX_RULE_EVIDENCE - len(evidence))
+        evidence.extend(
+            Evidence(
+                EvidenceKind.HEURISTIC,
+                "Git added line",
+                {
+                    "path": line.path,
+                    "line": line.line_number,
+                    "signal": "new coverage/validation exclusion",
+                    "text": line.text[:300],
+                },
+            )
+            for line in exclusions[:available]
+        )
+        available = max(0, MAX_RULE_EVIDENCE - len(evidence))
+        evidence.extend(
+            Evidence(
+                EvidenceKind.HEURISTIC,
+                "Git removed line",
+                {
+                    "path": line.path,
+                    "line": line.line_number,
+                    "signal": "removed test assertion",
+                    "text": line.text[:300],
+                },
+            )
+            for line in removed_assertions[:available]
+        )
         return (
             Finding(
                 self.id,
@@ -163,11 +210,18 @@ class TestBypassRule:
                 Severity.HIGH,
                 Confidence.MEDIUM,
                 (
-                    f"The current change deletes {len(deleted)} test file(s) and introduces "
-                    f"{len(skips)} skip/xfail marker(s)."
+                    f"The current change deletes {len(deleted)} test file(s), introduces "
+                    f"{len(skips)} skip/xfail marker(s), adds {len(exclusions)} validation "
+                    f"exclusion(s), and removes {len(removed_assertions)} assertion(s)."
                 ),
                 tuple(evidence),
-                location={"path": deleted[0] if deleted else skips[0].path},
+                location={
+                    "path": (
+                        deleted[0]
+                        if deleted
+                        else (skips or exclusions or removed_assertions)[0].path
+                    )
+                },
                 suggestion="Restore the coverage or provide a reviewed reason and replacement validation.",
             ),
         )
@@ -291,6 +345,7 @@ class AntiAiAuditService:
         try:
             snapshot = self.git_inspector.snapshot(mode)
             added_lines, lines_truncated = self.git_inspector.added_lines(mode)
+            removed_lines, removed_lines_truncated = self.git_inspector.removed_lines(mode)
         except (RuntimeError, ValueError) as exc:
             return CheckResult(
                 CheckStatus.ERROR,
@@ -306,6 +361,8 @@ class AntiAiAuditService:
             snapshot.files,
             added_lines,
             lines_truncated,
+            removed_lines,
+            removed_lines_truncated,
             new_files,
             new_files_truncated,
             normalizer,
@@ -323,7 +380,7 @@ class AntiAiAuditService:
         )
         findings = rule_findings + architecture_findings
         graph_metadata = normalizer.graph_metadata(
-            truncated=lines_truncated or new_files_truncated,
+            truncated=lines_truncated or removed_lines_truncated or new_files_truncated,
             coverage={
                 "new_source_files": len(context.new_files),
                 "new_source_files_with_graph_nodes": sum(
@@ -496,6 +553,45 @@ def _is_skip_marker(text: str) -> bool:
     )
 
 
+def _is_validation_exclusion(text: str, path: str) -> bool:
+    suffix = PurePosixPath(path).suffix.lower()
+    if suffix == ".py":
+        try:
+            comments = " ".join(
+                token.string
+                for token in tokenize.generate_tokens(io.StringIO(text).readline)
+                if token.type == tokenize.COMMENT
+            )
+        except (IndentationError, tokenize.TokenError):
+            comments = ""
+        return bool(
+            re.search(
+                r"pragma:\s*no\s*cover\b|#\s*noqa\b|"
+                r"#\s*type:\s*ignore\b|mypy:\s*ignore-errors\b|ruff:\s*noqa\b",
+                comments,
+                re.IGNORECASE,
+            )
+        )
+    return bool(
+        re.search(
+            r"pragma:\s*no\s*cover\b|istanbul\s+ignore\b|c8\s+ignore\b|"
+            r"eslint-disable\b|ruff:\s*noqa\b|#\s*noqa\b|"
+            r"#\s*type:\s*ignore\b|@ts-ignore\b|mypy:\s*ignore-errors\b",
+            text,
+            re.IGNORECASE,
+        )
+    )
+
+
+def _is_assertion(text: str) -> bool:
+    return bool(
+        re.search(
+            r"^\s*assert\b|\bself\.assert[A-Za-z]*\s*\(|\bexpect\s*\([^)]*\)\s*\.",
+            text,
+        )
+    )
+
+
 def _has_abstraction(text: str, suffix: str) -> bool:
     if suffix == ".py":
         return bool(re.search(r"^(?:class|def)\s+[A-Za-z_]", text, re.MULTILINE))
@@ -544,7 +640,7 @@ def _rule_policies() -> dict[str, dict[str, Any]]:
             "confidence": "MEDIUM; pre-existing lines are excluded",
         },
         "AA-AI-TEST-BYPASS-001": {
-            "detects": "deleted test files and newly added skip/xfail markers",
+            "detects": "deleted test files, newly added skip/xfail or validation exclusions, and removed test assertions",
             "cannot_prove": "that validation was bypassed rather than intentionally replaced",
             "known_false_positives": ["obsolete tests", "quarantine with replacement coverage"],
             "confidence": "MEDIUM; the Git delta is factual, intent is not",

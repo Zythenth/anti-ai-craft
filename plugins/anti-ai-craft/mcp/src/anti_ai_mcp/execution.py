@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import math
 import signal
 import subprocess
 import sys
@@ -113,6 +114,9 @@ def run_command(
     stdout_limit: int = DEFAULT_OUTPUT_BYTES,
     stderr_limit: int = DEFAULT_OUTPUT_BYTES,
 ) -> CommandExecution:
+    input_error = _validate_limits(timeout_seconds, stdout_limit, stderr_limit)
+    if input_error is not None:
+        return _error_execution(spec, input_error)
     root = repository_root.resolve(strict=True)
     cwd = resolve_within_repository(root, spec.cwd)
     if not cwd.is_dir():
@@ -183,10 +187,7 @@ def run_command(
             except subprocess.TimeoutExpired:
                 timed_out = True
                 try:
-                    if sys.platform == "win32":
-                        process.kill()
-                    else:
-                        os.killpg(process.pid, signal.SIGKILL)
+                    _terminate_process_tree(process, environment)
                     exit_code = process.wait(timeout=5)
                 except (OSError, subprocess.TimeoutExpired) as exc:
                     error = f"timed out and termination could not be confirmed: {exc}"
@@ -214,6 +215,66 @@ def run_command(
         timed_out=timed_out,
         error=error,
     )
+
+
+def _validate_limits(
+    timeout_seconds: float,
+    stdout_limit: int,
+    stderr_limit: int,
+) -> str | None:
+    if (
+        isinstance(timeout_seconds, bool)
+        or not isinstance(timeout_seconds, (int, float))
+        or not math.isfinite(timeout_seconds)
+        or timeout_seconds <= 0
+    ):
+        return "timeout_seconds must be a finite number greater than 0"
+    for name, value in (("stdout_limit", stdout_limit), ("stderr_limit", stderr_limit)):
+        if isinstance(value, bool) or not isinstance(value, int) or value < 0:
+            return f"{name} must be a non-negative integer"
+    return None
+
+
+def _error_execution(spec: CommandSpec, message: str) -> CommandExecution:
+    return CommandExecution(
+        command=spec.argv,
+        category=spec.category,
+        exit_code=None,
+        duration_seconds=0.0,
+        stdout="",
+        stderr="",
+        stdout_truncated=False,
+        stderr_truncated=False,
+        error=message,
+    )
+
+
+def _terminate_process_tree(
+    process: subprocess.Popen[bytes],
+    environment: dict[str, str],
+) -> None:
+    if sys.platform != "win32":
+        os.killpg(process.pid, signal.SIGKILL)
+        return
+
+    system_root = Path(environment.get("SYSTEMROOT", environment.get("WINDIR", r"C:\Windows")))
+    taskkill = system_root / "System32" / "taskkill.exe"
+    if not taskkill.is_file():
+        process.kill()
+        raise OSError("Windows process-tree termination utility is unavailable")
+    termination = subprocess.run(
+        (str(taskkill), "/PID", str(process.pid), "/T", "/F"),
+        env=environment,
+        stdin=subprocess.DEVNULL,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        shell=False,
+        timeout=5,
+        check=False,
+    )
+    if termination.returncode not in (0, 128) and process.poll() is None:
+        process.kill()
+        raise OSError(f"Windows process-tree termination failed with exit code {termination.returncode}")
 
 
 def _resolve_executable(

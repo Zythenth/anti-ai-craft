@@ -84,3 +84,21 @@ def test_invalid_scope_glob_is_reported_as_input_error(modified_repo: Path) -> N
     result = verify(modified_repo, allowed=["[z-a]"])
     assert result["status"] == "ERROR"
     assert result["errors"][0]["code"] == "AA-SCOPE-INPUT"
+
+
+def test_extremely_long_scope_pattern_is_rejected(modified_repo: Path) -> None:
+    result = verify(modified_repo, allowed=["a" * 4097])
+    assert result["status"] == "ERROR"
+    assert result["errors"][0]["type"] == "INVALID_INPUT"
+
+
+def test_duplicate_and_unicode_scope_patterns_are_stable(clean_repo: Path) -> None:
+    path = clean_repo / "documentação" / "visão.md"
+    path.parent.mkdir()
+    path.write_text("mudança\n", encoding="utf-8")
+    result = verify(
+        clean_repo,
+        allowed=["documentação/**", "documentação/**"],
+    )
+    assert result["status"] == "PASS"
+    assert result["metadata"]["scope"]["allowed"] == ["documentação/**"]

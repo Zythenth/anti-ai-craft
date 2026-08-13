@@ -5,6 +5,9 @@ from enum import StrEnum
 from typing import Any
 
 
+CHECK_RESULT_SCHEMA_VERSION = "1.0"
+
+
 class EvidenceKind(StrEnum):
     FACT = "FACT"
     HEURISTIC = "HEURISTIC"
@@ -79,7 +82,7 @@ class CheckError:
     detail: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
-        return asdict(self)
+        return {**asdict(self), "type": _error_type(self.code)}
 
 
 @dataclass(frozen=True)
@@ -93,6 +96,7 @@ class CheckResult:
 
     def to_dict(self) -> dict[str, Any]:
         return {
+            "schema_version": CHECK_RESULT_SCHEMA_VERSION,
             "status": self.status.value,
             "summary": self.summary,
             "findings": [finding.to_dict() for finding in self.findings],
@@ -100,3 +104,31 @@ class CheckResult:
             "metadata": self.metadata,
             "errors": [error.to_dict() for error in self.errors],
         }
+
+
+def _error_type(code: str) -> str:
+    normalized = code.upper()
+    if "INPUT" in normalized:
+        return "INVALID_INPUT"
+    if "GRAPH" in normalized:
+        return "GRAPH_INVALID" if "INVALID" in normalized else "GRAPH_UNAVAILABLE"
+    if "TIMEOUT" in normalized:
+        return "VALIDATION_TIMEOUT"
+    if "REPOSITORY" in normalized or normalized.startswith("AA-GIT"):
+        return "REPOSITORY_UNAVAILABLE"
+    if "SECURITY" in normalized or normalized.startswith("AA-SEC"):
+        return "SECURITY_LIMIT"
+    if "EXEC" in normalized:
+        return "EXECUTION_FAILED"
+    if normalized in {
+        "INVALID_INPUT",
+        "REPOSITORY_UNAVAILABLE",
+        "GRAPH_UNAVAILABLE",
+        "GRAPH_INVALID",
+        "VALIDATION_TIMEOUT",
+        "EXECUTION_FAILED",
+        "SECURITY_LIMIT",
+        "INTERNAL_ERROR",
+    }:
+        return normalized
+    return "INTERNAL_ERROR"

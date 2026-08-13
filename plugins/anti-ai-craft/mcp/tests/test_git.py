@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import subprocess
 
 from anti_ai_mcp.git import GitInspector
 from conftest import git
@@ -63,3 +64,48 @@ def test_mixed_diff_reports_all_states(clean_repo: Path) -> None:
     assert readme["staged"] is True
     assert readme["unstaged"] is True
     assert result["metadata"]["diff_summary"]["untracked"] == 1
+
+
+def test_removed_lines_preserve_original_location(clean_repo: Path) -> None:
+    source = clean_repo / "src" / "guard.py"
+    source.parent.mkdir()
+    source.write_text("authorize(user)\nreturn_resource()\n", encoding="utf-8")
+    git(clean_repo, "add", "src/guard.py")
+    git(clean_repo, "commit", "-q", "-m", "add guard")
+    source.write_text("return_resource()\n", encoding="utf-8")
+
+    lines, truncated = GitInspector(clean_repo).removed_lines()
+
+    assert truncated is False
+    assert [(line.path, line.line_number, line.text) for line in lines] == [
+        ("src/guard.py", 1, "authorize(user)")
+    ]
+
+
+def test_repository_without_commits_reports_untracked_files(tmp_path: Path) -> None:
+    git(tmp_path, "init", "-q")
+    (tmp_path / "first.txt").write_text("first\n", encoding="utf-8")
+
+    result = GitInspector(tmp_path).inspect().to_dict()
+
+    assert result["status"] == "PASS"
+    assert result["metadata"]["head"] is None
+    assert result["metadata"]["files"][0]["status"] == "untracked"
+
+
+def test_detached_head_is_reported_without_failure(clean_repo: Path) -> None:
+    head = git(clean_repo, "rev-parse", "HEAD").stdout.strip()
+    detached = subprocess.run(
+        ["git", "-C", str(clean_repo), "checkout", "--detach", "-q", head],
+        capture_output=True,
+        text=True,
+        check=False,
+        shell=False,
+    )
+    assert detached.returncode == 0, detached.stderr
+
+    result = GitInspector(clean_repo).inspect().to_dict()
+
+    assert result["status"] == "PASS"
+    assert result["metadata"]["branch"] is None
+    assert result["metadata"]["head"] == head

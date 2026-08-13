@@ -16,13 +16,18 @@ Anti-AI MCP does not call another MCP server.
 Requirements: Python 3.11+ and `uv`.
 
 ```bash
-uv sync --project plugins/anti-ai-craft/mcp
+uv sync --locked --project plugins/anti-ai-craft/mcp
 ```
 
 The lock file pins Graphify `0.9.38`, MCP Python SDK `2.0.0`, and the complete
 development environment. Graphify is optional to the Anti-AI MCP runtime: when
 its detector is missing, graph freshness becomes `unknown_freshness`; graph
 queries can still use a valid local artifact.
+
+`--repository-root` and `--plugin-root` are mandatory unless their matching
+`ANTI_AI_REPOSITORY_ROOT` and `ANTI_AI_PLUGIN_ROOT` variables are set. The first is
+the target under analysis; the second is a validated plugin installation and may
+live outside the target. The MCP never guesses either one.
 
 ## Graph lifecycle
 
@@ -82,13 +87,24 @@ The MCP surface is:
 - `inspect_architecture`: compact communities, representative nodes, hotspots, and cross-community relations;
 - `audit_architecture`: conservative current-change structural signals with attributable delta only for new files;
 - `audit_anti_ai`: current-diff facts plus the small documented Anti-AI rule set;
+- `audit_security`: defensive current-change signals with credential redaction;
+- `verify_remediation`: recheck prior finding evidence without trusting claimed status;
+- `collect_evidence`: versioned cross-tool bundle with optional bounded execution,
+  baseline comparison, truncation summary, and phase timing;
 - resources `anti-ai://project/status`, `anti-ai://project/repository`, and
   `anti-ai://project/checks`.
 
-Every Stage 2 tool returns the same `CheckResult` envelope with status, summary,
-findings, evidence, metadata, and errors. Finding IDs are stable (`AA-REPO-*`,
+Check tools return the additive `CheckResult` schema `1.0` with status, summary,
+findings, evidence, metadata, and normalized errors. Existing fields and the first
+ten tools remain compatible. Finding IDs are stable (`AA-REPO-*`,
 `AA-GIT-*`, `AA-SCOPE-*`, `AA-VAL-*`, and `AA-TEST-*`). Facts, heuristics,
 inferences, and manual-review requirements remain distinct.
+
+| Profile | Capabilities |
+|---|---|
+| `READ_ONLY` | status, repository, Git, scope, impact, architecture, Anti-AI, security, remediation |
+| `EXECUTES_PROJECT_COMMANDS` | validation, relevant tests, and `collect_evidence(execute=true)` |
+| `STATEFUL_ADMIN` | `anti-ai-baseline create` CLI only; no MCP write tool |
 
 ## Deterministic and Graphify policy
 
@@ -125,15 +141,17 @@ node cannot materialize unbounded fan-out before truncation is reported.
 clusters. It does not infer bounded contexts, layers, services, or entrypoints from
 degree. `audit_architecture` can attribute a cross-community relation to the current
 change only when it starts at an added/untracked file. For modified files, the
-existing-versus-new distinction remains explicitly unavailable until Stage 4 has a
-historical graph baseline. Cycles are checked only on a logically directed graph.
+existing-versus-new edge distinction remains explicitly unavailable; the compact
+baseline compares finding signatures rather than copying historical graph edges.
+Cycles are checked only on a logically directed graph.
 
 ## Initial Anti-AI rules and false positives
 
 The first `audit_anti_ai` release intentionally keeps four rules:
 
 - `AA-AI-PLACEHOLDER-001`: new TODO/FIXME or explicit unimplemented-error lines;
-- `AA-AI-TEST-BYPASS-001`: deleted test files or newly added skip/xfail markers;
+- `AA-AI-TEST-BYPASS-001`: deleted test files, newly added skip/xfail or
+  coverage/lint exclusions, or removed test assertions;
 - `AA-AI-FILE-PROLIFERATION-001`: a compound cluster of at least six new production
   source files, predominantly small and structurally isolated;
 - `AA-AI-ABSTRACTION-001`: a new abstraction file with graph nodes but no observed
@@ -159,9 +177,15 @@ claim.
 No public tool accepts a command string or Git argv. Validation commands are
 generated from recognized manifest keys and fixed runners. Execution uses
 `shell=False`, separate argv, a repository-contained cwd, a controlled
-environment, timeout/termination, and explicit stdout/stderr byte limits.
+environment, timeout/process-tree termination, and explicit stdout/stderr byte limits.
 Project-owned package scripts are still code: dry-run shows the selected command
 before execution, and callers should review untrusted repository changes first.
+
+On POSIX, a timed-out process group receives `SIGKILL`; on Windows, the implementation
+uses the fixed System32 `taskkill.exe /T /F` path and confirms parent exit. Regression
+tests verify that a child process cannot outlive the timeout. Invalid time/output
+limits are rejected before a process starts, and unlisted environment variables are
+not forwarded.
 
 Graph input is confined to the repository and capped at 64 MiB. Graph-aware
 traversals, overview results, new-source inspection, and evidence lists all have
@@ -171,6 +195,45 @@ graph content is semantically correct.
 All paths emitted to clients are repository-relative POSIX paths. Scope patterns
 reject absolute paths and traversal, deny rules take precedence, exceptions do
 not override denies, and a rename checks both source and destination.
+
+## Security, remediation, baseline, and evidence bundle
+
+`audit_security` is a bounded defensive diff auditor, not a pentest. Its stable rules
+cover credential formats, explicit `shell=True`/shell APIs, `eval`/`exec`, literal
+path traversal reaching filesystem sinks, unsafe temporary names, and explicit
+security-control weakening. Secret evidence is always redacted; placeholders and
+test fixtures are suppressed or downgraded. Ambiguous signals require review.
+
+`verify_remediation` supports `RESOLVED`, `PARTIALLY_RESOLVED`, `UNRESOLVED`,
+`REGRESSION`, `NOT_VERIFIABLE`, and `MANUAL_REVIEW_REQUIRED`. It reruns current
+audits and ignores input fields such as `fixed`, `resolved`, or `status`. Removing a
+credential-like value is only partial because static evidence cannot prove external
+rotation or revocation.
+
+Create repository-local baseline state explicitly:
+
+```bash
+uv run --project plugins/anti-ai-craft/mcp anti-ai-baseline create --repository-root . --output .anti-ai/baseline.json
+uv run --project plugins/anti-ai-craft/mcp anti-ai-baseline validate --repository-root . .anti-ai/baseline.json
+```
+
+The baseline and evidence bundle use independent schema `1.0`. Baselines store
+compact fingerprints/signatures, never raw Graphify nodes or secret evidence.
+`collect_evidence` has no cross-call cache. Within one call it reuses a test execution
+only when command, argv, cwd, and Git state exactly match validation; phase timings
+make the decision and actual bottleneck observable.
+
+Set `ANTI_AI_MCP_LOG_LEVEL=INFO` for bounded stderr diagnostics. Logs include only
+tool, duration, status, truncation, and finding count. There is no telemetry,
+analytics, network send, argument logging, raw diff logging, or secret logging.
+
+## Extending rules
+
+Define observable evidence first, classify it as fact/heuristic/inference/manual,
+assign a stable ID, add positive/negative/ambiguous tests, and register remediation
+only when current evidence can prove it. A graph-aware rule must use `GraphProvider`,
+preserve provenance/freshness/direction, handle OFF and undirected graphs, and bound
+every traversal. Rules never parse `graphify-out/graph.json` directly.
 
 ## Validation
 
@@ -183,12 +246,19 @@ uv run --project plugins/anti-ai-craft/mcp python plugins/anti-ai-craft/mcp/test
 uv run --project plugins/anti-ai-craft/mcp python plugins/anti-ai-craft/mcp/tests/smoke_stage2_stdio.py . --execute
 uv run --project plugins/anti-ai-craft/mcp python plugins/anti-ai-craft/mcp/tests/smoke_stage3_stdio.py .
 uv run --project plugins/anti-ai-craft/mcp python plugins/anti-ai-craft/mcp/tests/smoke_stage3_stdio.py . --disable-graph
+uv run --project plugins/anti-ai-craft/mcp anti-ai-plugin-validate plugins/anti-ai-craft --marketplace .agents/plugins/marketplace.json
+uv run --project plugins/anti-ai-craft/mcp python plugins/anti-ai-craft/mcp/tests/smoke_stage4_stdio.py . --baseline-path .anti-ai/baseline.json
+uv run --project plugins/anti-ai-craft/mcp python plugins/anti-ai-craft/mcp/tests/smoke_stage4_stdio.py . --disable-graph
 ```
 
 The tests use isolated repositories for graph lifecycle, Git states, rename/move
 scope bypasses, Python/Node/multi-package inspection, validation success/failure,
 timeouts, large output, cwd containment, deterministic test mapping/fallback,
 and MCP tool/resource behavior with Graphify stale and disabled.
+
+CI runs the locked install, lock check, compile, full suite, plugin validation, and
+post-check Git diff on Python 3.11 and 3.14. Operational recovery, release artifacts,
+versioning, and the objective release gate are in [`docs/RELEASE.md`](../../../docs/RELEASE.md).
 
 ## Current primary references
 

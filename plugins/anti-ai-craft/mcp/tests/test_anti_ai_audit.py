@@ -105,6 +105,28 @@ def test_preexisting_skip_is_not_attributed_to_current_change(clean_repo: Path) 
     assert "AA-AI-TEST-BYPASS-001" not in ids(result)
 
 
+def test_removed_assertion_and_new_validation_exclusions_are_signals(clean_repo: Path) -> None:
+    test = clean_repo / "tests" / "test_service.py"
+    test.parent.mkdir()
+    test.write_text("def test_service():\n    assert 1 + 1 == 2\n", encoding="utf-8")
+    git(clean_repo, "add", "tests/test_service.py")
+    git(clean_repo, "commit", "-q", "-m", "add assertion")
+    test.write_text(
+        "def test_service():\n    value = 1 + 1  # pragma: no cover\n",
+        encoding="utf-8",
+    )
+
+    result = service(
+        clean_repo,
+        graph_payload([node("test", "tests/test_service.py", 1)], []),
+    ).audit().to_dict()
+
+    finding = next(item for item in result["findings"] if item["id"] == "AA-AI-TEST-BYPASS-001")
+    signals = {item["payload"]["signal"] for item in finding["evidence"]}
+    assert "removed test assertion" in signals
+    assert "new coverage/validation exclusion" in signals
+
+
 def test_compound_file_proliferation_requires_graph_isolation(clean_repo: Path) -> None:
     nodes = []
     for index in range(6):

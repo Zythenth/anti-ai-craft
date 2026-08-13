@@ -67,6 +67,29 @@ def test_new_cross_community_relation_is_attributable(
     assert result["metadata"]["observations"]["new_cross_community_relations"] == 1
 
 
+def test_cross_community_containment_is_not_a_dependency_signal(clean_repo: Path) -> None:
+    target = clean_repo / "src" / "new.py"
+    target.parent.mkdir()
+    target.write_text("class Child: pass\n", encoding="utf-8")
+    payload = {
+        "directed": True,
+        "multigraph": False,
+        "graph": {},
+        "nodes": [
+            {"id": "module", "label": "new.py", "source_file": "src/new.py", "community": 1},
+            {"id": "child", "label": "Child", "source_file": "src/new.py", "community": 2},
+        ],
+        "links": [
+            {"source": "module", "target": "child", "relation": "contains", "confidence": "EXTRACTED"}
+        ],
+    }
+
+    result = service(clean_repo, payload).audit().to_dict()
+
+    assert "AA-ARCH-002" not in {finding["id"] for finding in result["findings"]}
+    assert result["metadata"]["observations"]["ignored_containment_relations"] == 1
+
+
 def test_modified_cross_community_relation_is_not_claimed_as_new(
     clean_repo: Path, cross_community_change: dict
 ) -> None:

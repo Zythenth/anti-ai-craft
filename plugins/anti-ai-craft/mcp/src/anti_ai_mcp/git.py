@@ -24,6 +24,7 @@ MAX_DIFF_FILES = 500
 MAX_GIT_OUTPUT_BYTES = 2 * 1024 * 1024
 MAX_UNTRACKED_FILE_BYTES = 1024 * 1024
 MAX_ADDED_LINES = 2_000
+MAX_REMOVED_LINES = 2_000
 
 
 @dataclass
@@ -69,6 +70,20 @@ class GitDiffSnapshot:
 
 @dataclass(frozen=True)
 class GitAddedLine:
+    path: str
+    line_number: int
+    text: str
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "path": self.path,
+            "line_number": self.line_number,
+            "text": self.text,
+        }
+
+
+@dataclass(frozen=True)
+class GitRemovedLine:
     path: str
     line_number: int
     text: str
@@ -277,6 +292,44 @@ class GitInspector:
                 break
         return tuple(result), truncated
 
+    def removed_lines(
+        self,
+        mode: DiffMode = "combined",
+        *,
+        limit: int = MAX_REMOVED_LINES,
+    ) -> tuple[tuple[GitRemovedLine, ...], bool]:
+        if mode not in ("working_tree", "staged", "combined"):
+            raise ValueError(f"unsupported diff mode: {mode}")
+        if limit < 1 or limit > MAX_REMOVED_LINES:
+            raise ValueError(f"removed-line limit must be between 1 and {MAX_REMOVED_LINES}")
+        snapshot = self.snapshot(mode)
+        result: list[GitRemovedLine] = []
+        truncated = snapshot.truncated
+        for change in snapshot.files:
+            if change.untracked:
+                continue
+            selector = (
+                ("--cached",)
+                if mode == "staged"
+                else (() if mode == "working_tree" else (("HEAD",) if snapshot.head else ("--cached",)))
+            )
+            diff = self._git(
+                "diff",
+                *selector,
+                "--unified=0",
+                "--no-color",
+                "--no-ext-diff",
+                "--",
+                change.path,
+            )
+            lines = _parse_removed_lines(change.path, diff)
+            available = limit - len(result)
+            result.extend(lines[:available])
+            if len(lines) > available:
+                truncated = True
+                break
+        return tuple(result), truncated
+
     def _diff_records(self, *, cached: bool = False, head: bool = False) -> list[GitFileChange]:
         selector = ["HEAD"] if head else (["--cached"] if cached else [])
         name_output = self._git("diff", *selector, "--name-status", "-z", "-M", "--no-ext-diff")
@@ -406,6 +459,28 @@ def _parse_added_lines(path: str, diff: str) -> tuple[GitAddedLine, ...]:
             result.append(GitAddedLine(path, line_number, raw[1:]))
             line_number += 1
         elif raw.startswith("-") or raw.startswith("\\"):
+            continue
+        else:
+            line_number += 1
+    return tuple(result)
+
+
+def _parse_removed_lines(path: str, diff: str) -> tuple[GitRemovedLine, ...]:
+    result: list[GitRemovedLine] = []
+    line_number: int | None = None
+    for raw in diff.splitlines():
+        if raw.startswith("@@"):
+            match = re.search(r"-(\d+)(?:,\d+)?", raw)
+            line_number = int(match.group(1)) if match else None
+            continue
+        if line_number is None:
+            continue
+        if raw.startswith("---"):
+            continue
+        if raw.startswith("-"):
+            result.append(GitRemovedLine(path, line_number, raw[1:]))
+            line_number += 1
+        elif raw.startswith("+") or raw.startswith("\\"):
             continue
         else:
             line_number += 1

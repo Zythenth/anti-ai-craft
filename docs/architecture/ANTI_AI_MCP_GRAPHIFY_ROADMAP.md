@@ -2,10 +2,12 @@
 
 ## Current stage
 
-**Stage 3 of 4 — GRAPH-AWARE INTELLIGENCE (complete on 2026-08-13)**
+**Stage 4 of 4 — HARDENING, SECURITY, AND REMEDIATION (local release validation complete on 2026-08-13; hosted CI pending)**
 
-The current implementation adds bounded structural evidence and conservative
-Anti-AI rules behind the stable `GraphProvider` boundary. Anti-AI rules do not
+The current implementation keeps the stable `GraphProvider` boundary and adds
+bounded security auditing, compact regression baselines, remediation verification,
+an aggregate evidence bundle, opt-in metadata-only observability, process-tree
+termination, plugin validation, and a pinned CI matrix. Anti-AI rules still do not
 parse Graphify output directly, and graph evidence never replaces deterministic
 selection or validation.
 
@@ -632,3 +634,58 @@ the corresponding command, test, or inspected artifact is recorded in this file.
    adding pinned CI; do not rely on the external system-Python validator implicitly.
 7. Define final evidence-bundle, regression-comparison, timeout/memory/concurrency,
    installation, recovery, upgrade, and release acceptance criteria before hardening.
+
+## Stage 4 implementation log
+
+All Stage 4 prerequisites were handled without adding a second knowledge graph or
+making the Anti-AI rules depend on Graphify's JSON representation:
+
+- `audit_security` reports bounded, redacted, current-change signals with stable IDs;
+- `anti-ai-baseline` creates and validates a compact schema-versioned baseline using
+  fingerprints and signatures rather than raw graph nodes, edges, diffs, or secrets;
+- `verify_remediation` reruns observable checks and does not trust a caller's claimed
+  resolution status; secret removal remains partial until external rotation is proven;
+- `collect_evidence` composes the existing evidence producers, plans commands by
+  default, and deduplicates execution only for an identical command, working directory,
+  and Git state;
+- all 13 MCP tools expose the shared result/error contract and metadata-only timings;
+- spawned validation is fixed-argv, uses `shell=False`, has bounded output and timeout,
+  and terminates the child process tree on supported platforms;
+- target-repository and plugin roots are explicit and independently contained;
+- the repository contains a locked Python 3.11/3.14 CI matrix, in-package plugin
+  validator, release/runbook documentation, and Stage 4 stdio/performance probes.
+
+The threat model is maintained in
+`docs/architecture/ANTI_AI_MCP_THREAT_MODEL.md`. It treats repository contents,
+diffs, graph caches, subprocess output, baseline files, and MCP arguments as untrusted
+inputs. Stateful behavior remains limited to the explicit baseline CLI and the MCP
+continues to expose no arbitrary command or general file-write primitive.
+
+### Stage 4 measured evidence
+
+- the real graph grew from 1,634 nodes / 3,162 edges / 96 communities to 1,869 nodes /
+  3,945 edges / 112 communities during implementation;
+- 20 repeated real-graph impact analyses completed in 39.84 seconds with about 4.36 MiB
+  peak traced allocation and no accumulating retained-memory pattern;
+- a valid graph near the 64 MiB file limit loaded in 0.11 seconds with about 120 MiB
+  peak traced allocation, which is bounded but remains an explicit availability risk;
+- Stage 4 dogfooding found and removed a test-bypass false positive, calibrated an
+  ambiguous removed-boundary security signal to manual review, and stopped treating
+  containment-only graph relations as architectural dependency crossings;
+- the final suite passed all 160 tests under Python 3.11 and 3.14, and a clean
+  source-only installation repeated the 160-test result under Python 3.14;
+- Graphify remains useful and optional. Its four zero-node JSON inputs keep the honest
+  status at `AVAILABLE_BUT_STALE`; the implementation does not fabricate freshness.
+
+### Stage 4 completion gate
+
+- [x] Threat model, attack surfaces, trust boundaries, and residual risks documented.
+- [x] Security audit, compact baseline, remediation verification, and evidence bundle implemented.
+- [x] Secrets are redacted and logging is opt-in and argument-free.
+- [x] No arbitrary shell execution or general write-capable MCP tool was added.
+- [x] Process limits, process-tree cleanup, path separation, and malformed-input behavior tested.
+- [x] Positive, negative, ambiguous, adversarial, concurrency, regression, and integration cases added.
+- [x] Memory and performance measured against the real graph and a near-limit graph.
+- [x] Codex project configuration, plugin metadata, recovery/upgrade guidance, and pinned CI added.
+- [x] Graphify ON, stale, disabled, baseline, remediation, and aggregate evidence paths dogfooded.
+- [ ] Hosted CI must pass on the exact release commit before promotion beyond beta/release-candidate status.

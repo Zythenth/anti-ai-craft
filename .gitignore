@@ -8,3 +8,5 @@ __pycache__/
 # Graphify output is a reproducible local cache.
 graphify-out/
 
+# Repository-specific evidence baselines are local state, not release artifacts.
+.anti-ai/

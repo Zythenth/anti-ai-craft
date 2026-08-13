@@ -18,6 +18,7 @@ from anti_ai_mcp.graph import (
     build_graph_provider,
     graphify_freshness_probe,
     resolve_within_repository,
+    MAX_GRAPH_BYTES,
 )
 
 
@@ -124,6 +125,56 @@ def test_invalid_graph_is_reported(repository: Path) -> None:
     assert provider.get_status().availability is GraphAvailability.INVALID
     with pytest.raises(GraphUnavailableError):
         provider.query("node")
+
+
+@pytest.mark.parametrize(
+    "payload",
+    [
+        {"directed": True, "nodes": [{"id": "a"}, {"id": "a"}], "links": []},
+        {
+            "directed": True,
+            "nodes": [{"id": "a"}],
+            "links": [{"source": "a", "target": "missing"}],
+        },
+        ["not", "an", "object"],
+    ],
+)
+def test_structurally_invalid_graphs_are_rejected(repository: Path, payload) -> None:
+    path = repository / "graphify-out" / "graph.json"
+    path.parent.mkdir()
+    path.write_text(json.dumps(payload), encoding="utf-8")
+    status = GraphifyProvider(repository, path, freshness_probe=fresh).get_status()
+    assert status.availability is GraphAvailability.INVALID
+    assert status.capabilities.query is False
+
+
+def test_graph_over_byte_limit_is_rejected_before_parsing(repository: Path) -> None:
+    path = repository / "graphify-out" / "graph.json"
+    path.parent.mkdir()
+    with path.open("wb") as handle:
+        handle.truncate(MAX_GRAPH_BYTES + 1)
+    status = GraphifyProvider(repository, path, freshness_probe=fresh).get_status()
+    assert status.availability is GraphAvailability.INVALID
+    assert str(MAX_GRAPH_BYTES) in status.detail
+
+
+def test_self_cycle_is_bounded_and_does_not_crash(repository: Path) -> None:
+    path = repository / "graphify-out" / "graph.json"
+    path.parent.mkdir()
+    path.write_text(
+        json.dumps(
+            {
+                "directed": True,
+                "nodes": [{"id": "a", "label": "A"}],
+                "links": [{"source": "a", "target": "a", "relation": "CALLS"}],
+            }
+        ),
+        encoding="utf-8",
+    )
+    provider = GraphifyProvider(repository, path, freshness_probe=fresh)
+    result = provider.get_neighbors("a", limit=10)
+    assert len(result.nodes) == 1
+    assert len(result.edges) == 1
 
 
 def test_unchanged_invalid_graph_is_not_reparsed(
